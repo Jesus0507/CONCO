@@ -124,7 +124,7 @@ class Solicitudes extends Controlador
     public function Consultar_solicitudes_vivienda()
     {
         $solicitud=$this->modelo->get_solicitud_vivienda($_POST['id']);
-        $solicitud[0]['servicio_gas']=count($this->modelo->get_info_vivienda_gas($solicitud['id_vivienda']));
+        $solicitud[0]['servicio_gas']=$this->modelo->get_info_vivienda_gas($solicitud[0]['observaciones']);
         
         $this->Escribir_JSON($solicitud);
     }

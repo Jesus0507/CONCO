@@ -84,6 +84,8 @@ $.ajax({
       result_s[i]['insectos_roedores']==1?document.getElementById("plagas").innerHTML="<span class='fa fa-check'></span>":document.getElementById("plagas").innerHTML="<span class='fa fa-times'></span>";
      
       
+      document.getElementById("descripcion").innerHTML=result_s[i]['descripcion'];
+      
     }
   }
 });

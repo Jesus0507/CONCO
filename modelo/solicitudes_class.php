@@ -89,7 +89,7 @@ class Solicitudes_Class extends Modelo
 
         $tabla  = "SELECT S.*, V.*, P.*, C.*, TV.*, SE.* FROM solicitudes S, personas P, vivienda V, calles C, tipo_vivienda TV, servicios SE 
         WHERE  P.cedula_persona = S.cedula_persona AND S.id_solicitud='$id' AND C.id_calle=V.id_calle 
-        AND TV.id_tipo_vivienda=V.id_tipo_vivienda AND V.id_servicio=SE.id_servicio";
+        AND TV.id_tipo_vivienda=V.id_tipo_vivienda AND V.id_servicio=SE.id_servicio AND V.id_vivienda=S.observaciones";
         $respuesta_arreglo = '';
         try {
             $datos = $this->conexion->prepare($tabla);
@@ -117,7 +117,7 @@ class Solicitudes_Class extends Modelo
           $datos->execute();
           $datos->setFetchMode(PDO::FETCH_ASSOC);
           $respuesta_arreglo = $datos->fetchAll(PDO::FETCH_ASSOC);
-          return $respuesta_arreglo;
+          return $tabla;
       } catch (PDOException $e) {
 
           $errorReturn = ['estatus' => false];
