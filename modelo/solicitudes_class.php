@@ -84,6 +84,27 @@ class Solicitudes_Class extends Modelo
     }
 
 
+    public function get_solicitud_vivienda($id)
+      {
+
+        $tabla  = "SELECT S.*, V.*, P.* FROM solicitudes S, personas P, vivienda V WHERE  P.cedula_persona = S.cedula_persona AND S.id_solicitud='$id'";
+        $respuesta_arreglo = '';
+        try {
+            $datos = $this->conexion->prepare($tabla);
+            $datos->execute();
+            $datos->setFetchMode(PDO::FETCH_ASSOC);
+            $respuesta_arreglo = $datos->fetchAll(PDO::FETCH_ASSOC);
+            return $respuesta_arreglo;
+        } catch (PDOException $e) {
+
+            $errorReturn = ['estatus' => false];
+            $errorReturn += ['info' => "error sql:{$e}"];
+            return $errorReturn;
+        }
+
+    }
+
+
      public function setStatus($data)
     { 
 
@@ -102,7 +123,7 @@ class Solicitudes_Class extends Modelo
 
             return true;
 
-        } catch (PDOExection $e) {
+        } catch (PDOException $e) {
 
             $error = ['estatus' => false];
 
@@ -117,4 +138,3 @@ class Solicitudes_Class extends Modelo
 
 
 }
-?>

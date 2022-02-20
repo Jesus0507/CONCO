@@ -121,6 +121,13 @@ class Solicitudes extends Controlador
         $this->Escribir_JSON($this->datos_solicitudes);
     }
 
+    public function Consultar_solicitudes_vivienda()
+    {
+        $solicitud=$this->modelo->get_solicitud_vivienda($_POST['id']);
+        
+        $this->Escribir_JSON($solicitud);
+    }
+
         public function Consultar_solicitudes_all()
     {
         $solicitudes=$this->modelo->Consultar_all();
