@@ -106,6 +106,27 @@ class Solicitudes_Class extends Modelo
 
     }
 
+    public function get_info_vivienda_gas($id)
+    {
+
+      $tabla  = "SELECT VSG.*, SG.* FROM vivienda_servicio_gas VSG, servicio_gas SG
+      WHERE  VSG.id_vivienda = '$id' AND SG.id_servicio_gas=VSG.id_servicio_gas";
+      $respuesta_arreglo = '';
+      try {
+          $datos = $this->conexion->prepare($tabla);
+          $datos->execute();
+          $datos->setFetchMode(PDO::FETCH_ASSOC);
+          $respuesta_arreglo = $datos->fetchAll(PDO::FETCH_ASSOC);
+          return $respuesta_arreglo;
+      } catch (PDOException $e) {
+
+          $errorReturn = ['estatus' => false];
+          $errorReturn += ['info' => "error sql:{$e}"];
+          return $errorReturn;
+      }
+
+  }
+
 
      public function setStatus($data)
     { 

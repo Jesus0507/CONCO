@@ -22,8 +22,6 @@ $.ajax({
       // document.getElementById("email_boton").click();
       //      enviar_correo();
 
-      console.log(solicitante);
-
       switch (result_s[i]["tipo_constancia"]) {
         case "Residencia":
           titulo_solicitud =
@@ -72,9 +70,19 @@ $.ajax({
       result_s[i]['hacinamiento']==1?document.getElementById("hacinamiento").innerHTML="<span class='fa fa-check'></span>":document.getElementById("hacinamiento").innerHTML="<span class='fa fa-times'></span>";
       result_s[i]['espacio_siembra']==1?document.getElementById("espacio_siembra").innerHTML="<span class='fa fa-check'></span>":document.getElementById("espacio_siembra").innerHTML="<span class='fa fa-times'></span>";
       result_s[i]['banio_sanitario']==1?document.getElementById("sanitario").innerHTML="<span class='fa fa-check'></span>":document.getElementById("sanitario").innerHTML="<span class='fa fa-times'></span>";
+      
       document.getElementById("agua_consumo").innerHTML=result_s[i]['agua_consumo'];
       document.getElementById("aguas_negras").innerHTML=result_s[i]['aguas_negras'];
       document.getElementById("residuos_solidos").innerHTML=result_s[i]['residuos_solidos'];
+      
+      result_s[i]['servicio_electrico']==1?document.getElementById("cableado_electrico").innerHTML="<span class='fa fa-check'></span>":document.getElementById("cableado_electrico").innerHTML="<span class='fa fa-times'></span>";
+      result_s[i]['cable_telefonico']==1?document.getElementById("cableado_telefonico").innerHTML="<span class='fa fa-check'></span>":document.getElementById("cableado_telefonico").innerHTML="<span class='fa fa-times'></span>";
+      result_s[i]['internet']==1?document.getElementById("internet").innerHTML="<span class='fa fa-check'></span>":document.getElementById("internet").innerHTML="<span class='fa fa-times'></span>";
+     
+      result_s[0]['servicio_gas'].length!=0?document.getElementById("gas").innerHTML="<span class='fa fa-check'></span>":document.getElementById("gas").innerHTML="<span class='fa fa-times'></span>";
+      result_s[i]['animales domesticos']==1?document.getElementById("animales").innerHTML="<span class='fa fa-check'></span>":document.getElementById("animales").innerHTML="<span class='fa fa-times'></span>";
+      result_s[i]['insectos_roedores']==1?document.getElementById("plagas").innerHTML="<span class='fa fa-check'></span>":document.getElementById("plagas").innerHTML="<span class='fa fa-times'></span>";
+     
       
     }
   }
