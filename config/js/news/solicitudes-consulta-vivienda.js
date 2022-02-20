@@ -2,8 +2,6 @@ var title = document.getElementById("title-solicitud");
 var id = document.getElementById("id_solicitud");
 var persona = document.getElementById("persona");
 var date = document.getElementById("fecha_solicitud");
-var tipo = document.getElementById("tipo_constancia");
-var motivo = document.getElementById("motivo");
 var aprobar = document.getElementById("aprobar");
 var rechazar = document.getElementById("rechazar");
 var solicitante = "";
@@ -42,6 +40,11 @@ $.ajax({
             "<em class='fas fa-hotel'></em> Solicitud de constancia de " +
             result_s[i]["tipo_constancia"];
           break;
+          case "Vivienda":
+          titulo_solicitud =
+            "<em class='fas fa-plus-square'></em> Solicitud de registro de " +
+            result_s[i]["tipo_constancia"];
+          break;
       }
 
       var fecha_s = new Date(result_s[i]["fecha_solicitud"]);
@@ -57,12 +60,22 @@ $.ajax({
 
       persona.innerHTML =
         result_s[i]["primer_nombre"] + " " + result_s[i]["primer_apellido"];
-
-      tipo.innerHTML = "Constancia de " + result_s[i]["tipo_constancia"];
-
-      motivo.innerHTML = result_s[i]["motivo_constancia"];
-
       title.innerHTML = titulo_solicitud;
+      document.getElementById("calle").innerHTML=result_s[i]['nombre_calle'];
+      document.getElementById("direccion").innerHTML=result_s[i]['direccion_vivienda'];
+      document.getElementById("nro_vivienda").innerHTML=result_s[i]['numero_casa'];
+
+      document.getElementById("habitaciones").innerHTML=result_s[i]['cantidad_habitaciones'];
+      document.getElementById("tipo_vivienda").innerHTML=result_s[i]['nombre_tipo_vivienda'];
+      document.getElementById("condicion").innerHTML=result_s[i]['condicion'];
+
+      result_s[i]['hacinamiento']==1?document.getElementById("hacinamiento").innerHTML="<span class='fa fa-check'></span>":document.getElementById("hacinamiento").innerHTML="<span class='fa fa-times'></span>";
+      result_s[i]['espacio_siembra']==1?document.getElementById("espacio_siembra").innerHTML="<span class='fa fa-check'></span>":document.getElementById("espacio_siembra").innerHTML="<span class='fa fa-times'></span>";
+      result_s[i]['banio_sanitario']==1?document.getElementById("sanitario").innerHTML="<span class='fa fa-check'></span>":document.getElementById("sanitario").innerHTML="<span class='fa fa-times'></span>";
+      document.getElementById("agua_consumo").innerHTML=result_s[i]['agua_consumo'];
+      document.getElementById("aguas_negras").innerHTML=result_s[i]['aguas_negras'];
+      document.getElementById("residuos_solidos").innerHTML=result_s[i]['residuos_solidos'];
+      
     }
   }
 });

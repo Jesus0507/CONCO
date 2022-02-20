@@ -87,7 +87,9 @@ class Solicitudes_Class extends Modelo
     public function get_solicitud_vivienda($id)
       {
 
-        $tabla  = "SELECT S.*, V.*, P.* FROM solicitudes S, personas P, vivienda V WHERE  P.cedula_persona = S.cedula_persona AND S.id_solicitud='$id'";
+        $tabla  = "SELECT S.*, V.*, P.*, C.*, TV.*, SE.* FROM solicitudes S, personas P, vivienda V, calles C, tipo_vivienda TV, servicios SE 
+        WHERE  P.cedula_persona = S.cedula_persona AND S.id_solicitud='$id' AND C.id_calle=V.id_calle 
+        AND TV.id_tipo_vivienda=V.id_tipo_vivienda AND V.id_servicio=SE.id_servicio";
         $respuesta_arreglo = '';
         try {
             $datos = $this->conexion->prepare($tabla);

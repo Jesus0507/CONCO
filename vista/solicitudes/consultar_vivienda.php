@@ -62,7 +62,7 @@
     <!-- Main content -->
     <section class="content">
         <center>
-            <div style="width:95%;background: white;height: 100vh;border-radius: 30px;">
+            <div style="width:95%;background: white;height: 130vh;border-radius: 30px;">
                 <div style="width:90%;text-align: justify; ">
 
                     <br>
@@ -97,7 +97,7 @@
                                 <tr>
                                     <td id='calle' class="text-center"></td>
                                     <td id='direccion' class='text-center'></td>
-                                    <td id='direccion' class='text-center'></td>
+                                    <td id='nro_vivienda' class='text-center'></td>
                                 </tr>
                             </table>
 
