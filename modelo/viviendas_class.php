@@ -417,12 +417,16 @@ public function registrar_vivienda_electrodomesticos($data)
     }
 }
 
-public function Eliminar($param)
+public function Eliminar($param,$param2)
 {
     try {
 
-        $query = $this->conexion->prepare('DELETE FROM vivienda WHERE id_vivienda = :id_vivienda');
-        $query->execute(['id_vivienda' => $param]);
+        $query = $this->conexion->prepare('DELETE FROM vivienda WHERE id_vivienda = :id_vivienda;
+        DELETE FROM servicios WHERE id_servicio=:id_servicio');
+        $query->execute([
+            'id_vivienda' => $param,
+            'id_servicio'=> $param2
+        ]);
 
         return true;
 

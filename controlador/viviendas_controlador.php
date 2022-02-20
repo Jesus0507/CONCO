@@ -99,7 +99,7 @@ class Viviendas extends Controlador
             <i class="fa fa-edit" style="color: white;"></i>
             </a>',
 
-            "eliminar" => ' <a href="javascript:void(0)" style="margin-right: 5px;" class="btn bg-danger mensaje-eliminar" title="Eliminar" onclick="Eliminar('.json_encode($value["id_vivienda"]).')">
+            "eliminar" => ' <a href="javascript:void(0)" style="margin-right: 5px;" class="btn bg-danger mensaje-eliminar" title="Eliminar" onclick="Eliminar('.json_encode($value["id_vivienda"]).','.$value['id_servicio'].')">
             <i class="fa fa-trash"></i>
             </a>',
 
@@ -284,10 +284,10 @@ public function Registrar_Servicos_Vivienda()
 
     if ($this->modelo->Registrar_Servicios(
         [
-            'id_agua_consumo' => $id_datos['id_agua_consumo'],
-            'id_aguas_negras' => $id_datos['id_aguas_negras'],
-            'id_residuos_solidos' => $id_datos['id_residuos_solidos'],
-            'id_television' => $id_datos['id_television'],
+            'id_agua_consumo' => $datos['id_agua_consumo'],
+            'id_aguas_negras' => $datos['id_aguas_negras'],
+            'id_residuos_solidos' => $datos['id_residuos_solidos'],
+            'id_television' => $datos['id_television'],
             'cable_telefonico' => $datos['cable_telefonico'],
             'internet' => $datos['internet'],
             'servicio_electrico' => $datos['servicio_electrico'],
@@ -494,6 +494,25 @@ public function eliminacion_logica(){
 
 
 }
+
+public function eliminacion_vivienda(){
+    $ids=explode("-",$_POST['id']);
+
+
+    echo $this->modelo->Eliminar($ids[0],$ids[1]);
+   
+   
+   }
+
+
+   public function activar_vivienda(){
+    $ids=explode("-",$_POST['id_vivienda']);
+
+
+    echo $this->Activar("vivienda","id_vivienda",$ids[0]);
+   
+   
+   }
 
 
 }

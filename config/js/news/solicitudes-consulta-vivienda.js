@@ -5,11 +5,12 @@ var date = document.getElementById("fecha_solicitud");
 var aprobar = document.getElementById("aprobar");
 var rechazar = document.getElementById("rechazar");
 var solicitante = "";
+var id_servicio = document.getElementById("id_servicio");
 
 $.ajax({
   type: "POST",
   url: BASE_URL + "Solicitudes/Consultar_solicitudes_vivienda",
-  data: { 'id': id.value }
+  data: { id: id.value },
 }).done(function (datos) {
   var result_s = JSON.parse(datos);
   console.log(result_s);
@@ -38,7 +39,7 @@ $.ajax({
             "<em class='fas fa-hotel'></em> Solicitud de constancia de " +
             result_s[i]["tipo_constancia"];
           break;
-          case "Vivienda":
+        case "Vivienda":
           titulo_solicitud =
             "<em class='fas fa-plus-square'></em> Solicitud de registro de " +
             result_s[i]["tipo_constancia"];
@@ -59,49 +60,98 @@ $.ajax({
       persona.innerHTML =
         result_s[i]["primer_nombre"] + " " + result_s[i]["primer_apellido"];
       title.innerHTML = titulo_solicitud;
-      document.getElementById("calle").innerHTML=result_s[i]['nombre_calle'];
-      document.getElementById("direccion").innerHTML=result_s[i]['direccion_vivienda'];
-      document.getElementById("nro_vivienda").innerHTML=result_s[i]['numero_casa'];
+      document.getElementById("calle").innerHTML = result_s[i]["nombre_calle"];
+      document.getElementById("direccion").innerHTML =
+        result_s[i]["direccion_vivienda"];
+      document.getElementById("nro_vivienda").innerHTML =
+        result_s[i]["numero_casa"];
 
-      document.getElementById("habitaciones").innerHTML=result_s[i]['cantidad_habitaciones'];
-      document.getElementById("tipo_vivienda").innerHTML=result_s[i]['nombre_tipo_vivienda'];
-      document.getElementById("condicion").innerHTML=result_s[i]['condicion'];
+      document.getElementById("habitaciones").innerHTML =
+        result_s[i]["cantidad_habitaciones"];
+      document.getElementById("tipo_vivienda").innerHTML =
+        result_s[i]["nombre_tipo_vivienda"];
+      document.getElementById("condicion").innerHTML = result_s[i]["condicion"];
 
-      result_s[i]['hacinamiento']==1?document.getElementById("hacinamiento").innerHTML="<span class='fa fa-check'></span>":document.getElementById("hacinamiento").innerHTML="<span class='fa fa-times'></span>";
-      result_s[i]['espacio_siembra']==1?document.getElementById("espacio_siembra").innerHTML="<span class='fa fa-check'></span>":document.getElementById("espacio_siembra").innerHTML="<span class='fa fa-times'></span>";
-      result_s[i]['banio_sanitario']==1?document.getElementById("sanitario").innerHTML="<span class='fa fa-check'></span>":document.getElementById("sanitario").innerHTML="<span class='fa fa-times'></span>";
-      
-      document.getElementById("agua_consumo").innerHTML=result_s[i]['agua_consumo'];
-      document.getElementById("aguas_negras").innerHTML=result_s[i]['aguas_negras'];
-      document.getElementById("residuos_solidos").innerHTML=result_s[i]['residuos_solidos'];
-      
-      result_s[i]['servicio_electrico']==1?document.getElementById("cableado_electrico").innerHTML="<span class='fa fa-check'></span>":document.getElementById("cableado_electrico").innerHTML="<span class='fa fa-times'></span>";
-      result_s[i]['cable_telefonico']==1?document.getElementById("cableado_telefonico").innerHTML="<span class='fa fa-check'></span>":document.getElementById("cableado_telefonico").innerHTML="<span class='fa fa-times'></span>";
-      result_s[i]['internet']==1?document.getElementById("internet").innerHTML="<span class='fa fa-check'></span>":document.getElementById("internet").innerHTML="<span class='fa fa-times'></span>";
-     
-      result_s[0]['servicio_gas'].length!=0?document.getElementById("gas").innerHTML="<span class='fa fa-check'></span>":document.getElementById("gas").innerHTML="<span class='fa fa-times'></span>";
-      result_s[i]['animales domesticos']==1?document.getElementById("animales").innerHTML="<span class='fa fa-check'></span>":document.getElementById("animales").innerHTML="<span class='fa fa-times'></span>";
-      result_s[i]['insectos_roedores']==1?document.getElementById("plagas").innerHTML="<span class='fa fa-check'></span>":document.getElementById("plagas").innerHTML="<span class='fa fa-times'></span>";
-     
-      
-      document.getElementById("descripcion").innerHTML=result_s[i]['descripcion'];
-      document.getElementById("tipo_techo").innerHTML=result_s[i]['tipos_techo'];
-      document.getElementById("tipo_piso").innerHTML=result_s[i]['tipos_piso'];
-      document.getElementById("tipo_pared").innerHTML=result_s[i]['tipos_pared'];
+      result_s[i]["hacinamiento"] == 1
+        ? (document.getElementById("hacinamiento").innerHTML =
+            "<span class='fa fa-check'></span>")
+        : (document.getElementById("hacinamiento").innerHTML =
+            "<span class='fa fa-times'></span>");
+      result_s[i]["espacio_siembra"] == 1
+        ? (document.getElementById("espacio_siembra").innerHTML =
+            "<span class='fa fa-check'></span>")
+        : (document.getElementById("espacio_siembra").innerHTML =
+            "<span class='fa fa-times'></span>");
+      result_s[i]["banio_sanitario"] == 1
+        ? (document.getElementById("sanitario").innerHTML =
+            "<span class='fa fa-check'></span>")
+        : (document.getElementById("sanitario").innerHTML =
+            "<span class='fa fa-times'></span>");
 
-      document.getElementById("tipo_gas").innerHTML=result_s[i]['gas_detalle'];
+      document.getElementById("agua_consumo").innerHTML =
+        result_s[i]["agua_consumo"];
+      document.getElementById("aguas_negras").innerHTML =
+        result_s[i]["aguas_negras"];
+      document.getElementById("residuos_solidos").innerHTML =
+        result_s[i]["residuos_solidos"];
 
-      document.getElementById("electrodomestico").innerHTML=result_s[i]['electrodomesticos'];
+      result_s[i]["servicio_electrico"] == 1
+        ? (document.getElementById("cableado_electrico").innerHTML =
+            "<span class='fa fa-check'></span>")
+        : (document.getElementById("cableado_electrico").innerHTML =
+            "<span class='fa fa-times'></span>");
+      result_s[i]["cable_telefonico"] == 1
+        ? (document.getElementById("cableado_telefonico").innerHTML =
+            "<span class='fa fa-check'></span>")
+        : (document.getElementById("cableado_telefonico").innerHTML =
+            "<span class='fa fa-times'></span>");
+      result_s[i]["internet"] == 1
+        ? (document.getElementById("internet").innerHTML =
+            "<span class='fa fa-check'></span>")
+        : (document.getElementById("internet").innerHTML =
+            "<span class='fa fa-times'></span>");
 
-      console.log(result_s[i]['servicio_gas']);
-      
+      result_s[0]["servicio_gas"].length != 0
+        ? (document.getElementById("gas").innerHTML =
+            "<span class='fa fa-check'></span>")
+        : (document.getElementById("gas").innerHTML =
+            "<span class='fa fa-times'></span>");
+      result_s[i]["animales domesticos"] == 1
+        ? (document.getElementById("animales").innerHTML =
+            "<span class='fa fa-check'></span>")
+        : (document.getElementById("animales").innerHTML =
+            "<span class='fa fa-times'></span>");
+      result_s[i]["insectos_roedores"] == 1
+        ? (document.getElementById("plagas").innerHTML =
+            "<span class='fa fa-check'></span>")
+        : (document.getElementById("plagas").innerHTML =
+            "<span class='fa fa-times'></span>");
+
+      document.getElementById("descripcion").innerHTML =
+        result_s[i]["descripcion"];
+      document.getElementById("tipo_techo").innerHTML =
+        result_s[i]["tipos_techo"];
+      document.getElementById("tipo_piso").innerHTML =
+        result_s[i]["tipos_piso"];
+      document.getElementById("tipo_pared").innerHTML =
+        result_s[i]["tipos_pared"];
+
+      id_servicio.value = result_s[i]["id_servicio"]+"-"+result_s[i]['observaciones'];
+
+      document.getElementById("tipo_gas").innerHTML =
+        result_s[i]["gas_detalle"];
+
+      document.getElementById("electrodomestico").innerHTML =
+        result_s[i]["electrodomesticos"];
+
+      console.log(result_s[i]["servicio_gas"]);
     }
   }
 });
 
 rechazar.onclick = function () {
   var textoSwal =
-    "Está por rechazar la solicitud de un documento ¿desea continuar?<br><br>";
+    "Está por rechazar la solicitud de un registro de vivienda ¿desea continuar?<br><br>";
   textoSwal +=
     "<textArea class='form-control' placeholder='Motivo de rechazo' id='text-area'></textArea><br>";
   textoSwal += "<div style='color:red' id='valid-text-area'></div>";
@@ -130,13 +180,13 @@ rechazar.onclick = function () {
           document.getElementById("valid-text-area").innerHTML = "";
           document.getElementById("text-area").style.borderColor = "";
           document.getElementById("text-area").blur();
-          rechazoSolicitud(document.getElementById("text-area").value);
+          rechazoSolicitud(document.getElementById("text-area").value,id_servicio.value);
           var datos_notificacion = new Object();
           datos_notificacion["tipo_notificacion"] = 2;
           datos_notificacion["usuario_receptor"] =
             solicitante["cedula_persona"];
           datos_notificacion["accion"] =
-            "Rechazó su solicitud para Constancia de " +
+            "Rechazó su solicitud para registro de " +
             solicitante["tipo_constancia"] +
             " debido a ``" +
             document.getElementById("text-area").value +
@@ -154,7 +204,7 @@ rechazar.onclick = function () {
 
           solicitante["asunto"] = "Se ha aprobado su solicitud";
           solicitante["mensaje"] =
-            "Su solicitud para constancia de " +
+            "Su solicitud para registro de " +
             solicitante["tipo_constancia"] +
             " ha sido rechazada. El motivo del rechazo es: " +
             motivo_rechazo;
@@ -178,26 +228,7 @@ aprobar.onclick = function () {
     (fecha_actual.getMonth() + 1) +
     "-" +
     fecha_actual.getFullYear();
-  var contenido = get_formato(solicitante);
 
-  contenido =
-    "<div style='width:100%;height:300px !important; overflow-y:scroll;background:#E0F6F5'><center><div style='width:90%'><br>" +
-    contenido +
-    "</div></center></div>";
-
-  swal(
-    {
-      title: "¿Ya revisó toda la información del documento?",
-      text: contenido,
-      html: true,
-      customClass: "bigSwalV2",
-      showCancelButton: true,
-      cancelButtonText: "Regresar",
-      confirmButtonText: "Si, aprobar",
-      closeOnConfirm: true,
-    },
-    function (isConfirm) {
-      if (isConfirm) {
         $.ajax({
           type: "POST",
           url: BASE_URL + "Solicitudes/Set_status",
@@ -206,6 +237,16 @@ aprobar.onclick = function () {
             procesada: 1,
             observaciones: "Aprobada el " + fecha_actual,
           },
+        }).done(function(){
+          $.ajax({
+            type: "POST",
+            url: BASE_URL + "Viviendas/activar_vivienda",
+            data: {
+              "id_vivienda": id_servicio.value,
+            },
+          }).done(function(result){
+            alert(result);
+          })   
         });
 
         swal({
@@ -220,25 +261,23 @@ aprobar.onclick = function () {
         datos_notificacion["tipo_notificacion"] = 1;
         datos_notificacion["usuario_receptor"] = solicitante["cedula_persona"];
         datos_notificacion["accion"] =
-          "Aprobó su solicitud para Constancia de " +
+          "Aprobó su solicitud para registro de " +
           solicitante["tipo_constancia"] +
-          " puede retirarla cuando desee.";
+          ".";
 
         console.log(datos_notificacion);
 
         solicitante["asunto"] = "Se ha aprobado su solicitud";
         solicitante["mensaje"] =
-          "Su solicitud para constancia de " +
+          "Su solicitud para registro de " +
           solicitante["tipo_constancia"] +
-          " ha sido aprobada. Puede pasar a retirarla cuando desee.";
+          " ha sido aprobada.";
 
         if (solicitante["correo"] != "No posee") {
           document.getElementById("btn_correo").click();
         }
 
         nueva_notificacion(datos_notificacion);
-
-        print_pdf();
 
         // setTimeout(function(){
 
@@ -247,9 +286,6 @@ aprobar.onclick = function () {
 
         // },1000);
       }
-    }
-  );
-};
 
 function rechazoSolicitud(motivo) {
   var fecha_actual = new Date();
@@ -268,224 +304,17 @@ function rechazoSolicitud(motivo) {
       procesada: 2,
       observaciones: "Rechazada el " + fecha_actual + "/" + motivo,
     },
+  }).done(function(){
+    $.ajax({
+      type: "POST",
+      url: BASE_URL + "Viviendas/eliminar_vivienda",
+      data: {
+        "id": id_servicio.value
+      },
+    });
   });
 }
 
-function print_pdf() {
-  $.ajax({
-    type: "POST",
-    url: BASE_URL + "Solicitudes/Consultar_solicitudes_all",
-  }).done(function (datos) {
-    var result = JSON.parse(datos);
-    var header = "";
-    var body = "";
-    var footer = "";
-
-    for (var i = 0; i < result.length; i++) {
-      if (result[i]["id_solicitud"] == id.value) {
-        content = get_formato(result[i]);
-      }
-    }
-
-    var myWindow = window.open("", "", "");
-    myWindow.document.write(content);
-    myWindow.blur();
-    myWindow.print();
-    myWindow.close();
-  });
-}
-
-function get_formato(solicitud) {
-  var header = "";
-  var body = "";
-  var footer = "";
-
-  switch (solicitud["tipo_constancia"]) {
-    case "Residencia":
-      header =
-        "<title>Constancia de residencia</title><center>REPUBLICA BOLIVARIANA DE VENEZUELA<br>";
-      header += "CONSEJO COMUNAL <br>PRADOS DE OCCIDENTE SECTOR III<br>";
-      header += "RIF. J-30725585 CODIGO 13-03-04-608-0002<br>";
-      header += "Barquisimeto Municipio Iribarren<br>";
-      header +=
-        "Parroquia Guerrera Ana Soto Estado Lara<br><u><h4><b>CONSTANCIA DE RESIDENCIA</b></h4></u>";
-      header += "<br></center>";
-
-      body =
-        "<div style='width:100%;text-align:justify'><b>&nbsp;&nbsp;Quienes suscriben Miembros del Consejo Comunal de Prados ";
-      body +=
-        "de Occidente Sector III, hacen constar por medio de la presente que el (la) ";
-      body +=
-        "ciudadano(a) <u>&nbsp;&nbsp;" +
-        solicitud["primer_nombre"] +
-        " " +
-        solicitud["primer_apellido"] +
-        "&nbsp;&nbsp;</u>";
-      body +=
-        " portador de la cédula de identidad <u>&nbsp;&nbsp;" +
-        solicitud["cedula_persona"] +
-        "&nbsp;&nbsp;</u> se encuentra";
-      body +=
-        " residenciado en esta Comunidad en la siguiente dirección:______________________________";
-      body +=
-        "<br><br>&nbsp;&nbsp;Constancia que se expide para fines legales, en la ciudad de Brquisimeto ";
-      body +=
-        "a los <u>&nbsp;&nbsp;" +
-        new Date().getDate() +
-        "&nbsp;&nbsp;</u> días del mes de <u>&nbsp;&nbsp;" +
-        getMes(new Date().getMonth() + 1) +
-        "&nbsp;&nbsp;</u><br>";
-      body +=
-        "<br>Firman Conformes los miembros autorizados para tal fin.<br><br></div>";
-
-      footer = "<br><br><br><center><table style='width:80%'><tr><td>";
-      footer +=
-        "_________________<br><b>Firma y cédula del miembro del Consejo Comunal</b><br>";
-      footer +=
-        "Comité ______________________<br>Teléfono __________________</td>";
-      footer +=
-        "<td>_________________<br><b>Firma y cédula del miembro del Consejo Comunal</b><br>";
-      footer +=
-        "Comité ______________________<br>Teléfono __________________</td>";
-      footer += "</tr><tr>";
-      footer +=
-        "<td colspan='2' style='text-align:center'><br><br>_________________<br><b>Firma y cédula del miembro del<br> Consejo Comunal</b><br>";
-      footer +=
-        "Comité ______________________<br>Teléfono __________________</td></tr></table>";
-      footer += "<br><br><br><b>Sello del Consejo Comunal</b></center>";
-
-      break;
-
-    case "Buena conducta":
-      header =
-        "<title>Constancia de buena conducta</title><center>REPUBLICA BOLIVARIANA DE VENEZUELA<br>";
-      header += "CONSEJO COMUNAL <br>PRADOS DE OCCIDENTE SECTOR III<br>";
-      header += "RIF. J-30725585 CODIGO 13-03-04-608-0002<br>";
-      header += "Barquisimeto Municipio Iribarren<br>";
-      header += "Parroquia Guerrera Ana Soto Estado Lara<br>";
-      header += "<u><h4><b>CERTIFICADO DE BUENA CONDUCTA</b></h4></u><br>";
-      header += "</center>";
-
-      body =
-        "<div style='width:100%;text-align:justify'><b>&nbsp;&nbsp;Quienes suscriben Miembros del Consejo Comunal de Prados ";
-      body +=
-        "de Occidente Sector III, ubicado en la Autopista Florencio Jiménez Vía Quibor Km 7 y medio de la ";
-      body +=
-        "parroquia Guerrera Ana Soto del Municipio Iribarren del estado Lara, hacemos constar que el (la) ";
-      body +=
-        "cidudano(a) <u>&nbsp;&nbsp;" +
-        solicitud["primer_nombre"] +
-        " " +
-        solicitud["primer_apellido"] +
-        "&nbsp;&nbsp;</u>";
-      body +=
-        " portador de la cédula de identidad <u>&nbsp;&nbsp;" +
-        solicitud["cedula_persona"] +
-        "&nbsp;&nbsp;</u> quien se encuentra";
-      body +=
-        " residenciado en esta Comunidad en la siguiente dirección: Parados de Occidente Sector III ______________________________________";
-      body +=
-        " declaramos que conocemos suficientemente de vista, trato y comunicación al (la) mencionado(a) ciudadano(a),";
-      body +=
-        " así como también nos consta QUE VIVE EN NUESTRA COMUNIDAD DESDE HACE <u>&nbsp;&nbsp" +
-        getAntiguedad(solicitud["antiguedad_comunidad"]) +
-        "&nbsp;&nbsp;</u>";
-      body +=
-        " AÑOS Y DURANTE ESTE TIEMPO DE RESIDENCIA EN NUESTRA COMUNIDAD SIEMPRE HA MANTENIDO BUENA CONDUCTA";
-      body += " ACATANDO LAS NORMAS DE CONVIVENCIA Y RESPETO.";
-      body +=
-        "<br><br>&nbsp;&nbsp;CERTIFICADO que se expide para fines legales, en la ciudad de Brquisimeto ";
-      body +=
-        "a los <u>&nbsp;&nbsp;" +
-        new Date().getDate() +
-        "&nbsp;&nbsp;</u> días del mes de <u>&nbsp;&nbsp;" +
-        getMes(new Date().getMonth() + 1) +
-        "&nbsp;&nbsp;</u>";
-      body +=
-        " del Año <u>&nbsp;&nbsp;" +
-        new Date().getFullYear() +
-        "&nbsp;&nbsp</u>.";
-      body +=
-        "<br><br>Firman Conformes los miembros autorizados para tal fin.<br><br></div>";
-
-      footer = "<br><br><br><center><table style='width:80%'><tr><td>";
-      footer +=
-        "_________________<br><b>Firma y cédula del miembro del Consejo Comunal</b><br>";
-      footer +=
-        "Comité ______________________<br>Teléfono __________________</td>";
-      footer +=
-        "<td>_________________<br><b>Firma y cédula del miembro del Consejo Comunal</b><br>";
-      footer +=
-        "Comité ______________________<br>Teléfono __________________</td>";
-      footer += "</tr><tr>";
-      footer +=
-        "<td colspan='2' style='text-align:center'><br><br>_________________<br><b>Firma y cédula del miembro del<br> Consejo Comunal</b><br>";
-      footer +=
-        "Comité ______________________<br>Teléfono __________________</td></tr></table>";
-      footer += "<br><br><br><b>Sello del Consejo Comunal</b></center>";
-
-      break;
-
-    case "No poseer vivienda":
-      header =
-        "<title>Constancia de no poseer vivienda</title><center>REPUBLICA BOLIVARIANA DE VENEZUELA<br>";
-      header += "MINISTERIO DEL PODER POPULAR PARA LAS COMUNAS<br>";
-      header +=
-        "CONSEJO COMUNAL <u>&nbsp;&nbsp;PRADOS DE OCCIDENTE SECTOR III&nbsp;&nbsp;</u><br>";
-      header += "RIF J- <u>&nbsp;30725585&nbsp;</u><br>";
-      header += "<u><h4><b>CONSTANCIA DE NO POSEER VIVIENDA</b></h4></u><br>";
-      header += "</center>";
-
-      body = "<div style='width:100%;text-align:justify'><b>&nbsp;&nbsp;";
-      body +=
-        "Por medio de la persente, el Consejo Comunal ''<u>&nbsp;&nbsp;PRADOS DE OCCIDENTE";
-      body +=
-        " SECTOR III&nbsp;&nbsp;</u>'' integrado por los voceros [Cambiar por voceros]";
-      body +=
-        " Venezolanos mayores de edad, civilmente hábiles, y respectivamente ubicados";
-      body +=
-        " en el Sector <u>&nbsp;III&nbsp;</u>, Parroquia <u>&nbsp;&nbsp;Guerrera Ana Soto&nbsp;&nbsp;</u>";
-      body +=
-        " Municipio Iribarren del Estado Lara, mediante la presente hacemos constar que el ciudadano(a):";
-      body +=
-        "<u>&nbsp;&nbsp;" +
-        solicitud["primer_nombre"] +
-        " " +
-        solicitud["primer_apellido"] +
-        "&nbsp;&nbsp;</u>";
-      body +=
-        " Venezolano(a), mayor de edad, portador de la cédula de identidad <u>&nbsp;&nbsp;" +
-        solicitud["cedula_persona"];
-      body += "&nbsp;&nbsp;</u>.";
-      body +=
-        "<br>&nbsp;&nbsp;Hacemos constar que el(ella) <u>no posee vivienda propia</u> y requiere de una solución";
-      body +=
-        " habitacional por carecer de ella. Y reside en: _____________________________________, en calidad de:";
-      body += "_____________________________________. <br><br>";
-      body +=
-        "&nbsp;&nbsp;Constancia que se expide a para fines consiguientes, en Barquisimeto, a los " +
-        new Date().getDate();
-      body +=
-        " días del mes de " +
-        getMes(new Date().getMonth() + 1) +
-        " del " +
-        new Date().getFullYear();
-
-      footer = "<br><br><br><center>Por el consejo Comunal<br>";
-      footer +=
-        "<table style='width:80%'><tr><td>______________________________<br>Voc. Órgano de Admin y Finanzas</td>";
-      footer +=
-        "<td>______________________________<br>Voc. Órgano de Admin y Finanzas</td>";
-      footer +=
-        "</tr><tr><td colspan='2' style='text-align:center'>________________________<br> Voc. Contraloría</td>";
-      footer += "</table>";
-
-      break;
-  }
-
-  var content = header + body + footer;
-  return content;
-}
 
 function getMes(mesNro) {
   var mesRetornar = "";

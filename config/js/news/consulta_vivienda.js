@@ -1,6 +1,6 @@
 
 
-function Eliminar(id){
+function Eliminar(id,id_servicio){
 	swal({
 		type:"warning",
 		title:"Atención",
