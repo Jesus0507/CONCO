@@ -105,7 +105,7 @@
 
  function goToSolicitud(id,tipo_solicitud){
 
-  if(tipo_solicitud=="Vivienta"){
+  if(tipo_solicitud=="Vivienda"){
       window.open(BASE_URL + 'Solicitudes/Solicitud_vivienda&id='+id);
   }
   else{

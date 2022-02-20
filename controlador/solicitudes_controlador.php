@@ -28,6 +28,14 @@ class Solicitudes extends Controlador
         $this->vista->Cargar_Vistas('solicitudes/consultar');
     }
 
+    public function Solicitud_vivienda()
+    {   
+        $this->Seguridad_de_Session();
+        $this->vista->Cargar_Vistas('solicitudes/consultar_vivienda');
+    }
+
+
+
     public function Solicitud_viewOnly()
     {
         $this->Seguridad_de_Session();
