@@ -76,180 +76,197 @@
                         </center>
                         <br>
                         <center>
-                        <table style='width:98%;'>
-                         <tr>
-                         <td class='text-center' style='width:35%'>
-                             <span class='fa fa-road'></span>
-                              Calle:<br>
-                              <span id='calle'>Calle</span>
+                            <table style='width:98%;' border='1'>
+                                <tr>
+                                    <td class='text-center' style='width:30%'>
+                                        <strong><span class='fa fa-road'></span>
+                                            Calle:</strong><br>
 
-                        </td>
-                        <td class='text-center' style='width:30%'>
-                             <span class='fa fa-location-arrow'></span>
-                              Dirección de vivienda:<br>
-                              <span id='direccion'>Direccion</span>
+                                    </td>
+                                    <td class='text-center' style='width:30%'>
+                                        <strong><span class='fa fa-location-arrow'></span>
+                                            Dirección de vivienda:</strong><br>
 
-                        </td>
-                        <td class='text-center' style='width:35%'>
-                             <span class='fa fa-map-signs'></span>
-                              Número de vivienda:<br>
-                              <span id='direccion'>Direccion</span>
+                                    </td>
+                                    <td class='text-center' style='width:30%'>
+                                        <strong><span class='fa fa-map-signs'></span>
+                                            Número de vivienda:</strong><br>
 
-                        </td>
-                    </tr>
-                    <tr>
-                         <td class='text-center' style='width:35%'>
-                         <br>    
-                         <span class='fa fa-bed'></span>
-                              Cantidad de habitaciones:<br>
-                              <span id='habitaciones'>habitaciones</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td id='calle' class="text-center"></td>
+                                    <td id='direccion' class='text-center'></td>
+                                    <td id='direccion' class='text-center'></td>
+                                </tr>
+                            </table>
 
-                        </td>
-                        <td class='text-center' style='width:30%'>
-                        <br>     
-                        <span class='fa fa-home'></span>
-                              Tipo de vivienda:<br>
-                              <span id='tipo_vivienda'>tipo vivienda</span>
+                            <br>
 
-                        </td>
-                        <td class='text-center' style='width:35%'>
-                        <br>     
-                        <span class='fa fa-signal'></span>
-                              Condición de vivienda:<br>
-                              <span id='condicion'>condicion</span>
+                            <table style='width:98%;' border='1'>
+                                <tr>
+                                    <td class='text-center' style='width:30%'>
+                                        <strong><span class='fa fa-bed'></span>
+                                            Cantidad de habitaciones:</strong><br>
 
-                        </td>
-                    </tr>
-                    <tr>
-                         <td class='text-center' style='width:35%'>
-                         <br>    
-                         <span class='fa fa-users'></span>
-                              Hacinamiento:<br>
-                              <span id='hacinamiento'>hacinamiento</span>
+                                    </td>
+                                    <td class='text-center' style='width:30%'>
+                                        <strong><span class='fa fa-home'></span>
+                                            Tipo de vivienda:</strong><br>
 
-                        </td>
-                        <td class='text-center' style='width:30%'>
-                        <br>     
-                        <span class='fa fa-tree'></span>
-                              Espacio de siembra:<br>
-                              <span id='espacio_siembra'>espacio_siembra</span>
+                                    </td>
+                                    <td class='text-center' style='width:30%'>
+                                        <strong><span class='fa fa-signal'></span>
+                                            Condición de vivienda:</strong><br>
 
-                        </td>
-                        <td class='text-center' style='width:35%'>
-                        <br>     
-                        <span class='fa fa-bath'></span>
-                              Baño sanitario:<br>
-                              <span id='sanitario'>sanitario</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td id='habitaciones' class="text-center"></td>
+                                    <td id='tipo_vivienda' class='text-center'></td>
+                                    <td id='condicion' class='text-center'></td>
+                                </tr>
+                            </table><br>
+                            <table style='width:98%;' border='1'>
+                                <tr>
+                                    <td class='text-center' style='width:30%'>
+                                        <strong><span class='fa fa-users'></span>
+                                            Hacinamiento:</strong><br>
+                                    </td>
+                                    <td class='text-center' style='width:30%'>
+                                        <strong><span class='fa fa-tree'></span>
+                                            Espacio de siembra:</strong><br>
+                                    </td>
+                                    <td class='text-center' style='width:30%'>
+                                        <strong><span class='fa fa-bath'></span>
+                                            Baño sanitario:</strong><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td id='hacinamiento' class="text-center"></td>
+                                    <td id='espacio_siembra' class='text-center'></td>
+                                    <td id='sanitario' class='text-center'></td>
+                                </tr>
+                            </table><br>
+                            <table style='width:98%;' border='1'>
+                                <tr>
+                                    <td class='text-center' style='width:30%'>
+                                        <strong><span class='fa fa-shower'></span>
+                                            Agua de consumo:</strong><br>
+                                    </td>
+                                    <td class='text-center' style='width:30%'>
+                                        <strong><span class='fa fa-tint'></span>
+                                            Aguas negras:</strong><br>
+                                    </td>
+                                    <td class='text-center' style='width:30%'>
+                                        <strong><span class='fa fa-trash'></span>
+                                            Residuos sólidos:</strong><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td id='agua_consumo' class="text-center"></td>
+                                    <td id='aguas_negras' class='text-center'></td>
+                                    <td id='residuos_solidos' class='text-center'></td>
+                                </tr>
+                            </table><br>
+                            <table style='width:98%;' border='1'>
+                                <tr>
+                                    <td class='text-center' style='width:30%'>
+                                        <strong><span class='fa fa-plug'></span>
+                                            Cableado eléctrico:</strong><br>
+                                    </td>
+                                    <td class='text-center' style='width:30%'>
+                                        <strong><span class='fa fa-phone'></span>
+                                            Cableado telefónico:</strong><br>
+                                    </td>
+                                    <td class='text-center' style='width:30%'>
+                                        <strong><span class='fa fa-wifi'></span>
+                                            Servicio de internet:</strong><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td id='cableado_electrico' class="text-center"></td>
+                                    <td id='cableado_telefonico' class='text-center'></td>
+                                    <td id='internet' class='text-center'></td>
+                                </tr>
+                            </table><br>
+                            <table style='width:98%;' border='1'>
+                                <tr>
+                                    <td class='text-center' style='width:30%'>
 
-                        </td>
-                    </tr>
-                    <tr>
-                         <td class='text-center' style='width:35%'>
-                         <br>    
-                         <span class='fa fa-shower'></span>
-                              Agua de consumo:<br>
-                              <span id='agua_consumo'>agua_consumo</span>
+                                        <strong><span class='fa fa-fire'></span>
+                                            Gas doméstico:</strong><br>
+                                    </td>
+                                    <td class='text-center' style='width:30%'>
 
-                        </td>
-                        <td class='text-center' style='width:30%'>
-                        <br>     
-                        <span class='fa fa-tint'></span>
-                              Aguas negras:<br>
-                              <span id='cableado_telefonico'>aguas negras</span>
+                                        <strong><span class='fa fa-paw'></span>
+                                            Animales domésticos:</strong><br>
+                                    </td>
+                                    <td class='text-center' style='width:30%'>
 
-                        </td>
-                        <td class='text-center' style='width:35%'>
-                        <br>     
-                        <span class='fa fa-trash'></span>
-                              Residuos sólidos:<br>
-                              <span id='residuos_solidos'>residuos_solidos</span>
+                                        <strong><span class='fa fa-bug'></span>
+                                            Plagas:</strong><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td id='gas' class="text-center"></td>
+                                    <td id='animales' class='text-center'></td>
+                                    <td id='plagas' class='text-center'></td>
+                                </tr>
+                            </table><br>
+                            <table style='width:98%;' border='1'>
+                            <tr>
+                                <td class='text-center' colspan='3'>
+                                    <strong><span class='fa fa-commenting-o'></span>
+                                        Descripción de la vivienda:</strong><br>
 
-                        </td>
-                       </tr>
-                       <tr>
-                         <td class='text-center' style='width:35%'>
-                         <br>    
-                         <span class='fa fa-plug'></span>
-                              Cableado eléctrico:<br>
-                              <span id='cableado_electrico'>cableado_electrico</span>
-
-                        </td>
-                        <td class='text-center' style='width:30%'>
-                        <br>     
-                        <span class='fa fa-phone'></span>
-                              Cableado telefónico:<br>
-                              <span id='cableado_telefonico'>cableado_telefonico</span>
-
-                        </td>
-                        <td class='text-center' style='width:35%'>
-                        <br>     
-                        <span class='fa fa-wifi'></span>
-                              Servicio de internet:<br>
-                              <span id='internet'>internet</span>
-
-                        </td>
-                       </tr>
-                       <tr>
-                         <td class='text-center' style='width:35%'>
-                         <br>    
-                         <span class='fa fa-fire'></span>
-                              Gas doméstico:<br>
-                              <span id='gas'>gas</span>
-
-                        </td>
-                        <td class='text-center' style='width:30%'>
-                        <br>     
-                        <span class='fa fa-paw'></span>
-                              Animales domésticos:<br>
-                              <span id='animales'>animales</span>
-
-                        </td>
-                        <td class='text-center' style='width:35%'>
-                        <br>     
-                        <span class='fa fa-bug'></span>
-                              Plagas:<br>
-                              <span id='plagas'>plagas</span>
-
-                        </td>
-                       </tr>
-                       <tr>
-                         <td class='text-center' colspan='3'>
-                         <br>    
-                         <span class='fa fa-commenting-o'></span>
-                              Descripción de la vivienda:<br>
-                              <span id='descripcion'>descripcion</span>
-
-                        </td>
-                        <td class='text-center' style='width:30%'>
-                       </tr>
-                       <tr>
-                         <td class='text-center' style='width:35%'>
-                         <br>    
-                         <span class='fa fa-arrow-up'></span>
-                              Tipo(s) de techo:<br>
-                              <span id='tipo_techo'>tipo_techo</span>
-
-                        </td>
-                        <td class='text-center' style='width:30%'>
-                        <br>     
-                        <span class='fa fa-square'></span>
-                              Tipo(s) de pared:<br>
-                              <span id='tipo_pared'>tipo_pared</span>
-
-                        </td>
-                        <td class='text-center' style='width:35%'>
-                        <br>     
-                        <span class='fa fa-arrow-down'></span>
-                              Tipo(s) de piso:<br>
-                              <span id='tipo_piso'>tipo_piso</span>
-
-                        </td>
-                       </tr>
-                        </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                    <td id='descripcion' class="text-center"></td>
+                          </tr>
+                           </table><br>
+                           <table style='width:98%;' border='1'>
+                            <tr>
+                                <td class='text-center' style='width:30%'>
+                                    <strong><span class='fa fa-arrow-up'></span>
+                                        Tipo(s) de techo:</strong><br>
+                                </td>
+                                <td class='text-center' style='width:30%'>
+                                    <strong><span class='fa fa-square'></span>
+                                        Tipo(s) de pared:</strong><br>
+                                </td>
+                                <td class='text-center' style='width:30%'>
+                                    <strong><span class='fa fa-arrow-down'></span>
+                                        Tipo(s) de piso:</strong><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                    <td id='tipo_techo' class="text-center"></td>
+                                    <td id='tipo_pared' class='text-center'></td>
+                                    <td id='tipo_piso' class='text-center'></td>
+                                </tr>
+                           </table><br>
+                           <table style='width:98%;' border='1'>
+                            <tr>
+                                <td class='text-center' style='width:50%' colspan='2'>
+                                    <strong><span class='fa fa-free-code-camp'></span>
+                                        Tipo(s) de servicio de gas:</strong><br>
+                                </td>
+                                <td class='text-center' style='width:50%'>
+                                    <strong><span class='fa fa-cogs'></span>
+                                        Electrodomésticos:</strong><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                    <td id='tipo_gas' class="text-center"></td>
+                                    <td id='electrodomestico' class='text-center'></td>
+                                </tr>
+                            </table>
                         </center>
-                            <br><br>
-                            <center><button type="button" class="btn btn-primary" id="aprobar">Aprobar</button> <button type="button" class="btn btn-danger" id="rechazar">Rechazar</button></center>
-                            <br><br>
+                        <br><br>
+                        <center><button type="button" class="btn btn-primary" id="aprobar">Aprobar</button> <button type="button" class="btn btn-danger" id="rechazar">Rechazar</button></center>
+                        <br><br>
 
                     </div>
                 </div>
