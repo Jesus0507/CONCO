@@ -125,6 +125,9 @@ class Solicitudes extends Controlador
     {
         $solicitud=$this->modelo->get_solicitud_vivienda($_POST['id']);
         $solicitud[0]['servicio_gas']=$this->modelo->get_info_vivienda_gas($solicitud[0]['observaciones']);
+        $solicitud[0]['tipos_techo']=$this->modelo->get_info_vivienda_techos($solicitud[0]['observaciones']);
+        $solicitud[0]['tipos_piso']=$this->modelo->get_info_vivienda_pisos($solicitud[0]['observaciones']);
+        $solicitud[0]['tipos_pared']=$this->modelo->get_info_vivienda_paredes($solicitud[0]['observaciones']);
         
         $this->Escribir_JSON($solicitud);
     }

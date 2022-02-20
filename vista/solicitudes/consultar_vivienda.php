@@ -77,7 +77,7 @@
                         <br>
                         <center>
                             <table style='width:98%;' border='1'>
-                                <tr>
+                                <tr style='background:#699373;color:white'>
                                     <td class='text-center' style='width:30%'>
                                         <strong><span class='fa fa-road'></span>
                                             Calle:</strong><br>
@@ -104,7 +104,7 @@
                             <br>
 
                             <table style='width:98%;' border='1'>
-                                <tr>
+                                <tr style='background:#699373;color:white'>
                                     <td class='text-center' style='width:30%'>
                                         <strong><span class='fa fa-bed'></span>
                                             Cantidad de habitaciones:</strong><br>
@@ -128,7 +128,7 @@
                                 </tr>
                             </table><br>
                             <table style='width:98%;' border='1'>
-                                <tr>
+                                <tr style='background:#699373;color:white'>
                                     <td class='text-center' style='width:30%'>
                                         <strong><span class='fa fa-users'></span>
                                             Hacinamiento:</strong><br>
@@ -149,7 +149,7 @@
                                 </tr>
                             </table><br>
                             <table style='width:98%;' border='1'>
-                                <tr>
+                                <tr style='background:#699373;color:white'>
                                     <td class='text-center' style='width:30%'>
                                         <strong><span class='fa fa-shower'></span>
                                             Agua de consumo:</strong><br>
@@ -170,7 +170,7 @@
                                 </tr>
                             </table><br>
                             <table style='width:98%;' border='1'>
-                                <tr>
+                                <tr style='background:#699373;color:white'>
                                     <td class='text-center' style='width:30%'>
                                         <strong><span class='fa fa-plug'></span>
                                             Cableado eléctrico:</strong><br>
@@ -191,7 +191,7 @@
                                 </tr>
                             </table><br>
                             <table style='width:98%;' border='1'>
-                                <tr>
+                                <tr style='background:#699373;color:white'>
                                     <td class='text-center' style='width:30%'>
 
                                         <strong><span class='fa fa-fire'></span>
@@ -215,7 +215,7 @@
                                 </tr>
                             </table><br>
                             <table style='width:98%;' border='1'>
-                            <tr>
+                            <tr style='background:#699373;color:white'>
                                 <td class='text-center' colspan='3'>
                                     <strong><span class='fa fa-commenting-o'></span>
                                         Descripción de la vivienda:</strong><br>
@@ -227,7 +227,7 @@
                           </tr>
                            </table><br>
                            <table style='width:98%;' border='1'>
-                            <tr>
+                            <tr style='background:#699373;color:white'>
                                 <td class='text-center' style='width:30%'>
                                     <strong><span class='fa fa-arrow-up'></span>
                                         Tipo(s) de techo:</strong><br>
@@ -248,7 +248,7 @@
                                 </tr>
                            </table><br>
                            <table style='width:98%;' border='1'>
-                            <tr>
+                            <tr style='background:#699373;color:white'>
                                 <td class='text-center' style='width:50%' colspan='2'>
                                     <strong><span class='fa fa-free-code-camp'></span>
                                         Tipo(s) de servicio de gas:</strong><br>

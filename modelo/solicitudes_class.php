@@ -127,6 +127,78 @@ class Solicitudes_Class extends Modelo
 
   }
 
+  public function get_info_vivienda_techos($id)
+    {
+
+      $tabla  = "SELECT VTT.*, TT.* FROM vivienda_tipo_techo VTT, tipo_techo TT
+      WHERE  VTT.id_vivienda = '$id' AND TT.id_tipo_techo=VTT.id_tipo_techo";
+      $respuesta_arreglo = '';
+      try {
+          $techos="";
+          $datos = $this->conexion->prepare($tabla);
+          $datos->execute();
+          $datos->setFetchMode(PDO::FETCH_ASSOC);
+          foreach($datos->fetchAll(PDO::FETCH_ASSOC) as $v){
+             $techos.=$v['techo']."<hr>";
+          }
+          return $techos;
+      } catch (PDOException $e) {
+
+          $errorReturn = ['estatus' => false];
+          $errorReturn += ['info' => "error sql:{$e}"];
+          return $errorReturn;
+      }
+
+  }
+
+  public function get_info_vivienda_pisos($id)
+  {
+
+    $tabla  = "SELECT VTP.*, TP.* FROM vivienda_tipo_piso VTP, tipo_piso TP
+    WHERE  VTP.id_vivienda = '$id' AND TP.id_tipo_piso=VTP.id_tipo_piso";
+    $respuesta_arreglo = '';
+    try {
+        $pisos="";
+        $datos = $this->conexion->prepare($tabla);
+        $datos->execute();
+        $datos->setFetchMode(PDO::FETCH_ASSOC);
+        foreach($datos->fetchAll(PDO::FETCH_ASSOC) as $v){
+           $pisos.=$v['piso']."<hr>";
+        }
+        return $pisos;
+    } catch (PDOException $e) {
+
+        $errorReturn = ['estatus' => false];
+        $errorReturn += ['info' => "error sql:{$e}"];
+        return $errorReturn;
+    }
+
+}
+
+public function get_info_vivienda_paredes($id)
+{
+
+  $tabla  = "SELECT VTP.*, TP.* FROM vivienda_tipo_pared VTP, tipo_pared TP
+  WHERE  VTP.id_vivienda = '$id' AND TP.id_tipo_pared=VTP.id_tipo_pared";
+  $respuesta_arreglo = '';
+  try {
+      $pared="";
+      $datos = $this->conexion->prepare($tabla);
+      $datos->execute();
+      $datos->setFetchMode(PDO::FETCH_ASSOC);
+      foreach($datos->fetchAll(PDO::FETCH_ASSOC) as $v){
+         $pared.=$v['pared']."<hr>";
+      }
+      return $pared;
+  } catch (PDOException $e) {
+
+      $errorReturn = ['estatus' => false];
+      $errorReturn += ['info' => "error sql:{$e}"];
+      return $errorReturn;
+  }
+
+}
+
 
      public function setStatus($data)
     { 
