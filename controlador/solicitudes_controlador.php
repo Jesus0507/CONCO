@@ -128,6 +128,15 @@ class Solicitudes extends Controlador
         $solicitud[0]['tipos_techo']=$this->modelo->get_info_vivienda_techos($solicitud[0]['observaciones']);
         $solicitud[0]['tipos_piso']=$this->modelo->get_info_vivienda_pisos($solicitud[0]['observaciones']);
         $solicitud[0]['tipos_pared']=$this->modelo->get_info_vivienda_paredes($solicitud[0]['observaciones']);
+        $solicitud[0]['gas_detalle']="<table style='width:100%'><tr><td>Tipo de Bombona</td>";
+        $solicitud[0]['gas_detalle'].="<td>Días de duración</td></tr>";
+
+        foreach($solicitud[0]['servicio_gas'] as $g){
+            $solicitud[0]['gas_detalle'].="<td>".$g['tipo_bombona']."</td><td>".$g['dias_duracion']."</td></tr>";
+        }
+
+        $solicitud[0]['gas_detalle'].="</table>";
+
         
         $this->Escribir_JSON($solicitud);
     }

@@ -117,7 +117,7 @@ class Solicitudes_Class extends Modelo
           $datos->execute();
           $datos->setFetchMode(PDO::FETCH_ASSOC);
           $respuesta_arreglo = $datos->fetchAll(PDO::FETCH_ASSOC);
-          return $tabla;
+          return $respuesta_arreglo;
       } catch (PDOException $e) {
 
           $errorReturn = ['estatus' => false];

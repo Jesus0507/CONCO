@@ -88,6 +88,10 @@ $.ajax({
       document.getElementById("tipo_techo").innerHTML=result_s[i]['tipos_techo'];
       document.getElementById("tipo_piso").innerHTML=result_s[i]['tipos_piso'];
       document.getElementById("tipo_pared").innerHTML=result_s[i]['tipos_pared'];
+
+      document.getElementById("tipo_gas").innerHTML=result_s[i]['gas_detalle'];
+
+      console.log(result_s[i]['servicio_gas']);
       
     }
   }
