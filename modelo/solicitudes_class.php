@@ -199,6 +199,30 @@ public function get_info_vivienda_paredes($id)
 
 }
 
+public function get_info_vivienda_electrodomesticos($id)
+{
+
+  $tabla  = "SELECT VE.*, E.* FROM vivienda_electrodomesticos VE, electrodomesticos E
+  WHERE  VE.id_vivienda = '$id' AND E.id_electrodomestico=VE.id_electrodomestico";
+  try {
+      $electrodomestico="<table style='width:100%'><tr><td>Electrodoméstico</td><td>Cantidad</td></tr>";
+      $datos = $this->conexion->prepare($tabla);
+      $datos->execute();
+      $datos->setFetchMode(PDO::FETCH_ASSOC);
+      foreach($datos->fetchAll(PDO::FETCH_ASSOC) as $v){
+         $electrodomestico.="<tr><td>".$v['nombre_electrodomestico']."</td><td>".$v['cantidad']."</td></tr>";
+      }
+      $electrodomestico.="</table>";
+      return $electrodomestico;
+  } catch (PDOException $e) {
+
+      $errorReturn = ['estatus' => false];
+      $errorReturn += ['info' => "error sql:{$e}"];
+      return $errorReturn;
+  }
+
+}
+
 
      public function setStatus($data)
     { 

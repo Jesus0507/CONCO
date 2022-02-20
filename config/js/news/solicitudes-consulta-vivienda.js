@@ -91,6 +91,8 @@ $.ajax({
 
       document.getElementById("tipo_gas").innerHTML=result_s[i]['gas_detalle'];
 
+      document.getElementById("electrodomestico").innerHTML=result_s[i]['electrodomesticos'];
+
       console.log(result_s[i]['servicio_gas']);
       
     }

@@ -137,6 +137,8 @@ class Solicitudes extends Controlador
 
         $solicitud[0]['gas_detalle'].="</table>";
 
+        $solicitud[0]['electrodomesticos']=$this->modelo->get_info_vivienda_electrodomesticos($solicitud[0]['observaciones']);
+
         
         $this->Escribir_JSON($solicitud);
     }

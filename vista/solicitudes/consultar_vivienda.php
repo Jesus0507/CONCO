@@ -249,7 +249,7 @@
                            </table><br>
                            <table style='width:98%;' border='1'>
                             <tr style='background:#699373;color:white'>
-                                <td class='text-center' style='width:50%' colspan='2'>
+                                <td class='text-center' style='width:50%'>
                                     <strong><span class='fa fa-free-code-camp'></span>
                                         Tipo(s) de servicio de gas:</strong><br>
                                 </td>
@@ -259,8 +259,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                    <td id='tipo_gas' class="text-center"></td>
-                                    <td id='electrodomestico' class='text-center'></td>
+                                    <td id='tipo_gas' class="text-center" style='width:50%'></td>
+                                    <td id='electrodomestico' class='text-center' style='width:50%'></td>
                                 </tr>
                             </table>
                         </center>
