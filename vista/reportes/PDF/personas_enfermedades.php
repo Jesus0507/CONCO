@@ -16,9 +16,9 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <script>
-    /* window.blur();
+     window.blur();
              window.print();
-             window.close(); */
+             
     </script>
     <section class="content">
         <!-- Default box -->
@@ -72,15 +72,52 @@
                                         <td>Observacion</td>
                                     </tr>
                                     <tbody id="datos">
+                                        <?php foreach ($this->personas_familia as $key => $value): ?>
+                                            <?php foreach ($this->enfermos as $key): ?>
+                                               
+                                                    
+                                               <?php if ($value["cedula_persona"] == $key["cedula_persona"]): ?>
+                                                   
+                                               
+                                        
                                         <tr>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><?php echo $value["cedula_persona"]; ?></td>
+                                            <td><?php echo $value["primer_nombre"]." ".$value["primer_apellido"] ?></td>
+                                            <td><?php echo $value["direccion_vivienda"] ?></td>
+                                            <td>
+                                                <?php 
+                                                    list($ano,$mes,$dia) = explode("-",$value["fecha_nacimiento"]);
+                                                    $ano_diferencia  = date("Y") - $ano;
+                                                    $mes_diferencia = date("m") - $mes;
+                                                    $dia_diferencia   = date("d") - $dia;
+                                                    if ($dia_diferencia < 0 || $mes_diferencia < 0)
+                                                        $ano_diferencia--;
+                                                    echo $ano_diferencia." Años"; 
+                                                ?>
+                                            </td>
+                                            <td><?php echo $value["genero"] ?></td>
+                                            
+
+     
+                                            <td>
+                                                <?php foreach ($this->enfermedades as $e): ?>
+                                                    <?php if ($key["cedula_persona"] == $e["cedula_persona"]): ?>
+                                                       <center>
+                                                            <?php echo $e["nombre_enfermedad"]."</br>" ?>
+                                                       </center>
+                                                    <?php endif ?>
+                                                <?php endforeach ?>
+                                            </td>
+                                            <td>
+                                                
+                                            </td>
+                                            
                                         </tr>
+                                        <?php endif ?>
+                                        
+                                            <?php endforeach ?>
+                                        <?php endforeach ?>
+
                                     </tbody>
                                 </table>
                             </div>

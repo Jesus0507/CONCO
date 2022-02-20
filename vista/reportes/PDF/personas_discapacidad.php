@@ -16,9 +16,9 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <script>
-    /* window.blur();
-             window.print();
-             window.close(); */
+    window.blur();
+    window.print();
+     
     </script>
     <section class="content">
         <!-- Default box -->
@@ -28,7 +28,7 @@
                 <table style="width: 100%;">
                     <tr>
                        
-                            <center>
+                            <center> 
                                 <h5>
                                     REPUBLICA BOLIVARIANA DE VENEZUELA<br />
                                     CONSEJO COMUNAL<br />
@@ -46,7 +46,7 @@
                         <td style="width: 10%;"></td>
                     </tr>
 
-                    <tr>
+                    <tr> 
                         
                             <div style='width:100%;text-align:justify'>
                                 <table class="datos">
@@ -63,21 +63,51 @@
                                         <td>
                                             Edad
                                         </td>
-                                        <td>Sexo</td>
+                                        <td>Sexo</td> 
                                         <td>
                                             Dicapadidad
                                         </td>
                                         <td>Observacion</td>
                                     </tr>
                                     <tbody id="datos">
+                                        <?php foreach ($this->discapacitados as $key => $value): ?>
+                                            
+                                       
                                         <tr>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td></td>
-                                            <td></td><td></td>
+                                            <td><?php echo $value["cedula_persona"] ?></td>
+                                            <td><?php echo $value["primer_nombre"]." ".$value["primer_apellido"] ?></td>
+                                            <td><?php echo $value["direccion_vivienda"] ?></td>
+                                            <td>
+                                                <?php 
+                                                    list($ano,$mes,$dia) = explode("-",$value["fecha_nacimiento"]);
+                                                    $ano_diferencia  = date("Y") - $ano;
+                                                    $mes_diferencia = date("m") - $mes;
+                                                    $dia_diferencia   = date("d") - $dia;
+                                                    if ($dia_diferencia < 0 || $mes_diferencia < 0)
+                                                        $ano_diferencia--;
+                                                    echo $ano_diferencia." Años"; 
+                                                ?>
+                                            </td>
+                                            <td><?php echo $value["genero"] ?></td>
+                                            
+                                                
+                                                    <td>
+                                                        <?php foreach ($this->discapacidades as $key): ?>
+                                                        <?php if ($value["cedula_persona"] == $key["cedula_persona"]): ?>
+                                                             <?php echo $key["nombre_discapacidad"]."</br>" ?>
+                                                        <?php endif ?>
+                                                        <?php endforeach ?>
+                                                    </td>
+                                                    
+                                                 <td>
+                                                        <?php foreach ($this->discapacidades as $key): ?>
+                                                        <?php if ($value["cedula_persona"] == $key["cedula_persona"]): ?>
+                                                             <?php echo $key["observaciones"] ?>
+                                                        <?php endif ?>
+                                                        <?php endforeach ?>
+                                                    </td>
                                         </tr>
+                                         <?php endforeach ?>
                                     </tbody>
                                 </table>
                             </div>

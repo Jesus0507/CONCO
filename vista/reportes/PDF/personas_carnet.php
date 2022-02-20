@@ -16,9 +16,9 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <script>
-    /* window.blur();
+     window.blur();
              window.print();
-             window.close(); */
+            
     </script>
     <section class="content">
         <!-- Default box -->
@@ -65,25 +65,39 @@
                                         <td>
                                             Calle
                                         </td>
+                                        <td>Tipo de Carnet</td>
                                         <td>
-                                            Carnet 
+                                            Serial 
                                         </td>
+                                        <td>Codigo</td>
     
                                     </tr>
-                                    <tbody id="datos">
+                                    <tbody id="datos"> 
+                                        <?php foreach ($this->carnet_personas as $key => $value): ?>
                                         <tr>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td></td>
+                                            <td><?php echo $value["cedula_persona"] ?></td>
+                                            <td><?php echo $value["primer_nombre"]." ".$value["segundo_nombre"] ?></td>
+                                            <td><?php echo $value["primer_apellido"]." ".$value["segundo_apellido"] ?></td>
+                                            <td><?php echo $value["nombre_calle"] ?></td>
+                                            <td>
+                                                <?php 
+                                                    if ($value["tipo_carnet"] == 1) {
+                                                        echo "Patria";
+                                                    }else{
+                                                        echo "PSUV";
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td><?php echo $value["serial_carnet"] ?></td>
+                                            <td><?php echo $value["codigo_carnet"] ?></td>
                                         </tr>
+                                        <?php endforeach ?>
                                         <tr>
                                             <td>
                                                 Total:
                                             </td>
-                                            <td colspan="4">
-
+                                            <td colspan="6">
+                                                <?php echo count($this->carnet_personas) ?>
                                             </td>
                                         </tr>
                                     </tbody>

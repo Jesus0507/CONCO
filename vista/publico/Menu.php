@@ -550,7 +550,7 @@
         </li>
 
         <li class="nav-item">
-            <a href="javascript:void(0)" class="nav-link">
+            <a href="<?php echo constant('URL');?>Reportes/Listados/" class="nav-link">
                 <i class="fa fa-list-alt nav-icon"></i>
                 <p>
                     Generar Listados
@@ -567,7 +567,7 @@
             </a>
         </li>
 
-        <li class="nav-item" onclick="cambio_modulo('Generar Constancias')">
+        <li class="nav-item">
             <a href="<?php echo constant('URL');?>Reportes/Constancias/" class="nav-link">
                 <i class="fa fa-file-text nav-icon"></i>
                 <p>

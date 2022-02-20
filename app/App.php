@@ -1,7 +1,7 @@
 <?php
-use BASE_DATOS as BASE_DATOS;
-use Errores as Errores;
-class Iniciar_Sistema {
+ // use BASE_DATOS as BASE_DATOS;
+ // use Errores as Errores;
+class Iniciar_Sistema { 
     private $url;
     private $error;
     private $parametros;
@@ -14,8 +14,14 @@ class Iniciar_Sistema {
         $this->Establecer_Url();
         $this->Establecer_Controladores();
         if (isset($_SESSION['cedula_usuario'])) {
-            if ($this->Validar_Direccion()) {
-                 if ($this->Validar_Conexion()) {
+            $this->Acceder_Sistema();
+        } else {
+            $this->Iniciar_Sistema();
+        }
+    }
+    public function Acceder_Sistema() {
+        if ($this->Validar_Direccion()) {
+            if ($this->Validar_Conexion()) {
                 if (empty($this->url[0])) {
                     $this->Cargar_Inicio();
                 } else {
@@ -32,12 +38,14 @@ class Iniciar_Sistema {
                 }
             } else {
                 $this->Errores->Error_500($this->error);
-            }           
-            } else {
-                $this->Errores->Error_404($this->error);
             }
-            
         } else {
+            $this->Errores->Error_404_1($this->error);
+        }
+        return true;
+    }
+    public function Iniciar_Sistema() {
+        if ($this->Validar_Direccion()) {
             if ($this->Validar_Conexion()) {
                 if (file_exists($this->archivo_controlador)) {
                     $this->Cargar_Controladores();
@@ -52,7 +60,10 @@ class Iniciar_Sistema {
             } else {
                 $this->Errores->Error_500($this->error);
             }
+        } else {
+            $this->Errores->Error_404_1($this->error);
         }
+        return true;
     }
     public function Establecer_Url() {
         $this->url = isset($_GET['url']) ? $_GET['url'] : null;
@@ -60,12 +71,10 @@ class Iniciar_Sistema {
         $this->url = explode('/', $this->url);
         return true;
     }
-
     public function Establecer_Directorio() {
         $this->directorrio = rtrim(getcwd(), '\\');
         $this->directorrio = explode('\\', $this->directorrio);
         $this->directorrio = end($this->directorrio);
-
         return $this->directorrio;
     }
     public function Establecer_Parametros(array $parametros) {
@@ -102,7 +111,7 @@ class Iniciar_Sistema {
     }
     public function Cargar_Funciones() {
         if ($this->Validar_Funcion() == true) {
-            $this->controlador->{$this->url[1]}(); 
+            $this->controlador->{$this->url[1]}();
         } else {
             $this->Errores->Error_409($this->error);
         }
@@ -139,7 +148,7 @@ class Iniciar_Sistema {
             $this->error[] = '[Error Archivo] => "El Archivo: [ ' . $this->archivo_controlador . ' ] No Existe."';
             return false;
         } else {
-            return true; 
+            return true;
         }
     }
     private function Validar_Controlador() {
@@ -178,20 +187,17 @@ class Iniciar_Sistema {
             return true;
         }
     }
-
     private function Validar_Direccion() {
-        $this->directorrio= str_replace(" ", "%20", $this->Establecer_Directorio()) ;
-        
+        $this->directorrio = str_replace(" ", "%20", $this->Establecer_Directorio());
         if (SISTEMA == $this->directorrio) {
             return true;
         } else {
             $this->error[] = '[Error Direccion] => "El Directorrio: [ ' . $this->directorrio . ' ] Es diferente a la configuracion del sistema,</br> 
-            Configuracion: ['.SISTEMA.']. </br>
+            Configuracion: [' . SISTEMA . ']. </br>
             Actualice la configuracion en el archivo: app/Config.php </br>
             Linea: ( 3 )';
             return false;
         }
-        
     }
     private function Validar_Conexion() {
         $conexion = new BASE_DATOS();
@@ -203,3 +209,4 @@ class Iniciar_Sistema {
         }
     }
 }
+?>

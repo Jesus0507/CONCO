@@ -1,5 +1,5 @@
 <?php
-
+ 
 class Reportes extends Controlador
 {
     public function __construct()
@@ -16,25 +16,88 @@ class Reportes extends Controlador
         $vacunados = $this->Consultar_Tabla("vacuna_covid", 1, "cedula_persona");
         $discapacitados = $this->Consultar_Tabla_sin_estado("discapacidad_persona", 1, "cedula_persona");
         $personas_bonos = $this->Consultar_Tabla_sin_estado("persona_bonos", 1, "cedula_persona");
+        $milicianos = $this->modelo->Milicianos();
+        $jefes_familia = $this->modelo->Jefes_Calle();
+        $inmuebles = $this->modelo->Inmuebles();
+        $negocios = $this->modelo->Negocios();
+        $nivel_educativo = $this->modelo->Nivel_Educativo();
+        $carnet_personas = $this->modelo->Carnet_Personas();
+        $viviendas = $this->modelo->Viviendas();
+        $discapacitados=$this->modelo->Discapacitados();
+        $discapacidades=$this->modelo->Discapacidades(); 
+        $comites_personas=$this->modelo->Comites_Personas(); 
+        $personas_familia=$this->modelo->Personas_Familia(); 
+        $persona_centro_votacion=$this->modelo->Persona_Centro_Votacion(); 
+        $enfermos=$this->modelo->Enfermos(); 
+        $enfermedades=$this->modelo->Enfermedades(); 
+        $grupos_deportivos=$this->modelo->Grupos_Deportivos(); 
+        $grupos_deportivos_personas=$this->modelo->Grupo_Deportivo_Persona(); 
 
-        $this->vista->personas = $personas; //datos para mandar a la vista
-        $this->personas = $personas; ///datos para usar en el 
+        $this->vista->personas = $personas; 
+        $this->personas = $personas; 
         
-        $this->vista->parto_humanizado = $parto_humanizado; //datos para mandar a la vista
+        $this->vista->parto_humanizado = $parto_humanizado; 
         $this->parto_humanizado = $parto_humanizado; 
 
-        $this->vista->votantes = $votantes; //datos para mandar a la vista
+        $this->vista->votantes = $votantes; 
         $this->votantes = $votantes; 
 
-        $this->vista->vacunados = $vacunados; //datos para mandar a la vista
+        $this->vista->vacunados = $vacunados; 
         $this->vacunados = $vacunados; 
 
-         $this->vista->discapacitados = $discapacitados; //datos para mandar a la vista
+         $this->vista->discapacitados = $discapacitados; 
          $this->discapacitados = $discapacitados; 
 
-        $this->vista->personas_bonos = $personas_bonos; //datos para mandar a la vista
-        $this->personas_bonos = $personas_bonos; 
+        $this->vista->personas_bonos = $personas_bonos; 
+        $this->personas_bonos = $personas_bonos;
 
+         $this->vista->milicianos = $milicianos; 
+        $this->milicianos = $milicianos; 
+
+        $this->vista->jefes_familia = $jefes_familia; 
+        $this->jefes_familia = $jefes_familia; 
+
+        $this->vista->inmuebles = $inmuebles; 
+        $this->inmuebles = $inmuebles; 
+
+        $this->vista->negocios = $negocios; 
+        $this->negocios = $negocios; 
+
+        $this->vista->nivel_educativo = $nivel_educativo; 
+        $this->nivel_educativo = $nivel_educativo;
+
+        $this->vista->carnet_personas = $carnet_personas; 
+        $this->carnet_personas = $carnet_personas; 
+
+        $this->vista->viviendas = $viviendas; 
+        $this->viviendas = $viviendas; 
+
+        $this->vista->discapacitados = $discapacitados; 
+        $this->discapacitados = $discapacitados;
+
+        $this->vista->discapacidades = $discapacidades; 
+        $this->discapacidades = $discapacidades; 
+
+        $this->vista->comites_personas = $comites_personas; 
+        $this->comites_personas = $comites_personas; 
+
+        $this->vista->personas_familia = $personas_familia; 
+        $this->personas_familia = $personas_familia;
+
+        $this->vista->persona_centro_votacion = $persona_centro_votacion; 
+        $this->persona_centro_votacion = $persona_centro_votacion;
+
+        $this->vista->enfermos = $enfermos; 
+        $this->enfermos = $enfermos;
+
+        $this->vista->enfermedades = $enfermedades; 
+        $this->enfermedades = $enfermedades; 
+
+        $this->vista->grupos_deportivos = $grupos_deportivos; 
+        $this->grupos_deportivos = $grupos_deportivos; 
+
+        $this->vista->grupos_deportivos_personas = $grupos_deportivos_personas; 
+        $this->grupos_deportivos_personas = $grupos_deportivos_personas; 
     }
 
     public function Datos_Poblacional()
@@ -423,77 +486,6 @@ $this->vista->Cargar_Vistas('reportes/estadisticas');
 
 /* ===============================PDF================================== */
 
-/* LISTADOS */
-public function Listados_PDF()
-{
-    $this->Establecer_Consultas();
-    $this->Seguridad_de_Session();
-
-    switch ($_POST["listados"]) {
-        case '1':
-        $this->vista->Cargar_Vistas('reportes/PDF/grupos_deportivos');
-        break;
-
-        case '2':
-        $this->vista->Cargar_Vistas('reportes/PDF/miliciano');
-        break;
-
-        case '3':
-        $this->vista->Cargar_Vistas('reportes/PDF/jefes_familia');
-        break;
-
-        case '4':
-        $this->vista->Cargar_Vistas('reportes/PDF/personas_discapacidad');
-        break;
-
-        case '5':
-        $this->vista->Cargar_Vistas('reportes/PDF/consejo_comunal');
-        break;
-
-        case '6':
-        $this->vista->Cargar_Vistas('reportes/PDF/embarazadas');
-        break;
-
-        case '7':
-        $this->vista->Cargar_Vistas('reportes/PDF/nivel_educativo');
-        break;
-
-        case '8':
-        $this->vista->Cargar_Vistas('reportes/PDF/personas_carnet');
-        break;
-
-        case '9':
-        $this->vista->Cargar_Vistas('reportes/PDF/negocios');
-        break;
-
-        case '10':
-        $this->vista->Cargar_Vistas('reportes/PDF/inmuebles');
-        break;
-
-        case '11':
-        $this->vista->Cargar_Vistas('reportes/PDF/viviendas');
-        break;
-
-        case '12':
-        $this->vista->Cargar_Vistas('reportes/PDF/personas_enfermedades');
-        break;
-
-        case '13':
-        $this->vista->Cargar_Vistas('reportes/PDF/votantes');
-        break;
-
-        case '14':
-        $this->vista->Cargar_Vistas('reportes/PDF/poblacion_edades');
-        break;
-
-        case '15':
-        $this->vista->Cargar_Vistas('reportes/PDF/sexo_diverso');
-        break;
-        default:
-        echo "REPORTE NO ENCONTRADO";
-        break;
-    }
-}
 
 /* CONSTANCIAS */
 
@@ -520,7 +512,11 @@ public function Constancias_PDF()
         break;
     }
 }
-
+public function Censos()
+{
+    $this->Seguridad_de_Session();
+    $this->vista->Cargar_Vistas('reportes/censos');
+} 
 public function Reporte_Niños()
 {
     $this->Seguridad_de_Session();
@@ -539,9 +535,102 @@ public function Parto_Humanizado()
     $this->vista->Cargar_Vistas('reportes/PDF/parto_humanizado');
 } 
 
-public function Historial_Clinico()
+public function Historial_Clinico() 
 {
     $this->Seguridad_de_Session();
     $this->vista->Cargar_Vistas('reportes/PDF/historial_clinico');
 } 
+
+public function Milicianos()
+{
+    $this->Seguridad_de_Session();
+    $this->Establecer_Consultas();
+    $this->vista->Cargar_Vistas('reportes/PDF/miliciano');
+} 
+
+public function Jefe_Familias()
+{
+    $this->Seguridad_de_Session();
+    $this->Establecer_Consultas();
+    $this->vista->Cargar_Vistas('reportes/PDF/jefes_familia');
+} 
+
+public function Inmuebles()
+{
+    $this->Seguridad_de_Session();
+    $this->Establecer_Consultas();
+    $this->vista->Cargar_Vistas('reportes/PDF/inmuebles');
+} 
+
+public function Negocios()
+{
+    $this->Seguridad_de_Session();
+    $this->Establecer_Consultas();
+    $this->vista->Cargar_Vistas('reportes/PDF/negocios');
+} 
+
+public function Nivel_Educativo()
+{
+    $this->Seguridad_de_Session();
+    $this->Establecer_Consultas();
+    $this->vista->Cargar_Vistas('reportes/PDF/nivel_educativo');
+} 
+
+public function Carnet_Personas()
+{
+    $this->Seguridad_de_Session();
+    $this->Establecer_Consultas();
+    $this->vista->Cargar_Vistas('reportes/PDF/personas_carnet');
+} 
+
+public function Personas_Discapacidad()
+{
+    $this->Seguridad_de_Session();
+    $this->Establecer_Consultas();
+    $this->vista->Cargar_Vistas('reportes/PDF/personas_discapacidad');
+} 
+
+public function Viviendas()
+{
+    $this->Seguridad_de_Session();
+    $this->Establecer_Consultas();
+    $this->vista->Cargar_Vistas('reportes/PDF/viviendas');
+} 
+
+public function Consejo_Comunal()
+{
+    $this->Seguridad_de_Session();
+    $this->Establecer_Consultas();
+    $this->vista->Cargar_Vistas('reportes/PDF/consejo_comunal');
+} 
+
+public function Sexo_Diverso()
+{
+    $this->Seguridad_de_Session();
+    $this->Establecer_Consultas();
+    $this->vista->Cargar_Vistas('reportes/PDF/sexo_diverso');
+} 
+
+public function Votantes()
+{
+    $this->Seguridad_de_Session();
+    $this->Establecer_Consultas();
+    $this->vista->Cargar_Vistas('reportes/PDF/votantes');
+} 
+
+public function Personas_Enfermedades()
+{
+    $this->Seguridad_de_Session();
+    $this->Establecer_Consultas();
+    $this->vista->Cargar_Vistas('reportes/PDF/personas_enfermedades');
+} 
+
+public function Grupos_Deportivos()
+{
+    $this->Seguridad_de_Session();
+    $this->Establecer_Consultas();
+    $this->vista->Cargar_Vistas('reportes/PDF/grupos_deportivos');
+} 
+
+
 }

@@ -16,15 +16,16 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <script>
-    /* window.blur();
+     window.blur();
              window.print();
-             window.close(); */
+             
     </script>
     <section class="content">
         <!-- Default box -->
         <div class="card">
             <!-- card-body -->
             <div class="card-body">
+
                 <table style="width: 100%;">
                     <tr>
                         <td style="width: 10%;"></td>
@@ -43,19 +44,14 @@
                             <table class="datos">
                                 <tr>
                                     <td>Direccion</td>
-                                    <td>Calle 15</td>
-                                    <td> Fecha: <?php echo $GLOBALS["fecha_corta"]; ?></td>
+                                    <td>Calle </td>
+                                    <td> Fecha: <?php echo date('d-m-Y'); ?></td>
                                 </tr>
                                 <tr>
                                     <td>Consejo Comunal</td>
                                     <td colspan="2">Prados de Occidente Sector III</td>
                                 </tr>   
-                                <tr>
-                                    <td>Jefe de Calle</td>
-                                    <td>NOMBRE APELLID</td>
-                                    <td>Cedula:</td>
-                                    
-                                </tr>
+                                
                             </table>
                             <br>
                         </td>
@@ -73,7 +69,7 @@
                                     <tr>
                                         <td>#</td>
                                         <td>
-                                            Jefe de Cas
+                                            Jefe de Casa
                                         </td>
                                         <td>
                                             C.I
@@ -90,14 +86,21 @@
                                         </td>
                                     </tr>
                                     <tbody id="datos">
+                                        <?php $cont = 1; ?>
+                                        <?php foreach ($this->jefes_familia as $key => $value): ?>
+                                            
                                         <tr>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td></td>
+                                            <td><?php echo $cont++ ?></td>
+                                            <td><?php echo $value["primer_nombre"]." ".$value["primer_apellido"] ?></td>
+                                            <td><?php echo $value["cedula_persona"] ?></td>
+                                            <td><?php 
+                                                    $x[]=$value["cedula_persona"];
+                                                    echo count($x); 
+                                                    ?></td>
+                                            <td><?php echo $value["numero_casa"]; ?></td>
                                             <td></td>
                                         </tr>
+                                         <?php endforeach ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -110,6 +113,7 @@
                     </tr>
                     </tr>
                 </table>
+
 
             </div>
         </div>

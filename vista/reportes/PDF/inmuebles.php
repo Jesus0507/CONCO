@@ -16,9 +16,9 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <script>
-    /* window.blur();
+     window.blur();
              window.print();
-             window.close(); */
+              
     </script>
     <section class="content">
         <!-- Default box -->
@@ -68,20 +68,22 @@
 
 
                                     </tr>
-                                    <tbody id="datos">
+                                    <tbody id="datos"> 
+                                        <?php foreach ($this->inmuebles as $key => $value): ?>
                                         <tr>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
+                                            <td><?php echo $value["nombre_inmueble"] ?></td>
+                                            <td><?php echo $value["nombre_tipo"] ?></td>
+                                            <td><?php echo $value["nombre_calle"] ?></td>
+                                            <td><?php echo $value["direccion_inmueble"] ?></td>
 
                                         </tr>
+                                        <?php endforeach ?>
                                         <tr>
                                             <td>
                                                 Total:
                                             </td>
                                             <td colspan="4">
-
+                                                <?php echo count($this->inmuebles) ?>
                                             </td>
                                         </tr>
                                     </tbody>

@@ -15,6 +15,11 @@ class Errores extends Exception {
         $this->vista->mensaje = $error;
         $this->vista->Cargar_Vistas('error/404');
     }
+    public function Error_404_1($error)
+    {
+        $this->vista->mensaje = $error;
+        $this->vista->Cargar_Vistas('error/404-1');
+    }
     public function Error_409($error)
     {
         $this->vista->mensaje = $error;

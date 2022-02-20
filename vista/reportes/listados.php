@@ -40,63 +40,63 @@
                                     <select class="custom-select" id="listados" name="listados">
                                         <option> ... </option>
 
-                                        <option value="1">
+                                        <option value="Reportes/Grupos_Deportivos">
                                             Listado de Grupos Deportivos
                                         </option>
 
-                                        <option value="2">
+                                        <option value="Reportes/Milicianos">
                                             Listado de Milicianos
                                         </option>
 
-                                        <option value="3">
+                                        <option value="Reportes/Jefe_Familias">
                                             Listado de Jefes de Familia
                                         </option>
 
-                                        <option value="4">
+                                        <option value="Reportes/Personas_Discapacidad">
                                             Listado de Personas con Discapacidad
                                         </option>
 
-                                        <option value="5">
+                                        <option value="Reportes/Consejo_Comunal">
                                             Listado de Estructura del Consejo Comunal
                                         </option>
 
-                                        <option value="6">
+                                        <option value="Reportes/Embarazadas">
                                             Listado de Embarazadas
                                         </option>
 
-                                        <option value="7">
+                                        <option value="Reportes/Nivel_Educativo">
                                             Listado de Nivel Educativo de Personas
                                         </option>
 
-                                        <option value="8">
+                                        <option value="Reportes/Carnet_Personas">
                                             Listado de Personas con Carnet
                                         </option>
 
-                                        <option value="9">
+                                        <option value="Reportes/Negocios">
                                             Listado de Negocios
                                         </option>
 
-                                        <option value="10">
+                                        <option value="Reportes/Inmuebles">
                                             Listado de Inmuebles
                                         </option>
 
-                                        <option value="11">
+                                        <option value="Reportes/Viviendas">
                                             Listado de Viviendas
                                         </option>
 
-                                        <option value="12">
+                                        <option value="Reportes/Personas_Enfermedades">
                                             Listado de Personas Enfermedades
                                         </option>
 
-                                        <option value="13">
+                                        <option value="Reportes/Votantes">
                                             Listado de Votantes
                                         </option>
 
-                                        <option value="14">
+                                        <option value="Reportes/Poblacion_Edades">
                                             Listado de Poblacion Edades
                                         </option>
 
-                                        <option value="15">
+                                        <option value="Reportes/Sexo_Diverso">
                                             Listado de Personas de Sexo Diverso
                                         </option>
 
@@ -130,6 +130,10 @@
 <!-- /.content-wrapper -->
 <?php include (call."Fin.php"); ?>
 <script>
+
+    document.getElementById("enviar").onclick=function(){
+       window.open(BASE_URL+document.getElementById("listados").value);
+    }
     
 /* $(document).on("change", "#listados", function () {
 

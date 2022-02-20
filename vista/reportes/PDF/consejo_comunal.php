@@ -16,9 +16,9 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <script>
-    /* window.blur();
+     window.blur();
              window.print();
-             window.close(); */
+             
     </script>
     <section class="content">
         <!-- Default box -->
@@ -51,15 +51,12 @@
                         <td style="width: 10%;"></td>
                         <td style="width: 80%;">
                             <div style='width:100%;text-align:justify'>
+                                
                                 <table class="datos">
+                                    
                                     <tr>
                                         <td>Comite</td>
-                                        <td colspan="4">
-                                            <center>Salud</center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Datos</td>
+                                        <td>Cargo</td>
                                         <td>
                                             Cedula
                                         </td>
@@ -75,22 +72,22 @@
 
                                     </tr>
                                     <tbody id="datos">
+                                        <?php foreach ($this->comites_personas as $key => $value): ?>
+                                            
+                                        
                                         <tr>
-                                            <td>Principal</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><?php echo $value["nombre_comite"] ?></td>
+                                            <td><?php  echo $value["cargo_persona"] ?></td>
+                                            <td><?php echo $value["cedula_persona"] ?></td>
+                                            <td><?php echo $value["primer_nombre"]." ".$value["segundo_nombre"] ?></td>
+                                            <td><?php echo $value["primer_apellido"]." ".$value["segundo_apellido"] ?></td>
+                                            <td><?php echo $value["direccion_vivienda"] ?></td>
                                         </tr>
-                                        <tr>
-                                            <td>Suplente</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
+                                        <?php endforeach ?>
                                     </tbody>
-                                </table>
+                                   
+                                </table><br>
+                                
                             </div>
                         </td>
                         <td style="width: 10%;"></td>

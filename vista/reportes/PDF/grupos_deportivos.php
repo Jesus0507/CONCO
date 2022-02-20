@@ -1,5 +1,5 @@
 <style>
-.datos {
+.datos { 
     border-collapse: collapse !important;
     width: 100%;
 }
@@ -67,12 +67,23 @@
 
                                     </tr>
                                     <tbody id="datos">
+                                        <?php foreach ($this->grupos_deportivos as $key => $value): $contador=0; ?>
+                                             <?php foreach ($this->grupos_deportivos_personas as $key): ?>
+                                                    <?php if ($value["id_grupo_deportivo"] == $key["id_grupo_deportivo"]): ?>
+                                                        <?php $contador++;?>
+                                                    <?php endif ?>
+                                                <?php endforeach ?>
+
                                         <tr>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
+                                            <td><?php echo $value["nombre_grupo_deportivo"] ?></td>
+                                            <td><?php echo $value["nombre_deporte"] ?></td>
+                                            <td>
+                                               <?php echo $contador; ?>
+                                                
+                                            </td>
+                                            <td><?php echo $value["descripcion"] ?></td>
                                         </tr>
+                                        <?php endforeach ?>
                                     </tbody>
                                 </table>
                             </div>

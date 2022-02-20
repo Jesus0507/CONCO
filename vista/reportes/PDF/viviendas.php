@@ -16,9 +16,8 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <script>
-    /* window.blur();
+     window.blur();
              window.print();
-             window.close(); */
     </script>
     <section class="content">
         <!-- Default box -->
@@ -66,23 +65,26 @@
                                         <td>Tipo de Vivienda</td>
 
                                         <td>Condicion</td>
-                                        <td>Condicion de Ocupacion</td>
+                                        
                                     </tr>
                                     <tbody id="datos">
+                                        <?php foreach ($this->viviendas as $key => $value): ?>
+                                            
+                                        
                                         <tr>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><?php echo $value["numero_casa"] ?></td>
+                                            <td><?php echo $value["nombre_calle"] ?></td>
+                                            <td><?php echo $value["direccion_vivienda"] ?></td>
+                                            <td><?php echo $value["nombre_tipo_vivienda"] ?></td>
+                                            <td><?php echo $value["condicion"] ?></td>
                                         </tr>
+                                        <?php endforeach ?>
                                         <tr>
                                             <td>
                                                 Total:
                                             </td>
                                             <td colspan="5">
-
+                                                <?php echo count($this->viviendas) ?>
                                             </td>
                                         </tr>
                                     </tbody>
