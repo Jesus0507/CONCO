@@ -120,7 +120,7 @@ class Notificaciones_Class extends Modelo
 
             return true;
 
-        } catch (PDOExection $e) {
+        } catch (PDOException $e) {
 
             $error = ['estatus' => false];
 

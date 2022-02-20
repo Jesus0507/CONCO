@@ -182,7 +182,7 @@ rechazar.onclick = function () {
           document.getElementById("text-area").blur();
           rechazoSolicitud(document.getElementById("text-area").value,id_servicio.value);
           var datos_notificacion = new Object();
-          datos_notificacion["tipo_notificacion"] = 2;
+          datos_notificacion["tipo_notificacion"] = 5;
           datos_notificacion["usuario_receptor"] =
             solicitante["cedula_persona"];
           datos_notificacion["accion"] =
@@ -258,7 +258,7 @@ aprobar.onclick = function () {
         });
 
         var datos_notificacion = new Object();
-        datos_notificacion["tipo_notificacion"] = 1;
+        datos_notificacion["tipo_notificacion"] = 4;
         datos_notificacion["usuario_receptor"] = solicitante["cedula_persona"];
         datos_notificacion["accion"] =
           "Aprobó su solicitud para registro de " +

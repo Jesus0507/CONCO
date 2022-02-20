@@ -32,6 +32,12 @@ $.ajax({
                             case '3': 
                             title.innerHTML="<em class='fa fa-calendar'></em> Un evento ha sido creado";
                             break;
+                            case '4': 
+                            title.innerHTML="<em class='fa fa-check'></em> Se aprobó tu solicitud de registro";
+                            break;
+                            case '5': 
+                            title.innerHTML="<em class='fa fa-times'></em>Se rechazó tu solicitud de registro";
+                            break;
                           }
                    
 

@@ -36,6 +36,12 @@ function getNotifications(){
                     case 3:
                           icono="<i class='fas fa-calendar'></i>";
                     break;
+                    case 4:
+                          icono="<i class='fas fa-check'></i>";
+                    break;
+                    case 5:
+                          icono="<i class='fas fa-times'></i>";
+                    break;
                 }
 
                 var mensaje=getRecortado(tipo[1]); 
