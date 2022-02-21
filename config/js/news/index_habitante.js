@@ -16,6 +16,9 @@ var boton_enviar=document.getElementById("enviar-solicitud");
 var div_registrar_vivienda=document.getElementById("formulario_vivienda");
 var btn_registrar_vivienda=document.getElementById("vivienda_panel");
 
+var div_registrar_familia=document.getElementById("formulario_familia");
+var btn_registrar_familia=document.getElementById("familia_panel");
+
 
 
 btn_calendario_habitante.onclick=function(){index_habitante=1; cambio_vista();}
@@ -23,6 +26,8 @@ btn_calendario_habitante.onclick=function(){index_habitante=1; cambio_vista();}
 btn_solicitar_habitante.onclick=function(){index_habitante=2; cambio_vista();}
 
 btn_registrar_vivienda.onclick=function(){index_habitante=3; cambio_vista();}
+
+btn_registrar_familia.onclick=function(){index_habitante=4; cambio_vista();}
 
 doc.onchange=function(){
     if(doc.value!='0'){
@@ -56,6 +61,7 @@ function cambio_vista(){
 
     div_solicitar_habitante.style.display="none";
     div_registrar_vivienda.style.display="none";
+    div_registrar_familia.style.display="none";
     doc.value='0';
     mot.value='';
     doc.style.borderColor='';
@@ -71,6 +77,7 @@ function cambio_vista(){
     $("#formulario-consulta-persona").hide().fadeIn(1000);
     div_calendario_habitante.style.display="none";
     div_registrar_vivienda.style.display="none";
+    div_registrar_familia.style.display="none";
     break;
 
     case 3:
@@ -80,7 +87,19 @@ function cambio_vista(){
     $("#formulario_vivienda").hide().fadeIn(1000);
     div_calendario_habitante.style.display="none";
     div_solicitar_habitante.style.display="none";
+    div_registrar_familia.style.display="none";
     break;
+
+    case 4:
+    titulo_habitante.innerHTML="Registrar familia";
+    div_registrar_familia.style.display="";
+
+    $("#formulario_familia").hide().fadeIn(1000);
+    div_calendario_habitante.style.display="none";
+    div_solicitar_habitante.style.display="none";
+    div_registrar_vivienda.style.display="none";
+    break;
+
 }
 
 }
