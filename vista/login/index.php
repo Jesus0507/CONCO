@@ -79,7 +79,7 @@
                 </form>
 
                 <div class="text-center mt-3 mb-3">
-                    <a href="#password" role="button" class="btn" data-toggle="modal">
+                    <a href="#password" role="button" class="btn" id='olvidado' data-toggle="modal">
                         He olvidado mi contraseña
                     </a>
                     <?php include privado."recuperar_contraseña.php"; ?>

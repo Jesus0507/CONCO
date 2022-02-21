@@ -142,6 +142,15 @@ class Login extends Controlador
         }
     }
 
+    public function consultar_recuperar(){
+        $cedula=$_POST['cedula'];
+        $resultado=$this->Consultar_Columna("personas","cedula_persona",$cedula);
+        if($resultado[0]['preguntas_seguridad']!='' || $resultado[0]['preguntas_seguridad']!=null){
+            $resultado[0]['preguntas_seguridad']=$this->Decodificar($resultado[0]['preguntas_seguridad']);
+        }
+        echo json_encode($resultado);
+    }
+
     public function set_Usuario_Actual($cedula, $nombre, $apellido, $correo, $estado, $rol_inicio)
     {
         $_SESSION['cedula_usuario'] = $cedula;
