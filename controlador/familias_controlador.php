@@ -48,19 +48,19 @@ class Familias extends Controlador
     public function registrar_familia(){
         $datos_familia=$_POST['datos'];
 
-        echo $this->modelo->Registrar_Familia($datos_familia);
+        $resultado= $this->modelo->Registrar_Familia($datos_familia);
         
- //        if($this->modelo->Registrar_Familia($datos_familia)){
- //           $id=$this->Ultimo_Ingresado("familia","id_familia");
- //           foreach ($id as $key => $i) {
- //            foreach ($datos_familia['integrantes'] as $inte) {
- //             $this->modelo->Registrar_persona_familia([
- //                "cedula_persona"         =>  $inte,
- //                "id_familia"            =>   $i['MAX(id_familia)']
- //            ]);
- //         }
- //     }
- // }
+        if($resultado){
+           $id=$this->Ultimo_Ingresado("familia","id_familia");
+           foreach ($id as  $i) {
+            foreach ($datos_familia['integrantes'] as $inte) {
+             $this->modelo->Registrar_persona_familia([
+                "cedula_persona"         =>  $inte,
+                "id_familia"            =>   $i['MAX(id_familia)']
+            ]);
+         }
+     }
+ }
 
 
 }

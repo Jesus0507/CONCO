@@ -97,7 +97,7 @@ function enviar_informacion(){
             	type:"success"
             });
 
-       //     setTimeout(function(){location.href=BASE_URL+"Familias/";},1000);
+            setTimeout(function(){location.href=BASE_URL+"Familias/Consultas";},1000);
 
 
 	});
