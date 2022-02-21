@@ -16,9 +16,9 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <script>
-    /* window.blur();
+     window.blur();
              window.print();
-             window.close(); */
+             
     </script>
     <section class="content">
         <!-- Default box -->
@@ -48,164 +48,22 @@
                     </tr>
                     
                     
-                     <?php foreach ($this->poblacion_edades as $value): ?>
-                         <?php if ($value["edad"] <= 12): ?>
-                            <tr>
-                        <td style="width: 10%;"></td>
-                        <td style="width: 80%;">
-                            <br>
-                            <div style='width:100%;text-align:justify'>
-                                <table class="datos">
-                                    <tr>
-                                        <td colspan="6">
-                                            <center>
-                                                Edad de 12 a 17
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Cedula
-                                        </td>
-                                        <td>
-                                            Nombres
-                                        </td>
-                                        <td>
-                                            Apellidos
-                                        </td>
-
-                                        <td>
-                                            Edad
-                                        </td>
-                                        <td>
-                                            Sexo
-                                        </td>
-                                        <td>
-                                            Calle
-                                        </td>
-                                    </tr>
-                                    <tbody id="datos">
-                                        <tr>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Total:
-                                            </td>
-                                            <td colspan="5">
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </td>
-                        <td style="width: 10%;"></td>
-                    </tr>
-
-                         <?php endif ?>
-
-                         <?php if ($value["edad"] > 12 && $value["edad"] <= 17): ?>
-                            <tr>
-                        <td style="width: 10%;"></td>
-                        <td style="width: 80%;">
-                            <br>
-                            <div style='width:100%;text-align:justify'>
-                                <table class="datos">
-                                    <tr>
-                                        <td colspan="6">
-                                            <center>
-                                                Mayores de 18
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Cedula
-                                        </td>
-                                        <td>
-                                            Nombres
-                                        </td>
-                                        <td>
-                                            Apellidos
-                                        </td>
-
-                                        <td>
-                                            Edad
-                                        </td>
-                                        <td>
-                                            Sexo
-                                        </td>
-                                        <td>
-                                            Calle
-                                        </td>
-                                    </tr>
-                                    <tbody id="datos">
-                                        <tr>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Total:
-                                            </td>
-                                            <td colspan="5">
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </td>
-                        <td style="width: 10%;"></td>
-                    </tr>
-                         <?php endif ?>
-
-                         <?php if ($value["edad"] >= 18 && $value["edad"] < 55): ?>
-                             
-                         <?php endif ?>
-
-                          <?php if ($value["edad"] >= 55): ?>
-                             
-                         <?php endif ?>
-                     <?php endforeach ?>
                     
-                   
-                   
-                   
-
-                    <tr>
+                         <tr>
                         <td style="width: 10%;"></td>
                         <td style="width: 80%;">
                             <br>
                             <div style='width:100%;text-align:justify'>
                                 <table class="datos">
-                                    <tr>
-                                        <td colspan="6">
-                                            <center>
-                                                Mayores de 55
-                                            </center>
-                                        </td>
-                                    </tr>
+                                    
                                     <tr>
                                         <td>
                                             Cedula
                                         </td>
                                         <td>
-                                            Nombres
+                                            Nombre y Apellido
                                         </td>
-                                        <td>
-                                            Apellidos
-                                        </td>
+                                        
 
                                         <td>
                                             Edad
@@ -218,14 +76,22 @@
                                         </td>
                                     </tr>
                                     <tbody id="datos">
+                                    <?php foreach ($this->poblacion_edades as $value): ?>
                                         <tr>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><?php echo $value["cedula_persona"] ?></td>
+                                            <td> <?php echo $value["primer_nombre"]." ".$value["primer_apellido"] ?></td>
+                                            <td><?php echo $value["edad"] ?></td>
+                                            <td><?php 
+                                                    if ($value["genero"] == "M") {
+                                                        echo "Masculino";
+                                                    }else{
+                                                        echo "Femenino";
+                                                    }
+                                             ?></td>
+                                            <td><?php echo $value["nombre_calle"] ?></td>
+                                            
                                         </tr>
+                                        <?php endforeach ?>
                                         <tr>
                                             <td>
                                                 Total:
@@ -240,6 +106,14 @@
                         </td>
                         <td style="width: 10%;"></td>
                     </tr>
+                     
+                   
+                   
+                    
+
+                    
+
+                   
                     
                 </table>
 

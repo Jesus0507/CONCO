@@ -116,6 +116,18 @@ public function Personas()
   $this->vista->Cargar_Vistas('personas/index'); 
 }  
 
+public function consulta_vacunado(){
+  $this->Establecer_Consultas(); 
+  $existe=true;
+  foreach($this->vacunas as $v){
+    if($v['cedula_persona']==$_POST['cedula']){
+      $existe=false;
+    }
+  }
+
+  echo $existe;
+}
+
 public function Registros()
 {
   $this->Seguridad_de_Session();
@@ -525,4 +537,3 @@ public function get_codigo_carnet(){
 }
 
 }
-?> 
