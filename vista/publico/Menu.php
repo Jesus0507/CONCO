@@ -19,7 +19,7 @@
                     </button>
                 </div>
             </div>
-        </div> -->
+        </div> --> 
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -568,7 +568,7 @@
         </li>
 
         <li class="nav-item">
-            <a href="<?php echo constant('URL');?>Reportes/Constancias/" class="nav-link">
+            <a href="javascript:void(0)" class="nav-link" onclick="$('#solicitar_constancia').modal('show');" data-toggle="dropdown">
                 <i class="fa fa-file-text nav-icon"></i>
                 <p>
                     Generar Constancias
