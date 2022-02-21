@@ -249,6 +249,36 @@ document.getElementById("modificarContrasenia").onclick = function () {
       else{
         var pregunta=document.getElementById("colorFav").value+document.getElementById("animFav").value+document.getElementById("mascota").value;
         if(pregunta.toLowerCase() == info['preguntas_seguridad'].toLowerCase()){
+            if(document.getElementById("passwordEmergente").value=="" || document.getElementById("passwordEmergente2").value=="" || document.getElementById("passwordEmergente").value!=document.getElementById("passwordEmergente2").value){
+                swal({
+                    type:"error",
+                    title:"Error",
+                    text:"Debe ingresar la clave y la confirmación de la contraseña. Ambos campos deben ser iguales",
+                    timer:3000,
+                    showConfirmButton:false
+                  });
+            }
+            else{
+                $.ajax({
+                    type: "POST",
+                    url: BASE_URL + "login/recuperar_contrasenia",
+                    data: {
+                      cedula: document.getElementById("cedulaEmergente").value,
+                      clave: document.getElementById("passwordEmergente").value
+                    },
+                  }).done(function(datos){
+                      if(datos){
+                        swal({
+                            type:"success",
+                            title:"Éxito",
+                            text:"Su contraseña ha sido cambiada exitosamente",
+                            timer:3000,
+                            showConfirmButton:false
+                          });
+                        $('#password'). modal('hide');
+                      }
+                  })
+            }
            
         }
         else{

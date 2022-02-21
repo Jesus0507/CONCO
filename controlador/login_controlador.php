@@ -148,7 +148,16 @@ class Login extends Controlador
         if($resultado[0]['preguntas_seguridad']!='' || $resultado[0]['preguntas_seguridad']!=null){
             $resultado[0]['preguntas_seguridad']=$this->Decodificar($resultado[0]['preguntas_seguridad']);
         }
+        
         echo json_encode($resultado);
+    }
+
+    public function recuperar_contrasenia(){
+        $cedula=$_POST['cedula'];
+        $clave=$this->Codificar($_POST['clave']);
+        $resultado=$this->Actualizar_Tablas("personas","contrasenia","cedula_persona",$clave,$cedula);
+        echo $resultado;
+        
     }
 
     public function set_Usuario_Actual($cedula, $nombre, $apellido, $correo, $estado, $rol_inicio)
