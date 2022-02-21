@@ -16,9 +16,9 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <script>
-    /* window.blur();
-             window.print();
-             window.close(); */
+    window.blur();
+    window.print();
+             
     </script>
     <section class="content">
         <!-- Default box -->
@@ -39,7 +39,7 @@
                                     <br />
                                 </h5>
                                 <u>
-                                    <h4>Listado de Personas con Discapadides</h4>
+                                    <h4>Listado de Embarazadas</h4>
                                 </u>
                             </center>
                         </td>
@@ -70,22 +70,35 @@
                                     
                                     </tr>
                                     <tbody id="datos">
-                                        <tr>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td></td>
+                                        <?php foreach ($this->embarazadas as $value): ?>
                                             
+                                        
+                                        <tr>
+                                            <td><?php echo $value["cedula_persona"] ?></td>
+                                            <td><?php echo $value["primer_nombre"]." ".$value["primer_apellido"] ?></td>
+                                            <td><?php echo $value["direccion_vivienda"] ?></td>
+                                            <td>
+                                                <?php 
+                                                    list($ano,$mes,$dia) = explode("-",$value["fecha_nacimiento"]);
+                                                    $ano_diferencia  = date("Y") - $ano;
+                                                    $mes_diferencia = date("m") - $mes;
+                                                    $dia_diferencia   = date("d") - $dia;
+                                                    if ($dia_diferencia < 0 || $mes_diferencia < 0)
+                                                        $ano_diferencia--;
+                                                    echo $ano_diferencia." Años"; 
+                                                ?>
+                                            </td>
+                                             <td><?php echo $value["fecha_aprox_parto"] ?></td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 Total:
                                             </td>
                                             <td colspan="4">
-
+                                                <?php echo count($this->embarazadas) ?>
                                             </td>
                                         </tr>
+                                        <?php endforeach ?>
                                     </tbody>
                                 </table>
                             </div>

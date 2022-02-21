@@ -31,7 +31,10 @@ class Reportes extends Controlador
         $enfermos=$this->modelo->Enfermos(); 
         $enfermedades=$this->modelo->Enfermedades(); 
         $grupos_deportivos=$this->modelo->Grupos_Deportivos(); 
-        $grupos_deportivos_personas=$this->modelo->Grupo_Deportivo_Persona(); 
+        $grupos_deportivos_personas=$this->modelo->Grupo_Deportivo_Persona();
+        $embarazadas=$this->modelo->Embarazadas();
+
+        $poblacion_edades=$this->modelo->Poblacion_Edades();  
 
         $this->vista->personas = $personas; 
         $this->personas = $personas; 
@@ -98,6 +101,12 @@ class Reportes extends Controlador
 
         $this->vista->grupos_deportivos_personas = $grupos_deportivos_personas; 
         $this->grupos_deportivos_personas = $grupos_deportivos_personas; 
+
+        $this->vista->embarazadas = $embarazadas; 
+        $this->embarazadas = $embarazadas;
+
+        $this->vista->poblacion_edades = $poblacion_edades; 
+        $this->poblacion_edades = $poblacion_edades; 
     }
 
     public function Datos_Poblacional()
@@ -630,6 +639,20 @@ public function Grupos_Deportivos()
     $this->Seguridad_de_Session();
     $this->Establecer_Consultas();
     $this->vista->Cargar_Vistas('reportes/PDF/grupos_deportivos');
+} 
+
+public function Embarazadas()
+{
+    $this->Seguridad_de_Session();
+    $this->Establecer_Consultas();
+    $this->vista->Cargar_Vistas('reportes/PDF/embarazadas');
+} 
+
+public function Poblacion_Edades()
+{
+    $this->Seguridad_de_Session();
+    $this->Establecer_Consultas();
+    $this->vista->Cargar_Vistas('reportes/PDF/poblacion_edades');
 } 
 
 

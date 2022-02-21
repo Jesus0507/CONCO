@@ -8,7 +8,7 @@ class Reportes_Class extends Modelo
         parent::__construct();
     }    
 
-     public function Familia_Vivienda($id_familia)
+     public function Familia_Vivienda($id_familia) 
      {
 
          $tabla            = "SELECT * FROM familia f, vivienda v, calles c, tipo_vivienda t, servicios s WHERE f.id_familia = $id_familia and v.id_calle = c.id_calle AND v.id_tipo_vivienda = t.id_tipo_vivienda AND v.id_vivienda = s.id_servicio";
@@ -51,6 +51,44 @@ class Reportes_Class extends Modelo
      {
 
          $tabla            = "SELECT DISTINCT p.cedula_persona, f.*,fp.*,p.*,v.*,c.* FROM familia f, familia_personas fp, personas p, vivienda v, calles c WHERE f.id_vivienda = v.id_vivienda AND f.id_familia = fp.id_familia AND p.cedula_persona = fp.cedula_persona AND v.id_calle = c.id_calle AND p.estado = 1 ORDER BY `c`.`nombre_calle` ASC";
+         $respuesta_arreglo = '';
+         try {
+             $datos = $this->conexion->prepare($tabla);
+             $datos->execute();
+             $datos->setFetchMode(PDO::FETCH_ASSOC);
+             $respuesta_arreglo = $datos->fetchAll(PDO::FETCH_ASSOC);
+             return $respuesta_arreglo;
+         } catch (PDOException $e) {
+
+             $errorReturn = ['estatus' => false];
+             $errorReturn += ['info' => "error sql:{$e}"];
+             return $errorReturn;
+         }
+     }
+
+     public function Poblacion_Edades() 
+     {
+
+         $tabla            = "SELECT DISTINCT p.cedula_persona, TIMESTAMPDIFF(YEAR,p.fecha_nacimiento,CURDATE()) AS edad, p.primer_nombre, p.segundo_nombre, p.primer_apellido, p.segundo_apellido, p.genero, c.nombre_calle FROM familia f, familia_personas fp, personas p, vivienda v, calles c WHERE f.id_vivienda = v.id_vivienda AND f.id_familia = fp.id_familia AND p.cedula_persona = fp.cedula_persona AND v.id_calle = c.id_calle AND p.estado = 1 ORDER BY `c`.`nombre_calle` ASC";
+         $respuesta_arreglo = '';
+         try {
+             $datos = $this->conexion->prepare($tabla);
+             $datos->execute();
+             $datos->setFetchMode(PDO::FETCH_ASSOC);
+             $respuesta_arreglo = $datos->fetchAll(PDO::FETCH_ASSOC);
+             return $respuesta_arreglo;
+         } catch (PDOException $e) {
+
+             $errorReturn = ['estatus' => false];
+             $errorReturn += ['info' => "error sql:{$e}"];
+             return $errorReturn;
+         }
+     }
+
+     public function Embarazadas() 
+     {
+
+         $tabla            = "SELECT DISTINCT p.cedula_persona, f.*, fp.*, p.*, v.*, c.*, par.* FROM familia f, familia_personas fp, personas p, vivienda v, calles c, parto_humanizado par WHERE f.id_vivienda = v.id_vivienda AND f.id_familia = fp.id_familia AND p.cedula_persona = fp.cedula_persona AND v.id_calle = c.id_calle AND p.estado = 1 AND par.estado = 1 AND par.cedula_persona = fp.cedula_persona ORDER BY `c`.`nombre_calle` ASC";
          $respuesta_arreglo = '';
          try {
              $datos = $this->conexion->prepare($tabla);
