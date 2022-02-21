@@ -335,7 +335,6 @@ public function registrar_org_politica(){
     "id_org_politica"     =>     $datos['organizacion']
   ]);
 
-   $cont++;
  }
 
  else{
