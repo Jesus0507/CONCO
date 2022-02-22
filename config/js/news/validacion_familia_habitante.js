@@ -84,6 +84,7 @@ function enviar_informacion(){
    observaciones.value==''?datos_familia['observacion']="Sin observaciones":datos_familia['observacion']=observaciones.value;
    
    datos_familia['integrantes']=integrantes;
+   datos_familia['estado']=2;
    
 
 

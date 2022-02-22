@@ -61,7 +61,7 @@ class Familias extends Controlador
          }
      }
  }
-
+echo $resultado;
 
 }
 

@@ -118,7 +118,7 @@ class Familias_Class extends Modelo
                 'observacion'      => $data['observacion'],
                 'telefono_familia'    =>$data['telefono_familia'],
                 'ingreso_mensual_aprox'        =>$data['ingreso_mensual_aprox'],
-                'estado'      => 1
+                'estado'      => $data['estado']
             ]);
 
             return true;
