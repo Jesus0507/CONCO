@@ -46,6 +46,12 @@
         texto_mensaje+="Ha realizado una solicitud de registro de "+result_s[i]['tipo_constancia'];
 
         break;
+
+        case 'Familia':
+        icono_s="<i class='fas fa-users'></i>";
+        texto_mensaje+="Ha realizado una solicitud de registro de "+result_s[i]['tipo_constancia'];
+
+        break;
       }
 
 
@@ -110,7 +116,13 @@
   }
   else{
 
+    if(tipo_solicitud=="Familia"){
+      window.open(BASE_URL + 'Solicitudes/Solicitud_familia&id='+id);
+    }
+    else{
+
   window.open(BASE_URL + 'Solicitudes/Solicitud&id='+id);
+    }
 
 }
 

@@ -94,16 +94,33 @@ function enviar_informacion(){
          data:{"datos":datos_familia}
 	}).done(function(result){
            console.log(result);
-            
-            swal({
-            	title:"Éxito",
-            	text:"Familia registrada satisfactoriamente",
-            	timer:2000,
-            	showConfirmButton:false,
-            	type:"success"
-            });
 
-            setTimeout(function(){location.reload()},1000);
+		   var datos_persona=new Object();
+		   datos_persona['cedula_persona']=document.getElementById("user_cedula").value;
+		   datos_persona['tipo_constancia']='Familia';
+		   datos_persona['motivo_constancia']="Registro familia";
+
+		   console.log(datos_persona);
+		   $.ajax({
+			   type:"POST",
+			   url:BASE_URL+"Solicitudes/Nueva_solicitud_vivienda",
+			   data:{"datos":datos_persona}
+
+		   }).done(function(result){
+			   console.log(result);
+			   if(result==1){
+				swal({
+					title:"Éxito",
+					text:"Familia registrada satisfactoriamente",
+					timer:2000,
+					showConfirmButton:false,
+					type:"success"
+				});
+	
+				setTimeout(function(){location.reload()},1000);
+
+			   }
+		   });
 
 
 	});

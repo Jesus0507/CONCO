@@ -113,6 +113,20 @@ class Solicitudes extends Controlador
 
     }
 
+    public function Nueva_solicitud_familia()
+    {
+       $datos=$_POST['datos'];
+       $ultimo=$this->Ultimo_Ingresado("familia","id_familia");
+       $id='';
+       foreach ($ultimo as $i) {
+          $id= $i['MAX(id_familia)'];
+      
+      }
+      $datos['observaciones']=$id;
+       echo $this->modelo->Registrar($datos);
+
+    }
+
 
     public function Consultar_solicitudes()
     {
