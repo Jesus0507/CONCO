@@ -20,6 +20,8 @@ class Solicitudes extends Controlador
     {   
         $this->Establecer_Consultas();
         $this->Seguridad_de_Session();
+        $solicitud=$this->Consultar_Columna("solicitudes","id_solicitud",$_GET['id']);
+
         $this->vista->Cargar_Vistas('solicitudes/index');
     }
     public function Solicitud()
@@ -32,6 +34,14 @@ class Solicitudes extends Controlador
     {   
         $this->Seguridad_de_Session();
         $this->vista->Cargar_Vistas('solicitudes/consultar_vivienda');
+    }
+
+    public function Solicitud_familia()
+    {   
+        $this->Seguridad_de_Session();
+        $solicitud=$this->Consultar_Columna("solicitudes","id_solicitud",$_GET['id']);
+        $familia=$this->Consultar_Columna("familia","id_familia",$solicitud[0]['observaciones']);
+        $this->vista->Cargar_Vistas('solicitudes/consultar_familia');
     }
 
 

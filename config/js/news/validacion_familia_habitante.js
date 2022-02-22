@@ -103,7 +103,7 @@ function enviar_informacion(){
 		   console.log(datos_persona);
 		   $.ajax({
 			   type:"POST",
-			   url:BASE_URL+"Solicitudes/Nueva_solicitud_vivienda",
+			   url:BASE_URL+"Solicitudes/Nueva_solicitud_familia",
 			   data:{"datos":datos_persona}
 
 		   }).done(function(result){
