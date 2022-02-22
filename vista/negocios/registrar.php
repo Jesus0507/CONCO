@@ -39,7 +39,7 @@
                                 </label>
                                 <div class="input-group">
                                     <select class="custom-select" id="id_calle" name="datos[id_calle]">
-                                        <option selected>
+                                        <option value="0">
                                            Seleccione ...
                                         </option>
                                     <?php foreach($this->calle as $calles){   ?>
@@ -48,7 +48,9 @@
                                         </option>
                                     <?php  }   ?>
                                     </select>
+                                    
                                 </div>
+                                <span id="mensaje_calle"></span>
                             </div>
 
                            
@@ -60,6 +62,7 @@
                                     <input class="form-control mb-10" id="direccion" name="datos[direccion_negocio]"
                                         placeholder="Direccion de Negocio" type="text" />
                                 </div>
+                                <span id="mensaje_direccion"></span>
                             </div>
 
                             <div class="col-md-12 mt-2">
@@ -69,7 +72,9 @@
                                 <div class="input-group">
                                     <input class="form-control mb-10" id="nombre_negocio" name="datos[nombre_negocio]"
                                         placeholder="Nombre de Negocio" type="text" />
+                                         
                                 </div>
+                                <span id="mensaje_negocio"></span>
                             </div>
                             
                             <div class="col-md-6 mt-2">
@@ -88,6 +93,7 @@
                                     </datalist>
                                     
                                 </div>
+                                <span id="mensaje_cedula"></span>
                             </div>
 
                             <div class="col-md-6 mt-2">
@@ -98,6 +104,7 @@
                                     <input class="form-control mb-10" id="rif_negocio" name="datos[rif_negocio]"
                                         placeholder="Rif del Negocio" type="text" />
                                 </div>
+                                <span id="mensaje_rif"></span>
                             </div>
                 
                         </div>
@@ -108,7 +115,7 @@
                 <div class="card-footer">
                     <div class="text-center m-t-20">
                         <div class="col-xs-12">
-                            <input type="submit" class="btn  btn-success m-r-10" name="" id="" value="Guardar">
+                            <input type="button" class="btn  btn-success m-r-10" name="" id="enviar" value="Guardar">
                             <input type="button" class="btn btn-danger" id="" name="" value="Limpiar">
                         </div>
                     </div>
@@ -123,5 +130,7 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+<script src="<?php echo constant('URL')?>config/js/news/registrar_negocios.js"></script> 
 <?php include (call."Fin.php"); ?>
 <?php include (call."Style-seguridad.php"); ?>
+

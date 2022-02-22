@@ -66,6 +66,21 @@ class Negocios extends Controlador
         $this->Escribir_JSON($this->datos_negocios);
     }
 
+    public function Negocio_Existente()
+    {
+        $this->Establecer_Consultas();
+
+
+
+        $existente = $this->Consultar_Columna("negocios","rif_negocio",$_POST['rif_negocio']);
+        if ($existente == "" || $existente == null ) {
+            echo 0;
+        } else {
+            echo 1;
+        }
+        
+    }
+
     public function Nuevo_Negocio()
     {
         $datos = ($_POST['datos'] !== "") ? $_POST['datos'] : null;
@@ -81,13 +96,13 @@ class Negocios extends Controlador
             ]
         )
         ) {
-            $this->vista->mensaje = 'Negocio Registrado exitosamente!.';
+            $this->mensaje = 1;
             $this->Accion("Registro de Negocio: ".$datos['nombre_negocio']." Exitosamente.");
         } else {
-            $this->vista->mensaje = 'Ha ocurrido un error.';
+            $this->mensaje = 0;
         }
-
-        header('location:' . constant('URL') . "negocios/Consultas");
+        echo $this->mensaje;
+        #header('location:' . constant('URL') . "negocios/Consultas");
         exit();
         return false;
     }

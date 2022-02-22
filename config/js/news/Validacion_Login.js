@@ -285,7 +285,7 @@ document.getElementById("modificarContrasenia").onclick = function () {
             swal({
                 type:"error",
                 title:"Error",
-                text:"Preguntas de seguridad incorrectas",
+                text:"Los datos de seguridad ingresados son incorrectos",
                 timer:3000,
                 showConfirmButton:false
               });
