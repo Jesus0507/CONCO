@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1 class="m-0" id="title-solicitud">Consejo Comunal Prados de Occidente</h1>
+                    <h1 class="m-0" id="title-solicitud"><em class='fa fa-users'></em> Solicitud de registro de familia</h1>
                 </div><!-- /.col -->
 
             </div><!-- /.row -->
@@ -68,11 +68,11 @@
                     <br>
                     <div style="width:100%;background: #DEEEE2;padding-left: 6%;padding-right: 6%;border-radius: 30px">
                         <br>
-                        <div style="width:100%;text-align: right;font-size:24px"><em class="fa fa-clock-o"></em> <span id="fecha_solicitud">Fecha</span></div>
+                        <div style="width:100%;text-align: right;font-size:24px"><em class="fa fa-clock-o"></em> <span id="fecha_solicitud"><?php echo date('d-m-Y', strtotime($this->solicitud[0]['fecha_solicitud'])); ?></span></div>
                         <center>
                             <br>
                             <span style="font-size:80px" class="fa fa-user-o"></span>
-                            <h4 id="persona">Pruieba</h4>
+                            <h4 id="persona"><?php echo $this->solicitante[0]['primer_nombre'] . " " . $this->solicitante[0]['primer_apellido']; ?></h4>
                             <input type='hidden' id='id_servicio'>
                         </center>
                         <br>
@@ -81,7 +81,7 @@
                                 <tr style='background:#699373;color:white'>
                                     <td class='text-center' style='width:30%'>
                                         <strong><span class='fa fa-users'></span>
-                                           Familia:</strong><br>
+                                            Familia:</strong><br>
 
                                     </td>
                                     <td class='text-center' style='width:30%'>
@@ -96,9 +96,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td id='calle' class="text-center"></td>
-                                    <td id='direccion' class='text-center'></td>
-                                    <td id='nro_vivienda' class='text-center'></td>
+                                    <td class="text-center"><?php echo $this->familia[0]['nombre_familia']; ?></td>
+                                    <td class='text-center'><?php echo $this->familia[0]['telefono_familia']; ?></td>
+                                    <td class='text-center'><?php echo $this->vivienda[0]['direccion_vivienda']; ?></td>
                                 </tr>
                             </table>
 
@@ -123,145 +123,26 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td id='habitaciones' class="text-center"></td>
-                                    <td id='tipo_vivienda' class='text-center'></td>
-                                    <td id='condicion' class='text-center'></td>
+                                    <td class="text-center"><?php echo $this->vivienda[0]['numero_casa']; ?></td>
+                                    <td class='text-center'><?php echo $this->familia[0]['ingreso_mensual_aprox']; ?></td>
+                                    <td class='text-center'><?php echo $this->familia[0]['condicion_ocupacion']; ?></td>
                                 </tr>
                             </table><br>
                             <table style='width:98%;' border='1'>
                                 <tr style='background:#699373;color:white'>
-                                    <td class='text-center' style='width:30%'>
-                                        <strong><span class='fa fa-users'></span>
-                                            Hacinamiento:</strong><br>
-                                    </td>
-                                    <td class='text-center' style='width:30%'>
-                                        <strong><span class='fa fa-tree'></span>
-                                            Espacio de siembra:</strong><br>
-                                    </td>
-                                    <td class='text-center' style='width:30%'>
-                                        <strong><span class='fa fa-bath'></span>
-                                            Baño sanitario:</strong><br>
+                                    <td class='text-center' style='width:100%'>
+                                        <strong><span class='fa fa-user'></span>
+                                            Integrantes (<?php echo count($this->integrantes); ?>):</strong><br>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td id='hacinamiento' class="text-center"></td>
-                                    <td id='espacio_siembra' class='text-center'></td>
-                                    <td id='sanitario' class='text-center'></td>
-                                </tr>
-                            </table><br>
-                            <table style='width:98%;' border='1'>
-                                <tr style='background:#699373;color:white'>
-                                    <td class='text-center' style='width:30%'>
-                                        <strong><span class='fa fa-shower'></span>
-                                            Agua de consumo:</strong><br>
+                                    <td  style='width:100%'>
+                                    <?php foreach($this->integrantes as $i){ ?>
+                                        * 
+                                        <?php echo $i['primer_nombre']." ".$i['primer_apellido']." (".$i['cedula_persona'].")"; ?>
+                                        <hr>
+                                        <?php } ?>
                                     </td>
-                                    <td class='text-center' style='width:30%'>
-                                        <strong><span class='fa fa-tint'></span>
-                                            Aguas negras:</strong><br>
-                                    </td>
-                                    <td class='text-center' style='width:30%'>
-                                        <strong><span class='fa fa-trash'></span>
-                                            Residuos sólidos:</strong><br>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td id='agua_consumo' class="text-center"></td>
-                                    <td id='aguas_negras' class='text-center'></td>
-                                    <td id='residuos_solidos' class='text-center'></td>
-                                </tr>
-                            </table><br>
-                            <table style='width:98%;' border='1'>
-                                <tr style='background:#699373;color:white'>
-                                    <td class='text-center' style='width:30%'>
-                                        <strong><span class='fa fa-plug'></span>
-                                            Cableado eléctrico:</strong><br>
-                                    </td>
-                                    <td class='text-center' style='width:30%'>
-                                        <strong><span class='fa fa-phone'></span>
-                                            Cableado telefónico:</strong><br>
-                                    </td>
-                                    <td class='text-center' style='width:30%'>
-                                        <strong><span class='fa fa-wifi'></span>
-                                            Servicio de internet:</strong><br>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td id='cableado_electrico' class="text-center"></td>
-                                    <td id='cableado_telefonico' class='text-center'></td>
-                                    <td id='internet' class='text-center'></td>
-                                </tr>
-                            </table><br>
-                            <table style='width:98%;' border='1'>
-                                <tr style='background:#699373;color:white'>
-                                    <td class='text-center' style='width:30%'>
-
-                                        <strong><span class='fa fa-fire'></span>
-                                            Gas doméstico:</strong><br>
-                                    </td>
-                                    <td class='text-center' style='width:30%'>
-
-                                        <strong><span class='fa fa-paw'></span>
-                                            Animales domésticos:</strong><br>
-                                    </td>
-                                    <td class='text-center' style='width:30%'>
-
-                                        <strong><span class='fa fa-bug'></span>
-                                            Plagas:</strong><br>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td id='gas' class="text-center"></td>
-                                    <td id='animales' class='text-center'></td>
-                                    <td id='plagas' class='text-center'></td>
-                                </tr>
-                            </table><br>
-                            <table style='width:98%;' border='1'>
-                            <tr style='background:#699373;color:white'>
-                                <td class='text-center' colspan='3'>
-                                    <strong><span class='fa fa-commenting-o'></span>
-                                        Descripción de la vivienda:</strong><br>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                    <td id='descripcion' class="text-center"></td>
-                          </tr>
-                           </table><br>
-                           <table style='width:98%;' border='1'>
-                            <tr style='background:#699373;color:white'>
-                                <td class='text-center' style='width:30%'>
-                                    <strong><span class='fa fa-arrow-up'></span>
-                                        Tipo(s) de techo:</strong><br>
-                                </td>
-                                <td class='text-center' style='width:30%'>
-                                    <strong><span class='fa fa-square'></span>
-                                        Tipo(s) de pared:</strong><br>
-                                </td>
-                                <td class='text-center' style='width:30%'>
-                                    <strong><span class='fa fa-arrow-down'></span>
-                                        Tipo(s) de piso:</strong><br>
-                                </td>
-                            </tr>
-                            <tr>
-                                    <td id='tipo_techo' class="text-center"></td>
-                                    <td id='tipo_pared' class='text-center'></td>
-                                    <td id='tipo_piso' class='text-center'></td>
-                                </tr>
-                           </table><br>
-                           <table style='width:98%;' border='1'>
-                            <tr style='background:#699373;color:white'>
-                                <td class='text-center' style='width:50%'>
-                                    <strong><span class='fa fa-free-code-camp'></span>
-                                        Tipo(s) de servicio de gas:</strong><br>
-                                </td>
-                                <td class='text-center' style='width:50%'>
-                                    <strong><span class='fa fa-cogs'></span>
-                                        Electrodomésticos:</strong><br>
-                                </td>
-                            </tr>
-                            <tr>
-                                    <td id='tipo_gas' class="text-center" style='width:50%'></td>
-                                    <td id='electrodomestico' class='text-center' style='width:50%'></td>
                                 </tr>
                             </table>
                         </center>

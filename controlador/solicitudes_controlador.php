@@ -40,7 +40,20 @@ class Solicitudes extends Controlador
     {   
         $this->Seguridad_de_Session();
         $solicitud=$this->Consultar_Columna("solicitudes","id_solicitud",$_GET['id']);
+        $this->vista->solicitud=$solicitud;
+        $solicitante=$this->Consultar_Columna("personas","cedula_persona",$solicitud[0]['cedula_persona']);
+        $this->vista->solicitante=$solicitante;
         $familia=$this->Consultar_Columna("familia","id_familia",$solicitud[0]['observaciones']);
+        $this->vista->familia=$familia;
+        $vivienda=$this->Consultar_Columna("vivienda","id_vivienda",$familia[0]['id_vivienda']);
+        $this->vista->vivienda=$vivienda;
+        $integrantes=$this->Consultar_Columna("familia_personas","id_familia",$solicitud[0]['observaciones']);
+        $personas_familia=[];
+        foreach($integrantes as $i){
+            $integrante=$this->Consultar_Columna("personas","cedula_persona",$i['cedula_persona']);
+            $personas_familia[]=$integrante[0];
+        }
+        $this->vista->integrantes=$personas_familia;
         $this->vista->Cargar_Vistas('solicitudes/consultar_familia');
     }
 
