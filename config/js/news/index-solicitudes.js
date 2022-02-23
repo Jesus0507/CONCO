@@ -40,6 +40,14 @@ $.ajax({
                 icono_solicitud="fas fa-address-card";
                 break;
 
+                case"Vivienda":
+                icono_solicitud="fas fa-plus-square";
+                break;
+
+                case"Familia":
+                icono_solicitud="fas fa-users";
+                break;
+
                 default :
                 icono_solicitud="fas fa-hotel";
                 break;

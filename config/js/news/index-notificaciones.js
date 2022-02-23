@@ -44,6 +44,12 @@ $.ajax({
                     case '3':
                     clase='fa fa-calendar';
                     break;
+                    case 4:
+                    clase="fas fa-check";
+                    break;
+                    case 5:
+                    clase="fas fa-times";
+                    break;
                    }
                   
 
