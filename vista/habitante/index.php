@@ -808,7 +808,8 @@
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<?php include (call."Fin.php"); ?>ç
+<?php include (call."Fin.php"); ?>
+<?php include (modal."registrar-personas-habitante.php"); ?>
 <script src="<?php echo constant('URL')?>config/js/news/consulta-eventos-habitante.js"></script> 
 <script src="<?php echo constant('URL')?>config/js/news/registrar_vivienda_habitante.js"></script> 
 <script src="<?php echo constant('URL')?>config/js/news/index_habitante.js"></script> 

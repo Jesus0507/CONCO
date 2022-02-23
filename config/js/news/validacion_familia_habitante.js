@@ -32,7 +32,7 @@ btn_vivienda_nueva.onclick=function(){
 
 
 btn_nuevo_integrante.onclick=function(){
-	window.open(BASE_URL+"Personas/Registros/");
+	$("#registrar-persona").modal("show");
 }
 
 
