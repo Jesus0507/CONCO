@@ -118,7 +118,7 @@ rechazar.onclick = function () {
             timer: 2000,
           });
 
-          solicitante["asunto"] = "Se ha aprobado su solicitud";
+          solicitante["asunto"] = "Se ha rechazado su solicitud";
           solicitante["mensaje"] =
             "Su solicitud para constancia de " +
             solicitante["tipo_constancia"] +
@@ -129,7 +129,7 @@ rechazar.onclick = function () {
             document.getElementById("btn_correo").click();
           }
 
-          // setTimeout(function(){location.href=BASE_URL+"Solicitudes/"},1000);
+           setTimeout(function(){location.href=BASE_URL+"Solicitudes/"},1000);
         }
       }
     }

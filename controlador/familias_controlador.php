@@ -99,6 +99,10 @@ public function eliminar_logica(){
   echo $this->Desactivar("familia","id_familia",$_POST['id']);
 }
 
+public function eliminar_familia(){
+    echo $this->Eliminar_Tablas("familia","id_familia",$_POST['id']);
+  }
+
 }
 
 ?> 

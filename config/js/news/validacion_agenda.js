@@ -295,7 +295,7 @@ function validacion_horas(hora_evento){
 
   for(var j=parseInt(hora_desde_evento.value);j<=parseInt(hora_hasta_evento.value);j++){
 
-    if(j==inicio || j==fin){
+    if(j>=inicio && j<=fin){
       validar=false;
     }   
     

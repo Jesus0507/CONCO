@@ -4,6 +4,9 @@
 <!-- Contenido de la pagina -->
 <div class="content-wrapper">
     <input type="hidden" id="id_solicitud" value="<?php echo $_GET['id'] ?>">
+    <input type="hidden" id="id_familia" value="<?php echo $this->familia[0]['id_familia']; ?>">
+    <input type="hidden" id="cedula_solicitante" value="<?php echo $this->solicitante[0]['cedula_persona']; ?>">
+    <input type="hidden" id="correo_solicitante" value="<?php echo $this->solicitante[0]['correo']; ?>">
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -73,7 +76,6 @@
                             <br>
                             <span style="font-size:80px" class="fa fa-user-o"></span>
                             <h4 id="persona"><?php echo $this->solicitante[0]['primer_nombre'] . " " . $this->solicitante[0]['primer_apellido']; ?></h4>
-                            <input type='hidden' id='id_servicio'>
                         </center>
                         <br>
                         <center>
@@ -164,3 +166,4 @@
 <?php include(call . "style-agenda.php"); ?>
 <script src="<?php echo constant('URL') ?>config/js/vue.min.js"></script>
 <script type="text/javascript" src="<?php echo constant('URL') ?>config/js/email.min.js"></script>
+<script type="text/javascript" src="<?php echo constant('URL') ?>config/js/news/solicitudes-consulta-familia.js"></script>

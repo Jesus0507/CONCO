@@ -111,7 +111,7 @@ function enviar_informacion(){
 			   if(result==1){
 				swal({
 					title:"Éxito",
-					text:"Familia registrada satisfactoriamente",
+					text:"Su solicitud de registro de familia ha sido enviada exitosamente",
 					timer:2000,
 					showConfirmButton:false,
 					type:"success"

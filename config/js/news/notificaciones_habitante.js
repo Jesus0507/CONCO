@@ -38,6 +38,12 @@ function getNotifications_habitante(){
                     case 3:
                           icono="<i class='fas fa-calendar'></i>";
                     break;
+                    case 4:
+                          icono="<i class='fas fa-check'></i>";
+                    break;
+                    case 5:
+                          icono="<i class='fas fa-times'></i>";
+                    break;
                 }
 
                 var mensaje=getRecortado(tipo[1]); 
@@ -80,7 +86,7 @@ function getNotifications_habitante(){
                 notificaciones_no_leidas.innerHTML="No hay notificaciones nuevas";
                 cantidad.style.display="none";
                 cantidad.innerHTML='0';
-
+                document.getElementById("page-title").innerHTML="C.C Prados de Occidente";
                }
                else{
                 notificaciones_no_leidas.innerHTML=cant+" Notificaciones";
