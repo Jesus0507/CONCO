@@ -128,8 +128,9 @@ rechazar.onclick = function () {
           if (solicitante["correo"] != "No posee") {
             document.getElementById("btn_correo").click();
           }
-
+          else{
            setTimeout(function(){location.href=BASE_URL+"Solicitudes/"},1000);
+          }
         }
       }
     }
@@ -201,8 +202,12 @@ aprobar.onclick = function () {
         if (solicitante["correo"] != "No posee") {
           document.getElementById("btn_correo").click();
         }
+        else{
+          setTimeout(function(){location.href=BASE_URL+"Solicitudes/"},1000);
+        }
 
         nueva_notificacion(datos_notificacion);
+
 
         print_pdf();
 

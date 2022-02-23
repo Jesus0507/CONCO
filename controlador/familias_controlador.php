@@ -103,6 +103,10 @@ public function eliminar_familia(){
     echo $this->Eliminar_Tablas("familia","id_familia",$_POST['id']);
   }
 
+  public function activar_familia(){
+    echo $this->Activar("familia","id_familia",$_POST['id_familia']);
+  }
+
 }
 
 ?> 

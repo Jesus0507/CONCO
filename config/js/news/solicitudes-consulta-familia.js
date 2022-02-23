@@ -61,16 +61,16 @@ rechazar.onclick = function () {
 
           solicitante["asunto"] = "Se ha rechazado su solicitud";
           solicitante["mensaje"] =
-            "Su solicitud para registro de " +
-            solicitante["tipo_constancia"] +
-            " ha sido rechazada. El motivo del rechazo es: " +
+            "Su solicitud para registro de familia ha sido rechazada. El motivo del rechazo es: " +
             motivo_rechazo;
 
           if (solicitante['correo']!= "No posee") {
             document.getElementById("btn_correo").click();
           }
+          else{
+            setTimeout(function(){location.href=BASE_URL+"Solicitudes/"},1000);
+          }
 
-           setTimeout(function(){location.href=BASE_URL+"Solicitudes/"},1000);
         }
       }
     }
@@ -97,12 +97,11 @@ aprobar.onclick = function () {
         }).done(function(){
           $.ajax({
             type: "POST",
-            url: BASE_URL + "Viviendas/activar_vivienda",
+            url: BASE_URL + "Familias/activar_familia",
             data: {
-              "id_vivienda": id_servicio.value,
+              "id_familia": id_familia.value,
             },
           }).done(function(result){
-            alert(result);
           })   
         });
 
@@ -116,25 +115,24 @@ aprobar.onclick = function () {
 
         var datos_notificacion = new Object();
         datos_notificacion["tipo_notificacion"] = 4;
-        datos_notificacion["usuario_receptor"] = solicitante["cedula_persona"];
+        datos_notificacion["usuario_receptor"] =  document.getElementById("cedula_solicitante").value;
         datos_notificacion["accion"] =
-          "Aprobó su solicitud para registro de " +
-          solicitante["tipo_constancia"] +
-          ".";
+          "Aprobó su solicitud para registro de familia.";
 
         console.log(datos_notificacion);
 
         solicitante["asunto"] = "Se ha aprobado su solicitud";
         solicitante["mensaje"] =
-          "Su solicitud para registro de " +
-          solicitante["tipo_constancia"] +
-          " ha sido aprobada.";
+          "Su solicitud para registro de familia ha sido aprobada.";
+
+          nueva_notificacion(datos_notificacion);
 
         if (solicitante["correo"] != "No posee") {
           document.getElementById("btn_correo").click();
+        }{
+          setTimeout(function(){location.href=BASE_URL+"Solicitudes/"},1000);
         }
 
-        nueva_notificacion(datos_notificacion);
 
         // setTimeout(function(){
 
