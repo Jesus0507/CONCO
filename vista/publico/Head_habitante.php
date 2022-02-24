@@ -39,9 +39,18 @@
         href="<?php echo constant('URL')?>config/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet"
         href="<?php echo constant('URL')?>config/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <!-- chartist CSS -->
+    <link href="<?php echo constant('URL')?>config/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
+    <link href="<?php echo constant('URL')?>config/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet">
+    <link
+        href="<?php echo constant('URL')?>config/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css"
+        rel="stylesheet">
+    <link href="<?php echo constant('URL')?>config/plugins/css-chart/css-chart.css" rel="stylesheet">
     
     <!-- jquery -->
     <script src="<?php echo constant('URL')?>config/plugins/jquery/jquery.min.js"></script>
+
 
     <style>
     @import url(<?php echo constant('URL')?>config/scss/icons/font-awesome/css/font-awesome.min.css);
@@ -55,5 +64,5 @@
         typeof BASE_URL;
 </script>
 
-
+<?php include (call."Style-tabs.php"); ?>
 </head>

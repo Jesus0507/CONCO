@@ -146,6 +146,24 @@ public function Registros()
   $this->vista->Cargar_Vistas('personas/registrar');
 }
 
+public function Registros_habitante()
+{
+  $this->Seguridad_de_Session();
+  $this->vista->transportes=$this->modelo->get_transportes();
+  $this->vista->comunidades=$this->modelo->get_comunidades();
+  $this->vista->organizaciones=$this->modelo->get_organizaciones();
+  //      $this->vista->centros_votacion=$this->modelo->get_centros();
+  //      $this->vista->parroquias=$this->modelo->get_parroquias();
+  $this->vista->bonos=$this->modelo->get_bonos();
+  //      $this->vista->enfermedades=$this->modelo->get_enfermedades();
+  //      $this->vista->discapacidades=$this->modelo->get_discapacidad();
+  $this->vista->misiones=$this->modelo->get_misiones();
+  $this->vista->ocupaciones=$this->modelo->get_ocupaciones();
+  $this->vista->condiciones=$this->modelo->get_condiciones();
+  $this->vista->proyectos=$this->modelo->get_proyectos();
+  $this->vista->Cargar_Vistas('habitante/registrar_personas');
+}
+
 public function Consultas()
 {
   /* $this->Establecer_Consultas(); */
