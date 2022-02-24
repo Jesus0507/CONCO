@@ -1059,7 +1059,7 @@
 <?php include (call."Fin.php"); ?>
 
 
-<script type="text/javascript" src="<?php echo constant('URL')?>config/js/news/registrar-personas.js"></script>
+<script type="text/javascript" src="<?php echo constant('URL')?>config/js/news/registrar-personas-habitante.js"></script>
 <style>
     .color-table.info-table thead th {
         background-color: #009efb;

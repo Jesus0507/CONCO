@@ -149,14 +149,14 @@ btn_agregar.onclick=function(){
          valid_integrantes.innerHTML="";
 		$.ajax({
 			type: 'POST',
-			url: BASE_URL + 'Personas/Consultas_cedula',
+			url: BASE_URL + 'Personas/Consultas_cedulaV3',
 			data:{'cedula':integrantes_input.value}
 		})
 		.done(function (datos) {
+       
 
-
-			if(datos!=0){
-
+			if(datos!=0 && datos !=2){
+				console.log(datos);
 				var result=JSON.parse(datos);
                 integrantes.push(result[0]['cedula_persona']);
                 integrantes_input.value='';

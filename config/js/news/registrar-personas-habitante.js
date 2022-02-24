@@ -1748,7 +1748,7 @@ function enviar_informacion(){
 
   $.ajax({
     type:"POST",
-    url:BASE_URL+"Personas/registrar_persona",
+    url:BASE_URL+"Personas/registrar_persona_habitante",
     data:{"datos":datos_persona}
   }).done(function(result){
 
@@ -1801,7 +1801,7 @@ function enviar_informacion(){
      showConfirmButton:false
    });
 
-    setTimeout(function(){location.href=BASE_URL+"Personas/Consultas";},1000);
+    setTimeout(function(){window.close();},1000);
   }
 })
 

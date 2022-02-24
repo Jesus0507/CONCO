@@ -140,7 +140,7 @@ class Personas_Class extends Modelo
                 'contrasenia'           =>       $data['contrasenia'],
                 'rol_inicio'            =>       $data['rol_inicio'],
                 'preguntas_seguridad'   =>       $data['preguntas_seguridad'],
-                'estado'                =>       1
+                'estado'                =>       $data['estado']
             ]);
 
             return true;

@@ -244,6 +244,25 @@ public function Consultas_cedulaV2()
 
 }
 
+public function Consultas_cedulaV3()
+{
+
+ $persona=$this->Consultar_Columna("personas","cedula_persona",$_POST['cedula']);
+
+ if(count($persona)==0){
+   echo 0;
+ }
+ else{
+  if($persona[0]['estado'] == 0){
+    echo 2;
+  }
+  else{
+    echo json_encode($persona);
+  }
+ }
+
+}
+
 public function Administracion()
 {
   $this->Establecer_Consultas();
@@ -257,7 +276,20 @@ public function registrar_persona(){
   $datos=$_POST['datos'];
   $datos['contrasenia']=$this->Codificar($datos['contrasenia']);
   $datos['preguntas_seguridad']=$this->Codificar($datos['preguntas_seguridad']);
+  $datos['estado']=1;
+  echo $this->modelo->Registrar($datos);
 
+      // echo json_encode($datos);
+
+
+}
+
+public function registrar_persona_habitante(){
+
+  $datos=$_POST['datos'];
+  $datos['contrasenia']=$this->Codificar($datos['contrasenia']);
+  $datos['preguntas_seguridad']=$this->Codificar($datos['preguntas_seguridad']);
+  $datos['estado']=2;
   echo $this->modelo->Registrar($datos);
 
       // echo json_encode($datos);
@@ -285,7 +317,7 @@ public function registrar_ocupacion(){
 
   $ocupacion_dato=$_POST['ocupacion'];
 
-  if($ocupacion_dato['nuevo']=='0'){
+  if($ocupacion_dato['nueva']=='0'){
    $this->modelo->Registrar_persona_ocupacion([
     "cedula_persona"   =>     $_POST['cedula_persona'],
     "id_ocupacion"     =>     $ocupacion_dato['ocupacion']
