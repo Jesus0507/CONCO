@@ -586,4 +586,34 @@ public function get_codigo_carnet(){
   echo count($result);
 }
 
+
+public function get_info_habitante(){
+  $cedula=$_POST['cedula_persona'];
+  $info_completa=[];
+  $personas=$this->modelo->Consultar();
+  
+   $ocupacion=json_encode($this->modelo->get_ocupacion_persona($cedula));
+   $condicion_lab=json_encode($this->modelo->get_cond_laboral_persona($cedula));
+   $transporte=json_encode($this->modelo->get_transporte_persona($cedula));
+   $bonos=json_encode($this->modelo->get_bonos_persona($cedula));
+   $misiones=json_encode($this->modelo->get_misiones_persona($cedula));
+   $proyectos=json_encode($this->modelo->get_proyectos_persona($cedula));
+   $comunidad_i=json_encode($this->modelo->get_comunidad_indigena_persona($cedula));
+   $org_politica=json_encode($this->modelo->get_org_politica_persona($cedula));
+   
+  echo  json_encode([
+                   "ocupacion"=>$ocupacion,    
+                   "condicion_lab"=>$condicion_lab,    
+                   "transporte"=>$transporte,    
+                   "bonos"=>$bonos,    
+                   "misiones"=>$misiones,    
+                   "proyectos"=>$proyectos,    
+                   "comunidad_i"=>$comunidad_i,      
+                   "org_politica"=>$org_politica         
+  ]);
+
+
+
+}
+
 }

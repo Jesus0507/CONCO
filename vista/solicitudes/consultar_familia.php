@@ -140,9 +140,11 @@
                                 <tr>
                                     <td  style='width:100%'>
                                     <?php foreach($this->integrantes as $i){ ?>
-                                        * 
-                                        <?php echo $i['primer_nombre']." ".$i['primer_apellido']." (".$i['cedula_persona'].")"; ?>
-                                        <hr>
+                                      <div onclick='ver_info_integrante(`<?php echo json_encode($i); ?>`);' class='div_integrantes' title='Ver información del integrante'> 
+                                           * 
+                                        <?php echo $i['primer_nombre']." ".$i['primer_apellido']." (".$i['cedula_persona'].")"; ?>        
+                                    <hr>
+                                    </div>
                                         <?php } ?>
                                     </td>
                                 </tr>

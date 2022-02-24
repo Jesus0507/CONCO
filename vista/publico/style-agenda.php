@@ -78,5 +78,13 @@
 }
 
 
+.div_integrantes:hover{
+        color:White;
+		height:100%;
+		background:#699373;
+		cursor:pointer;
+}
+
+
 
 </style>
