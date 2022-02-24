@@ -100,10 +100,27 @@ public function eliminar_logica(){
 }
 
 public function eliminar_familia(){
+   $integrantes=$this->Consultar_Columna("familia_personas","id_familia",$_POST['id']);
+
+   foreach($integrantes as $i){
+       $persona=$this->Consultar_Columna("personas","cedula_persona",$i['cedula_persona']);
+       if($persona[0]['estado']==2){
+        $this->Eliminar_Tablas("personas","cedula_persona",$persona[0]['cedula_persona']);
+       }
+   }
+
     echo $this->Eliminar_Tablas("familia","id_familia",$_POST['id']);
   }
 
   public function activar_familia(){
+    $integrantes=$this->Consultar_Columna("familia_personas","id_familia",$_POST['id_familia']);
+
+    foreach($integrantes as $i){
+        $persona=$this->Consultar_Columna("personas","cedula_persona",$i['cedula_persona']);
+        if($persona[0]['estado']==2){
+         $this->Activar("personas","cedula_persona",$persona[0]['cedula_persona']);
+        }
+    }
     echo $this->Activar("familia","id_familia",$_POST['id_familia']);
   }
 
