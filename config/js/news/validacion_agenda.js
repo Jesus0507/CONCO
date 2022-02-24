@@ -187,7 +187,7 @@ function guardar_eventos(){
             var datos_notificacion=new Object();
             datos_notificacion['tipo_notificacion']=3;
             datos_notificacion['usuario_receptor']=users[i]['cedula_usuario'];
-            datos_notificacion['accion']="Creó el evento ``"+tipo_evento.value+"´´ para la(s) fecha(s) : ";
+            datos_notificacion['accion']="Creó el evento : "+tipo_evento.value+", para la(s) fecha(s) : ";
 
             for(var j=0;j<lista_fechas.length;j++){
               if(j!=lista_fechas.length-1){

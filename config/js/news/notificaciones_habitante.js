@@ -59,7 +59,7 @@ function getNotifications_habitante() {
           "' href='javascript:void(0)' class='dropdown-item' style='font-size:12px !important' onclick='setStatus(`" +
           result[i]["id_notificacion"] +
           "`,`" +
-          tipo[1].split("") +
+          tipo[1] +
           "`)'>";
         cuerpo += icono + " " + mensaje + span;
         cuerpo += "</a><div class='dropdown-divider'></div>";
@@ -72,7 +72,7 @@ function getNotifications_habitante() {
           "' href='javascript:void(0)' class='dropdown-item' style='background:#BFBFBF;font-size:12px !important;' onclick='setStatus(`" +
           result[i]["id_notificacion"] +
           "`,`" +
-          tipo[1].split("") +
+          tipo[1]+
           "`)'>";
         cuerpo += icono + " " + mensaje + span;
         cuerpo += "</a><div class='dropdown-divider'></div>";
