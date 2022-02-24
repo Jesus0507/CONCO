@@ -48,9 +48,9 @@ rechazar.onclick = function () {
           datos_notificacion["usuario_receptor"] =
             document.getElementById("cedula_solicitante").value;
           datos_notificacion["accion"] =
-            "Rechazó su solicitud para registro de familia debido a ``" +
+            "Rechazó su solicitud para registro de familia debido a :" +
             document.getElementById("text-area").value +
-            "´´.";
+            ".";
 
           console.log(datos_notificacion);
           nueva_notificacion(datos_notificacion);

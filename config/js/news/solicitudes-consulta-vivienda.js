@@ -188,9 +188,9 @@ rechazar.onclick = function () {
           datos_notificacion["accion"] =
             "Rechazó su solicitud para registro de " +
             solicitante["tipo_constancia"] +
-            " debido a ``" +
+            " debido a :" +
             document.getElementById("text-area").value +
-            "´´.";
+            ".";
 
           console.log(datos_notificacion);
           nueva_notificacion(datos_notificacion);
