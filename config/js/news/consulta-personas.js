@@ -322,6 +322,9 @@ function editar_datos(
   var vtransp = document.getElementById("transp");
   var vtranspinput = document.getElementById("tiptransinput");
   var vvertiptrans = document.getElementById("tiptransp");
+  var vbonos=document.getElementById("bonos");
+  var vmisiones=document.getElementById("misiones");
+  var vproyectos=document.getElementById("proyectos");
 
   modal_title.innerHTML = "Editar persona: " + persona_info["cedula_persona"];
   vn1.value = persona_info["primer_nombre"];
@@ -382,6 +385,50 @@ function editar_datos(
     vvertiptrans.style.display = "";
     vtranspinput.value = transporte_info[0]["descripcion_transporte"];
   }
+
+  
+  if (bonos_info.length == 0) {
+   vbonos.innerHTML = "No aplica";
+  } else {
+    vbonos.innerHTML = "";
+    for (var i = 0; i < bonos_info.length; i++) {
+      vbonos.innerHTML += " - " + bonos_info[i]["nombre_bono"] + "<br><hr>";
+    }
+
+  }
+
+  if (misiones_info.length == 0) {
+    vmisiones.innerHTML= "No aplica";
+  } else {
+    vmisiones.innerHTML = "";
+    for (var i = 0; i < misiones_info.length; i++) {
+      vmisiones.innerHTML += " - " + misiones_info[i]["nombre_mision"] + "<br><hr>";
+    }
+
+  }
+
+
+  if (proyectos_info.length == 0) {
+    vproyectos.innerHTML= "No aplica";
+  } else {
+    var texto = "";
+    for (var i = 0; i < proyectos_info.length; i++) {
+      vproyectos.innerHTML +=
+        "<table style='width:100%' border='1'><tr><td style='width:25%'>Nombre</td><td style='width:25%'>Área</td><td style='width:25%'>Estado</td></tr>";
+      vproyectos.innerHTML +=
+        "<tr><td style='width:25%'>" +
+        proyectos_info[i]["nombre_proyecto"] +
+        "</td><td style='width:25%'>" +
+        proyectos_info[i]["area_proyecto"] +
+        "</td>";
+      vproyectos.innerHTML +=
+        "<td style='width:25%'>" +
+        proyectos_info[i]["estado_proyecto"] +
+        "</td></tr></table> <br>";
+    }
+
+  }
+
 
   $("#edit_persona").modal().show();
 }

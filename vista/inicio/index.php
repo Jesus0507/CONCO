@@ -185,7 +185,7 @@
                     <span class="info-box-icon"><i class="fa fa-child"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Niños</span>
+                        <span class="info-box-text">Menores de edad</span>
                         <span class="info-box-number">30</span>
                     </div>
                     <!-- /.info-box-content -->
