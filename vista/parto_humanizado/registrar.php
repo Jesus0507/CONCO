@@ -41,11 +41,12 @@
                                     <input list="cedula_p" id="cedula_persona" name="datos[cedula_persona]"
                                         class="form-control " placeholder="Cedula de Persona" />
                                     <datalist id="cedula_p">
-                                        <?php foreach($this->personas as $persona){   ?>
+                                        <?php foreach($this->personas as $persona){  
+                                            if($persona['genero']=="F"){ ?>
                                         <option value="<?php echo $persona["cedula_persona"];?>">
                                             <?php echo $persona["primer_nombre"]." ".$persona["primer_apellido"];?>
                                         </option>
-                                        <?php  }   ?>
+                                        <?php  }  } ?>
                                     </datalist>
 
                                 </div>
@@ -99,7 +100,7 @@
                 <div class="card-footer">
                     <div class="text-center m-t-20">
                         <div class="col-xs-12">
-                            <input type="submit" class="btn  btn-success m-r-10" name="" id="" value="Guardar">
+                            <input type="button" class="btn  btn-success m-r-10" name="" id="boton" value="Guardar">
                             <input type="button" class="btn btn-danger" id="" name="" value="Limpiar">
                         </div>
                     </div>
@@ -116,4 +117,5 @@
 
 
 <!-- /.content-wrapper -->
+<script src="<?php echo constant('URL')?>config/js/news/validacion_parto_humanizado.js"></script>
 <?php include (call."Fin.php"); ?>

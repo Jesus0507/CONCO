@@ -64,16 +64,9 @@ class Parto_Humanizado extends Controlador
     public function Nuevo_Parto_Humanizado()
     {
         $datos = ($_POST['datos'] !== "") ? $_POST['datos'] : null;
+        $datos['estado']=1;
 
-        if ($this->modelo->Registrar(
-            [
-                'cedula_persona'      => $datos['cedula_persona'],
-                'recibe_micronutrientes'      => $datos['recibe_micronutrientes'],
-                'tiempo_gestacion'   => $datos['tiempo_gestacion'], 
-                'fecha_aprox_parto'   => $datos['fecha_aprox_parto'],
-                'estado'   => 1,
-            ]
-        )
+        if ($this->modelo->Registrar($datos)
         ) {
             $this->mensaje = 'Embarazada Registrada exitosamente!.';
             $this->Accion($this->mensaje);
@@ -125,6 +118,29 @@ class Parto_Humanizado extends Controlador
         echo $this->mensaje;
         return false;
     } 
+
+
+    public function consulta_parto_ajax(){
+        $cedula=$_POST['cedula'];
+        $consulta=$this->Consultar_Columna("personas","cedula_persona",$cedula);
+        $respuesta="";
+
+        if(count($consulta)==0 || $consulta[0]['estado']==0 || $consulta[0]['estado']==2){
+            $respuesta="Esta persona no se encuentra registrada";
+        }
+        else{
+        if($consulta[0]['genero']=='M'){
+            $respuesta="Esta cédula no es válida, su propietario es masculino.";
+        }
+        else{
+         $respuesta=1;
+        }
+    }
+
+
+    echo $respuesta;
+
+    }
 
 }
 ?>

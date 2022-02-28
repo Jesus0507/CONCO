@@ -67,7 +67,7 @@ $(function() {
 
             swal({
                 title: "¿Desea Eliminar este Elemento?",
-                text: "El elemento seleccionado sera eliminado de manera permanente!",
+                text: "El elemento seleccionado sera eliminado",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
