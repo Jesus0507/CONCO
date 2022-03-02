@@ -194,11 +194,11 @@
                             <option value='<?php echo $o["id_ocupacion"] ?>'><?php echo $o["nombre_ocupacion"]; ?></option>
                           <?php  } ?>
                         </select>
-                        <input type="text" placeholder="Ocupación" id='ocupinput' style='display:none' name="">
+                        <input type="text" class='form-control' placeholder="Ocupación" id='ocupinput' style='display:none' name="">
                       </td>
                       <td></td>
                       <td>
-                        <span class='fa fa-plus-square' id='spannewocup' style='font-size:25px'></span>
+                        <span class='fa fa-plus-square' id='spannewocup' style='font-size:25px;cursor:pointer'></span>
                       </td>
                     </tr>
                   </table>

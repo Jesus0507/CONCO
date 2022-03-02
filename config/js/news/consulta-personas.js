@@ -623,3 +623,20 @@ vcomindi.onchange=function(){
     vvervalcomindi.style.display="none";
   }
 }
+
+
+spanocup.onclick=function(){
+  if(spanocup.className=="fa fa-plus-square"){
+    spanocup.className="fa fa-list";
+    vocup.style.display="none";
+    vocup.value=0;
+    vocupinput.style.display="";
+    vocupinput.focus();
+  }
+  else{
+    spanocup.className="fa fa-plus-square";
+    vocup.style.display="";
+    vocupinput.value="";
+    vocupinput.style.display="none";
+  }
+}
