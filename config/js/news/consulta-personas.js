@@ -261,6 +261,51 @@ function eliminar_datos(cedula) {
   );
 }
 
+var modal_title = document.getElementById("modal-title");
+var vn1 = document.getElementById("n1");
+var vn2 = document.getElementById("n2");
+var va1 = document.getElementById("a1");
+var va2 = document.getElementById("a2");
+var vnac = document.getElementById("nac");
+var vtlf = document.getElementById("tlf");
+var vws = document.getElementById("ws");
+var vcor = document.getElementById("cor");
+var vfnac = document.getElementById("fnac");
+var vgen = document.getElementById("gen");
+var vorsex = document.getElementById("orsex");
+var vedoc = document.getElementById("edoc");
+var vnedu = document.getElementById("nedu");
+var vantcom = document.getElementById("antcom");
+var vmili = document.getElementById("mili");
+var vjeffam = document.getElementById("jeffam");
+var vpropv = document.getElementById("propv");
+var vjefcas = document.getElementById("jefcas");
+var vprivlib = document.getElementById("privlib");
+var vafro = document.getElementById("afro");
+var vcomindi = document.getElementById("comindi");
+var vvercomindi = document.getElementById("vercomindi");
+var vvalcomindi = document.getElementById("valcomindi");
+var vvervalcomindi = document.getElementById("vervalcomindi");
+var vocup = document.getElementById("ocup");
+var vverocup = document.getElementById("verocup");
+var vocupinput = document.getElementById("ocupinput");
+var spanocup = document.getElementById("spannewocup");
+var vcondlab = document.getElementById("condlab");
+var vnomcondlab = document.getElementById("nomcondlab");
+var vsectlab = document.getElementById("sectlab");
+var vtipsectlab = document.getElementById("tipsectlab");
+var spancondlab = document.getElementById("spanenwcondlab");
+var vorgpol = document.getElementById("orgpol");
+var vorgpolinput = document.getElementById("orgpolinput");
+var spanorgpol = document.getElementById("spanneworgpol");
+var vtransp = document.getElementById("transp");
+var vtranspinput = document.getElementById("tiptransinput");
+var vvertiptrans = document.getElementById("tiptransp");
+var vbonos = document.getElementById("bonos");
+var vmisiones = document.getElementById("misiones");
+var vproyectos = document.getElementById("proyectos");
+var btn_guardar = document.getElementById("guardar_cambios");
+
 function editar_datos(
   persona,
   ocupacion,
@@ -281,50 +326,6 @@ function editar_datos(
   var proyectos_info = JSON.parse(proyectos);
   var comunidad_i_info = JSON.parse(comunidad_i);
   var org_politica_info = JSON.parse(org_politica);
-
-  var modal_title = document.getElementById("modal-title");
-  var vn1 = document.getElementById("n1");
-  var vn2 = document.getElementById("n2");
-  var va1 = document.getElementById("a1");
-  var va2 = document.getElementById("a2");
-  var vnac = document.getElementById("nac");
-  var vtlf = document.getElementById("tlf");
-  var vws = document.getElementById("ws");
-  var vcor = document.getElementById("cor");
-  var vfnac = document.getElementById("fnac");
-  var vgen = document.getElementById("gen");
-  var vorsex = document.getElementById("orsex");
-  var vedoc = document.getElementById("edoc");
-  var vnedu = document.getElementById("nedu");
-  var vantcom = document.getElementById("antcom");
-  var vmili = document.getElementById("mili");
-  var vjeffam = document.getElementById("jeffam");
-  var vpropv = document.getElementById("propv");
-  var vjefcas = document.getElementById("jefcas");
-  var vprivlib = document.getElementById("privlib");
-  var vafro = document.getElementById("afro");
-  var vcomindi = document.getElementById("comindi");
-  var vvercomindi = document.getElementById("vercomindi");
-  var vvalcomindi = document.getElementById("valcomindi");
-  var vvervalcomindi = document.getElementById("vervalcomindi");
-  var vocup = document.getElementById("ocup");
-  var vverocup = document.getElementById("verocup");
-  var vocupinput = document.getElementById("ocupinput");
-  var spanocup = document.getElementById("spannewocup");
-  var vcondlab = document.getElementById("condlab");
-  var vnomcondlab = document.getElementById("nomcondlab");
-  var vsectlab = document.getElementById("sectlab");
-  var vtipsectlab = document.getElementById("tipsectlab");
-  var spancondlab = document.getElementById("spanenwcondlab");
-  var vorgpol = document.getElementById("orgpol");
-  var vorgpolinput = document.getElementById("orgpolinput");
-  var spanorgpol = document.getElementById("spanneworgpol");
-  var vtransp = document.getElementById("transp");
-  var vtranspinput = document.getElementById("tiptransinput");
-  var vvertiptrans = document.getElementById("tiptransp");
-  var vbonos=document.getElementById("bonos");
-  var vmisiones=document.getElementById("misiones");
-  var vproyectos=document.getElementById("proyectos");
 
   modal_title.innerHTML = "Editar persona: " + persona_info["cedula_persona"];
   vn1.value = persona_info["primer_nombre"];
@@ -386,30 +387,27 @@ function editar_datos(
     vtranspinput.value = transporte_info[0]["descripcion_transporte"];
   }
 
-  
   if (bonos_info.length == 0) {
-   vbonos.innerHTML = "No aplica";
+    vbonos.innerHTML = "No aplica";
   } else {
     vbonos.innerHTML = "";
     for (var i = 0; i < bonos_info.length; i++) {
       vbonos.innerHTML += " - " + bonos_info[i]["nombre_bono"] + "<br><hr>";
     }
-
   }
 
   if (misiones_info.length == 0) {
-    vmisiones.innerHTML= "No aplica";
+    vmisiones.innerHTML = "No aplica";
   } else {
     vmisiones.innerHTML = "";
     for (var i = 0; i < misiones_info.length; i++) {
-      vmisiones.innerHTML += " - " + misiones_info[i]["nombre_mision"] + "<br><hr>";
+      vmisiones.innerHTML +=
+        " - " + misiones_info[i]["nombre_mision"] + "<br><hr>";
     }
-
   }
 
-
   if (proyectos_info.length == 0) {
-    vproyectos.innerHTML= "No aplica";
+    vproyectos.innerHTML = "No aplica";
   } else {
     var texto = "";
     for (var i = 0; i < proyectos_info.length; i++) {
@@ -426,9 +424,145 @@ function editar_datos(
         proyectos_info[i]["estado_proyecto"] +
         "</td></tr></table> <br>";
     }
-
   }
-
 
   $("#edit_persona").modal().show();
 }
+
+btn_guardar.onclick = function () {
+  if (vn1.value == "") {
+    swal({
+      type: "error",
+      title: "Error",
+      text: "Debe ingresar el primer nombre de la persona",
+      timer: 2000,
+      showConfirmButton: false,
+    });
+    setTimeout(function () {
+      vn1.style.borderColor = "red";
+      vn1.focus();
+    }, 2000);
+  } else {
+    vn1.style.borderColor = "";
+    if (vn2.value == "") {
+      swal({
+        type: "error",
+        title: "Error",
+        text: "Debe ingresar el segundo nombre de la persona",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+      setTimeout(function () {
+        vn2.style.borderColor = "red";
+        vn2.focus();
+      }, 2000);
+    } else {
+      vn2.style.borderColor = "";
+      if (va1.value == "") {
+        swal({
+          type: "error",
+          title: "Error",
+          text: "Debe ingresar el primer apellido de la persona",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        setTimeout(function () {
+          va1.style.borderColor = "red";
+          va1.focus();
+        }, 2000);
+      } else {
+        va1.style.borderColor = "";
+        if (va2.value == "") {
+          swal({
+            type: "error",
+            title: "Error",
+            text: "Debe ingresar el segundo apellido de la persona",
+            timer: 2000,
+            showConfirmButton: false,
+          });
+          setTimeout(function () {
+            va2.style.borderColor = "red";
+            va2.focus();
+          }, 2000);
+        } else {
+          va2.style.borderColor = "";
+          if (vnac.value == "") {
+            swal({
+              type: "error",
+              title: "Error",
+              text: "Debe ingresar la nacionalidad de la persona",
+              timer: 2000,
+              showConfirmButton: false,
+            });
+            setTimeout(function () {
+              vnac.style.borderColor = "red";
+              vnac.focus();
+            }, 2000);
+          } else {
+            vnac.style.borderColor = "";
+            if (vtlf.value == "") {
+              swal({
+                type: "error",
+                title: "Error",
+                text: "Debe ingresar el teléfono de la persona",
+                timer: 2000,
+                showConfirmButton: false,
+              });
+              setTimeout(function () {
+                vtlf.style.borderColor = "red";
+                vtlf.focus();
+              }, 2000);
+            } else {
+              vtlf.style.borderColor = "";
+              if (vfnac.value == "") {
+                swal({
+                  type: "error",
+                  title: "Error",
+                  text: "Debe indicar la fecha de nacimiento de la persona",
+                  timer: 2000,
+                  showConfirmButton: false,
+                });
+                setTimeout(function () {
+                  vfnac.style.borderColor = "red";
+                  vfnac.focus();
+                }, 2000);
+              } else {
+                vfnac.style.borderColor = "";
+                if (vnedu.value == "") {
+                  swal({
+                    type: "error",
+                    title: "Error",
+                    text: "Debe ingresar el nivel de educación de la persona",
+                    timer: 2000,
+                    showConfirmButton: false,
+                  });
+                  setTimeout(function () {
+                    vnedu.style.borderColor = "red";
+                    vnedu.focus();
+                  }, 2000);
+                } else {
+                  vnedu.style.borderColor = "";
+                  if (vantcom.value == "") {
+                    swal({
+                      type: "error",
+                      title: "Error",
+                      text: "Debe ingresar la antigüedad en la comunidad",
+                      timer: 2000,
+                      showConfirmButton: false,
+                    });
+                    setTimeout(function () {
+                      vantcom.style.borderColor = "red";
+                      vantcom.focus();
+                    }, 2000);
+                  } else {
+                    vantcom.style.borderColor = "";
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};

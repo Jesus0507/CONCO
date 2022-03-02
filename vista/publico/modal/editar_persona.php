@@ -99,7 +99,9 @@
               </tr>
               <tr>
                 <td style='width:25%'><input type="text" id='nedu' class='form-control' placeholder="Nivel educativo"></td>
-                <td style='width:25%'><input type="date" id='antcom' class='form-control'></td>
+                <td style='width:25%'>
+                <input type="date" id='antcom' class='form-control'>
+              </td>
                 <td style='width:25%'>
                   <select class='form-control' id='mili'>
                     <option value="1">Si</option>
