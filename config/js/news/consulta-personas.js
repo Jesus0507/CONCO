@@ -305,6 +305,7 @@ var vbonos = document.getElementById("bonos");
 var vmisiones = document.getElementById("misiones");
 var vproyectos = document.getElementById("proyectos");
 var btn_guardar = document.getElementById("guardar_cambios");
+var inf_persona=new Object();
 
 function editar_datos(
   persona,
@@ -327,6 +328,7 @@ function editar_datos(
   var comunidad_i_info = JSON.parse(comunidad_i);
   var org_politica_info = JSON.parse(org_politica);
 
+  inf_persona['cedula_persona']=persona_info["cedula_persona"];
   modal_title.innerHTML = "Editar persona: " + persona_info["cedula_persona"];
   vn1.value = persona_info["primer_nombre"];
   vn2.value = persona_info["segundo_nombre"];
@@ -556,6 +558,34 @@ btn_guardar.onclick = function () {
                     }, 2000);
                   } else {
                     vantcom.style.borderColor = "";
+
+                    inf_persona["primer_nombre"]=vn1.value;
+                    inf_persona["segundo_nombre"]=vn2.value;
+                    inf_persona["primer_apellido"]=va1.value;
+                    inf_persona["segundo_apellido"]=va2.value;
+                    inf_persona["nacionalidad"]=vnac.value;
+                    inf_persona["telefono"]=vtlf.value;
+                    inf_persona["whatsapp"]=vws.value;
+                    if(vcor.value=="No posee" || vcor.value==""){
+                    inf_persona["correo"]="No posee";
+                    }
+                    else{
+                    inf_persona["correo"]=vcor.value; 
+                    }
+                    inf_persona["fecha_nacimiento"]=vfnac.value;
+                    inf_persona["genero"]=vgen.value;
+                    inf_persona["sexualidad"]=vorsex.value;
+                    inf_persona["estado_civil"]=vedoc.value;
+                    inf_persona["nivel_educativo"]=vnedu.value;
+                    inf_persona["antiguedad_comunidad"]=vantcom.value;
+                    inf_persona["miliciano"]=vmili.value;
+                    inf_persona["jefe_familia"]=vjeffam.value;
+                    inf_persona["propietario_vivienda"]=vpropv.value;
+                    inf_persona["jefe_calle"]=vjefcas.value;
+                    inf_persona["privado_libertad"]=vprivlib.value;
+                    inf_persona["afrodescendencia"]=vafro.value;
+
+                    editar_persona();
                   }
                 }
               }
@@ -566,3 +596,13 @@ btn_guardar.onclick = function () {
     }
   }
 };
+
+function editar_persona(){
+   $.ajax({
+     type:"POST",
+     url:BASE_URL+"Personas/modificar_persona",
+     data:{'datos_persona':inf_persona}
+   }).done(function(result){
+    console.log(result);
+   })
+}

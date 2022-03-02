@@ -616,4 +616,10 @@ public function get_info_habitante(){
 
 }
 
+
+public function modificar_persona(){
+  $datos_persona=$_POST["datos_persona"];
+  echo $this->modelo->Actualizar($datos_persona);
+}
+
 }
