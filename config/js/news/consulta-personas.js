@@ -591,7 +591,16 @@ btn_guardar.onclick = function () {
                       inf_persona['comunidad_indigena']=vvalcomindi.value;
                     }
 
-                    editar_persona();
+                    if(vocup.value==0 && vocup.style.display!="none" || vocup.style.display=="none" && vocupinput.value==""){
+                      inf_persona['ocupacion']="No posee";
+                      }
+                      else{
+                      vocup.style.display=="none"?
+                      inf_persona['ocupacion']=vocupinput.value:
+                      inf_persona['ocupacion']=vocup.value;
+                      }
+                   
+                      editar_persona();
                   }
                 }
               }

@@ -623,6 +623,7 @@ public function modificar_persona(){
 
   if($editado){
   $this->editar_comunidad_indigena($datos_persona);
+  $this->editar_ocupacion($datos_persona);
   }
 }
 
@@ -669,6 +670,46 @@ public function editar_comunidad_indigena($datos_persona){
 
 
   }
+}
+
+
+public function editar_ocupacion($datos_persona){
+  $ocupacion_persona=$this->Consultar_Columna("ocupacion_persona","cedula_persona",$datos_persona['cedula_persona']);
+  if($datos_persona['ocupacion']=='No posee'){
+    if(count($ocupacion_persona)!=0){
+       foreach($ocupacion_persona as $op){
+         $this->Eliminar_Tablas("ocupacion_persona","id_ocupacion_persona",$op['id_ocupacion_persona']);
+       }
+    } 
+}
+else{
+  $ocupaciones=$this->Consultar_Tabla("ocupacion",1,"id_ocupacion");
+  $existe=false;
+  foreach($ocupaciones as $o){
+    if($o['id_ocupacion']==$datos_persona['ocupacion']){
+      $existe=$o['id_ocupacion'];
+    }
+  }
+
+  if($existe==false){
+    $this->Registrar_Tablas("ocupacion","nombre_ocupacion",$datos_persona['ocupacion']);
+    $id=$this->Ultimo_Ingresado("ocupacion","id_ocupacion");
+    $id=$id[0]['MAX(id_ocupacion)'];
+    $existe=$id;
+  }
+
+   if(count($ocupacion_persona)==0){
+     $this->modelo->Registrar_persona_ocupacion([
+                "cedula_persona"         =>$datos_persona['cedula_persona'],
+                "id_ocupacion"  =>$existe
+     ]);
+   }
+   else{
+     $this->Actualizar_Tablas("ocupacion_persona","id_ocupacion","id_ocupacion_persona",$existe,$ocupacion_persona[0]['id_ocupacion_persona']);
+   }
+
+
+}
 }
 
 }
