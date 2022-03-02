@@ -619,7 +619,56 @@ public function get_info_habitante(){
 
 public function modificar_persona(){
   $datos_persona=$_POST["datos_persona"];
-  echo $this->modelo->Actualizar($datos_persona);
+  $editado=$this->modelo->Actualizar($datos_persona);
+
+  if($editado){
+  $this->editar_comunidad_indigena($datos_persona);
+  }
+}
+
+
+
+
+
+
+public function editar_comunidad_indigena($datos_persona){
+  $comunidades_persona=$this->Consultar_Columna("comunidad_indigena_personas","cedula_persona",$datos_persona['cedula_persona']);
+   
+  if($datos_persona['comunidad_indigena']=='No posee'){
+       if(count($comunidades_persona)!=0){
+          foreach($comunidades_persona as $cp){
+            $this->Eliminar_Tablas("comunidad_indigena_personas","id_comunidad_persona",$cp['id_comunidad_persona']);
+          }
+       } 
+  }
+  else{
+    $comunidades_indigenas=$this->Consultar_Tabla("comunidad_indigena",1,"id_comunidad_indigena");
+    $existe=false;
+    foreach($comunidades_indigenas as $ci){
+      if(strtolower($ci['nombre_comunidad'])==strtolower($datos_persona['comunidad_indigena'])){
+        $existe=$ci['id_comunidad_indigena'];
+      }
+    }
+
+    if($existe==false){
+      $this->Registrar_Tablas("comunidad_indigena","nombre_comunidad",$datos_persona['comunidad_indigena']);
+      $id=$this->Ultimo_Ingresado("comunidad_indigena","id_comunidad_indigena");
+      $id=$id[0]['MAX(id_comunidad_indigena)'];
+      $existe=$id;
+    }
+
+     if(count($comunidades_persona)==0){
+       $this->modelo->Registrar_persona_comunidad([
+                  "cedula_persona"         =>$datos_persona['cedula_persona'],
+                  "id_comunidad_indigena"  =>$existe
+       ]);
+     }
+     else{
+       $this->Actualizar_Tablas("comunidad_indigena_personas","id_comunidad_indigena","id_comunidad_persona",$existe,$comunidades_persona[0]['id_comunidad_persona']);
+     }
+
+
+  }
 }
 
 }

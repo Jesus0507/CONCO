@@ -584,6 +584,12 @@ btn_guardar.onclick = function () {
                     inf_persona["jefe_calle"]=vjefcas.value;
                     inf_persona["privado_libertad"]=vprivlib.value;
                     inf_persona["afrodescendencia"]=vafro.value;
+                    if(vcomindi.value==0){
+                    inf_persona['comunidad_indigena']="No posee";
+                    }
+                    else{
+                      inf_persona['comunidad_indigena']=vvalcomindi.value;
+                    }
 
                     editar_persona();
                   }
@@ -605,4 +611,15 @@ function editar_persona(){
    }).done(function(result){
     console.log(result);
    })
+}
+
+vcomindi.onchange=function(){
+  if(vcomindi.value==1){
+    vvalcomindi.value="";
+    vvervalcomindi.style.display="";
+    vvalcomindi.focus();
+  }
+  else{
+    vvervalcomindi.style.display="none";
+  }
 }
