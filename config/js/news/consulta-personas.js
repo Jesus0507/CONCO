@@ -294,7 +294,7 @@ var vcondlab = document.getElementById("condlab");
 var vnomcondlab = document.getElementById("nomcondlab");
 var vsectlab = document.getElementById("sectlab");
 var vtipsectlab = document.getElementById("tipsectlab");
-var spancondlab = document.getElementById("spanenwcondlab");
+var spancondlab = document.getElementById("spannewcondlab");
 var vorgpol = document.getElementById("orgpol");
 var vorgpolinput = document.getElementById("orgpolinput");
 var spanorgpol = document.getElementById("spanneworgpol");
@@ -305,7 +305,7 @@ var vbonos = document.getElementById("bonos");
 var vmisiones = document.getElementById("misiones");
 var vproyectos = document.getElementById("proyectos");
 var btn_guardar = document.getElementById("guardar_cambios");
-var inf_persona=new Object();
+var inf_persona = new Object();
 
 function editar_datos(
   persona,
@@ -328,7 +328,7 @@ function editar_datos(
   var comunidad_i_info = JSON.parse(comunidad_i);
   var org_politica_info = JSON.parse(org_politica);
 
-  inf_persona['cedula_persona']=persona_info["cedula_persona"];
+  inf_persona["cedula_persona"] = persona_info["cedula_persona"];
   modal_title.innerHTML = "Editar persona: " + persona_info["cedula_persona"];
   vn1.value = persona_info["primer_nombre"];
   vn2.value = persona_info["segundo_nombre"];
@@ -559,48 +559,85 @@ btn_guardar.onclick = function () {
                   } else {
                     vantcom.style.borderColor = "";
 
-                    inf_persona["primer_nombre"]=vn1.value;
-                    inf_persona["segundo_nombre"]=vn2.value;
-                    inf_persona["primer_apellido"]=va1.value;
-                    inf_persona["segundo_apellido"]=va2.value;
-                    inf_persona["nacionalidad"]=vnac.value;
-                    inf_persona["telefono"]=vtlf.value;
-                    inf_persona["whatsapp"]=vws.value;
-                    if(vcor.value=="No posee" || vcor.value==""){
-                    inf_persona["correo"]="No posee";
+                    inf_persona["primer_nombre"] = vn1.value;
+                    inf_persona["segundo_nombre"] = vn2.value;
+                    inf_persona["primer_apellido"] = va1.value;
+                    inf_persona["segundo_apellido"] = va2.value;
+                    inf_persona["nacionalidad"] = vnac.value;
+                    inf_persona["telefono"] = vtlf.value;
+                    inf_persona["whatsapp"] = vws.value;
+                    if (vcor.value == "No posee" || vcor.value == "") {
+                      inf_persona["correo"] = "No posee";
+                    } else {
+                      inf_persona["correo"] = vcor.value;
                     }
-                    else{
-                    inf_persona["correo"]=vcor.value; 
-                    }
-                    inf_persona["fecha_nacimiento"]=vfnac.value;
-                    inf_persona["genero"]=vgen.value;
-                    inf_persona["sexualidad"]=vorsex.value;
-                    inf_persona["estado_civil"]=vedoc.value;
-                    inf_persona["nivel_educativo"]=vnedu.value;
-                    inf_persona["antiguedad_comunidad"]=vantcom.value;
-                    inf_persona["miliciano"]=vmili.value;
-                    inf_persona["jefe_familia"]=vjeffam.value;
-                    inf_persona["propietario_vivienda"]=vpropv.value;
-                    inf_persona["jefe_calle"]=vjefcas.value;
-                    inf_persona["privado_libertad"]=vprivlib.value;
-                    inf_persona["afrodescendencia"]=vafro.value;
-                    if(vcomindi.value==0){
-                    inf_persona['comunidad_indigena']="No posee";
-                    }
-                    else{
-                      inf_persona['comunidad_indigena']=vvalcomindi.value;
+                    inf_persona["fecha_nacimiento"] = vfnac.value;
+                    inf_persona["genero"] = vgen.value;
+                    inf_persona["sexualidad"] = vorsex.value;
+                    inf_persona["estado_civil"] = vedoc.value;
+                    inf_persona["nivel_educativo"] = vnedu.value;
+                    inf_persona["antiguedad_comunidad"] = vantcom.value;
+                    inf_persona["miliciano"] = vmili.value;
+                    inf_persona["jefe_familia"] = vjeffam.value;
+                    inf_persona["propietario_vivienda"] = vpropv.value;
+                    inf_persona["jefe_calle"] = vjefcas.value;
+                    inf_persona["privado_libertad"] = vprivlib.value;
+                    inf_persona["afrodescendencia"] = vafro.value;
+                    if (vcomindi.value == 0) {
+                      inf_persona["comunidad_indigena"] = "No posee";
+                    } else {
+                      inf_persona["comunidad_indigena"] = vvalcomindi.value;
                     }
 
-                    if(vocup.value==0 && vocup.style.display!="none" || vocup.style.display=="none" && vocupinput.value==""){
-                      inf_persona['ocupacion']="No posee";
+                    if (
+                      (vocup.value == 0 && vocup.style.display != "none") ||
+                      (vocup.style.display == "none" && vocupinput.value == "")
+                    ) {
+                      inf_persona["ocupacion"] = "No posee";
+                    } else {
+                      vocup.style.display == "none"
+                        ? (inf_persona["ocupacion"] = vocupinput.value)
+                        : (inf_persona["ocupacion"] = vocup.value);
+                    }
+
+                    if (
+                      (vnomcondlab.style.display == "" &&
+                        vnomcondlab.value == "") ||
+                      (vnomcondlab.style.display == "" &&
+                        vsectlab.value == 0) ||
+                      (vnomcondlab.style.display == "" &&
+                        vsectlab.value == 1 &&
+                        vtipsectlab.value == 0)
+                    ) {
+                      swal({
+                        type: "error",
+                        title: "Error",
+                        text: "Debe ingresar todos los datos de la condición laboral",
+                        timer: 2000,
+                        showConfirmButton: false,
+                      });
+                      vnomcondlab.focus();
+                    } else {
+
+                      if (vcondlab.style.display == "" && vcondlab.value == 0) {
+                        inf_persona["condicion_laboral"] = "No posee";
+                      } else {                   
+                        inf_persona["condicion_laboral"] = vcondlab.value;
+                       if(vcondlab.style.display=="none") {
+                          var condicion = new Object();
+                          condicion["nombre_cond_laboral"] = vnomcondlab.value;
+                          condicion["sector_laboral"] = vsectlab.value;
+                          vsectlab.value == 1
+                            ? (condicion["pertenece"] = vtipsectlab.value)
+                            : (condicion["pertenece"] = 0);
+
+                          inf_persona["condicion_laboral"] = condicion;
+                        }
                       }
-                      else{
-                      vocup.style.display=="none"?
-                      inf_persona['ocupacion']=vocupinput.value:
-                      inf_persona['ocupacion']=vocup.value;
-                      }
-                   
-                      editar_persona();
+                      console.log(inf_persona['condicion_laboral']);
+
+                      //    editar_persona();
+                    }
                   }
                 }
               }
@@ -612,40 +649,66 @@ btn_guardar.onclick = function () {
   }
 };
 
-function editar_persona(){
-   $.ajax({
-     type:"POST",
-     url:BASE_URL+"Personas/modificar_persona",
-     data:{'datos_persona':inf_persona}
-   }).done(function(result){
+function editar_persona() {
+  $.ajax({
+    type: "POST",
+    url: BASE_URL + "Personas/modificar_persona",
+    data: { datos_persona: inf_persona },
+  }).done(function (result) {
     console.log(result);
-   })
+  });
 }
 
-vcomindi.onchange=function(){
-  if(vcomindi.value==1){
-    vvalcomindi.value="";
-    vvervalcomindi.style.display="";
+vcomindi.onchange = function () {
+  if (vcomindi.value == 1) {
+    vvalcomindi.value = "";
+    vvervalcomindi.style.display = "";
     vvalcomindi.focus();
+  } else {
+    vvervalcomindi.style.display = "none";
   }
-  else{
-    vvervalcomindi.style.display="none";
-  }
-}
+};
 
-
-spanocup.onclick=function(){
-  if(spanocup.className=="fa fa-plus-square"){
-    spanocup.className="fa fa-list";
-    vocup.style.display="none";
-    vocup.value=0;
-    vocupinput.style.display="";
+spanocup.onclick = function () {
+  if (spanocup.className == "fa fa-plus-square") {
+    spanocup.className = "fa fa-list";
+    vocup.style.display = "none";
+    vocup.value = 0;
+    vocupinput.style.display = "";
     vocupinput.focus();
+  } else {
+    spanocup.className = "fa fa-plus-square";
+    vocup.style.display = "";
+    vocupinput.value = "";
+    vocupinput.style.display = "none";
   }
-  else{
-    spanocup.className="fa fa-plus-square";
-    vocup.style.display="";
-    vocupinput.value="";
-    vocupinput.style.display="none";
+};
+
+spancondlab.onclick = function () {
+  if (spancondlab.className == "fa fa-plus-square") {
+    spancondlab.className = "fa fa-list";
+    vcondlab.style.display = "none";
+    vcondlab.value = 0;
+    vsectlab.style.display = "";
+    vnomcondlab.style.display = "";
+    vnomcondlab.focus();
+  } else {
+    spancondlab.className = "fa fa-plus-square";
+    vcondlab.style.display = "";
+    vnomcondlab.value = "";
+    vnomcondlab.style.display = "none";
+    vsectlab.value = 0;
+    vsectlab.style.display = "none";
+    vtipsectlab.style.display = "none";
+    vtipsectlab.value = 0;
   }
-}
+};
+
+vsectlab.onchange = function () {
+  if (vsectlab.value == 1) {
+    vtipsectlab.style.display = "";
+  } else {
+    vtipsectlab.style.display = "none";
+    vtipsectlab.value = 0;
+  }
+};

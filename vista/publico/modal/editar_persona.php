@@ -242,21 +242,21 @@
 
                       </td>
                       <td>
-                        <select style='display: none' class='form-control' id='sectlab'>
+                        <select style='display: none' title="Sector laboral" class='form-control' id='sectlab'>
                           <option value='0'>-Seleccione-</option>
                           <option value='1'>Formal</option>
                           <option value='2'>Público</option>
                         </select>
                       </td>
                       <td>
-                        <select style="display: none" class='form-control' id='tipsectlab'>
+                        <select style="display: none" title="Tipo de sector formal" class='form-control' id='tipsectlab'>
                           <option value='0'>-Seleccione-</option>
                           <option value='1'>Informal</option>
                           <option value='2'>Privado</option>
                         </select>
                       </td>
                       <td>
-                        <span class='fa fa-plus-square' id='spannewcondlab' style='font-size:25px'></span>
+                        <span class='fa fa-plus-square' id='spannewcondlab' style='font-size:25px;cursor:pointer'></span>
                       </td>
 
                   </table>
