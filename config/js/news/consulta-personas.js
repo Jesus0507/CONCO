@@ -634,9 +634,9 @@ btn_guardar.onclick = function () {
                           inf_persona["condicion_laboral"] = condicion;
                         }
                       }
-                      console.log(inf_persona['condicion_laboral']);
 
-                      //    editar_persona();
+
+                          editar_persona();
                     }
                   }
                 }

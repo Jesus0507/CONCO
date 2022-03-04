@@ -624,6 +624,7 @@ public function modificar_persona(){
   if($editado){
   $this->editar_comunidad_indigena($datos_persona);
   $this->editar_ocupacion($datos_persona);
+  $this->editar_cond_laboral($datos_persona);
   }
 }
 
@@ -710,6 +711,66 @@ else{
 
 
 }
+}
+
+public function editar_cond_laboral($datos_persona){
+  $cond_lab_persona=$this->Consultar_Columna("condicion_laboral","cedula_persona",$datos_persona['cedula_persona']);
+  if($datos_persona['condicion_laboral']=="No posee"){
+    if(count($cond_lab_persona)!=0){
+      $this->Eliminar_Tablas("condicion_laboral","id_cond_laboral",$cond_lab_persona[0]['id_cond_laboral']);
+    }
+  }
+  else{
+    $existe=false;
+    $condiciones_laborales=$this->Consultar_Tabla("condicion_laboral",1,"id_cond_laboral");
+
+    foreach($condiciones_laborales as $cl){
+      if($cl['id_cond_laboral']==$datos_persona['condicion_laboral']){
+        $existe=$cl;
+      }
+    }
+
+    if($existe==false){
+      if(count($cond_lab_persona)==0){
+        $this->modelo->Registrar_cond_laboral([
+          "cedula_persona" => $datos_persona["cedula_persona"],
+          "nombre_cond_laboral" => $datos_persona["condicion_laboral"]['nombre_cond_laboral'],
+          "sector_laboral" => $datos_persona['condicion_laboral']['sector_laboral'],
+          "pertenece" => $datos_persona['condicion_laboral']['pertenece']
+        ]);
+      }
+      else{
+        $this->modelo->Actualizar_cond_laboral([
+          "cedula_persona" => $datos_persona["cedula_persona"],
+          "nombre_cond_laboral" => $datos_persona["condicion_laboral"]['nombre_cond_laboral'],
+          "sector_laboral" => $datos_persona['condicion_laboral']['sector_laboral'],
+          "pertenece" => $datos_persona['condicion_laboral']['pertenece'],
+          "id_cond_laboral" => $cond_lab_persona[0]['id_cond_laboral']
+        ]);
+      }
+    }
+    else{
+      if(count($cond_lab_persona)==0){
+        $this->modelo->Registrar_cond_laboral([
+          "cedula_persona" => $datos_persona["cedula_persona"],
+          "nombre_cond_laboral" => $existe["nombre_cond_laboral"],
+          "sector_laboral" => $existe['sector_laboral'],
+          "pertenece" => $existe['pertenece']
+        ]);
+      }
+      else{
+        $this->modelo->Actualizar_cond_laboral([
+          "cedula_persona" => $datos_persona["cedula_persona"],
+          "nombre_cond_laboral" => $existe['nombre_cond_laboral'],
+          "sector_laboral" => $existe['sector_laboral'],
+          "pertenece" => $existe['pertenece'],
+          "id_cond_laboral" => $cond_lab_persona[0]['id_cond_laboral']
+        ]);
+      }
+
+    }
+
+  }
 }
 
 }

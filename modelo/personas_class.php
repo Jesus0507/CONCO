@@ -669,6 +669,37 @@ class Personas_Class extends Modelo
         }
     }
 
+    public function Actualizar_cond_laboral($data)
+    {
+
+        try {
+            $query = $this->conexion->prepare("UPDATE condicion_laboral  SET
+                cedula_persona           =:cedula_persona,
+                nombre_cond_laboral      =:nombre_cond_laboral,
+                sector_laboral           =:sector_laboral,
+                pertenece                =:pertenece
+
+                WHERE id_cond_laboral    =:id_cond_laboral"
+            );
+
+            $query->execute([
+                'cedula_persona'            =>$data['cedula_persona'], 
+                'nombre_cond_laboral'       =>$data['nombre_cond_laboral'],
+                'sector_laboral'            =>$data['sector_laboral'],
+                'pertenece'                 =>$data['pertenece'],
+                "id_cond_laboral"           =>$data['id_cond_laboral']
+
+            ]);
+
+            return true;
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+
+            return false;
+        }
+    }
+
     public function Eliminar($param)
     {
         try {
