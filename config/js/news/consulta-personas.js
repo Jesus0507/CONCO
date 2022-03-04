@@ -642,8 +642,7 @@ btn_guardar.onclick = function () {
                         vorgpolinput.value==""?inf_persona['org_politica']="No posee":inf_persona['org_politica']=vorgpolinput.value;
                       }
 
-                         console.log(inf_persona['org_politica']);
-                          //editar_persona();
+                          editar_persona();
                     }
                   }
                 }

@@ -625,6 +625,7 @@ public function modificar_persona(){
   $this->editar_comunidad_indigena($datos_persona);
   $this->editar_ocupacion($datos_persona);
   $this->editar_cond_laboral($datos_persona);
+  $this->editar_org_politica($datos_persona);
   }
 }
 
@@ -769,6 +770,46 @@ public function editar_cond_laboral($datos_persona){
       }
 
     }
+
+  }
+}
+
+public function editar_org_politica($datos_persona){
+  $organizaciones_persona=$this->Consultar_Columna("org_politica_persona","cedula_persona",$datos_persona['cedula_persona']);
+   
+  if($datos_persona['org_politica']=='No posee'){
+       if(count($organizaciones_persona)!=0){
+          foreach($organizaciones_persona as $op){
+            $this->Eliminar_Tablas("org_politica_persona","id_org_persona",$op['id_org_persona']);
+          }
+       } 
+  }
+  else{
+    $org_politicas=$this->Consultar_Tabla("org_politica",1,"id_org_politica");
+    $existe=false;
+    foreach($org_politicas as $or){
+      if($or['id_org_politica']==$datos_persona['org_politica']){
+        $existe=$or['id_org_politica'];
+      }
+    }
+
+    if($existe==false){
+      $this->Registrar_Tablas("org_politica","nombre_org",$datos_persona['org_politica']);
+      $id=$this->Ultimo_Ingresado("org_politica","id_org_politica");
+      $id=$id[0]['MAX(id_org_politica)'];
+      $existe=$id;
+    }
+
+     if(count($organizaciones_persona)==0){
+       $this->modelo->Registrar_persona_organizacion([
+                  "cedula_persona"         =>$datos_persona['cedula_persona'],
+                  "id_org_politica"  =>$existe
+       ]);
+     }
+     else{
+       $this->Actualizar_Tablas("org_politica_persona","id_org_politica","id_org_persona",$existe,$organizaciones_persona[0]['id_org_persona']);
+     }
+
 
   }
 }
