@@ -635,8 +635,15 @@ btn_guardar.onclick = function () {
                         }
                       }
 
+                      if(spanorgpol.className=="fa fa-plus-square"){
+                        vorgpol.value==0?inf_persona['org_politica']="No posee":inf_persona['org_politica']=vorgpol.value;
+                      }
+                      else{
+                        vorgpolinput.value==""?inf_persona['org_politica']="No posee":inf_persona['org_politica']=vorgpolinput.value;
+                      }
 
-                          editar_persona();
+                         console.log(inf_persona['org_politica']);
+                          //editar_persona();
                     }
                   }
                 }
@@ -711,4 +718,20 @@ vsectlab.onchange = function () {
     vtipsectlab.style.display = "none";
     vtipsectlab.value = 0;
   }
-};
+}
+
+spanorgpol.onclick=function(){
+  if(spanorgpol.className=="fa fa-plus-square"){
+    spanorgpol.className="fa fa-list";
+    vorgpol.style.display='none';
+    vorgpol.value="0";
+    vorgpolinput.style.display="";
+    vorgpolinput.focus();
+  }
+  else{
+    spanorgpol.className="fa fa-plus-square";
+    vorgpolinput.style.display='none';
+    vorgpolinput.value="";
+    vorgpol.style.display="";
+  }
+}

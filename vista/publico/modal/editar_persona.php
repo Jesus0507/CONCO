@@ -272,11 +272,11 @@
                             <option value='<?php echo $o["id_org_politica"] ?>'><?php echo $o["nombre_org"]; ?></option>
                           <?php  } ?>
                         </select>
-                        <input type="text" placeholder="Org política" id='orgpolinput' style='display:none' name="">
+                        <input type="text" placeholder="Org política" class='form-control' id='orgpolinput' style='display:none' name="">
                       </td>
                       <td></td>
                       <td>
-                        <span class='fa fa-plus-square' id='spanneworgpol' style='font-size:25px'></span>
+                        <span class='fa fa-plus-square' id='spanneworgpol' style='font-size:25px;cursor:pointer'></span>
                       </td>
                     </tr>
                   </table>
