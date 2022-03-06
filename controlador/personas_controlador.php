@@ -626,6 +626,7 @@ public function modificar_persona(){
   $this->editar_ocupacion($datos_persona);
   $this->editar_cond_laboral($datos_persona);
   $this->editar_org_politica($datos_persona);
+  $this->editar_transporte($datos_persona);
   }
 }
 
@@ -808,6 +809,36 @@ public function editar_org_politica($datos_persona){
      }
      else{
        $this->Actualizar_Tablas("org_politica_persona","id_org_politica","id_org_persona",$existe,$organizaciones_persona[0]['id_org_persona']);
+     }
+
+
+  }
+}
+
+public function editar_transporte($datos_persona){
+  $transportes=$this->Consultar_Columna("transporte","cedula_propietario",$datos_persona['cedula_persona']);
+   
+  if($datos_persona['transporte']=='No posee'){
+       if(count($transportes)!=0){
+          foreach($transportes as $t){
+            $this->Eliminar_Tablas("transporte","id_transporte",$t['id_transporte']);
+          }
+       } 
+  }
+  else{
+
+    if(count($transportes)==0){
+      $this->modelo->Registrar_transporte([
+        "cedula_propietario" =>$datos_persona['cedula_persona'],
+        "descripcion_transporte" => $datos_persona['transporte']
+      ]);
+      $id=$this->Ultimo_Ingresado("transporte","id_transporte");
+      $id=$id[0]['MAX(id_transporte)'];
+      $existe=$id;
+    }
+
+     else{
+       $this->Actualizar_Tablas("transporte","descripcion_transporte","id_transporte",$datos_persona['transporte'],$transportes[0]['id_transporte']);
      }
 
 

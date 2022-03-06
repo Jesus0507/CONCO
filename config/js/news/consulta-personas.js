@@ -642,7 +642,13 @@ btn_guardar.onclick = function () {
                         vorgpolinput.value==""?inf_persona['org_politica']="No posee":inf_persona['org_politica']=vorgpolinput.value;
                       }
 
-                          editar_persona();
+                      if(vtransp.value==0){
+                        inf_persona['transporte']="No posee";
+                      }
+                      else{
+                        vtranspinput.value!=""?inf_persona['transporte']=vtranspinput.value:inf_persona['transporte']="No posee";
+                      }
+                        editar_persona();
                     }
                   }
                 }
@@ -732,5 +738,16 @@ spanorgpol.onclick=function(){
     vorgpolinput.style.display='none';
     vorgpolinput.value="";
     vorgpol.style.display="";
+  }
+}
+
+vtransp.onchange=function(){
+  if(vtransp.value=="privado"){
+    vvertiptrans.style.display="";
+    vtranspinput.focus();
+  }
+  else{
+    vvertiptrans.style.display="none";
+    vtranspinput.value="";
   }
 }

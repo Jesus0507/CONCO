@@ -286,9 +286,6 @@
                     <tr>
                       <td>
                         <select class="custom-select" id="transp" name="transporte">
-                          <option selected="" value="vacio">
-                            -Seleccione-
-                          </option>
                           <option value="0">
                             Público
                           </option>
@@ -304,7 +301,7 @@
 
                         <datalist id='transportes_regitrados'>
                           <?php foreach ($this->transportes as $tr) { ?>
-                            <option value="<?php echo $tr['id_transporte']; ?>"></option>
+                            <option value="<?php echo $tr['descripcion_transporte']; ?>"></option>
                           <?php } ?>
                         </datalist>
 
