@@ -1094,7 +1094,7 @@ public function get_organizaciones()
       public function get_bonos_persona($cedula)
      {
 
-         $tabla            = "SELECT B.nombre_bono FROM bonos B, persona_bonos PB WHERE PB.cedula_persona = $cedula AND PB.id_bono=B.id_bono AND B.estado=1";
+         $tabla            = "SELECT B.nombre_bono, PB.id_persona_bono FROM bonos B, persona_bonos PB WHERE PB.cedula_persona = $cedula AND PB.id_bono=B.id_bono AND B.estado=1";
          $respuestaArreglo = '';
          try {
              $datos = $this->conexion->prepare($tabla);

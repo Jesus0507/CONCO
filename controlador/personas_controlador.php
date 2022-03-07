@@ -845,4 +845,25 @@ public function editar_transporte($datos_persona){
   }
 }
 
+public function eliminar_bono(){
+  $retornar=0;
+  
+  if($this->Eliminar_Tablas("persona_bonos","id_persona_bono",$_POST['id_bono'])){
+    $bonos=$this->Consultar_Columna("persona_bonos","cedula_persona",$_POST['cedula_param']);
+    if(count($bonos)!=0){
+      $retornar=[];
+      for($i=0;$i<count($bonos);$i++){
+         $b=$this->Consultar_Columna("bonos","id_bono",$bonos[$i]['id_bono']);
+         $retornar[]=[
+           "nombre_bono"=>$b[0]['nombre_bono'],
+           "id_persona_bono"=>$bonos[$i]['id_persona_bono']
+         ];
+      }
+    }
+  }
+
+  echo json_encode($retornar);
+
+}
+
 }

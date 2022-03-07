@@ -394,7 +394,8 @@ function editar_datos(
   } else {
     vbonos.innerHTML = "";
     for (var i = 0; i < bonos_info.length; i++) {
-      vbonos.innerHTML += " - " + bonos_info[i]["nombre_bono"] + "<br><hr>";
+      var tabl=
+      vbonos.innerHTML += " <table style='width:95%'><tr><td>- " + bonos_info[i]["nombre_bono"] + "</td><td style='text-align:right'><span onclick='borrar_bono("+bonos_info[i]['id_persona_bono']+",`"+persona_info['cedula_persona']+"`)' class='iconDelete fa fa-times-circle' title='Eliminar bono' style='font-size:22px'></span></td></tr></table><br><hr>";
     }
   }
 
@@ -750,4 +751,34 @@ vtransp.onchange=function(){
     vvertiptrans.style.display="none";
     vtranspinput.value="";
   }
+}
+
+function borrar_bono(id,cedula_param){
+swal({
+  type:"warning",
+  title:"¿Está seguro?",
+  text:"Está por eliminar este bono relacionado con la persona, ¿desea continuar?",
+  showCancelButton:true,
+  confirmButtonText:"Si, continuar",
+  cancelButtonText:"No"
+},function(isConfirm){
+  if(isConfirm){
+    $.ajax({
+      type:"POST",
+      url:BASE_URL+"Personas/eliminar_bono",
+      data:{"id_bono":id,"cedula_param":cedula_param}
+    }).done(function(result){
+      console.log(result);
+         if(result!=0){
+          vbonos.innerHTML = "";
+          for (var i = 0; i < result.length; i++) {
+            vbonos.innerHTML += " <table style='width:95%'><tr><td>- " + result[i]["nombre_bono"] + "</td><td style='text-align:right'><span onclick='borrar_bono("+result[i]['id_persona_bono']+",`"+cedula_param+"`)' class='iconDelete fa fa-times-circle' title='Eliminar bono' style='font-size:22px'></span></td></tr></table><br><hr>";
+          }
+         }
+         else{
+           vbonos.innerHTML="No aplica";
+         }
+    })
+  }
+});
 }

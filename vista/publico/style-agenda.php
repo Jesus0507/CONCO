@@ -85,6 +85,16 @@
 		cursor:pointer;
 }
 
+.iconDelete{
+	color:#FE4141;
+	cursor:pointer;
+}
+
+.iconDelete:hover{
+	color:#BF1010;
+}
+
+
 
 
 </style>
