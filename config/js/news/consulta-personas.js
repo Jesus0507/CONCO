@@ -769,16 +769,21 @@ swal({
       data:{"id_bono":id,"cedula_param":cedula_param}
     }).done(function(result){
       result=JSON.parse(result);
-         if(result!=0){
-          vbonos.innerHTML = "";
-          for (var i = 0; i < result.length; i++) {
-            vbonos.innerHTML += " <table style='width:95%'><tr><td>- " + result[i]["nombre_bono"] + "</td><td style='text-align:right'><span onclick='borrar_bono("+result[i]['id_persona_bono']+",`"+cedula_param+"`)' class='iconDelete fa fa-times-circle' title='Eliminar bono' style='font-size:22px'></span></td></tr></table><br><hr>";
-          }
-         }
-         else{
-           vbonos.innerHTML="No aplica";
-         }
+        actualizar_bonos(result);
     })
   }
 });
+}
+
+
+function actualizar_bonos(result){
+  if(result!=0){
+    vbonos.innerHTML = "";
+    for (var i = 0; i < result.length; i++) {
+      vbonos.innerHTML += " <table style='width:95%'><tr><td>- " + result[i]["nombre_bono"] + "</td><td style='text-align:right'><span onclick='borrar_bono("+result[i]['id_persona_bono']+",`"+cedula_param+"`)' class='iconDelete fa fa-times-circle' title='Eliminar bono' style='font-size:22px'></span></td></tr></table><br><hr>";
+    }
+   }
+   else{
+     vbonos.innerHTML="No aplica";
+   }
 }

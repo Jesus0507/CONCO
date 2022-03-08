@@ -319,7 +319,16 @@
 
               <tr style='background:#057E9F;color:white;'>
 
-                <td style='width:50%'>Bonos</td>
+                <td style='width:50%'><table style='width:100%'><tr><td>Bonos </td><td><input type='text' class='form-control' id="bono_nuevo" list="lista_bonos" style='width:90%;height:20px' ></td>
+                <datalist id='lista_bonos'>
+                  <?php foreach($this->bonos as $b){ ?> 
+                    <option value="<?php echo $b['nombre_bono']; ?>"></option>
+                    <?php } ?>
+                </datalist>
+                <td>
+                <span class="fa fa-plus-circle" style='font-size:22px;'></span>
+                  </td></tr></table>
+                </td>
                 <td style='width:50%'>Misiones</td>
 
               </tr>
@@ -327,13 +336,11 @@
               <tr>
 
               <td style='width:50%'>
-              <div style='width:100%;overflow-y:scroll;background:#C5E6EF;border-radius:6px;height:100px;' id='bonos'>
-              sdfsff
+              <div style='width:100%;overflow-y:scroll;background:#C5E6EF;border-radius:6px;height:100px;' id='bonos'> 
             </div>
               </td>
               <td style='width:50%'>
               <div style='width:100%;overflow-y:scroll;background:#C5E6EF;border-radius:6px;height:100px;' id='misiones'>
-            sdfdfsd  
             </div>
               </td>
               </tr>

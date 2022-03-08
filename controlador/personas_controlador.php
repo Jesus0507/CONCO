@@ -172,6 +172,7 @@ public function Consultas()
   $this->vista->ocupaciones=$this->modelo->get_ocupaciones();
   $this->vista->condiciones=$this->modelo->get_condiciones();
   $this->vista->organizaciones=$this->modelo->get_organizaciones();
+  $this->vista->bonos=$this->Consultar_Tabla("bonos",1,"id_bono");
   $this->Seguridad_de_Session();
   $this->vista->Cargar_Vistas('personas/consultar');
 }
