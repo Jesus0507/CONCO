@@ -768,7 +768,7 @@ swal({
       url:BASE_URL+"Personas/eliminar_bono",
       data:{"id_bono":id,"cedula_param":cedula_param}
     }).done(function(result){
-      console.log(result);
+      result=JSON.parse(result);
          if(result!=0){
           vbonos.innerHTML = "";
           for (var i = 0; i < result.length; i++) {
