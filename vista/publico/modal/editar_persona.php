@@ -326,7 +326,7 @@
                     <?php } ?>
                 </datalist>
                 <td>
-                <span class="fa fa-plus-circle" style='font-size:22px;'></span>
+                <span class="fa fa-plus-circle" style='font-size:22px;cursor:pointer' title="Agregar bono" id="add_bono"></span>
                   </td></tr></table>
                 </td>
                 <td style='width:50%'>Misiones</td>

@@ -306,6 +306,7 @@ var vmisiones = document.getElementById("misiones");
 var vproyectos = document.getElementById("proyectos");
 var btn_guardar = document.getElementById("guardar_cambios");
 var inf_persona = new Object();
+var add_bono=document.getElementById("add_bono");
 
 function editar_datos(
   persona,
@@ -769,14 +770,15 @@ swal({
       data:{"id_bono":id,"cedula_param":cedula_param}
     }).done(function(result){
       result=JSON.parse(result);
-        actualizar_bonos(result);
+        actualizar_bonos(result,cedula_param);
     })
   }
 });
 }
 
 
-function actualizar_bonos(result){
+function actualizar_bonos(result,cedula_param){
+  console.log(result);
   if(result!=0){
     vbonos.innerHTML = "";
     for (var i = 0; i < result.length; i++) {
@@ -786,4 +788,53 @@ function actualizar_bonos(result){
    else{
      vbonos.innerHTML="No aplica";
    }
+}
+
+add_bono.onclick=function(){
+  if(document.getElementById("bono_nuevo").value==""){
+    swal({
+      type:"error",
+      title:"Error",
+      text:"Debe seleccionar un bono",
+      timer:2000,
+      showConfirmButton:false
+    });
+    setTimeout(
+      function(){
+        document.getElementById("bono_nuevo").focus();
+        document.getElementById("bono_nuevo").style.borderColor="red";
+      },2000
+    );
+  }
+  else{
+    document.getElementById("bono_nuevo").style.borderColor="";
+    document.getElementById("bono_nuevo").value="";
+    $.ajax({
+      type:"POST",
+      url:BASE_URL+"Personas/agg_bono",
+      data:{"cedula_persona":inf_persona['cedula_persona'],"bono":document.getElementById("bono_nuevo").value}
+    }).done(function(result){
+           if(result==0){
+             swal({
+                type:"error",
+                title:"Error",
+                text:"Ya esta persona posee ese bono agregado",
+                timer:2000,
+                showConfirmButton:false
+             });
+             setTimeout(() => {
+              document.getElementById("bono_nuevo").focus();
+             }, 2000);
+           }
+           else{
+             actualizar_bonos(JSON.parse(result),inf_persona['cedula_persona']);
+           }
+    });
+   }
+}
+
+document.getElementById("bono_nuevo").onkeyup=function(){
+  if(document.getElementById("bono_nuevo").value!=""){
+    document.getElementById("bono_nuevo").style.borderColor="";
+  }
 }

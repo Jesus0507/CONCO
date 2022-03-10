@@ -867,4 +867,68 @@ public function eliminar_bono(){
 
 }
 
+public function agg_bono(){
+  $all_bonos=$this->Consultar_Tabla("bonos",1,"id_bono");
+  $bonos_persona=$this->Consultar_Columna("persona_bonos","cedula_persona",$_POST['cedula_persona']);
+  $existe=false;
+  $retornar=[];
+  foreach($all_bonos as $a){
+    if(strtolower($a['nombre_bono'])==strtolower($_POST['bono'])){
+      $existe=$a['id_bono'];
+    }
+  }
+
+  if($existe==false){
+    $this->Registrar_Tablas("bonos","nombre_bono",$_POST['bono']);
+    $id=$this->Ultimo_Ingresado("bonos","id_bono");
+    $this->modelo->Registrar_persona_bono([
+      "cedula_persona"=>$_POST['cedula_persona'],
+      "id_bono"=>$id[0]['MAX(id_bono)']
+    ]);
+    $retornar=1;
+  }
+  else{
+    $registrado=false;
+     foreach($bonos_persona as $bp){
+       if($bp['id_bono']==$existe){
+          $registrado=true;
+       }
+     }
+
+     if($registrado==false){
+      $this->modelo->Registrar_persona_bono([
+        "cedula_persona"=>$_POST['cedula_persona'],
+        "id_bono"=>$existe
+      ]);
+      $retornar=1;
+     }
+     else{
+       $retornar=0;
+     }
+  }
+
+  if($retornar==1){
+    $bonos=$this->Consultar_Columna("persona_bonos","cedula_persona",$_POST['cedula_persona']);
+    if(count($bonos)!=0){
+      $retornar=[];
+      for($i=0;$i<count($bonos);$i++){
+         $b=$this->Consultar_Columna("bonos","id_bono",$bonos[$i]['id_bono']);
+         $retornar[]=[
+           "nombre_bono"=>$b[0]['nombre_bono'],
+           "id_persona_bono"=>$bonos[$i]['id_persona_bono']
+         ];
+      }
+    }
+
+    echo json_encode($retornar);
+  }
+  else{
+    echo $retornar;
+  }
+
+  
 }
+
+}
+
+
