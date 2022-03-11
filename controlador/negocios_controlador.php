@@ -71,7 +71,6 @@ class Negocios extends Controlador
         $this->Establecer_Consultas();
 
 
-
         $existente = $this->Consultar_Columna("negocios","rif_negocio",$_POST['rif_negocio']);
         if ($existente == "" || $existente == null ) {
             echo 0;

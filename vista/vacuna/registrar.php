@@ -37,7 +37,7 @@
                                     Cedula de Persona
                                 </label>
                                 <div class="input-group">
-                                    <input list="cedula_p" id="cedula_persona" name="cedula_persona" class="form-control " placeholder="Cedula de Persona" />
+                                    <input list="cedula_p" id="cedula_persona" name="cedula_persona" class="form-control no-simbolos " placeholder="Cedula de Persona" />
                                     <datalist id="cedula_p">
                                         <?php foreach ($this->personas as $persona) {   ?>
                                             <option value="<?php echo $persona["cedula_persona"]; ?>">
@@ -75,7 +75,7 @@
                                         <td class="col-6">
 
                                             <div class="input-group">
-                                                <input class="form-control" id="fecha" name="fecha[]" type="date">
+                                                <input class="form-control no-simbolos" id="fecha" name="fecha[]" type="date">
                                             </div>
                                         </td>
                                         <td class="">
@@ -125,7 +125,7 @@
                 '<div class="input-group"><select class="custom-select" id="dosis" name="dosis[]"><option selected value="Primera Dosis">Primera Dosis</option><option value="Segunda Dosis">Segunda Dosis</option><option value="Tercera Dosis">Tercera Dosis</option></select></div>' +
                 '</td>' +
                 '<td class="col-6">' +
-                '<div class="input-group"><input class="form-control" id="fecha" name="fecha[]" type="date"></div>' +
+                '<div class="input-group"><input class="form-control no-simbolos" id="fecha" name="fecha[]" type="date"></div>' +
                 '</td>' +
                 '<td>' +
                 '<button type="button" name="eliminar" id="' + i +
@@ -138,7 +138,7 @@
                 '<div class="input-group"><select class="custom-select" id="dosis" name="dosis[]"><option value="Primera Dosis">Primera Dosis</option><option selected value="Segunda Dosis">Segunda Dosis</option><option value="Tercera Dosis">Tercera Dosis</option></select></div>' +
                 '</td>' +
                 '<td class="col-6">' +
-                '<div class="input-group"><input class="form-control" id="fecha" name="fecha[]" type="date"></div>' +
+                '<div class="input-group"><input class="form-control no-simbolos" id="fecha" name="fecha[]" type="date"></div>' +
                 '</td>' +
                 '<td>' +
                 '<button type="button" name="eliminar" id="' + i +
@@ -151,7 +151,7 @@
                 '<div class="input-group"><select class="custom-select" id="dosis" name="dosis[]"><option value="Primera Dosis">Primera Dosis</option><option value="Segunda Dosis">Segunda Dosis</option><option selected value="Tercera Dosis">Tercera Dosis</option></select></div>' +
                 '</td>' +
                 '<td class="col-6">' +
-                '<div class="input-group"><input class="form-control" id="fecha" name="fecha[]" type="date"></div>' +
+                '<div class="input-group"><input class="form-control no-simbolos" id="fecha" name="fecha[]" type="date"></div>' +
                 '</td>' +
                 '<td>' +
                 '<button type="button" name="eliminar" id="' + i +

@@ -64,6 +64,9 @@
 
         $(document).ready(function () {
             $("form").attr("autocomplete", "off");
+            $('.no-simbolos').on('input', function() {
+        this.value = this.value.replace(/^[!@#$%^&*()_=\[\]{};':"\\|,.<>\/?+-]*$/, '');
+    });
         });
     </script>
 

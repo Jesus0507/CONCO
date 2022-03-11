@@ -15,7 +15,18 @@ $(function () {
             },
         })
             .done(function (datos) {
-                location.href = BASE_URL + "Centro_Votacion/Consultas";
+                
+                if (datos != 0) {
+                        swal({
+                            title: "Registrado!",
+                            text: "El elemento fue Registrado con exito.",
+                            type: "success",
+                            showConfirmButton: false
+                        });
+                        setTimeout(function() {
+                            location.href = BASE_URL + "Centro_Votacion/Consultas";
+                        }, 2000);
+                    }
             })
             .fail(function () {
                 alert("error");

@@ -37,7 +37,7 @@
                                     Deporte
                                 </label>
                                 <div class="input-group">
-                                    <input list="tipo_I" id="id_deporte" name="datos[id_deporte]" class="form-control "
+                                    <input list="tipo_I" id="id_deporte" name="datos[id_deporte]" class="form-control no-simbolos "
                                         placeholder="Deporte" />
                                     <datalist id="tipo_I">
                                         <?php foreach($this->deportes as $deporte){   ?>
@@ -54,7 +54,7 @@
                                     Nombre Grupo Deportivo
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control mb-10" id="nombre_grupo_deportivo"
+                                    <input class="form-control no-simbolos mb-10" id="nombre_grupo_deportivo"
                                         name="datos[nombre_grupo_deportivo]" placeholder="Nombre de Grupo"
                                         type="text" />
                                 </div>
@@ -65,7 +65,7 @@
                                     Descripcion
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control mb-10" id="descripcion" name="datos[descripcion]"
+                                    <input class="form-control no-simbolos mb-10" id="descripcion" name="datos[descripcion]"
                                         placeholder="Nombre de Grupo" type="text" />
                                 </div>
                             </div>
@@ -78,7 +78,7 @@
                                     <tr>
                                         <td class="col-6">
                                             <input list="cedula_p" id="cedula" type="number" name="cedula[]" placeholder="Cedula"
-                                                class="form-control cedula" />
+                                                class="form-control no-simbolos cedula" />
                                             <datalist id="cedula_p">
                                                 <?php foreach($this->personas as $persona){   ?>
                                                 <option value="<?php echo $persona["cedula_persona"];?>">
@@ -89,7 +89,7 @@
                                         </td>
                                         <td class="col-6">
                                             <input type="text" name="" placeholder="Nombre y Apellido"
-                                                class="form-control nombre_apellido" />
+                                                class="form-control no-simbolos nombre_apellido" />
                                         </td>
                                         <td>
                                             <button type="button" name="agregar" id="agregar"
@@ -130,10 +130,10 @@ $(document).ready(function() {
         var html =
             '<tr id="row' + i + '" >' +
             '<td class="col-6">' +
-            '<input list="cedula_p"  type="number" name="cedula[]" placeholder="Cedula" class="form-control cedula" /><datalist id="cedula_p"><?php foreach($this->personas as $persona){   ?><option value="<?php echo $persona["cedula_persona"];?>"><?php echo $persona["primer_nombre"]." ".$persona["primer_apellido"];?></option><?php  }   ?></datalist>' +
+            '<input list="cedula_p"  type="number" name="cedula[]" placeholder="Cedula" class="form-control no-simbolos cedula" /><datalist id="cedula_p"><?php foreach($this->personas as $persona){   ?><option value="<?php echo $persona["cedula_persona"];?>"><?php echo $persona["primer_nombre"]." ".$persona["primer_apellido"];?></option><?php  }   ?></datalist>' +
             '</td>' +
             '<td class="col-6">' +
-            '<input type="text" name="" placeholder="Nombre y Apellido"     class="form-control nombre_apellido" />' +
+            '<input type="text" name="" placeholder="Nombre y Apellido"     class="form-control no-simbolos nombre_apellido" />' +
             '</td>' +
             '<td>' +
             '<button type="button" name="eliminar" id="' + i +

@@ -59,9 +59,18 @@
                                     Cedula de Propietario
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control mb-10" id="cedula_propietario2" name="datos[cedula_propietario]"
-                                        placeholder="Cedula de Propietario" type="text" />
-                                </div>
+                                   
+                                <input list="cedula" id="cedula_propietario2" name="datos[cedula_propietario]"
+                                        class="form-control " placeholder="Cedula" />
+                                    <datalist id="cedula">
+                                        <?php foreach($this->personas as $persona){   ?>
+                                        <option value="<?php echo $persona["cedula_persona"];?>">
+                                            <?php echo $persona["primer_nombre"]." ".$persona["primer_apellido"];?>
+                                        </option>
+                                    <?php  }   ?>
+                                    </datalist>
+                                    
+                                </div> 
                             </div>
 
                             <div class="col-md-6 mt-2">

@@ -32,7 +32,7 @@
                         <div class="col-md-12">
                          <label>Persona</label> <span id='valid_persona' style='color:red'></span>
                          <table style='width:100%'><tr><td>
-                             <input type="number" maxlength="15" placeholder="Buscar cédula" class='form-control' id='persona' name="" list='lista_personas'>
+                             <input type="number" maxlength="15" placeholder="Buscar cédula" class='form-control no-simbolos' id='persona' name="" list='lista_personas'>
 
                              <datalist id='lista_personas'>
                                  <?php foreach ($this->personas as $p) { ?>
@@ -55,16 +55,16 @@
 
                              <label>Enfermedad</label> <span id='valid_enfermedad' style='color:red'></span>
                              <table style='width:100%'><tr><td>
-                                 <input type="text" style='display:none' maxlength="30" placeholder="Enfermedad..." class='form-control' id='enfermedad_input' name="">
+                                 <input type="text" style='display:none' maxlength="30" placeholder="Enfermedad..." class='form-control no-simbolos' id='enfermedad_input' name="">
 
-                                 <select class='form-control' id='enfermedad_select'> 
+                                 <select class='form-control no-simbolos' id='enfermedad_select'> 
                                    <option value='vacio'>-Enfermedad-</option>
                                    <?php foreach ($this->enfermedades as $e) { ?>
                                      <option value='<?php echo $e['id_enfermedad'];?>'><?php echo $e['nombre_enfermedad']; ?></option>
                                  <?php   } ?>
                              </select></td>
 
-                             <td><textarea id='medicamentos' class='form-control' placeholder="Ej: Parecetamol, Loratadina, Lozartan, etc..." rows="1"></textarea></td><td><button id='agregar' class="btn btn-info" type="button">Agregar</button>&nbsp;&nbsp;<button type='button' class="btn btn-primary" id='btn_nueva_enfermedad' >Nueva enfermedad</button></td></tr></table>
+                             <td><textarea id='medicamentos' class='form-control no-simbolos' placeholder="Ej: Parecetamol, Loratadina, Lozartan, etc..." rows="1"></textarea></td><td><button id='agregar' class="btn btn-info" type="button">Agregar</button>&nbsp;&nbsp;<button type='button' class="btn btn-primary" id='btn_nueva_enfermedad' >Nueva enfermedad</button></td></tr></table>
 
 
                          </div>

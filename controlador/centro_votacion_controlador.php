@@ -141,6 +141,9 @@ class Centro_Votacion extends Controlador
                 'estado' => 1
             ]);
            $cont++;
+           $this->mensaje =1;
+            }else {
+                $this->mensaje =0;
             }
         }
 
@@ -162,10 +165,13 @@ class Centro_Votacion extends Controlador
                         'estado' => 1
                     ]);
                 }
+                $this->mensaje =1;
+            }{
+                $this->mensaje =0;
             }
         }
 
-        echo $_POST['id_parroquia'];
+        echo $this->mensaje;
     }
 
 

@@ -32,7 +32,7 @@
                         <div class="col-md-12">
                          <label>Persona</label> <span id='valid_persona' style='color:red'></span>
                          <table style='width:100%'><tr><td>
-                             <input type="number" maxlength="15" placeholder="Buscar cédula" class='form-control' id='persona' name="" list='lista_personas'>
+                             <input type="number" maxlength="15" placeholder="Buscar cédula" class='form-control no-simbolos' id='persona' name="" list='lista_personas'>
 
                              <datalist id='lista_personas'>
                                  <?php foreach ($this->personas as $p) { ?>
@@ -55,9 +55,9 @@
 
                              <label>Discapacidad</label> <span id='valid_discapacidad' style='color:red'></span>
                              <table style='width:100%'><tr><td>
-                                 <input type="text" style='display:none' maxlength="30" placeholder="Discapacidad..." class='form-control' id='discapacidad_input' name="">
+                                 <input type="text" style='display:none' maxlength="30" placeholder="Discapacidad..." class='form-control no-simbolos' id='discapacidad_input' name="">
 
-                                 <select class='form-control' id='discapacidad_select'> 
+                                 <select class='form-control no-simbolos' id='discapacidad_select'> 
                                    <option value='vacio'>-Discapacidad-</option>
                                    <?php foreach ($this->discapacidades as $d) { ?>
                                      <option value='<?php echo $d['id_discapacidad'];?>'><?php echo $d['nombre_discapacidad']; ?></option>
@@ -65,17 +65,17 @@
                              </select></td>
 
                              <td>
-                                <select id='en_cama' class='form-control'>
+                                <select id='en_cama' class='form-control no-simbolos'>
                                     <option value='vacio'>-En cama-</option>
                                     <option value="1">Si</option>
                                     <option value='0'>No</option>
                                 </select>
                              </td>
                              <td>
-                               <input type="text" class='form-control' id='necesidades' placeholder="Necesidades (opcional)" name="">
+                               <input type="text" class='form-control no-simbolos' id='necesidades' placeholder="Necesidades (opcional)" name="">
                              </td>
                             <td>
-                               <input type="text" class='form-control' id='observaciones' placeholder="Observaciones (opcional)" name="">
+                               <input type="text" class='form-control no-simbolos' id='observaciones' placeholder="Observaciones (opcional)" name="">
                              </td>
                              <td>
                                 <button id='agregar' class="btn btn-info" type="button">Agregar</button>&nbsp;&nbsp;<button type='button' class="btn btn-primary" id='btn_nueva_discapacidad' >Nueva discapacidad</button>

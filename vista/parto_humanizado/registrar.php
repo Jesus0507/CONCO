@@ -39,7 +39,7 @@
                                 </label>
                                 <div class="input-group">
                                     <input list="cedula_p" id="cedula_persona" name="datos[cedula_persona]"
-                                        class="form-control " placeholder="Cedula de Persona" />
+                                        class="form-control no-simbolos " placeholder="Cedula de Persona" />
                                     <datalist id="cedula_p">
                                         <?php foreach($this->personas as $persona){  
                                             if($persona['genero']=="F"){ ?>
@@ -77,7 +77,7 @@
                                     Tiempo de Gestacion
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control" placeholder="Tiempo de Gestacion" id="tiempo_gestacion" name="datos[tiempo_gestacion]" type="text">
+                                    <input class="form-control no-simbolos" placeholder="Tiempo de Gestacion" id="tiempo_gestacion" name="datos[tiempo_gestacion]" type="text">
                                 </div>
                             </div>
                             
@@ -86,7 +86,7 @@
                                     Fecha Aproximada de Parto
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control" id="fecha_aprox_parto" name="datos[fecha_aprox_parto]" type="date" >
+                                    <input class="form-control no-simbolos" id="fecha_aprox_parto" name="datos[fecha_aprox_parto]" type="date" >
                                 </div>
                             </div>
 

@@ -71,6 +71,7 @@ class Inmuebles extends Controlador
         $datos = ($_POST['datos'] !== "") ? $_POST['datos'] : null;
         $this->Establecer_Consultas();
 
+        $cont = 0;
         foreach ($this->tipo_inmueble as $datos_t) {
             
             if ($datos_t["nombre_tipo"] == $datos['tipo_inmueble']) {
@@ -84,21 +85,58 @@ class Inmuebles extends Controlador
                      ]
                  )
                  ) {
-                     $this->vista->mensaje = 'Inmueble Registrado exitosamente!.';
+                     $this->mensaje = 1;
                      $this->Accion("Registro de Inmueble: ".$datos['nombre_inmueble']." \\Exitosamente.");
                  } else {
-                     $this->vista->mensaje = 'Ha ocurrido un error.';
+                     $this->mensaje = 0;
                  }
-                header('location:' . constant('URL') . "Inmuebles/Consultas");
-            }else{
-                echo "";
-            } 
+                echo $this->mensaje;
+                 $cont++;
+            }
         }
 
-        
+        if($cont==0){
+            if($this->Registrar_Tablas("tipo_inmueble", "nombre_tipo", $datos['tipo_inmueble'])){
+                $id= $this->Ultimo_Ingresado("tipo_inmueble","id_tipo_inmueble");
+
+                foreach ($id as $i) {
+                    if ($this->modelo->Registrar(
+                     [
+                         'id_calle'   => $datos['id_calle'],
+                         'nombre_inmueble'      => $datos['nombre_inmueble'],
+                         'direccion_inmueble'   => $datos['direccion_inmueble'],
+                         'id_tipo_inmueble'   =>   $i['MAX(id_tipo_inmueble)'],
+                         'estado'   => 1,
+                     ]
+                 )
+                 ) {
+                     $this->mensaje = 1;
+                     $this->Accion("Registro de Inmueble: ".$datos['nombre_inmueble']." \\Exitosamente.");
+                 } else {
+                     $this->mensaje = 0;
+                 }
+                echo $this->mensaje;
+                }
+            }
+        }
+
         exit();
         return false;
     }
+
+    public function Consultas_Calle() 
+    {
+        $this->Establecer_Consultas();
+
+        foreach ($this->calle as $key => $value) {
+            if ($value["nombre_calle"] == $_POST['calle']) {
+                $id = $value["id_calle"];
+            }
+        }
+        
+        echo  $id;
+        return false;
+    } 
 
     public function Eliminar_Inmueble() 
     {

@@ -45,7 +45,7 @@
                                 </label>
                                 <div class="input-group">
                                     <input list="cedula_p" id="cedula_persona" name="datos[cedula_persona]"
-                                        class="form-control " placeholder="Cedula de Persona"/>
+                                        class="form-control no-simbolos " placeholder="Cedula de Persona"/>
                                     <datalist id="cedula_p">
                                         <?php foreach($this->personas as $persona){   ?>
                                         <option value="<?php echo $persona["cedula_persona"];?>">
@@ -62,7 +62,7 @@
                                     Area de Produccion
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control mb-10" id="area_produccion" name="datos[area_produccion]"
+                                    <input class="form-control  no-simbolos mb-10" id="area_produccion" name="datos[area_produccion]"
                                         placeholder="Area de Produccion" type="text" />
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                                     Años de Experiencia
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control mb-10" id="anios_experiencia" name="datos[anios_experiencia]"
+                                    <input class="form-control no-simbolos mb-10" id="anios_experiencia" name="datos[anios_experiencia]"
                                         placeholder="Años de Experiencia" type="number" />
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                                     Pertenece a una Organizacion Agricola
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control mb-10" id="org_agricola" name="datos[org_agricola]"
+                                    <input class="form-control no-simbolos mb-10" id="org_agricola" name="datos[org_agricola]"
                                         placeholder="Organizacion Agricola" type="text" />
                                 </div>
                             </div>
@@ -93,7 +93,7 @@
                                     Rubro Principal
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control mb-10" id="rubro_principal" name="datos[rubro_principal]"
+                                    <input class="form-control no-simbolos mb-10" id="rubro_principal" name="datos[rubro_principal]"
                                         placeholder="Rubro Principal" type="text" />
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                     Rubro Alternativo
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control mb-10" id="rubro_alternativo" name="datos[rubro_alternativo]"
+                                    <input class="form-control no-simbolos mb-10" id="rubro_alternativo" name="datos[rubro_alternativo]"
                                         placeholder=" Rubro Alternativo" type="text" />
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                                     Financiamiento
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control mb-10 dinero" id="financiado" name="datos[financiado]"
+                                    <input class="form-control no-simbolos mb-10 dinero" id="financiado" name="datos[financiado]"
                                         placeholder="Financiado" type="text" />
                                 </div>
                             </div>

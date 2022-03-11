@@ -59,7 +59,7 @@
                                     Direccion de Negocio
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control mb-10" id="direccion" name="datos[direccion_negocio]"
+                                    <input class="form-control no-simbolos mb-10" id="direccion" name="datos[direccion_negocio]"
                                         placeholder="Direccion de Negocio" type="text" />
                                 </div>
                                 <span id="mensaje_direccion"></span>

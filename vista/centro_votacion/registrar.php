@@ -39,7 +39,7 @@
                                 </label>
                                 <div class="input-group">
                                     <input list="cedula_p" id="cedula_persona" name="datos[cedula_persona]"
-                                        class="form-control " placeholder="Cedula de Persona"/>
+                                        class="form-control no-simbolos " placeholder="Cedula de Persona"/>
                                     <datalist id="cedula_p">
                                         <?php foreach($this->personas as $persona){   ?>
                                         <option value="<?php echo $persona["cedula_persona"];?>">
@@ -49,6 +49,7 @@
                                     </datalist>
 
                                 </div>
+                                <span id="mensaje_1"></span>
                             </div>
                         
                             <div class="col-md-4 mt-2">
@@ -56,7 +57,7 @@
                                     Centro de Votacion
                                 </label>
                                 <div class="input-group">
-                                    <input list="centro" id="nombre_centro" name="datos[nombre_centro]" class="form-control " placeholder="Centro de Votacion" />
+                                    <input list="centro" id="nombre_centro" name="datos[nombre_centro]" class="form-control no-simbolos " placeholder="Centro de Votacion" />
                                     <datalist id="centro">
                                         <?php foreach($this->centros_votacion as $centro){   ?>
                                         <option value="<?php echo $centro["nombre_centro"];?>"> 
@@ -65,6 +66,7 @@
                                     </datalist>
                                     
                                 </div>
+                                <span id="mensaje_2"></span>
                             </div>
 
                             <div class="col-md-4 mt-2">
@@ -73,7 +75,7 @@
                                 </label>
                                 <div class="input-group">
                                     <select class="custom-select" id="id_parroquia" name="datos[id_parroquia]">
-                                        <option>
+                                        <option value="0">
                                            Seleccione ...
                                         </option>
                                     <?php foreach($this->parroquias as $parroquia){   ?>
@@ -82,6 +84,7 @@
                                         </option>
                                     <?php  }   ?>
                                     </select>
+                                    <span id="mensaje_3"></span>
                                 </div>
                             </div>
 
@@ -108,7 +111,7 @@
     <!-- /.content -->
     <!-- /.content -->
 </div>
-<script src="<?php echo constant('URL')?>config/js/news/registrar-centro_votacion.js"></script> 
+<script src="<?php echo constant('URL')?>config/js/news/registrar-centro_votacion.js"></script>  
 <!-- /.content-wrapper -->
 <?php include (call."Fin.php"); ?>
 

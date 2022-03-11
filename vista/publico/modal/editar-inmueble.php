@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?php echo constant('URL'); ?>Inmuebles/Nuevo_Inmueble" enctype="multipart/form-data"
+                <form action="<?php echo constant('URL'); ?>Inmuebles/Nuevo_Inmueble" enctype="multipart/form-data" 
                     id="formulario" method="POST" name="formulario">
                     <!-- card-body -->
                     <div class="card-body">
@@ -21,7 +21,7 @@
                                     </label>
                                     <div class="input-group">
                                         <select class="custom-select" id="id_calle2" name="datos[id_calle]">
-                                        <option selected>
+                                        <option>
                                            Seleccione ...
                                         </option>
                                     <?php foreach($this->calle as $calles){   ?>

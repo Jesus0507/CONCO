@@ -126,9 +126,9 @@ class Grupos_Deportivos extends Controlador
             ]
         )
         ) {
-            $this->mensaje = 'Grupo Deportivo Actualizado exitosamente!.';
+            $this->mensaje = 1;
         } else {
-            $this->mensaje = $this->ERROR();
+            $this->mensaje = 0;
         }
         
         echo  $this->mensaje;

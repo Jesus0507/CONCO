@@ -75,12 +75,13 @@ class Consejo_Comunal extends Controlador
             ]
         )
         ) {
-            $this->vista->mensaje = 'Vocero Registrado exitosamente!.';
+            $this->mensaje = 1;
             $this->Accion("El portador de la cedula ".$datos['cedula_persona']." fue registrado como vocero \\Exitosamente.");
         } else {
-            $this->vista->mensaje = 'Ha ocurrido un error.';
-        }
-            header('location:' . constant('URL') . "Consejo_Comunal/Consultas");
+            $this->mensaje = 0;
+        }   
+        echo $this->mensaje;
+            // header('location:' . constant('URL') . "Consejo_Comunal/Consultas");
         exit();
         return false;
     }

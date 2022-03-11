@@ -66,7 +66,7 @@ $(document).ready(function() {
                                     'rif_negocio': rif_negocio.value,
                                 },
                             }).done(function(respuesta) {
-                                if (respuesta == 1) {
+                                if (respuesta == 0) {
                                     mensaje_rif.innerHTML = 'Ya hay un negocio registrado con este rif.';
                                     rif_negocio.style.borderColor = 'red';
                                     mensaje_rif.style.color = 'red';
