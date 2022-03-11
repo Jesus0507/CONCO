@@ -808,7 +808,6 @@ add_bono.onclick=function(){
   }
   else{
     document.getElementById("bono_nuevo").style.borderColor="";
-    document.getElementById("bono_nuevo").value="";
     $.ajax({
       type:"POST",
       url:BASE_URL+"Personas/agg_bono",
@@ -829,6 +828,8 @@ add_bono.onclick=function(){
            else{
              actualizar_bonos(JSON.parse(result),inf_persona['cedula_persona']);
            }
+
+           document.getElementById("bono_nuevo").value="";
     });
    }
 }
