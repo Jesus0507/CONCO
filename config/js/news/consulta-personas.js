@@ -839,3 +839,22 @@ document.getElementById("bono_nuevo").onkeyup=function(){
     document.getElementById("bono_nuevo").style.borderColor="";
   }
 }
+
+// function cargar_misiones(cedula_persona){
+// $.ajax({
+//   type:"POST",
+//   url:BASE_URL+"Personas/get_misiones",
+//   data:{"cedula_persona":cedula_persona}
+// }).done(function(result){
+//   console.log(result);
+//   if(result!=0){
+//     vmisiones.innerHTML = "";
+//     for (var i = 0; i < result.length; i++) {
+//       vmisiones.innerHTML += " <table style='width:95%'><tr><td>- " + result[i]["nombre_mision"] + "</td><td style='text-align:right'><span onclick='borrar_mision("+result[i]['id_persona_mision']+",`"+cedula_persona+"`)' class='iconDelete fa fa-times-circle' title='Eliminar misión' style='font-size:22px'></span></td></tr></table><br><hr>";
+//     }
+//    }
+//    else{
+//      vmisiones.innerHTML="No aplica";
+//    }
+// })
+// }
