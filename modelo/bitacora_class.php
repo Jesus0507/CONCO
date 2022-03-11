@@ -29,7 +29,7 @@ class Bitacora_Class extends Modelo
     public function Consultar_Bitacora() 
     {
 
-        $tabla = "SELECT B.*,P.* FROM bitacoras B, personas P WHERE P.cedula_persona = B.cedula_usuario";
+        $tabla = "SELECT B.*,P.* FROM bitacoras B, personas P WHERE P.cedula_persona = B.cedula_usuario ORDER BY B.id_bitacora DESC";
 
         $respuestaArreglo = '';
         try {
@@ -68,7 +68,7 @@ class Bitacora_Class extends Modelo
 
             return true;
 
-        } catch (PDOExection $e) {
+        } catch (PDOException $e) {
 
             $error = ['estatus' => false];
 
@@ -94,7 +94,7 @@ class Bitacora_Class extends Modelo
 
             return true;
 
-        } catch (PDOExection $e) {
+        } catch (PDOException $e) {
 
             $error = ['estatus' => false];
 
@@ -120,7 +120,7 @@ class Bitacora_Class extends Modelo
 
             return true;
 
-        } catch (PDOExection $e) {
+        } catch (PDOException $e) {
 
             $error = ['estatus' => false];
 

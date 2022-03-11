@@ -92,7 +92,7 @@ class Seguridad_Class extends Modelo
 
             return true;
 
-        } catch (PDOExection $e) {
+        } catch (PDOException $e) {
 
             $error = ['estatus' => false];
 
@@ -121,7 +121,7 @@ class Seguridad_Class extends Modelo
 
             return true;
 
-        } catch (PDOExection $e) {
+        } catch (PDOException $e) {
 
             $error = ['estatus' => false];
 
@@ -147,7 +147,7 @@ class Seguridad_Class extends Modelo
 
             return true;
 
-        } catch (PDOExection $e) {
+        } catch (PDOException $e) {
 
             $error = ['estatus' => false];
 
