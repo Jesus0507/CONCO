@@ -1,4 +1,4 @@
-<?php
+ <?php
  
 class Reportes extends Controlador
 {
@@ -8,7 +8,7 @@ class Reportes extends Controlador
    //    $this->Cargar_Modelo("reportes");
     }
 
-    public function Establecer_Consultas()
+    public function Establecer_Consultas() 
     {
         $personas = $this->Consultar_Tabla("personas", 1, "cedula_persona");
         $parto_humanizado = $this->Consultar_Tabla("parto_humanizado", 1, "cedula_persona");
@@ -33,6 +33,7 @@ class Reportes extends Controlador
         $grupos_deportivos=$this->modelo->Grupos_Deportivos(); 
         $grupos_deportivos_personas=$this->modelo->Grupo_Deportivo_Persona();
         $embarazadas=$this->modelo->Embarazadas();
+        
 
         $poblacion_edades=$this->modelo->Poblacion_Edades();  
 
@@ -106,7 +107,9 @@ class Reportes extends Controlador
         $this->embarazadas = $embarazadas;
 
         $this->vista->poblacion_edades = $poblacion_edades; 
-        $this->poblacion_edades = $poblacion_edades; 
+        $this->poblacion_edades = $poblacion_edades;
+
+        
     }
 
     public function Datos_Poblacional()
@@ -524,11 +527,15 @@ public function Constancias_PDF()
 public function Censos()
 {
     $this->Seguridad_de_Session();
+    $this->Establecer_Consultas();
     $this->vista->Cargar_Vistas('reportes/censos');
 } 
-public function Reporte_Niños()
+public function Reporte_Ninos()
 {
     $this->Seguridad_de_Session();
+    $this->Establecer_Consultas();
+
+   
     $this->vista->Cargar_Vistas('reportes/PDF/censo_niños');
 } 
 
@@ -547,7 +554,29 @@ public function Parto_Humanizado()
 public function Historial_Clinico() 
 {
     $this->Seguridad_de_Session();
-    $this->vista->Cargar_Vistas('reportes/PDF/historial_clinico');
+    $this->Establecer_Consultas();
+
+    
+
+    foreach ($this->jefes_familia as $key => $value) {
+        if ($value["nombre_familia"] ==  $_GET['id']) {
+            $id = $value["id_familia"];
+        }
+    }
+
+    $familia_vivienda=$this->modelo->Familia_Vivienda($id);
+    $this->vista->familia_vivienda = $familia_vivienda; 
+
+    $techo=$this->modelo->Techo($id);
+    $this->vista->techo = $techo; 
+
+    $pared=$this->modelo->Pared($id);
+    $this->vista->pared = $pared; 
+
+    $piso=$this->modelo->Piso($id);
+    $this->vista->piso = $piso; 
+
+     $this->vista->Cargar_Vistas('reportes/PDF/historial_clinico');
 } 
 
 public function Milicianos()
@@ -653,6 +682,13 @@ public function Poblacion_Edades()
     $this->Seguridad_de_Session();
     $this->Establecer_Consultas();
     $this->vista->Cargar_Vistas('reportes/PDF/poblacion_edades');
+} 
+
+public function Historial_Familiar()
+{
+    $this->Seguridad_de_Session();
+    $this->Establecer_Consultas();
+    $this->vista->Cargar_Vistas('reportes/historial_familiar');
 } 
 
 

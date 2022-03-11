@@ -559,7 +559,7 @@
         </li>
 
         <li class="nav-item">
-            <a href="javascript:void(0)" class="nav-link">
+            <a href="<?php echo constant('URL');?>Reportes/Historial_Familiar/" class="nav-link">
                 <i class="mdi mdi-account-multiple nav-icon"></i>
                 <p>
                     Generar Historial Familiar

@@ -1,9 +1,9 @@
 <?php
 
-class Reportes_Class extends Modelo
+class Reportes_Class extends Modelo 
 {
 
-    public function __construct()
+    public function __construct() 
     {
         parent::__construct();
     }    
@@ -11,7 +11,7 @@ class Reportes_Class extends Modelo
      public function Familia_Vivienda($id_familia) 
      {
 
-         $tabla            = "SELECT * FROM familia f, vivienda v, calles c, tipo_vivienda t, servicios s WHERE f.id_familia = $id_familia and v.id_calle = c.id_calle AND v.id_tipo_vivienda = t.id_tipo_vivienda AND v.id_vivienda = s.id_servicio";
+         $tabla            = "SELECT DISTINCT p.cedula_persona, f.*, fp.*, p.*, v.*, c.*, t.*, s.* FROM familia f, familia_personas fp, personas p, vivienda v, calles c, tipo_vivienda t, servicios s WHERE f.id_vivienda = v.id_vivienda AND f.id_familia = fp.id_familia AND p.cedula_persona = fp.cedula_persona AND v.id_calle = c.id_calle AND p.estado = 1 AND v.id_tipo_vivienda = t.id_tipo_vivienda AND v.id_servicio = s.id_servicio  AND f.id_familia = $id_familia ORDER BY `c`.`nombre_calle` ASC";
          $respuesta_arreglo = '';
          try {
              $datos = $this->conexion->prepare($tabla);
@@ -69,7 +69,7 @@ class Reportes_Class extends Modelo
      public function Poblacion_Edades() 
      {
 
-         $tabla            = "SELECT DISTINCT p.cedula_persona, TIMESTAMPDIFF(YEAR,p.fecha_nacimiento,CURDATE()) AS edad, p.primer_nombre, p.segundo_nombre, p.primer_apellido, p.segundo_apellido, p.genero, c.nombre_calle FROM familia f, familia_personas fp, personas p, vivienda v, calles c WHERE f.id_vivienda = v.id_vivienda AND f.id_familia = fp.id_familia AND p.cedula_persona = fp.cedula_persona AND v.id_calle = c.id_calle AND p.estado = 1 ORDER BY `c`.`nombre_calle` ASC";
+         $tabla            = "SELECT DISTINCT p.cedula_persona, fp.id_familia, TIMESTAMPDIFF(YEAR,p.fecha_nacimiento,CURDATE()) AS edad, p.primer_nombre, p.segundo_nombre, p.primer_apellido, p.segundo_apellido, p.genero, c.nombre_calle FROM familia f, familia_personas fp, personas p, vivienda v, calles c WHERE f.id_vivienda = v.id_vivienda AND f.id_familia = fp.id_familia AND p.cedula_persona = fp.cedula_persona AND v.id_calle = c.id_calle AND p.estado = 1 ORDER BY `c`.`nombre_calle`, edad ASC";
          $respuesta_arreglo = '';
          try {
              $datos = $this->conexion->prepare($tabla);
@@ -353,7 +353,7 @@ class Reportes_Class extends Modelo
      public function Jefes_Calle()
      {
 
-         $tabla            = "SELECT * FROM familia f, familia_personas fp, personas p,vivienda v,calles c WHERE f.id_vivienda = v.id_vivienda and f.id_familia = fp.id_familia and p.cedula_persona = fp.cedula_persona and v.id_calle = c.id_calle and p.jefe_familia = 1 ORDER BY `c`.`nombre_calle` ASC";
+         $tabla            = "SELECT DISTINCT fp.cedula_persona, f.*, fp.*,p.*,v.*,c.* FROM familia f, familia_personas fp, personas p, vivienda v, calles c WHERE f.id_vivienda = v.id_vivienda AND f.id_familia = fp.id_familia AND p.cedula_persona = fp.cedula_persona AND v.id_calle = c.id_calle AND p.jefe_familia = 1 ORDER BY `c`.`nombre_calle` ASC";
          $respuesta_arreglo = '';
          try {
              $datos = $this->conexion->prepare($tabla);

@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Generar Censos</h1> </div>
+                    <h1 class="m-0">Generar Historial Clinico</h1> </div>
                     <!-- /.col -->
                     
                     <!-- /.col -->
@@ -33,7 +33,7 @@
                             <div class="form-group row justify-content-center">
 
 
-                                <div class="col-md-6 mt-2">
+                                <div class="col-md-12 mt-2">
                                     <label for="familia">
                                         Familia 
                                     </label>
@@ -50,30 +50,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 mt-2">
-                                    <label for="familia">
-                                        Censo 
-                                    </label>
-                                    <div class="input-group">
-                                        <select class="custom-select" id="censos" name="censos">
-                                        <option> ... </option>
-
-                                        <option value="Reportes/Censo_Poblacional">
-                                            Censo Poblacional
-                                        </option>
-
-                                        <option value="Reportes/Reporte_Ninos">
-                                            Reporte de Niños
-                                        </option>
-                                    </select>
-                                    </div>
-                                </div>
-
-
                                 
-
-                                        
-            
                             </div>
                         </div>
                     </div>
@@ -99,6 +76,6 @@
 <script type="text/javascript">
     
     document.getElementById("imprimir").onclick=function(){
-       window.open(BASE_URL+document.getElementById("censos").value+"?id="+document.getElementById("familia").value);
+       window.open(BASE_URL+"Reportes/Historial_Clinico"+"?id="+document.getElementById("familia").value);
     }
 </script>

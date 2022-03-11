@@ -1,12 +1,14 @@
+
+  
 <?php
 // =============CONTROLADOR=========
-class Controlador extends Modelo 
+class Controlador 
 { 
 
     public function __construct()
     {
         $this->Cargar_Vista();
-        parent::__construct();
+        $this->conexion = new BASE_DATOS();
     }
 
     public function __GET($A)
@@ -24,7 +26,6 @@ class Controlador extends Modelo
         require_once $controlador;
 
         $this->controlador = new $nombre();
-        return $this->controlador;
     }
 
     public function Cargar_Modelo($model)
@@ -272,3 +273,4 @@ class Controlador extends Modelo
     }
 
 }
+

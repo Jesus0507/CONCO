@@ -87,16 +87,17 @@
                                     </tr>
                                     <tbody id="datos">
                                         <?php $cont = 1; ?>
-                                        <?php foreach ($this->jefes_familia as $key => $value): ?>
-                                            
+                                        <?php foreach ($this->jefes_familia as $key => $value): $contador=0; ?>
+                                            <?php foreach ($this->personas_familia as $key): ?>
+                                                <?php if ($value["id_familia"] == $key["id_familia"]): ?>
+                                                    <?php $contador++;?>
+                                                <?php endif ?>
+                                            <?php endforeach ?>
                                         <tr>
                                             <td><?php echo $cont++ ?></td>
                                             <td><?php echo $value["primer_nombre"]." ".$value["primer_apellido"] ?></td>
                                             <td><?php echo $value["cedula_persona"] ?></td>
-                                            <td><?php 
-                                                    $x[]=$value["cedula_persona"];
-                                                    echo count($x); 
-                                                    ?></td>
+                                            <td><?php echo $contador; ?></td>
                                             <td><?php echo $value["numero_casa"]; ?></td>
                                             <td></td>
                                         </tr>
