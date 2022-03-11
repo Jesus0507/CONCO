@@ -11,9 +11,122 @@
 </style>
 <title>Censo Poblacional</title>
 <!-- Contenido de la pagina -->
+<input type="hidden" value="<?php echo $_GET['id']; ?>" id='fam'>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
+  <script src="<?php echo constant('URL')?>config/plugins/jquery/jquery.min.js"></script>
   <script>
+    const BASE_URL = 'http://localhost/dashboard/www/CONCO%20V2/';
+  $.ajax({
+    type:"POST",
+    url:BASE_URL+"Reportes/info_censo_poblacional",
+    data:{"familia":document.getElementById("fam").value}
+  }).done(function(result){
+     result=JSON.parse(result);
+     
+     cargar_tipo_vivienda(result['tipo_vivienda']);
+     cargar_condicion_vivienda(result['vivienda']);
+     cargar_condicion_ocupacion(result['familia']);
+     cargar_tipo_techo(result['techo']);
+
+
+
+
+  });
+  function cargar_tipo_techo(array){
+    
+    for(var i=0;i<array.length;i++){
+      switch(array[i]['id_tipo_techo']){
+      case "Platabanda":
+        document.getElementById("platabanda").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      break;
+      case "Láminas asfálticas":
+        document.getElementById("laminas_asfalticas").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      break;
+      case "Tela":
+        document.getElementById("tela").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      break;
+      case "Asbesto y similares":
+        document.getElementById("asbesto").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: -160px'>X</div>";
+      break;
+      case "Láminas de policloruro de vinilo PVC":
+        document.getElementById("laminas_pvc").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      break;
+      case "Láminas metálicas (zinc , aluminio,similares)":
+        document.getElementById("laminas_metalicas").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+        break;
+      case "Latón, tablas o similares":
+        document.getElementById("laton_similares").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      
+        break;
+    }
+
+    }
+    
+  }
+
+  function cargar_condicion_ocupacion(array){
+    console.log(array);
+    switch(array[0]['condicion_ocupacion']){
+      case "Alquilada":
+        document.getElementById("alquilada").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      break;
+      case "Prestada":
+        document.getElementById("prestada").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      break;
+      case "Propia pagada":
+        document.getElementById("propia_pagada").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      break;
+      case "Adjudicada":
+        document.getElementById("propia_pagandose").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      break;
+      case "Invadida":
+        document.getElementById("invadida").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      break;
+      default:
+      document.getElementById("otro_cond_ocupacion").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      document.getElementById("especifico_cond_ocupacion").innerHTML="<u>"+array[0]["condicion_ocupacion"]+"</u>";
+      break;
+    }
+  }
+
+  function cargar_condicion_vivienda(array){
+    console.log(array);
+    switch(array[0]['condicion']){
+      case "Buena":
+        document.getElementById("buena").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      break;
+      case "Mala":
+        document.getElementById("mala").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      break;
+      case "Regular":
+        document.getElementById("regular").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      break;
+    }
+  }
+
+
+  function cargar_tipo_vivienda(array){
+    console.log(array);
+    switch(array[0]['nombre_tipo_vivienda']){
+      case "Casa":
+        document.getElementById("casa").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      break;
+      case "Casa de vecindad":
+        document.getElementById("casa_vecindad").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      break;
+      case "Rancho":
+        document.getElementById("rancho").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      break;
+      case "Refugio":
+        document.getElementById("refugio").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      break;
+      default:
+      document.getElementById("otra").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      document.getElementById("especifico_tipo_casa").innerHTML="<u>"+array[0]["nombre_tipo_vivienda"]+"</u>";
+      break;
+    }
+  }
     /* window.blur();
              window.print();
              window.close(); */
@@ -132,7 +245,7 @@
                     <tr>
                       <td>Otra</td>
                       <td>
-                        <span id='casa_vecindad'>
+                        <span id='otra'>
                           <div style='border-style:solid;height: 20px;width:20px'></div>
                         </span>
                       </td>
@@ -157,7 +270,7 @@
                     <tr>
                       <td>Mala</td>
                       <td>
-                        <span id='Mala'>
+                        <span id='mala'>
                           <div style='border-style:solid;height: 20px;width:20px'></div>
                         </span>
                       </td>
@@ -250,7 +363,7 @@
                     <td>
                     <td style="position: relative;left: -180px;"> Laminas Asfalticas </td>
                     <td>
-                      <span id='laminas'>
+                      <span id='laminas_asfalticas'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -160px'></div>
                       </span>
                     </td>
@@ -270,14 +383,14 @@
                   <tr style="color: red;font-size: 13px;">
                     <td style="position: relative;left: 20px;"> Tela </td>
                     <td>
-                      <span id='platabanda'>
+                      <span id='tela'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -110px'></div>
                       </span>
                     </td>
                     <td>
                     <td style="position: relative;left: -180px;"> Asbesto y Similares </td>
                     <td>
-                      <span id='laminas'>
+                      <span id='asbesto'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -160px'></div>
                       </span>
                     </td>
@@ -297,7 +410,7 @@
                   <tr style="color: red;font-size: 13px;">
                     <td style="position: relative;left:20px;"> Laminas Metalicas (zinc, aluminio ,similares) </td>
                     <td>
-                      <span id='platabanda'>
+                      <span id='laminas_metalicas'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 58px'></div>
                       </span>
                     </td>
@@ -320,7 +433,7 @@
                   <tr style="color: red;font-size: 13px;">
                     <td style="position: relative;left:20px;"> Laminas Policluro de Vinilo (pcv) </td>
                     <td>
-                      <span id='platabanda'>
+                      <span id='laminas_pvc'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 58px'></div>
                       </span>
                     </td>
@@ -343,7 +456,7 @@
                   <tr style="color: red;font-size: 13px;">
                     <td style="position: relative;left:20px;"> Otras Laton o Similares </td>
                     <td>
-                      <span id='platabanda'>
+                      <span id='laton_similares'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 58px'></div>
                       </span>
                     </td>

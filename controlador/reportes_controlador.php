@@ -691,5 +691,34 @@ public function Historial_Familiar()
     $this->vista->Cargar_Vistas('reportes/historial_familiar');
 } 
 
+public function info_censo_poblacional(){
+   $familias_all=$this->Consultar_Tabla("familia",1,"id_familia");
+   $id="";
+   foreach($familias_all as $fall){
+       if(strtolower($fall['nombre_familia'])==strtolower($_POST['familia'])){
+          $id=$fall['id_familia'];
+       }
+   }
+   $familia=$this->Consultar_Columna("familia","id_familia",$id);
+   $vivienda=$this->Consultar_Columna("vivienda","id_vivienda",$familia[0]['id_vivienda']);
+   $tipo_vivienda=$this->Consultar_Columna("tipo_vivienda","id_tipo_vivienda",$vivienda[0]['id_tipo_vivienda']);
+   $techo=$this->Consultar_Columna("vivienda_tipo_techo","id_vivienda",$vivienda[0]['id_vivienda']);
+   for($i=0;$i<count($techo);$i++){
+       $t=$this->Consultar_Columna("tipo_techo","id_tipo_techo",$techo[$i]['id_tipo_techo']);
+       $techo[$i]['id_tipo_techo']=$t[0]['techo'];
+
+   }
+
+
+   $datos=[
+       "tipo_vivienda"=>$tipo_vivienda,
+       "vivienda"=>$vivienda,
+       "familia"=>$familia,
+       "techo"=>$techo
+   ];
+
+   echo json_encode($datos);
+}
+
 
 }
