@@ -329,7 +329,28 @@
                 <span class="fa fa-plus-circle" style='font-size:22px;cursor:pointer' title="Agregar bono" id="add_bono"></span>
                   </td></tr></table>
                 </td>
-                <td style='width:50%'>Misiones</td>
+                <td style='width:50%'>
+                <table style='width:95%'>
+                <tr>
+                  <td>Misiones</td>
+                  <td style="width:50%;">
+                  <input type="text" id='mision' class="form-control" style="width:100%;height:20px" list='lista_misiones'>
+                  <datalist id='lista_misiones'>
+                    <?php foreach($this->misiones as $m){ ?>
+                      <option value='<?php echo $m['nombre_mision']; ?>'></option>
+                      <?php } ?>
+                  </datalist>                       
+                </td>
+                  <td style="width:80%;"><select  id='recibe' style="width:100%;height:20px">
+                  <option value='vacio'>Recibe actualmente</option>
+                  <option value='1'>Sí</option>
+                  <option value='0'>No</option>
+              </select>
+                  </td>
+                  <td><input type="date" style='display:none' id='fecha_recibe' style="width:50%;height:20px"></td>
+                  <td> <span class="fa fa-plus-circle" style='font-size:22px;cursor:pointer' title="Agregar misión" id="add_mision"></span></td>
+                </tr></table>
+              </td>
 
               </tr>
 

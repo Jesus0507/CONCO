@@ -173,6 +173,7 @@ public function Consultas()
   $this->vista->condiciones=$this->modelo->get_condiciones();
   $this->vista->organizaciones=$this->modelo->get_organizaciones();
   $this->vista->bonos=$this->Consultar_Tabla("bonos",1,"id_bono");
+  $this->vista->misiones=$this->Consultar_Tabla("misiones",1,"id_mision");
   $this->Seguridad_de_Session();
   $this->vista->Cargar_Vistas('personas/consultar');
 }
@@ -925,6 +926,72 @@ public function agg_bono(){
   else{
     echo $retornar;
   }
+
+  
+}
+
+public function eliminar_mision(){
+  $id=$_POST['id_mision'];
+  echo $this->Eliminar_Tablas("persona_misiones","id_persona_mision",$id);
+}
+
+
+public function get_misiones(){
+  $misiones=$this->Consultar_Columna("persona_misiones","cedula_persona",$_POST['cedula_persona']);
+  for($i=0;$i<count($misiones);$i++){
+    $mis=$this->Consultar_Columna("misiones","id_mision",$misiones[$i]['id_mision']);
+    $misiones[$i]['nombre_mision']=$mis[0]['nombre_mision'];
+  }
+  echo json_encode($misiones);
+}
+
+
+public function add_mision(){
+  $all_misiones=$this->Consultar_Tabla("misiones",1,"id_mision");
+  $misiones_persona=$this->Consultar_Columna("persona_misiones","cedula_persona",$_POST['cedula']);
+  $existe=false;
+  $retornar=[];
+  foreach($all_misiones as $a){
+    if(strtolower($a['nombre_mision'])==strtolower($_POST['mision']['mision'])){
+      $existe=$a['id_mision'];
+    }
+  }
+
+  if($existe==false){
+    $this->Registrar_Tablas("misiones","nombre_mision",$_POST['mision']['mision']);
+    $id=$this->Ultimo_Ingresado("misiones","id_mision");
+    $this->modelo->Registrar_persona_mision([
+      "cedula_persona"=>$_POST['cedula'],
+      "id_mision"=>$id[0]['MAX(id_mision)'],
+      "recibe_actualmente"=>$_POST['mision']['recibe'],
+      "fecha"=>$_POST['mision']['fecha']
+    ]);
+    $retornar=1;
+  }
+  else{
+    $registrado=false;
+     foreach($misiones_persona as $mp){
+       if($mp['id_mision']==$existe){
+          $registrado=true;
+       }
+     }
+
+     if($registrado==false){
+        $this->modelo->Registrar_persona_mision([
+          "cedula_persona"=>$_POST['cedula'],
+          "id_mision"=>$existe,
+          "recibe_actualmente"=>$_POST['mision']['recibe'],
+          "fecha"=>$_POST['mision']['fecha']
+        ]);
+
+      $retornar=1;
+     }
+     else{
+       $retornar=0;
+     }
+  }
+
+  echo $retornar;
 
   
 }

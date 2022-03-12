@@ -62,34 +62,7 @@
         const BASE_URL = 'http://localhost/dashboard/www/CONCO%20V2/';
         typeof BASE_URL;
 
-        $(document).ready(function () {
-            $("form").attr("autocomplete", "off");
-            $('.no-simbolos').on('input', function() {
-        this.value = this.value.replace(/^[!@#$%^&*()_=\[\]{};':"\\|,.<>\/?+-]*$/, '');
-    });
-        });
     </script>
 
-
-    <script type="text/javascript">
-        
-        function validacion_inputs_generica(input,condicion,validador,mensaje){
-                   
-                   if(input.value==condicion){
-                    input.style.borderColor='red';
-                    validador.innerHTML=mensaje;
-                   }
-                   else{
-                    input.style.borderColor='';
-                    validador.innerHTML='';
-                   }
-
-        }  
-
-
-
-      
-
-
-    </script>
+    <script src="<?php echo constant('URL')?>config/js/news/validacion-generica.js"></script>
 </head>

@@ -148,7 +148,9 @@ function ver_datos(
   } else {
     var texto = "";
     for (var i = 0; i < misiones_info.length; i++) {
-      texto += " - " + misiones_info[i]["nombre_mision"] + "<br><hr>";
+      var recibe="";
+      misiones_info[i]['recibe_actualmente']==1?recibe="Recibe actualmente":recibe=misiones_info[i]['fecha'];
+      texto += " - " + misiones_info[i]["nombre_mision"] + " ("+recibe+")<br><hr>";
     }
 
     tabla6 +=
@@ -307,6 +309,7 @@ var vproyectos = document.getElementById("proyectos");
 var btn_guardar = document.getElementById("guardar_cambios");
 var inf_persona = new Object();
 var add_bono=document.getElementById("add_bono");
+var add_mision=document.getElementById("add_mision");
 
 function editar_datos(
   persona,
@@ -405,8 +408,9 @@ function editar_datos(
   } else {
     vmisiones.innerHTML = "";
     for (var i = 0; i < misiones_info.length; i++) {
-      vmisiones.innerHTML +=
-        " - " + misiones_info[i]["nombre_mision"] + "<br><hr>";
+      var recibe="";
+      misiones_info[i]['recibe_actualmente']==1?recibe="Recibe actualmente":recibe=misiones_info[i]['fecha'];
+      vmisiones.innerHTML += " <table style='width:95%'><tr><td>- " + misiones_info[i]["nombre_mision"] + "  ("+recibe+")</td><td style='text-align:right'><span onclick='borrar_mision("+misiones_info[i]['id_persona_mision']+",`"+persona_info['cedula_persona']+"`)' class='iconDelete fa fa-times-circle' title='Eliminar misión' style='font-size:22px'></span></td></tr></table><br><hr>";
     }
   }
 
@@ -840,21 +844,117 @@ document.getElementById("bono_nuevo").onkeyup=function(){
   }
 }
 
-// function cargar_misiones(cedula_persona){
-// $.ajax({
-//   type:"POST",
-//   url:BASE_URL+"Personas/get_misiones",
-//   data:{"cedula_persona":cedula_persona}
-// }).done(function(result){
-//   console.log(result);
-//   if(result!=0){
-//     vmisiones.innerHTML = "";
-//     for (var i = 0; i < result.length; i++) {
-//       vmisiones.innerHTML += " <table style='width:95%'><tr><td>- " + result[i]["nombre_mision"] + "</td><td style='text-align:right'><span onclick='borrar_mision("+result[i]['id_persona_mision']+",`"+cedula_persona+"`)' class='iconDelete fa fa-times-circle' title='Eliminar misión' style='font-size:22px'></span></td></tr></table><br><hr>";
-//     }
-//    }
-//    else{
-//      vmisiones.innerHTML="No aplica";
-//    }
-// })
-// }
+function cargar_misiones(cedula_persona){
+$.ajax({
+  type:"POST",
+  url:BASE_URL+"Personas/get_misiones",
+  data:{"cedula_persona":cedula_persona}
+}).done(function(result){
+  console.log(result);
+  if(result!=0){
+    result=JSON.parse(result);
+    vmisiones.innerHTML = "";
+    for (var i = 0; i < result.length; i++) {
+      var recibe="";
+      result[i]['recibe_actualmente']==1?recibe="Recibe actualmente":recibe=result[i]['fecha'];
+      vmisiones.innerHTML += " <table style='width:95%'><tr><td>- " + result[i]["nombre_mision"] + "  ("+recibe+")</td><td style='text-align:right'><span onclick='borrar_mision("+result[i]['id_persona_mision']+",`"+cedula_persona+"`)' class='iconDelete fa fa-times-circle' title='Eliminar misión' style='font-size:22px'></span></td></tr></table><br><hr>";
+    }
+   }
+   else{
+     vmisiones.innerHTML="No aplica";
+   }
+})
+}
+
+
+function borrar_mision(id,cedula_param){
+  swal({
+    type:"warning",
+    title:"¿Está seguro?",
+    text:"Está por eliminar esta misión relacionada con la persona, ¿desea continuar?",
+    showCancelButton:true,
+    confirmButtonText:"Si, continuar",
+    cancelButtonText:"No"
+  },function(isConfirm){
+    if(isConfirm){
+      $.ajax({
+        type:"POST",
+        url:BASE_URL+"Personas/eliminar_mision",
+        data:{"id_mision":id,"cedula_param":cedula_param}
+      }).done(function(result){
+        console.log(result);
+          cargar_misiones(cedula_param);
+      })
+    }
+  });
+  }
+
+  add_mision.onclick=function(){
+    if(document.getElementById("mision").value==""){
+        swal({
+          type:"error",
+          title:"Error",
+          text:"Debe ingresar la información de la misión",
+          timer:2000,
+          showConfirmButton:false
+        });
+        setTimeout(function(){
+          document.getElementById("mision").style.borderColor="red";
+          document.getElementById("mision").focus();
+        },2000);
+    }
+    else{
+      document.getElementById("mision").style.borderColor="";
+      if(document.getElementById("recibe").value=="vacio" || document.getElementById("recibe").value==0 && document.getElementById("fecha_recibe").value==""){
+        swal({
+          type:"error",
+          title:"Error",
+          text:"Debe ingresar la información de la misión",
+          timer:2000,
+          showConfirmButton:false
+        });
+        setTimeout(function(){
+          document.getElementById("recibe").style.borderColor=document.getElementById("fecha_recibe").style.borderColor="red";
+        },2000);
+      }
+      else{
+        document.getElementById("recibe").style.borderColor=document.getElementById("fecha_recibe").style.borderColor="";
+        var mision_data=new Object();
+        mision_data['mision']=document.getElementById("mision").value;
+        mision_data['recibe']=document.getElementById("recibe").value;
+        mision_data['fecha']=document.getElementById("fecha_recibe").value;
+        $.ajax({
+           type:"POST",
+           url:BASE_URL+"Personas/add_mision",
+           data:{"cedula":inf_persona['cedula_persona'],"mision":mision_data}
+        }).done(function(result){
+          console.log(result);
+          if(result==0){
+            swal({
+              type:"error",
+              title:"Error",
+              text:"Ya esta mision se encuentra relacionada a esta persona",
+              timer:2000,
+              showConfirmButton:false
+            });
+          }
+          else{
+            cargar_misiones(inf_persona['cedula_persona']);
+
+          }
+          document.getElementById("mision").value="";
+          document.getElementById("recibe").value="vacio";
+          document.getElementById("fecha_recibe").value="";
+          document.getElementById("fecha_recibe").style.display='none';
+        });
+      }
+    }
+  }
+  document.getElementById("recibe").onchange=function(){
+    if(document.getElementById("recibe").value=="0"){
+      document.getElementById("fecha_recibe").style.display="";
+    }
+    else{
+      document.getElementById("fecha_recibe").style.display="none";
+    }
+  }
