@@ -624,6 +624,7 @@ public function modificar_persona(){
   $datos_persona=$_POST["datos_persona"];
   $editado=$this->modelo->Actualizar($datos_persona);
 
+
   if($editado){
   $this->editar_comunidad_indigena($datos_persona);
   $this->editar_ocupacion($datos_persona);
@@ -631,6 +632,8 @@ public function modificar_persona(){
   $this->editar_org_politica($datos_persona);
   $this->editar_transporte($datos_persona);
   }
+
+  echo $editado;
 }
 
 

@@ -675,7 +675,10 @@ function editar_persona() {
     url: BASE_URL + "Personas/modificar_persona",
     data: { datos_persona: inf_persona },
   }).done(function (result) {
-    console.log(result);
+    if(result==1){
+      setTimeout(function(){$('#example1').DataTable().clear().destroy();
+      cargar_tabla_personas();$("#edit_persona").modal("hide");},300);
+    }
   });
 }
 
@@ -1090,4 +1093,7 @@ function borrar_mision(id,cedula_param){
 
       }
     }
+
+
+    
     
