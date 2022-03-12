@@ -703,18 +703,35 @@ public function info_censo_poblacional(){
    $vivienda=$this->Consultar_Columna("vivienda","id_vivienda",$familia[0]['id_vivienda']);
    $tipo_vivienda=$this->Consultar_Columna("tipo_vivienda","id_tipo_vivienda",$vivienda[0]['id_tipo_vivienda']);
    $techo=$this->Consultar_Columna("vivienda_tipo_techo","id_vivienda",$vivienda[0]['id_vivienda']);
+   $pared=$this->Consultar_Columna("vivienda_tipo_pared","id_vivienda",$vivienda[0]['id_vivienda']);
+   $piso=$this->Consultar_Columna("vivienda_tipo_piso","id_vivienda",$vivienda[0]['id_vivienda']);
+      
    for($i=0;$i<count($techo);$i++){
        $t=$this->Consultar_Columna("tipo_techo","id_tipo_techo",$techo[$i]['id_tipo_techo']);
        $techo[$i]['id_tipo_techo']=$t[0]['techo'];
 
    }
 
+   for($i=0;$i<count($pared);$i++){
+    $p=$this->Consultar_Columna("tipo_pared","id_tipo_pared",$pared[$i]['id_tipo_pared']);
+    $pared[$i]['id_tipo_pared']=$p[0]['pared'];
+
+}
+
+for($i=0;$i<count($piso);$i++){
+    $p=$this->Consultar_Columna("tipo_piso","id_tipo_piso",$piso[$i]['id_tipo_piso']);
+    $piso[$i]['id_tipo_piso']=$p[0]['piso'];
+
+}
+
 
    $datos=[
        "tipo_vivienda"=>$tipo_vivienda,
        "vivienda"=>$vivienda,
        "familia"=>$familia,
-       "techo"=>$techo
+       "techo"=>$techo,
+       "pared"=>$pared,
+       "piso"=>$piso
    ];
 
    echo json_encode($datos);

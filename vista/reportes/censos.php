@@ -41,11 +41,12 @@
                                         <input list="cedula" id="familia" name="datos[familia]"
                                         class="form-control " placeholder="Nombre Familia" />
                                         <datalist id="cedula">
-                                            <?php foreach($this->jefes_familia as $familia){   ?>
+                                            <?php foreach($this->jefes_familia as $familia){  
+                                                if($familia['estado']==1){ ?>
                                                 <option value="<?php echo $familia["nombre_familia"];?>">
                                                     
                                                 </option>
-                                            <?php  }   ?>
+                                            <?php  }  } ?>
                                         </datalist>
                                     </div>
                                 </div>

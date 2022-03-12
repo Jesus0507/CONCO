@@ -28,35 +28,94 @@
      cargar_condicion_vivienda(result['vivienda']);
      cargar_condicion_ocupacion(result['familia']);
      cargar_tipo_techo(result['techo']);
+     cargar_tipo_pared(result['pared']);
+     cargar_tipo_piso(result['piso']);
 
 
 
 
   });
+  function cargar_tipo_piso(array){
+    
+    for(var i=0;i<array.length;i++){
+      switch(array[i]['id_tipo_piso']){
+      case "Cemento":
+        document.getElementById("cemento").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'>X</div>";
+      break;
+      case "Tierra":
+        document.getElementById("tierra").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'>X</div>";
+      break;
+      case "Tablas":
+        document.getElementById("tablas").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'>X</div>";
+      break;
+      case "Cerámicas":
+        document.getElementById("ceramica").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'>X</div>";
+      break;
+      default:
+      document.getElementById("otro_piso").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'>X</div>";
+      break;
+    }
+
+    }
+    
+  }
+  
+  function cargar_tipo_pared(array){
+    
+    for(var i=0;i<array.length;i++){
+      switch(array[i]['id_tipo_pared']){
+      case "Bloque, ladrillo o adobe frisado":
+        document.getElementById("bloque_frisado").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -70px'>X</div>";
+      break;
+      case "Bloque, ladrillo o adobe sin frisar":
+        document.getElementById("bloque_sin_frisar").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -70px'>X</div>";
+      break;
+      case "Concreto":
+        document.getElementById("concreto").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 128px'>X</div>";
+      break;
+      case "Laminas Policluro de vinilo PVC":
+        document.getElementById("lamin_PVC").innerHTML="   <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 128px'>X</div>";
+      break;
+      case "Tapia o bahareque":
+        document.getElementById("tapia").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 128px'>X</div>";
+      break;
+      case "Troncos o piedras":
+        document.getElementById("troncos").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+        break;
+      case "Zinc, cartón, tablas o similar":
+        document.getElementById("zinc").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+      
+        break;
+    }
+
+    }
+    
+  }
+
   function cargar_tipo_techo(array){
     
     for(var i=0;i<array.length;i++){
       switch(array[i]['id_tipo_techo']){
       case "Platabanda":
-        document.getElementById("platabanda").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+        document.getElementById("platabanda").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -110px'>X</div>";
       break;
       case "Láminas asfálticas":
-        document.getElementById("laminas_asfalticas").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+        document.getElementById("laminas_asfalticas").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -160px'>X</div>";
       break;
       case "Tela":
-        document.getElementById("tela").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+        document.getElementById("tela").innerHTML="  <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -110px'>X</div>";
       break;
       case "Asbesto y similares":
         document.getElementById("asbesto").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: -160px'>X</div>";
       break;
       case "Láminas de policloruro de vinilo PVC":
-        document.getElementById("laminas_pvc").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+        document.getElementById("laminas_pvc").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 58px'>X</div>";
       break;
       case "Láminas metálicas (zinc , aluminio,similares)":
-        document.getElementById("laminas_metalicas").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+        document.getElementById("laminas_metalicas").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 58px'>X</div>";
         break;
       case "Latón, tablas o similares":
-        document.getElementById("laton_similares").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+        document.getElementById("laton_similares").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 58px'>X</div>";
       
         break;
     }
@@ -369,13 +428,13 @@
                     </td>
                     <td style="position: relative;left: -100px;"> Bloque Ladrillo o Adobe Frizado </td>
                     <td>
-                      <span id='laminas'>
+                      <span id='bloque_frisado'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -70px'></div>
                       </span>
                     </td>
                     <td style="position: relative;left: 0px;"> Cemento </td>
                     <td>
-                      <span id='laminas'>
+                      <span id='cemento'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'></div>
                       </span>
                     </td>
@@ -396,13 +455,13 @@
                     </td>
                     <td style="position: relative;left: -100px;"> Bloque Ladrillo o Adobe sin Frisar </td>
                     <td>
-                      <span id='laminas'>
+                      <span id='bloque_sin_frisar'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -70px'></div>
                       </span>
                     </td>
                     <td style="position: relative;left: 0px;"> Tierra </td>
                     <td>
-                      <span id='laminas'>
+                      <span id='tierra'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'></div>
                       </span>
                     </td>
@@ -417,15 +476,15 @@
                     <td>
                     <td style="position: relative;left: 160px;"> Concreto </td>
                     <td>
-                      <span id='laminas'>
+                      <span id='concreto'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 128px'></div>
                       </span>
                     </td>
                     <td style="position: relative;left: -100px;"></td>
                     <td></td>
-                    <td style="position: relative;left: 0px;"> Tierra </td>
+                    <td style="position: relative;left: 0px;"> Tablas </td>
                     <td>
-                      <span id='laminas'>
+                      <span id='tablas'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'></div>
                       </span>
                     </td>
@@ -440,7 +499,7 @@
                     <td>
                     <td style="position: relative;left: 60px;"> Laminas Policluro de Vinilo (pcv) </td>
                     <td>
-                      <span id='laminas'>
+                      <span id='lamin_PVC'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 128px'></div>
                       </span>
                     </td>
@@ -448,7 +507,7 @@
                     <td></td>
                     <td style="position: relative;left: 0px;"> Ceramica o Similares </td>
                     <td>
-                      <span id='laminas'>
+                      <span id='ceramica'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'></div>
                       </span>
                     </td>
@@ -463,7 +522,7 @@
                     <td>
                     <td style="position: relative;left: 60px;"> Tapia o Bahareque </td>
                     <td>
-                      <span id='laminas'>
+                      <span id='tapia'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 128px'></div>
                       </span>
                     </td>
@@ -471,7 +530,7 @@
                     <td></td>
                     <td style="position: relative;left: 0px;"> Otros </td>
                     <td>
-                      <span id='laminas'>
+                      <span id='otro_piso'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'></div>
                       </span>
                     </td>
@@ -482,7 +541,7 @@
                     <td>
                     <td style="position: relative;left: 60px;"> Troncos o Piedras </td>
                     <td>
-                      <span id='laminas'>
+                      <span id='troncos'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 128px'></div>
                       </span>
                     </td>
@@ -497,7 +556,7 @@
                     <td>
                     <td style="position: relative;left: 60px;"> Otras (zinc,carton,tablas) </td>
                     <td>
-                      <span id='laminas'>
+                      <span id='zinc'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 128px'></div>
                       </span>
                     </td>
@@ -561,7 +620,7 @@
                           </span>
                         </td>
                         <td style="position: relative;left: -80px;">
-                          <h3>4</h3>
+                          <h3 id='cant_habitaciones'>4</h3>
                         </td>
                       </tr>
                       <tr style="color: red;font-size: 13px;">

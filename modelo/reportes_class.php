@@ -353,7 +353,7 @@ class Reportes_Class extends Modelo
      public function Jefes_Calle()
      {
 
-         $tabla            = "SELECT DISTINCT fp.cedula_persona, f.*, fp.*,p.*,v.*,c.* FROM familia f, familia_personas fp, personas p, vivienda v, calles c WHERE f.id_vivienda = v.id_vivienda AND f.id_familia = fp.id_familia AND p.cedula_persona = fp.cedula_persona AND v.id_calle = c.id_calle AND p.jefe_familia = 1 ORDER BY `c`.`nombre_calle` ASC";
+         $tabla            = "SELECT DISTINCT  f.*, fp.*,p.*,v.*,c.* FROM familia f, familia_personas fp, personas p, vivienda v, calles c WHERE f.estado=1 AND f.id_vivienda = v.id_vivienda AND f.id_familia = fp.id_familia AND p.cedula_persona = fp.cedula_persona AND v.id_calle = c.id_calle AND p.jefe_familia = 1  ORDER BY `c`.`nombre_calle` ASC";
          $respuesta_arreglo = '';
          try {
              $datos = $this->conexion->prepare($tabla);
