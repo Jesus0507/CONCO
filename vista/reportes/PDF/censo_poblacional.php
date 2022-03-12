@@ -14,178 +14,291 @@
 <input type="hidden" value="<?php echo $_GET['id']; ?>" id='fam'>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
-  <script src="<?php echo constant('URL')?>config/plugins/jquery/jquery.min.js"></script>
+  <script src="<?php echo constant('URL') ?>config/plugins/jquery/jquery.min.js"></script>
   <script>
     const BASE_URL = 'http://localhost/dashboard/www/CONCO%20V2/';
-  $.ajax({
-    type:"POST",
-    url:BASE_URL+"Reportes/info_censo_poblacional",
-    data:{"familia":document.getElementById("fam").value}
-  }).done(function(result){
-     result=JSON.parse(result);
-     
-     cargar_tipo_vivienda(result['tipo_vivienda']);
-     cargar_condicion_vivienda(result['vivienda']);
-     cargar_condicion_ocupacion(result['familia']);
-     cargar_tipo_techo(result['techo']);
-     cargar_tipo_pared(result['pared']);
-     cargar_tipo_piso(result['piso']);
+    $.ajax({
+      type: "POST",
+      url: BASE_URL + "Reportes/info_censo_poblacional",
+      data: {
+        "familia": document.getElementById("fam").value
+      }
+    }).done(function(result) {
+      result = JSON.parse(result);
+
+      cargar_tipo_vivienda(result['tipo_vivienda']);
+      cargar_condicion_vivienda(result['vivienda']);
+      cargar_condicion_ocupacion(result['familia']);
+      cargar_tipo_techo(result['techo']);
+      cargar_tipo_pared(result['pared']);
+      cargar_tipo_piso(result['piso']);
+      cargar_servicios(result['servicios']);
+      cargar_servicio_gas(result['gas']);
+      document.getElementById("cantidad_habitaciones").innerHTML = result['vivienda'][0]['cantidad_habitaciones'];
+      if(result['vivienda'][0]['animales_domesticos']==1){
+        document.getElementById("animales").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -230px'>X</div>";
+      }
+      else{
+        document.getElementById("no_animales").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: -230px'>X</div>";
+      }
+
+      if(result['vivienda'][0]['insectos_roedores']==1){
+        document.getElementById("plagas").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: -170px'>X</div>";
+      }
+      else{
+        document.getElementById("no_plagas").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: -170px'>X</div>";
+      }
 
 
 
+    });
 
-  });
-  function cargar_tipo_piso(array){
-    
-    for(var i=0;i<array.length;i++){
-      switch(array[i]['id_tipo_piso']){
-      case "Cemento":
-        document.getElementById("cemento").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'>X</div>";
-      break;
-      case "Tierra":
-        document.getElementById("tierra").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'>X</div>";
-      break;
-      case "Tablas":
-        document.getElementById("tablas").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'>X</div>";
-      break;
-      case "Cerámicas":
-        document.getElementById("ceramica").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'>X</div>";
-      break;
-      default:
-      document.getElementById("otro_piso").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'>X</div>";
-      break;
-    }
+    function cargar_servicio_gas(array) {
 
-    }
-    
-  }
-  
-  function cargar_tipo_pared(array){
-    
-    for(var i=0;i<array.length;i++){
-      switch(array[i]['id_tipo_pared']){
-      case "Bloque, ladrillo o adobe frisado":
-        document.getElementById("bloque_frisado").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -70px'>X</div>";
+for (var i = 0; i < array.length; i++) {
+  switch (array[i]['tipo_bombona']) {
+    case "10 Kg":
+      document.getElementById("10_kg").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -130px'>X</div>";
       break;
-      case "Bloque, ladrillo o adobe sin frisar":
-        document.getElementById("bloque_sin_frisar").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -70px'>X</div>";
+    case "18 Kg":
+      document.getElementById("18_kg").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -290px'>X</div>";
       break;
-      case "Concreto":
-        document.getElementById("concreto").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 128px'>X</div>";
+    case "43 Kg":
+      document.getElementById("43_kg").innerHTML="  <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -270px'>X</div>";
       break;
-      case "Laminas Policluro de vinilo PVC":
-        document.getElementById("lamin_PVC").innerHTML="   <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 128px'>X</div>";
-      break;
-      case "Tapia o bahareque":
-        document.getElementById("tapia").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 128px'>X</div>";
-      break;
-      case "Troncos o piedras":
-        document.getElementById("troncos").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
-        break;
-      case "Zinc, cartón, tablas o similar":
-        document.getElementById("zinc").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
-      
-        break;
-    }
-
-    }
-    
   }
 
-  function cargar_tipo_techo(array){
-    
-    for(var i=0;i<array.length;i++){
-      switch(array[i]['id_tipo_techo']){
-      case "Platabanda":
-        document.getElementById("platabanda").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -110px'>X</div>";
+  switch (array[i]['dias_duracion']) {
+    case 7:
+      document.getElementById("7_dias").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: -220px'>X</div>";
       break;
-      case "Láminas asfálticas":
-        document.getElementById("laminas_asfalticas").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -160px'>X</div>";
+    case 15:
+      document.getElementById("15_dias").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: -200px'>X</div>";
       break;
-      case "Tela":
-        document.getElementById("tela").innerHTML="  <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -110px'>X</div>";
+    case 30:
+      document.getElementById("30_dias").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: -180px'>X</div>";
       break;
-      case "Asbesto y similares":
-        document.getElementById("asbesto").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: -160px'>X</div>";
-      break;
-      case "Láminas de policloruro de vinilo PVC":
-        document.getElementById("laminas_pvc").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 58px'>X</div>";
-      break;
-      case "Láminas metálicas (zinc , aluminio,similares)":
-        document.getElementById("laminas_metalicas").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 58px'>X</div>";
-        break;
-      case "Latón, tablas o similares":
-        document.getElementById("laton_similares").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 58px'>X</div>";
-      
-        break;
-    }
-
-    }
-    
   }
 
-  function cargar_condicion_ocupacion(array){
-    console.log(array);
-    switch(array[0]['condicion_ocupacion']){
-      case "Alquilada":
-        document.getElementById("alquilada").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+  switch (array[i]['servicio']) {
+    case "PDV Comunal":
+      document.getElementById("pdv_comunal").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: -160px'>X</div>";
       break;
-      case "Prestada":
-        document.getElementById("prestada").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+
+    default:
+    document.getElementById("otro_gas").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -150px'>X</div>";
+    document.getElementById("gas_especifico").innerHTML="<u>"+array[i]['servicio']+"</u>";
       break;
-      case "Propia pagada":
-        document.getElementById("propia_pagada").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
-      break;
-      case "Adjudicada":
-        document.getElementById("propia_pagandose").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
-      break;
-      case "Invadida":
-        document.getElementById("invadida").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
-      break;
-      default:
-      document.getElementById("otro_cond_ocupacion").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
-      document.getElementById("especifico_cond_ocupacion").innerHTML="<u>"+array[0]["condicion_ocupacion"]+"</u>";
-      break;
-    }
+
   }
 
-  function cargar_condicion_vivienda(array){
-    console.log(array);
-    switch(array[0]['condicion']){
-      case "Buena":
-        document.getElementById("buena").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
-      break;
-      case "Mala":
-        document.getElementById("mala").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
-      break;
-      case "Regular":
-        document.getElementById("regular").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
-      break;
+}
+
+}
+
+    function cargar_servicios(array) {
+
+      for (var i = 0; i < array.length; i++) {
+        switch (array[i]['agua_consumo']) {
+          case "Acueducto":
+            document.getElementById("acueducto").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -80px'>X</div>";
+            break;
+          case "Cisterna":
+            document.getElementById("cisterna").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -80px'>X</div>";
+            break;
+          case "Pipa Publica":
+            document.getElementById("pipa_publica").innerHTML="  <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -80px'>X</div>";
+            break;
+        }
+
+        switch (array[i]['residuos_solidos']) {
+          case "Aseo Urbano":
+            document.getElementById("aseo_urbano").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: -260px'>X</div>";
+            break;
+          case "Quema":
+            document.getElementById("quema").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: -260px'>X</div>";
+            break;
+          case "Aire Libre":
+            document.getElementById("aire_libre").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: -260px'>X</div>";
+            break;
+        }
+
+        switch (array[i]['aguas_negras']) {
+          case "Cloacas":
+            document.getElementById("cloacas").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: -260px'>X</div>";
+            break;
+          case "Letrina":
+            document.getElementById("letrina").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -260px'>X</div>";
+            break;
+          case "Alcantarilla":
+            document.getElementById("alcantarilla").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: -260px'>X</div>";
+            break;
+
+          case "Pozo Septico":
+            document.getElementById("pozo").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: -250px'>X</div>";
+            break;
+
+          default:
+          document.getElementById("otro_residuo").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -250px'>X</div>";
+            break;
+
+        }
+
+      }
+
     }
-  }
+
+    function cargar_tipo_piso(array) {
+
+      for (var i = 0; i < array.length; i++) {
+        switch (array[i]['id_tipo_piso']) {
+          case "Cemento":
+            document.getElementById("cemento").innerHTML = "<div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'>X</div>";
+            break;
+          case "Tierra":
+            document.getElementById("tierra").innerHTML = "<div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'>X</div>";
+            break;
+          case "Tablas":
+            document.getElementById("tablas").innerHTML = "<div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'>X</div>";
+            break;
+          case "Cerámicas":
+            document.getElementById("ceramica").innerHTML = " <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'>X</div>";
+            break;
+          default:
+            document.getElementById("otro_piso").innerHTML = " <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 10px'>X</div>";
+            break;
+        }
+
+      }
+
+    }
+
+    function cargar_tipo_pared(array) {
+
+      for (var i = 0; i < array.length; i++) {
+        switch (array[i]['id_tipo_pared']) {
+          case "Bloque, ladrillo o adobe frisado":
+            document.getElementById("bloque_frisado").innerHTML = " <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -70px'>X</div>";
+            break;
+          case "Bloque, ladrillo o adobe sin frisar":
+            document.getElementById("bloque_sin_frisar").innerHTML = " <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -70px'>X</div>";
+            break;
+          case "Concreto":
+            document.getElementById("concreto").innerHTML = " <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 128px'>X</div>";
+            break;
+          case "Laminas Policluro de vinilo PVC":
+            document.getElementById("lamin_PVC").innerHTML = "   <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 128px'>X</div>";
+            break;
+          case "Tapia o bahareque":
+            document.getElementById("tapia").innerHTML = " <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 128px'>X</div>";
+            break;
+          case "Troncos o piedras":
+            document.getElementById("troncos").innerHTML = "<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+            break;
+          case "Zinc, cartón, tablas o similar":
+            document.getElementById("zinc").innerHTML = "<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+
+            break;
+        }
+
+      }
+
+    }
+
+    function cargar_tipo_techo(array) {
+
+      for (var i = 0; i < array.length; i++) {
+        switch (array[i]['id_tipo_techo']) {
+          case "Platabanda":
+            document.getElementById("platabanda").innerHTML = " <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -110px'>X</div>";
+            break;
+          case "Láminas asfálticas":
+            document.getElementById("laminas_asfalticas").innerHTML = " <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -160px'>X</div>";
+            break;
+          case "Tela":
+            document.getElementById("tela").innerHTML = "  <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -110px'>X</div>";
+            break;
+          case "Asbesto y similares":
+            document.getElementById("asbesto").innerHTML = "<div style='border-style:solid;height: 20px;width:20px;position: relative;left: -160px'>X</div>";
+            break;
+          case "Láminas de policloruro de vinilo PVC":
+            document.getElementById("laminas_pvc").innerHTML = " <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 58px'>X</div>";
+            break;
+          case "Láminas metálicas (zinc , aluminio,similares)":
+            document.getElementById("laminas_metalicas").innerHTML = " <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 58px'>X</div>";
+            break;
+          case "Latón, tablas o similares":
+            document.getElementById("laton_similares").innerHTML = " <div style='border-style:solid;height: 20px;width:20px;position: relative;left: 58px'>X</div>";
+
+            break;
+        }
+
+      }
+
+    }
+
+    function cargar_condicion_ocupacion(array) {
+      console.log(array);
+      switch (array[0]['condicion_ocupacion']) {
+        case "Alquilada":
+          document.getElementById("alquilada").innerHTML = "<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+          break;
+        case "Prestada":
+          document.getElementById("prestada").innerHTML = "<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+          break;
+        case "Propia pagada":
+          document.getElementById("propia_pagada").innerHTML = "<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+          break;
+        case "Adjudicada":
+          document.getElementById("propia_pagandose").innerHTML = "<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+          break;
+        case "Invadida":
+          document.getElementById("invadida").innerHTML = "<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+          break;
+        default:
+          document.getElementById("otro_cond_ocupacion").innerHTML = "<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+          document.getElementById("especifico_cond_ocupacion").innerHTML = "<u>" + array[0]["condicion_ocupacion"] + "</u>";
+          break;
+      }
+    }
+
+    function cargar_condicion_vivienda(array) {
+      console.log(array);
+      switch (array[0]['condicion']) {
+        case "Buena":
+          document.getElementById("buena").innerHTML = "<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+          break;
+        case "Mala":
+          document.getElementById("mala").innerHTML = "<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+          break;
+        case "Regular":
+          document.getElementById("regular").innerHTML = "<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+          break;
+      }
+    }
 
 
-  function cargar_tipo_vivienda(array){
-    console.log(array);
-    switch(array[0]['nombre_tipo_vivienda']){
-      case "Casa":
-        document.getElementById("casa").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
-      break;
-      case "Casa de vecindad":
-        document.getElementById("casa_vecindad").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
-      break;
-      case "Rancho":
-        document.getElementById("rancho").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
-      break;
-      case "Refugio":
-        document.getElementById("refugio").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
-      break;
-      default:
-      document.getElementById("otra").innerHTML="<div style='border-style:solid;height: 20px;width:20px'>X</div>";
-      document.getElementById("especifico_tipo_casa").innerHTML="<u>"+array[0]["nombre_tipo_vivienda"]+"</u>";
-      break;
+    function cargar_tipo_vivienda(array) {
+      console.log(array);
+      switch (array[0]['nombre_tipo_vivienda']) {
+        case "Casa":
+          document.getElementById("casa").innerHTML = "<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+          break;
+        case "Casa de vecindad":
+          document.getElementById("casa_vecindad").innerHTML = "<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+          break;
+        case "Rancho":
+          document.getElementById("rancho").innerHTML = "<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+          break;
+        case "Refugio":
+          document.getElementById("refugio").innerHTML = "<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+          break;
+        default:
+          document.getElementById("otra").innerHTML = "<div style='border-style:solid;height: 20px;width:20px'>X</div>";
+          document.getElementById("especifico_tipo_casa").innerHTML = "<u>" + array[0]["nombre_tipo_vivienda"] + "</u>";
+          break;
+      }
     }
-  }
     /* window.blur();
              window.print();
              window.close(); */
@@ -201,7 +314,7 @@
               <tr>
                 <td style='text-align:left'>
                   <img style='width:200px' src="
-                                        <?php echo constant('URL');?>config/img/web/cintillo_vzla.png">
+                                        <?php echo constant('URL'); ?>config/img/web/cintillo_vzla.png">
                 </td>
                 <td>Vicepresidencia para el <b>Area Social, Sistema Nacional de Misiones y Grandes Misiones</b>
                 </td>
@@ -584,80 +697,80 @@
                       <tr style="color: red;font-size: 13px;">
                         <td style="position: relative;left: -60px;"> Acueducto </td>
                         <td>
-                          <span id='platabanda'>
+                          <span id='acueducto'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -80px'></div>
                           </span>
                         </td>
                         <td>
                         <td style="position: relative;left: -220px;"> Aseo Urbano </td>
                         <td>
-                          <span id='laminas'>
+                          <span id='aseo_urbano'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -260px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -260px;"> Cloacas </td>
                         <td>
-                          <span id='laminas'>
-                            <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -260px'></div>
+                          <span id='cloacas'>
+                          <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -260px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -250px;"> Pozo Septico </td>
                         <td>
-                          <span id='laminas'>
+                          <span id='pozo'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -250px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -230px;"> Si </td>
                         <td>
-                          <span id='laminas'>
+                          <span id='animales'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -230px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -180px;"> Si </td>
                         <td>
-                          <span id='laminas'>
+                          <span id='plagas'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -170px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -80px;">
-                          <h3 id='cant_habitaciones'>4</h3>
+                          <h3 id='cantidad_habitaciones'></h3>
                         </td>
                       </tr>
                       <tr style="color: red;font-size: 13px;">
                         <td style="position: relative;left: -60px;"> Cisterna </td>
                         <td>
-                          <span id='platabanda'>
+                          <span id='cisterna'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -80px'></div>
                           </span>
                         </td>
                         <td>
                         <td style="position: relative;left: -220px;"> Quema </td>
                         <td>
-                          <span id='laminas'>
+                          <span id='quema'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -260px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -260px;"> Letrina </td>
                         <td>
-                          <span id='laminas'>
+                          <span id='letrina'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -260px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -250px;"> Ninguno </td>
                         <td>
-                          <span id='laminas'>
+                          <span id='otro_residuo'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -250px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -230px;"> No </td>
                         <td>
-                          <span id='laminas'>
+                          <span id='no_animales'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -230px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -180px;"> No </td>
                         <td>
-                          <span id='laminas'>
+                          <span id='no_plagas'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -170px'></div>
                           </span>
                         </td>
@@ -665,20 +778,20 @@
                       <tr style="color: red;font-size: 13px;">
                         <td style="position: relative;left: -60px;"> Pipa Publica </td>
                         <td>
-                          <span id='platabanda'>
+                          <span id='pipa_publica'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -80px'></div>
                           </span>
                         </td>
                         <td>
                         <td style="position: relative;left: -220px;"> Aire Libre </td>
                         <td>
-                          <span id='laminas'>
+                          <span id='aire_libre'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -260px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -260px;"> Alcantarillas </td>
                         <td>
-                          <span id='laminas'>
+                          <span id='alcantarilla'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -260px'></div>
                           </span>
                         </td>
@@ -702,53 +815,54 @@
                       <tr style="color: red;font-size: 13px;">
                         <td style="position: relative;left: -80px;"> 10kg </td>
                         <td>
-                          <span id='platabanda'>
+                          <span id='10_kg'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -130px'></div>
                           </span>
                         </td>
                         <td>
                         <td style="position: relative;left: -290px;"> 18kg </td>
                         <td>
-                          <span id='laminas'>
+                          <span id='18_kg'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -290px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -270px;"> 43kg </td>
                         <td>
-                          <span id='laminas'>
+                          <span id='43_kg'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -270px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -220px;"> 7d </td>
                         <td>
-                          <span id='laminas'>
+                          <span id='7_dias'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -220px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -200px;"> 15d </td>
                         <td>
-                          <span id='laminas'>
+                          <span id='15_dias'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -200px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -180px;"> 30d </td>
                         <td>
-                          <span id='laminas'>
+                          <span id='30_dias'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -180px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -160px;"> PDV Comunal </td>
                         <td>
-                          <span id='laminas'>
+                          <span id='pdv_comunal'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -160px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -150px;"> Otro </td>
                         <td>
-                          <span id='laminas'>
+                          <span id='otro_gas'>
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -150px'></div>
                           </span>
                         </td>
+                        <td style="position: relative;left: -150px;" id="gas_especifico"> _________</td>
                       </tr>
                     </table>
                   </td>
@@ -1441,7 +1555,7 @@
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -140px'></div>
                           </span>
                         </td>
-                        
+
                       </tr>
 
                       <tr style="color: red;font-size: 13px;">
@@ -1477,7 +1591,7 @@
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -140px'></div>
                           </span>
                         </td>
-                        
+
                       </tr>
 
                       <tr style="color: red;font-size: 13px;">
@@ -1494,8 +1608,8 @@
                           </span>
                         </td>
 
-                        
-                        
+
+
                       </tr>
 
                       <tr style="color: red;font-size: 13px;">
@@ -1512,59 +1626,59 @@
                           </span>
                         </td>
 
-                        
-                        
+
+
                       </tr>
                     </table>
-                     <tr>
+                  <tr>
                     <div style='width:100%;background: red;color:white'>
                       <center> IX. Datos de los residentes habituales del hogar </center>
                     </div>
                   </tr>
                   <tr>
-                      <table class="datos">
-                          <tr style="color:red;">
-                              <td>#</td>
-                              <td>Nombre y Apellido</td>
-                              <td>Edad</td>
-                              <td>Cedula</td>
-                              <td>Fecha de Nacimiento</td>
-                              <td>Grado Intrucciones</td>
-                              <td>Estado Civil</td>
-                          </tr>
-                          <tr>
-                              <td>1</td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                          </tr>
+                    <table class="datos">
+                      <tr style="color:red;">
+                        <td>#</td>
+                        <td>Nombre y Apellido</td>
+                        <td>Edad</td>
+                        <td>Cedula</td>
+                        <td>Fecha de Nacimiento</td>
+                        <td>Grado Intrucciones</td>
+                        <td>Estado Civil</td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
 
-                           <tr style="color:red;">
-                            <td></td>
-                              <td>Ocupacion u Oficio</td>
-                              <td>Condicion Laboral</td>
-                              <td>Enfermedad o Factor de Riesgo</td>
-                              <td>Mision de la cual recibe beneficio</td>
-                              <td colspan="2">Documento que requiere</td>
-                          </tr>
-                          <tr>
-                              <td>1</td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td colspan="2"></td>
-                              
-                          </tr>
-                      </table>
+                      <tr style="color:red;">
+                        <td></td>
+                        <td>Ocupacion u Oficio</td>
+                        <td>Condicion Laboral</td>
+                        <td>Enfermedad o Factor de Riesgo</td>
+                        <td>Mision de la cual recibe beneficio</td>
+                        <td colspan="2">Documento que requiere</td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2"></td>
+
+                      </tr>
+                    </table>
 
                   </tr>
-                  </tr>
-                </table>
               </tr>
+            </table>
+            </tr>
             </table>
           </div>
         </center>

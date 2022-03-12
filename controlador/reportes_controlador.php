@@ -705,6 +705,10 @@ public function info_censo_poblacional(){
    $techo=$this->Consultar_Columna("vivienda_tipo_techo","id_vivienda",$vivienda[0]['id_vivienda']);
    $pared=$this->Consultar_Columna("vivienda_tipo_pared","id_vivienda",$vivienda[0]['id_vivienda']);
    $piso=$this->Consultar_Columna("vivienda_tipo_piso","id_vivienda",$vivienda[0]['id_vivienda']);
+   $servicios=$this->Consultar_Columna("servicios","id_servicio",$vivienda[0]['id_servicio']);
+   $servicio_gas=$this->Consultar_Columna("vivienda_servicio_gas","id_vivienda",$vivienda[0]['id_vivienda']);
+
+
       
    for($i=0;$i<count($techo);$i++){
        $t=$this->Consultar_Columna("tipo_techo","id_tipo_techo",$techo[$i]['id_tipo_techo']);
@@ -724,6 +728,11 @@ for($i=0;$i<count($piso);$i++){
 
 }
 
+for($i=0;$i<count($servicio_gas);$i++){
+    $ser_gas=$this->Consultar_Columna("servicio_gas","id_servicio_gas",$servicio_gas[$i]['id_servicio_gas']);
+    $servicio_gas[$i]['servicio']=$ser_gas[0]['nombre_servicio_gas'];
+}
+
 
    $datos=[
        "tipo_vivienda"=>$tipo_vivienda,
@@ -731,7 +740,9 @@ for($i=0;$i<count($piso);$i++){
        "familia"=>$familia,
        "techo"=>$techo,
        "pared"=>$pared,
-       "piso"=>$piso
+       "piso"=>$piso,
+       "servicios"=>$servicios,
+       "gas"=>$servicio_gas
    ];
 
    echo json_encode($datos);

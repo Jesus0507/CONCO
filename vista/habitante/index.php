@@ -327,7 +327,7 @@
                                         Quema
                                     </option>
                                     <option value="Aire Libre">
-                                        Pipa Publica
+                                       Aire libre
                                     </option>
                                 </select>
                             </div>
