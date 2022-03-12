@@ -100,8 +100,8 @@
               <tr>
                 <td style='width:25%'><input type="text" id='nedu' class='form-control' placeholder="Nivel educativo"></td>
                 <td style='width:25%'>
-                <input type="date" id='antcom' class='form-control'>
-              </td>
+                  <input type="date" id='antcom' class='form-control'>
+                </td>
                 <td style='width:25%'>
                   <select class='form-control' id='mili'>
                     <option value="1">Si</option>
@@ -319,72 +319,122 @@
 
               <tr style='background:#057E9F;color:white;'>
 
-                <td style='width:50%'><table style='width:100%'><tr><td>Bonos </td><td><input type='text' class='form-control' id="bono_nuevo" list="lista_bonos" style='width:90%;height:20px' ></td>
-                <datalist id='lista_bonos'>
-                  <?php foreach($this->bonos as $b){ ?> 
-                    <option value="<?php echo $b['nombre_bono']; ?>"></option>
-                    <?php } ?>
-                </datalist>
-                <td>
-                <span class="fa fa-plus-circle" style='font-size:22px;cursor:pointer' title="Agregar bono" id="add_bono"></span>
-                  </td></tr></table>
+                <td style='width:50%'>
+                  <table style='width:100%'>
+                    <tr>
+                      <td>Bonos </td>
+                      <td><input type='text' class='form-control' id="bono_nuevo" list="lista_bonos" style='width:90%;height:20px'></td>
+                      <datalist id='lista_bonos'>
+                        <?php foreach ($this->bonos as $b) { ?>
+                          <option value="<?php echo $b['nombre_bono']; ?>"></option>
+                        <?php } ?>
+                      </datalist>
+                      <td>
+                        <span class="fa fa-plus-circle" style='font-size:22px;cursor:pointer' title="Agregar bono" id="add_bono"></span>
+                      </td>
+                    </tr>
+                  </table>
                 </td>
                 <td style='width:50%'>
-                <table style='width:95%'>
-                <tr>
-                  <td>Misiones</td>
-                  <td style="width:50%;">
-                  <input type="text" id='mision' class="form-control" style="width:100%;height:20px" list='lista_misiones'>
-                  <datalist id='lista_misiones'>
-                    <?php foreach($this->misiones as $m){ ?>
-                      <option value='<?php echo $m['nombre_mision']; ?>'></option>
-                      <?php } ?>
-                  </datalist>                       
+                  <table style='width:95%'>
+                    <tr>
+                      <td>Misiones</td>
+                      <td style="width:50%;">
+                        <input type="text" id='mision' class="form-control" style="width:100%;height:20px" list='lista_misiones'>
+                        <datalist id='lista_misiones'>
+                          <?php foreach ($this->misiones as $m) { ?>
+                            <option value='<?php echo $m['nombre_mision']; ?>'></option>
+                          <?php } ?>
+                        </datalist>
+                      </td>
+                      <td style="width:80%;"><select id='recibe' style="width:100%;height:20px">
+                          <option value='vacio'>Recibe actualmente</option>
+                          <option value='1'>Sí</option>
+                          <option value='0'>No</option>
+                        </select>
+                      </td>
+                      <td><input type="date" style='display:none' id='fecha_recibe' style="width:50%;height:20px"></td>
+                      <td> <span class="fa fa-plus-circle" style='font-size:22px;cursor:pointer' title="Agregar misión" id="add_mision"></span></td>
+                    </tr>
+                  </table>
                 </td>
-                  <td style="width:80%;"><select  id='recibe' style="width:100%;height:20px">
-                  <option value='vacio'>Recibe actualmente</option>
-                  <option value='1'>Sí</option>
-                  <option value='0'>No</option>
-              </select>
-                  </td>
-                  <td><input type="date" style='display:none' id='fecha_recibe' style="width:50%;height:20px"></td>
-                  <td> <span class="fa fa-plus-circle" style='font-size:22px;cursor:pointer' title="Agregar misión" id="add_mision"></span></td>
-                </tr></table>
-              </td>
 
               </tr>
 
               <tr>
 
-              <td style='width:50%'>
-              <div style='width:100%;overflow-y:scroll;background:#C5E6EF;border-radius:6px;height:100px;' id='bonos'> 
-            </div>
-              </td>
-              <td style='width:50%'>
-              <div style='width:100%;overflow-y:scroll;background:#C5E6EF;border-radius:6px;height:100px;' id='misiones'>
-            </div>
-              </td>
+                <td style='width:50%'>
+                  <div style='width:100%;overflow-y:scroll;background:#C5E6EF;border-radius:6px;height:100px;' id='bonos'>
+                  </div>
+                </td>
+                <td style='width:50%'>
+                  <div style='width:100%;overflow-y:scroll;background:#C5E6EF;border-radius:6px;height:100px;' id='misiones'>
+                  </div>
+                </td>
               </tr>
             </table>
 
-            
+
             <br>
 
             <table style='width:98%' border='1'>
 
               <tr style='background:#057E9F;color:white;'>
 
-                <td style='width:50%' class='text-center'>Proyectos</td>
+                <td style='width:50%' class='text-center'>
+                  <table style='width:100%'>
+                    <tr>
+                      <td style='width:20%'>Proyectos</td>
+                      <td style='width:60%'>
+                        <select id='nuevo_proyecto' style='width:100%;'>
+                          <option value='0'>-Seleccione-</option>
+                          <?php foreach ($this->proyectos as $p) { ?>
+                            <option value='<?php echo $p['id_proyecto'] ?>'><?php echo $p['nombre_proyecto']; ?></option>
+                          <?php } ?>
+                        </select>
+                        <table style="width:100%;display:none" id='add_proyect'>
+                          <tr>
+                            <td style='width:30%'>
+                              <input type="text" placeholder="Nombre del proyecto" id='nombre_proyecto' style='height:20px;width:100%'>
+                            </td>
+                            <td style='width:30%'>
+                              <select style='width:100%' id='area_proyecto'>
+                                <option value='0'>-Seleccione-</option>
+                                <option value='Construcción y mantenimiento'>Construcción y mantenimiento</option>
+                                <option value='Transporte'>Transporte</option>
+                                <option value='Alimentación'>Alimentación</option>
+                                <option value='Comunicación'>Comunicación</option>
+                                <option value='Textil o Artesanal'>Textil o Artesanal</option>
+                                <option value='Agricola'>Agricola</option>
+                                <option value='Cultural'>Cultural</option>
+                                <option value='Educativo'>Educativo</option>
+
+                              </select>
+                            </td>
+                            <td style='width:30%'>
+                            <input type="text" id='estado_proyecto' style='width:100%' placeholder="Area">
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td style='text-align:center;width:10%'>
+                      <span class='fa fa-plus-square' id='spannewproyect' title="Crear nuevo proyecto" style='font-size:25px;cursor:pointer'></span>
+                      </td>
+                      <td style='text-align:center;width:10%'>
+                      <span class='fa fa-plus-circle' id='spanaddproyect' title="Agregar proyecto" style='font-size:25px;cursor:pointer'></span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
 
               </tr>
 
               <tr>
 
-              <td style='width:100%'>
-              <div style='width:100%;overflow-y:scroll;background:#C5E6EF;border-radius:6px;height:100px;' id='proyectos'>
-              sdfsff
-            </div>
-              </td>
+                <td style='width:100%'>
+                  <div style='width:100%;overflow-y:scroll;background:#C5E6EF;border-radius:6px;height:100px;' id='proyectos'>
+                  </div>
+                </td>
               </tr>
             </table>
 

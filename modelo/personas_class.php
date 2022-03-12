@@ -1133,7 +1133,7 @@ public function get_organizaciones()
      public function get_proyectos_persona($cedula)
      {
 
-         $tabla            = "SELECT P.*  FROM proyecto P, persona_proyecto PP WHERE PP.cedula_persona = $cedula AND PP.id_proyecto=P.id_proyecto AND P.estado=1";
+         $tabla            = "SELECT P.*, PP.id_persona_proyecto  FROM proyecto P, persona_proyecto PP WHERE PP.cedula_persona = $cedula AND PP.id_proyecto=P.id_proyecto AND P.estado=1";
          $respuestaArreglo = '';
          try {
              $datos = $this->conexion->prepare($tabla);

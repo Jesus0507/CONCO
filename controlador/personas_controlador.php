@@ -174,6 +174,7 @@ public function Consultas()
   $this->vista->organizaciones=$this->modelo->get_organizaciones();
   $this->vista->bonos=$this->Consultar_Tabla("bonos",1,"id_bono");
   $this->vista->misiones=$this->Consultar_Tabla("misiones",1,"id_mision");
+  $this->vista->proyectos=$this->Consultar_Tabla("proyecto",1,"id_proyecto");
   $this->Seguridad_de_Session();
   $this->vista->Cargar_Vistas('personas/consultar');
 }
@@ -935,6 +936,11 @@ public function eliminar_mision(){
   echo $this->Eliminar_Tablas("persona_misiones","id_persona_mision",$id);
 }
 
+public function eliminar_proyecto(){
+  $id=$_POST['proyecto'];
+  echo $this->Eliminar_Tablas("persona_proyecto","id_persona_proyecto",$id);
+}
+
 
 public function get_misiones(){
   $misiones=$this->Consultar_Columna("persona_misiones","cedula_persona",$_POST['cedula_persona']);
@@ -994,6 +1000,18 @@ public function add_mision(){
   echo $retornar;
 
   
+}
+
+
+public function get_proyectos(){
+  $proyectos=$this->Consultar_Columna("persona_proyecto","cedula_persona",$_POST['cedula_persona']);
+  for($i=0;$i<count($proyectos);$i++){
+    $pro=$this->Consultar_Columna("proyecto","id_proyecto",$proyectos[$i]['id_proyecto']);
+    $proyectos[$i]['nombre_proyecto']=$pro[0]['nombre_proyecto'];
+    $proyectos[$i]['area_proyecto']=$pro[0]['area_proyecto'];
+    $proyectos[$i]['estado_proyecto']=$pro[0]['estado_proyecto'];
+  }
+  echo json_encode($proyectos);
 }
 
 }

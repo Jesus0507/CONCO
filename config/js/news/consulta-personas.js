@@ -418,20 +418,22 @@ function editar_datos(
     vproyectos.innerHTML = "No aplica";
   } else {
     var texto = "";
+    console.log(proyectos_info);
+    texto+=
+    "<table style='width:100%' border='1'><tr style='background:grey;color:white'><td style='width:25%'>Nombre</td><td style='width:25%'>Área</td><td style='width:25%'>Estado</td><td style='width:25%'>Eliminar</td></tr>";
     for (var i = 0; i < proyectos_info.length; i++) {
-      vproyectos.innerHTML +=
-        "<table style='width:100%' border='1'><tr><td style='width:25%'>Nombre</td><td style='width:25%'>Área</td><td style='width:25%'>Estado</td></tr>";
-      vproyectos.innerHTML +=
+      texto+=
         "<tr><td style='width:25%'>" +
         proyectos_info[i]["nombre_proyecto"] +
         "</td><td style='width:25%'>" +
         proyectos_info[i]["area_proyecto"] +
         "</td>";
-      vproyectos.innerHTML +=
+      texto +=
         "<td style='width:25%'>" +
         proyectos_info[i]["estado_proyecto"] +
-        "</td></tr></table> <br>";
+        "</td><td style='width:25%;text-align:center'><span onclick='borrar_proyecto("+proyectos_info[i]['id_persona_proyecto']+",`"+inf_persona['cedula_persona']+"`)' class='iconDelete fa fa-times-circle' title='Eliminar proyecto' style='font-size:22px'></span></td></tr>";
     }
+    vproyectos.innerHTML+=texto+"</table>"; 
   }
 
   $("#edit_persona").modal().show();
@@ -958,3 +960,105 @@ function borrar_mision(id,cedula_param){
       document.getElementById("fecha_recibe").style.display="none";
     }
   }
+
+
+  function cargar_proyectos(cedula_persona){
+    $.ajax({
+      type:"POST",
+      url:BASE_URL+"Personas/get_proyectos",
+      data:{"cedula_persona":cedula_persona}
+    }).done(function(result){
+      console.log(result);
+      if(result!=0){
+        result=JSON.parse(result);
+        vproyectos.innerHTML = "";
+        for (var i = 0; i < result.length; i++) {
+          var texto = "";
+          console.log(result);
+          texto+=
+          "<table style='width:100%' border='1'><tr style='background:grey;color:white'><td style='width:25%'>Nombre</td><td style='width:25%'>Área</td><td style='width:25%'>Estado</td><td style='width:25%'>Eliminar</td></tr>";
+          for (var i = 0; i < result.length; i++) {
+            texto+=
+              "<tr><td style='width:25%'>" +
+              result[i]["nombre_proyecto"] +
+              "</td><td style='width:25%'>" +
+              result[i]["area_proyecto"] +
+              "</td>";
+            texto +=
+              "<td style='width:25%'>" +
+              result[i]["estado_proyecto"] +
+              "</td><td style='width:25%;text-align:center'><span onclick='borrar_proyecto("+result[i]['id_persona_proyecto']+",`"+cedula_persona+"`)' class='iconDelete fa fa-times-circle' title='Eliminar proyecto' style='font-size:22px'></span></td></tr>";
+          }
+          vproyectos.innerHTML+=texto+"</table>";       }
+       }
+       else{
+         vmisiones.innerHTML="No aplica";
+       }
+    })
+    }
+
+    function borrar_proyecto(id,cedula){
+      swal({
+        type:"warning",
+        title:"¿Está seguro?",
+        text:"Está por eliminar el proyecto asociado a esta persona, ¿desea continuar?",
+        showCancelButton:true,
+        confirmButtonText:"Sí",
+        cancelButtonText:"No"
+      },function(isConfirm){
+           if(isConfirm){
+            $.ajax({
+              type:"POST",
+              url:BASE_URL+"Personas/eliminar_proyecto",
+              data:{"proyecto":id}
+            }).done(function(result){
+                  if(result){
+                    cargar_proyectos(cedula);
+                  }
+            });
+           }
+      });
+    }
+
+    document.getElementById("spannewproyect").onclick=function(){
+     if(document.getElementById("spannewproyect").className=="fa fa-plus-square"){
+      document.getElementById("spannewproyect").className="fa fa-list";
+      document.getElementById("nuevo_proyecto").style.display="none";
+      document.getElementById("nuevo_proyecto").value="0";
+      document.getElementById("add_proyect").style.display="";
+     }
+     else{
+      document.getElementById("spannewproyect").className="fa fa-plus-square";
+      document.getElementById("add_proyect").style.display="none";
+      document.getElementById("nombre_proyecto").value="";
+      document.getElementById("estado_proyecto").value="";
+      document.getElementById("area_proyecto").value="0";
+      document.getElementById("nuevo_proyecto").style.display="";
+
+     }
+    }
+
+    document.getElementById("spanaddproyect").onclick=function(){
+      if((document.getElementById("nuevo_proyecto").value=="0" && document.getElementById("nuevo_proyecto").style.display=="") || (document.getElementById("nuevo_proyecto").style.display=="none" &&  document.getElementById("nombre_proyecto").value=="" || document.getElementById("area_proyecto").value=="0" || document.getElementById("estado_proyecto").value=="")){
+         swal({
+           type:"error",
+           title:"Error",
+           text:"Debe ingresar los datos del proyecto",
+           timer:2000,
+           showConfirmButton:false
+         });
+         setTimeout(function(){
+          document.getElementById("nombre_proyecto").style.borderColor='red'
+          document.getElementById("estado_proyecto").style.borderColor="red";
+          document.getElementById("area_proyecto").style.borderColor="red";
+          document.getElementById("nuevo_proyecto").style.borderColor="red";
+         });
+      }
+      else{
+        document.getElementById("nombre_proyecto").style.borderColor=''
+          document.getElementById("estado_proyecto").style.borderColor="";
+          document.getElementById("area_proyecto").style.borderColor="";
+          document.getElementById("nuevo_proyecto").style.borderColor="";
+      }
+    }
+    
