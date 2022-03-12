@@ -1014,6 +1014,71 @@ public function get_proyectos(){
   echo json_encode($proyectos);
 }
 
+public function add_proyecto(){
+  $proyecto=$_POST['proyecto_info'];
+  $proyecto_persona=$this->Consultar_Columna("persona_proyecto","cedula_persona",$_POST['cedula_persona']);
+  $proyectos_all=$this->Consultar_Tabla("proyecto",1,"id_proyecto");
+  $retornar=1;
+  $existe=false;
+  if($proyecto['proyecto']==0){
+     foreach($proyectos_all as $a){
+       if(strtolower($a['nombre_proyecto'])==strtolower($proyecto['nombre_proyecto']) && strtolower($a['area_proyecto'])==strtolower($proyecto['area_proyecto'])){
+         $existe=$a['id_proyecto'];
+       }
+     }
+
+   if($existe==false){
+     $this->modelo->Registrar_proyecto([
+            "nombre_proyecto"=>$proyecto['nombre_proyecto'],
+            "area_proyecto"=>$proyecto['area_proyecto'],
+            "estado_proyecto"=>$proyecto['estado_proyecto']     
+     ]);
+    
+   $id=$this->Ultimo_Ingresado("proyecto","id_proyecto");
+   $this->modelo->Registrar_persona_proyecto([
+     "cedula_persona"=>$_POST['cedula_persona'],
+     "id_proyecto"=>$id[0]['MAX(id_proyecto)']
+   ]);
+
+  }
+  else{
+     foreach($proyecto_persona as $pp){
+       if($pp['id_proyecto']==$existe){
+         $retornar=0;
+       }
+     }
+
+     if($retornar!=0){
+      $this->modelo->Registrar_persona_proyecto([
+        "cedula_persona"=>$_POST['cedula_persona'],
+        "id_proyecto"=>$proyecto['proyecto']
+      ]);
+     }
+
+  }
+
+  }
+
+  else{
+    foreach($proyecto_persona as $pp){
+      if($pp['id_proyecto']==$proyecto['proyecto']){
+        $retornar=0;
+      }
+    }
+
+    if($retornar!=0){
+     $this->modelo->Registrar_persona_proyecto([
+       "cedula_persona"=>$_POST['cedula_persona'],
+       "id_proyecto"=>$proyecto['proyecto']
+     ]);
+    }
+
+ 
+  }
+
+  echo $retornar;
+}
+
 }
 
 

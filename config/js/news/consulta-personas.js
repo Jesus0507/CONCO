@@ -1039,7 +1039,7 @@ function borrar_mision(id,cedula_param){
     }
 
     document.getElementById("spanaddproyect").onclick=function(){
-      if((document.getElementById("nuevo_proyecto").value=="0" && document.getElementById("nuevo_proyecto").style.display=="") || (document.getElementById("nuevo_proyecto").style.display=="none" &&  document.getElementById("nombre_proyecto").value=="" || document.getElementById("area_proyecto").value=="0" || document.getElementById("estado_proyecto").value=="")){
+      if((document.getElementById("nuevo_proyecto").value=="0" && document.getElementById("nuevo_proyecto").style.display!="none") || (document.getElementById("nuevo_proyecto").style.display=="none" &&  (document.getElementById("nombre_proyecto").value=="" || document.getElementById("area_proyecto").value=="0" || document.getElementById("estado_proyecto").value==""))){
          swal({
            type:"error",
            title:"Error",
@@ -1059,6 +1059,35 @@ function borrar_mision(id,cedula_param){
           document.getElementById("estado_proyecto").style.borderColor="";
           document.getElementById("area_proyecto").style.borderColor="";
           document.getElementById("nuevo_proyecto").style.borderColor="";
+          var proyecto_persona=new Object();
+          proyecto_persona['proyecto']=document.getElementById("nuevo_proyecto").value;
+          proyecto_persona['nombre_proyecto']=document.getElementById("nombre_proyecto").value;
+          proyecto_persona['estado_proyecto']=document.getElementById("estado_proyecto").value;
+          proyecto_persona['area_proyecto']=document.getElementById("area_proyecto").value;
+          $.ajax({
+            type:"POST",
+            url:BASE_URL+"Personas/add_proyecto",
+            data:{"proyecto_info":proyecto_persona,"cedula_persona":inf_persona['cedula_persona']}
+          }).done(function(result){
+              if(result==0){
+                swal({
+                     type:"error",
+                     title:"Error",
+                     text:"Esta persona ya se encuentra asociada a este proyecto",
+                     timer:2000,
+                     showConfirmButton:false
+                });
+              }
+              else{
+                cargar_proyectos(inf_persona["cedula_persona"]);
+              }
+          document.getElementById("nombre_proyecto").value=''
+          document.getElementById("estado_proyecto").value="";
+          document.getElementById("area_proyecto").value="0";
+          document.getElementById("nuevo_proyecto").value="0";
+          });
+
+
       }
     }
     

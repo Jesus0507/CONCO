@@ -412,7 +412,7 @@
                               </select>
                             </td>
                             <td style='width:30%'>
-                            <input type="text" id='estado_proyecto' style='width:100%' placeholder="Area">
+                            <input type="text" id='estado_proyecto' style='width:100%' placeholder="Estado del proyecto">
                             </td>
                           </tr>
                         </table>
