@@ -698,6 +698,10 @@
             $jefe_familia = "";
             $fam_sexo_diverso=0;
             $privado_libertad=0;
+            $cant_trabajando=0;
+            $cant_menor_17_trabajando=0;
+            $proyecto_socio=0;
+            $sector_agricola=0;
 
 
 
@@ -724,6 +728,9 @@
 
             for ($i = 0; $i < count($integrantes); $i++) {
                 $persona = $this->Consultar_Columna("personas", "cedula_persona", $integrantes[$i]['cedula_persona']);
+                $cond_lab=$this->Consultar_Columna("condicion_laboral","cedula_persona",$integrantes[$i]['cedula_persona']);
+                $proyecto=$this->Consultar_Columna("persona_proyecto","cedula_persona",$integrantes[$i]['cedula_persona']);
+                $sector_agricola=$this->Consultar_Columna("sector_agricola","cedula_persona",$integrantes[$i]['cedula_persona']);
                 if ($persona[0]['jefe_familia'] == 1) {
                     $jefe_familia = $persona[0];
                     $ocupacion = $this->Consultar_Columna("ocupacion_persona", "cedula_persona", $jefe_familia['cedula_persona']);
@@ -749,6 +756,29 @@
                 if($persona[0]['privado_libertad']==1){
                     $privado_libertad=1;
                 }
+
+                if(count($cond_lab)!=0){
+                    $cant_trabajando++;        
+                    $anio = explode('-', $persona[0]["fecha_nacimiento"]);
+                    $edad = date("Y") - $anio[0];
+                    if($edad<17){
+                        $cant_menor_17_trabajando++;
+                    }
+                }
+
+                if(count($proyecto)!=0){
+                    $pro=$this->Consultar_Columna("proyecto","id_proyecto",$proyecto[0]['id_proyecto']);
+                    $proyecto_socio=$pro[0];
+                }
+
+                if(count($sector_agricola)==0){
+                    $sector_agricola=0;
+                }
+                else{
+                    $sector_agricola=$sector_agricola[0];
+                }
+
+
             }
 
 
@@ -765,7 +795,11 @@
                 "integrantes" => $integrantes,
                 "jefe_familia" => $jefe_familia,
                 "familiar_sexo_diverso"=>$fam_sexo_diverso,
-                "privado_libertad"=>$privado_libertad
+                "privado_libertad"=>$privado_libertad,
+                "trabajando"=>$cant_trabajando,
+                "proyectos"=>$proyecto_socio,
+                "menores_trabajando"=>$cant_menor_17_trabajando,
+                "sector_agricola"=>$sector_agricola
             ];
 
             echo json_encode($datos);

@@ -787,6 +787,8 @@ swal({
     }).done(function(result){
       result=JSON.parse(result);
         actualizar_bonos(result,cedula_param);
+        $('#example1').DataTable().clear().destroy();
+       cargar_tabla_personas();
     })
   }
 });
@@ -843,6 +845,8 @@ add_bono.onclick=function(){
            }
            else{
              actualizar_bonos(JSON.parse(result),inf_persona['cedula_persona']);
+             $('#example1').DataTable().clear().destroy();
+             cargar_tabla_personas();
            }
 
            document.getElementById("bono_nuevo").value="";
@@ -896,6 +900,8 @@ function borrar_mision(id,cedula_param){
       }).done(function(result){
         console.log(result);
           cargar_misiones(cedula_param);
+          $('#example1').DataTable().clear().destroy();
+          cargar_tabla_personas();
       })
     }
   });
@@ -952,6 +958,8 @@ function borrar_mision(id,cedula_param){
           }
           else{
             cargar_misiones(inf_persona['cedula_persona']);
+            $('#example1').DataTable().clear().destroy();
+            cargar_tabla_personas();
 
           }
           document.getElementById("mision").value="";
@@ -1024,6 +1032,8 @@ function borrar_mision(id,cedula_param){
             }).done(function(result){
                   if(result){
                     cargar_proyectos(cedula);
+                    $('#example1').DataTable().clear().destroy();
+                   cargar_tabla_personas();
                   }
             });
            }
@@ -1090,6 +1100,8 @@ function borrar_mision(id,cedula_param){
               }
               else{
                 cargar_proyectos(inf_persona["cedula_persona"]);
+                $('#example1').DataTable().clear().destroy();
+                cargar_tabla_personas();
               }
           document.getElementById("nombre_proyecto").value=''
           document.getElementById("estado_proyecto").value="";

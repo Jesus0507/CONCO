@@ -34,6 +34,7 @@
       cargar_tipo_piso(result['piso']);
       cargar_servicios(result['servicios']);
       cargar_servicio_gas(result['gas']);
+      cargar_sector_agricola(result['sector_agricola']);
       document.getElementById("cantidad_habitaciones").innerHTML = result['vivienda'][0]['cantidad_habitaciones'];
       if(result['vivienda'][0]['animales_domesticos']==1){
         document.getElementById("animales").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -230px'>X</div>";
@@ -89,13 +90,37 @@
         document.getElementById("ampliada").innerHTML='X';
       }
       }
-console.log(result['familiar_sexo_diverso']);
+      document.getElementById("cant_trabajan").innerHTML=result['trabajando'];
+      document.getElementById("ing_mensual").innerHTML=result['familia'][0]['ingreso_mensual_aprox'];
       result['familiar_sexo_diverso']==1?document.getElementById("si_sexo_diverso").innerHTML="X":document.getElementById("no_sexo_diverso").innerHTML="X";
       result['privado_libertad']==1?document.getElementById("si_privado_libertad").innerHTML="X":document.getElementById("no_privado_libertad").innerHTML="X";
-
-
+      if(result['proyectos']==0){
+        document.getElementById("trabajo_proyecto").innerHTML="No";
+      }
+      else{
+        document.getElementById("trabajo_proyecto").innerHTML="Si";
+        document.getElementById("estado_proyecto").innerHTML=result['proyectos']['estado_proyecto'];
+        document.getElementById("area_proyecto").innerHTML=result['proyectos']['area_proyecto'];
+        document.getElementById("cantidad_menores_trabajando").innerHTML=result['menores_trabajando'];
+      }
+       
 
     });
+
+    function cargar_sector_agricola(sector){
+      if(sector!=0){
+        document.getElementById("area_produccion").innerHTML=sector['area_produccion'];
+        document.getElementById("anios_experiencia").innerHTML=sector['anios_experiencia'];
+        document.getElementById("rubro_principal").innerHTML=sector['rubro_principal'];
+        sector['registro_INTI']==0?document.getElementById("inti").innerHTML="No":document.getElementById("inti").innerHTML="Si";
+        sector['constancia_productor']==0?document.getElementById("constancia_productor").innerHTML="No":document.getElementById("constancia_productor").innerHTML="Si";
+        sector['senial_hierro']==0?document.getElementById("hierro").innerHTML="No":document.getElementById("hierro").innerHTML="Si";
+        document.getElementById("financiado").innerHTML=sector["financiado"];
+        sector['agua_riego']==0?document.getElementById("agua_riego").innerHTML="No":document.getElementById("agua_riego").innerHTML="Si";
+        sector['produccion_actual']==0?document.getElementById("produccion_actual").innerHTML="No":document.getElementById("produccion_actual").innerHTML="Si";
+        document.getElementById("nombre_org_agricola").innerHTML=sector['org_agricola'];
+      }
+    }
 
     function cargar_servicio_gas(array) {
 
@@ -1164,28 +1189,29 @@ for (var i = 0; i < array.length; i++) {
                     <td style="position: relative; left: 0px;"> Estado Actual del Proyecto </td>
                     <td style="position: relative; left: 0px;"> Area del Proyecto </td>
                     <td style="position: relative; left: 0px;"> Tiene pensado una idea socioproductiva </td>
-                    <td style="position: relative; left: 0px;"> Area del Proyecto </td>
                   </tr>
                   <tr>
                     <td>
+                      <span id='cant_trabajan'></span>
                       <hr>
                     </td>
                     <td>
+                      <span id='ing_mensual'></span>
                       <hr>
                     </td>
                     <td>
+                      <span id='trabajo_proyecto'></span>
                       <hr>
                     </td>
                     <td>
+                    <span id='estado_proyecto'></span>
                       <hr>
                     </td>
                     <td>
+                    <span id='area_proyecto'></span>
                       <hr>
                     </td>
-                    <td>
-                      <hr>
-                    </td>
-                    <td>
+                    <td><br>
                       <hr>
                     </td>
                   </tr>
@@ -1213,9 +1239,6 @@ for (var i = 0; i < array.length; i++) {
                     </td>
                   </tr>
                   <tr>
-                    <td>
-                      <hr>
-                    </td>
                     <td>
                       <hr>
                     </td>
@@ -1268,7 +1291,7 @@ for (var i = 0; i < array.length; i++) {
                   </tr>
                   <tr>
                     <td style="position: relative; left: 0px;">
-                      <span id="cantidad"></span>
+                      <span id="cantidad_menores_trabajando"></span>
                     </td>
                   </tr>
                   <tr style="color: red;font-size: 13px;">
@@ -1300,10 +1323,10 @@ for (var i = 0; i < array.length; i++) {
                       </span>
                     </td>
                     <td>
-                    <td style="position: relative;left: -230px;"> No </td>
+                    <td style="position: relative;left: -200px;"> No </td>
                     <td>
                       <span id='platabanda'>
-                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -220px'></div>
+                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -150px'></div>
                       </span>
                     </td>
                     <td></td>
@@ -1320,10 +1343,10 @@ for (var i = 0; i < array.length; i++) {
                       </span>
                     </td>
                     <td>
-                    <td style="position: relative;left: -230px;"> No </td>
+                    <td style="position: relative;left: -200px;"> No </td>
                     <td>
                       <span id='platabanda'>
-                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -220px'></div>
+                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -150px'></div>
                       </span>
                     </td>
                     <td></td>
@@ -1347,6 +1370,17 @@ for (var i = 0; i < array.length; i++) {
                         <td style="position: relative;left: 0px;"> Ha sido Financiado </td>
                         <td style="position: relative;left: 0px;"> Cuenta con Agua de Riego </td>
                         <td style="position: relative;left: 0px;"> Tiene produccion de alimentos Actual </td>
+                      </tr>
+                      <tr style="font-size: 13px;">
+                        <td id='area_produccion' style="position: relative;left: 0px;"></td>
+                        <td id='anios_experiencia' style="position: relative;left: 0px;"></td>
+                        <td id='rubro_principal' style="position: relative;left: 0px;"></td>
+                        <td id='inti' style="position: relative;left: 0px;"></td>
+                        <td id='constancia_productor' style="position: relative;left: 0px;"></td>
+                        <td id='hierro' style="position: relative;left: 0px;"></td>
+                        <td id='financiado' style="position: relative;left: 0px;"></td>
+                        <td id='agua_riego' style="position: relative;left: 0px;"></td>
+                        <td id='produccion_actual' style="position: relative;left: 0px;"></td>
                       </tr>
                     </table>
                   </tr>
@@ -1403,7 +1437,7 @@ for (var i = 0; i < array.length; i++) {
                         </tr>
                         <tr>
                           <td>
-                            <span>nombre</span>
+                            <span id='nombre_org_agricola'></span>
                           </td>
                         </tr>
                       </table>
