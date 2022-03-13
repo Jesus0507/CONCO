@@ -34,7 +34,9 @@
       cargar_tipo_piso(result['piso']);
       cargar_servicios(result['servicios']);
       cargar_servicio_gas(result['gas']);
+      cargar_org_politica(result['org_politica']);
       cargar_sector_agricola(result['sector_agricola']);
+      cargar_electrodomesticos(result['electrodomesticos']);
       document.getElementById("cantidad_habitaciones").innerHTML = result['vivienda'][0]['cantidad_habitaciones'];
       if(result['vivienda'][0]['animales_domesticos']==1){
         document.getElementById("animales").innerHTML=" <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -230px'>X</div>";
@@ -103,9 +105,76 @@
         document.getElementById("area_proyecto").innerHTML=result['proyectos']['area_proyecto'];
         document.getElementById("cantidad_menores_trabajando").innerHTML=result['menores_trabajando'];
       }
-       
 
     });
+
+    function cargar_electrodomesticos(array){
+      console.log(array);
+      var tiene_pc=0;
+      for(var i=0;i<array.length;i++){
+        switch(array[i]['nombre'].toLowerCase()){
+           case "nevera":
+             document.getElementById("nevera").innerHTML="X";
+             break;
+          case "cocina":
+            document.getElementById("cocina").innerHTML="X";
+            break; 
+          case "television":
+            document.getElementById("tv").innerHTML="X";
+            break;
+          case "televisor":
+            document.getElementById("tv").innerHTML="X";
+            break;
+          case "radio":
+            document.getElementById("radio").innerHTML="X";
+            break;
+          case "computador":
+            document.getElementById("si_pc").innerHTML="X";
+            tiene_pc++;
+            break;
+          case "computadora":
+            document.getElementById("si_pc").innerHTML="X";
+            tiene_pc++;
+            break;
+        }
+      }
+
+      if(tiene_pc==0){
+        document.getElementById("no_pc").innerHTML="X";
+      }
+    }
+
+    function cargar_org_politica(org){
+      if(org==0){
+        document.getElementById("no_org_politica").innerHTML="X";
+      }
+      else{
+        document.getElementById("si_org_politica").innerHTML="X";  
+        switch(org['nombre_org']){
+          case "Consejo Comunal":
+            document.getElementById("num_org_politica").innerHTML="1";
+            break;
+          case "Comuna":
+            document.getElementById("num_org_politica").innerHTML="2";
+            break;
+          case "Colectivos":
+            document.getElementById("num_org_politica").innerHTML="3";
+            break;
+          case "UBCH":
+            document.getElementById("num_org_politica").innerHTML="4";
+            break;
+          case "Frente Francisco de Miranda":
+            document.getElementById("num_org_politica").innerHTML="5";
+            break;
+          default:
+          document.getElementById("num_org_politica").innerHTML="6";
+          document.getElementById("org_politica_especifica").innerHTML=org['nombre_org'];
+            break;    
+        }     
+        console.log(org); 
+
+      }
+    }
 
     function cargar_sector_agricola(sector){
       if(sector!=0){
@@ -119,6 +188,7 @@
         sector['agua_riego']==0?document.getElementById("agua_riego").innerHTML="No":document.getElementById("agua_riego").innerHTML="Si";
         sector['produccion_actual']==0?document.getElementById("produccion_actual").innerHTML="No":document.getElementById("produccion_actual").innerHTML="Si";
         document.getElementById("nombre_org_agricola").innerHTML=sector['org_agricola'];
+        
       }
     }
 
@@ -450,10 +520,10 @@ for (var i = 0; i < array.length; i++) {
               </center>
             </div>
             <table style='width:100%;color:red !important;font-size:13px'>
-              <tr>
+              <tr style='color:red'>
                 <td> 1- Tipo de vivienda <br>
                   <table>
-                    <tr>
+                    <tr style='color:red'>
                       <td>Casa de vecindad</td>
                       <td>
                         <span id='casa_vecindad'>
@@ -468,7 +538,7 @@ for (var i = 0; i < array.length; i++) {
                         </span>
                       </td>
                     </tr>
-                    <tr>
+                    <tr style='color:red'>
                       <td>Casa</td>
                       <td>
                         <span id='casa'>
@@ -483,7 +553,7 @@ for (var i = 0; i < array.length; i++) {
                         </span>
                       </td>
                     </tr>
-                    <tr>
+                    <tr style='color:red'>
                       <td>Otra</td>
                       <td>
                         <span id='otra'>
@@ -500,7 +570,7 @@ for (var i = 0; i < array.length; i++) {
                 </td>
                 <td> 2-.Condiciones de la vivienda <br>
                   <table>
-                    <tr>
+                    <tr style='color:red'>
                       <td>Buena</td>
                       <td>
                         <span id='buena'>
@@ -508,7 +578,7 @@ for (var i = 0; i < array.length; i++) {
                         </span>
                       </td>
                     </tr>
-                    <tr>
+                    <tr style='color:red'>
                       <td>Mala</td>
                       <td>
                         <span id='mala'>
@@ -516,7 +586,7 @@ for (var i = 0; i < array.length; i++) {
                         </span>
                       </td>
                     </tr>
-                    <tr>
+                    <tr style='color:red'>
                       <td>Regular</td>
                       <td>
                         <span id='regular'>
@@ -528,7 +598,7 @@ for (var i = 0; i < array.length; i++) {
                 </td>
                 <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3- Condición de ocupación <br>
                   <table>
-                    <tr>
+                    <tr style='color:red'>
                       <td style="width: 20px;">Propia pagada</td>
                       <td>
                         <span id='propia_pagada'>
@@ -549,7 +619,7 @@ for (var i = 0; i < array.length; i++) {
                         </span>
                       </td>
                     </tr>
-                    <tr>
+                    <tr style='color:red'>
                       <td></td>
                       <td style="position: relative;left: -50px;">Propia pagándose</td>
                       <td>
@@ -570,7 +640,7 @@ for (var i = 0; i < array.length; i++) {
                         </span>
                       </td>
                     </tr>
-                    <tr>
+                    <tr style='color:red'>
                       <td>Otro</td>
                       <td>
                         <span id='otro_cond_ocupacion'>
@@ -1477,8 +1547,8 @@ for (var i = 0; i < array.length; i++) {
                         </td>
                         <td style="position: relative;left: -220px;"> Nevera </td>
                         <td>
-                          <span id='platabanda'>
-                            <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -200px'></div>
+                          <span >
+                            <div id='nevera' style='border-style:solid;height: 20px;width:20px;position: relative;left: -200px'></div>
                           </span>
                         </td>
                       </tr>
@@ -1503,8 +1573,8 @@ for (var i = 0; i < array.length; i++) {
                         </td>
                         <td style="position: relative;left: -220px;"> Cocina </td>
                         <td>
-                          <span id='platabanda'>
-                            <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -200px'></div>
+                          <span >
+                            <div id='cocina' style='border-style:solid;height: 20px;width:20px;position: relative;left: -200px'></div>
                           </span>
                         </td>
                       </tr>
@@ -1551,14 +1621,14 @@ for (var i = 0; i < array.length; i++) {
                         </td>
                         <td style="position: relative;left: -250px;"> Si </td>
                         <td>
-                          <span id='platabanda'>
-                            <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -80px'></div>
+                          <span >
+                            <div id='no_org_politica' style='border-style:solid;height: 20px;width:20px;position: relative;left: -80px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -160px;"> No </td>
                         <td>
-                          <span id='platabanda'>
-                            <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -250px'></div>
+                          <span >
+                            <div id='si_org_politica' style='border-style:solid;height: 20px;width:20px;position: relative;left: -250px'></div>
                           </span>
                         </td>
                       </tr>
@@ -1567,7 +1637,7 @@ for (var i = 0; i < array.length; i++) {
                         <td style="position: relative; left: 0px;"></td>
                         <td style="position: relative; left: 50px;"> Mencione cuantos: </td>
                         <td style="position: relative; left: 0px;"></td>
-                        <td style="position: relative; left: 150px;"> Indique cual: <br> Coloque N°: </td>
+                        <td style="position: relative; left: 150px;"> Indique cual: <br> Coloque N°: <span id='num_org_politica' style='color:black'></span></td>
                         <td style="position: relative; left: 0px;"></td>
                       </tr>
                       <tr style="color: red;font-size: 13px;">
@@ -1580,7 +1650,7 @@ for (var i = 0; i < array.length; i++) {
                       <tr style="color: red;font-size: 13px;">
                         <td style="position: relative; left: 200px;"> 5.Frente Francisco de Miranda </td>
                         <td style="position: relative; left: 300px;"> 6.Otros </td>
-                        <td style="position: relative; left: 400px;"> Especifique: </td>
+                        <td style="position: relative; left: 400px;"> Especifique: <span style='color:black' id='org_politica_especifica'></span></td>
                         <td style="position: relative; left: 0px;"></td>
                       </tr>
                     </table>
@@ -1607,17 +1677,17 @@ for (var i = 0; i < array.length; i++) {
                             <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -100px'></div>
                           </span>
                         </td>
-                        <td style="position: relative;left: -200px;"> Television </td>
+                        <td style="position: relative;left: -200px;"> Televisión </td>
                         <td>
-                          <span id='platabanda'>
-                            <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -300px'></div>
+                          <span >
+                            <div id='tv' style='border-style:solid;height: 20px;width:20px;position: relative;left: -300px'></div>
                           </span>
                         </td>
 
                         <td style="position: relative;left: -300px;"> Si </td>
                         <td>
-                          <span id='platabanda'>
-                            <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -300px'></div>
+                          <span >
+                            <div id='si_pc' style='border-style:solid;height: 20px;width:20px;position: relative;left: -300px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -200px;"> Si </td>
@@ -1645,15 +1715,15 @@ for (var i = 0; i < array.length; i++) {
                         </td>
                         <td style="position: relative;left: -200px;"> Radio </td>
                         <td>
-                          <span id='platabanda'>
-                            <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -300px'></div>
+                          <span >
+                            <div id='radio' style='border-style:solid;height: 20px;width:20px;position: relative;left: -300px'></div>
                           </span>
                         </td>
 
                         <td style="position: relative;left: -300px;">No</td>
                         <td>
-                          <span id='platabanda'>
-                            <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -300px'></div>
+                          <span >
+                            <div id='no_pc' style='border-style:solid;height: 20px;width:20px;position: relative;left: -300px'></div>
                           </span>
                         </td>
                         <td style="position: relative;left: -200px;">No</td>

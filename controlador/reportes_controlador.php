@@ -695,6 +695,7 @@
             $servicios = $this->Consultar_Columna("servicios", "id_servicio", $vivienda[0]['id_servicio']);
             $servicio_gas = $this->Consultar_Columna("vivienda_servicio_gas", "id_vivienda", $vivienda[0]['id_vivienda']);
             $integrantes = $this->Consultar_Columna("familia_personas", "id_familia", $id);
+            $electrodomesticos=$this->Consultar_Columna("vivienda_electrodomesticos","id_vivienda",$vivienda[0]['id_vivienda']);
             $jefe_familia = "";
             $fam_sexo_diverso=0;
             $privado_libertad=0;
@@ -702,6 +703,7 @@
             $cant_menor_17_trabajando=0;
             $proyecto_socio=0;
             $sector_agricola=0;
+            $org_politica="";
 
 
 
@@ -726,11 +728,17 @@
                 $servicio_gas[$i]['servicio'] = $ser_gas[0]['nombre_servicio_gas'];
             }
 
+            for ($i = 0; $i < count($electrodomesticos); $i++) {
+                $e = $this->Consultar_Columna("electrodomesticos", "id_electrodomestico", $electrodomesticos[$i]['id_electrodomestico']);
+                $electrodomesticos[$i]['nombre'] = $e[0]['nombre_electrodomestico'];
+            }
+
             for ($i = 0; $i < count($integrantes); $i++) {
                 $persona = $this->Consultar_Columna("personas", "cedula_persona", $integrantes[$i]['cedula_persona']);
                 $cond_lab=$this->Consultar_Columna("condicion_laboral","cedula_persona",$integrantes[$i]['cedula_persona']);
                 $proyecto=$this->Consultar_Columna("persona_proyecto","cedula_persona",$integrantes[$i]['cedula_persona']);
                 $sector_agricola=$this->Consultar_Columna("sector_agricola","cedula_persona",$integrantes[$i]['cedula_persona']);
+                $org_politica=$this->Consultar_Columna("org_politica_persona","cedula_persona",$integrantes[$i]['cedula_persona']);
                 if ($persona[0]['jefe_familia'] == 1) {
                     $jefe_familia = $persona[0];
                     $ocupacion = $this->Consultar_Columna("ocupacion_persona", "cedula_persona", $jefe_familia['cedula_persona']);
@@ -778,6 +786,14 @@
                     $sector_agricola=$sector_agricola[0];
                 }
 
+                if(count($org_politica)==0){
+                    $org_politica=0;
+                }
+                else{
+                    $org=$this->Consultar_Columna("org_politica","id_org_politica",$org_politica[0]['id_org_politica']);
+                    $org_politica=$org[0];
+                }
+
 
             }
 
@@ -799,7 +815,9 @@
                 "trabajando"=>$cant_trabajando,
                 "proyectos"=>$proyecto_socio,
                 "menores_trabajando"=>$cant_menor_17_trabajando,
-                "sector_agricola"=>$sector_agricola
+                "sector_agricola"=>$sector_agricola,
+                "org_politica"=>$org_politica,
+                "electrodomesticos"=>$electrodomesticos
             ];
 
             echo json_encode($datos);
