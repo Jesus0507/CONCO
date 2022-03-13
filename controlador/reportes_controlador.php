@@ -519,7 +519,82 @@
         public function Reporte_Ninos()
         {
             $this->Seguridad_de_Session();
-            $this->Establecer_Consultas();
+            $personas=$this->Consultar_Tabla("personas",1,"cedula_persona");
+            $menores=[];
+            $menos_dos_anios=[
+                "masculino"=>0,
+                "femenino"=>0
+            ];
+
+            $dos_a_cinco_anios=[
+                "masculino"=>0,
+                "femenino"=>0
+            ];
+
+            $seis_a_diez_anios=[
+                "masculino"=>0,
+                "femenino"=>0
+            ];
+
+            $once_doce_anios=[
+                "masculino"=>0,
+                "femenino"=>0
+            ];
+
+            foreach($personas as $p){
+                $anio = explode('-', $p["fecha_nacimiento"]);
+                $edad = date("Y") - $anio[0];
+                if($edad<=2){
+                   $p['genero']=='M'?$menos_dos_anios['masculino']++:$menos_dos_anios['femenino']++;
+                }
+
+                if($edad>=3 && $edad <=5){
+                    $p['genero']=='M'?$dos_a_cinco_anios['masculino']++:$dos_a_cinco_anios['femenino']++; 
+                }
+
+                if($edad>=6 && $edad<=10){
+                    $p['genero']=='M'?$seis_a_diez_anios['masculino']++:$seis_a_diez_anios['femenino']++;
+                }
+
+                if($edad==11 || $edad==12){
+                    $p['genero']=='M'?$once_doce_anios['masculino']++:$once_doce_anios['femenino']++;
+                }
+
+                if($edad<=12){
+                    $menores[]=$p;
+                }
+                
+            }
+
+
+            for($i=0;$i<count($menores);$i++){
+                $anio = explode('-', $menores[$i]["fecha_nacimiento"]);
+                $edad = date("Y") - $anio[0];
+                $menores[$i]['edad']=$edad;
+                
+                $familia=$this->Consultar_Columna("familia_personas","cedula_persona",$menores[$i]['cedula_persona']);
+                $integrantes=$this->Consultar_Columna("familia_personas","id_familia",$familia[0]['id_familia']);
+                $get_familia=$this->Consultar_Columna("familia","id_familia",$familia[0]['id_familia']);
+                foreach($integrantes as $in){
+                    $persona=$this->Consultar_Columna("personas","cedula_persona",$in['cedula_persona']);
+                    if($persona[0]['jefe_familia']==1){
+                        $menores[$i]['representante']=$persona[0]['primer_nombre']." ".$persona[0]['primer_apellido'];
+                        $menores[$i]['contacto']=$persona[0]['telefono'];
+                    }
+                }
+
+                $vivienda=$this->Consultar_Columna("vivienda","id_vivienda",$get_familia[0]['id_vivienda']);
+                $calle=$this->Consultar_Columna("calles","id_calle",$vivienda[0]['id_calle']);
+                $menores[$i]['calle']=$calle[0]['nombre_calle'];
+
+
+            }
+            
+            $this->vista->menos_dos_anios=$menos_dos_anios;
+            $this->vista->dos_a_cinco_anios=$dos_a_cinco_anios;
+            $this->vista->seis_a_diez_anios=$seis_a_diez_anios;
+            $this->vista->once_doce_anios=$once_doce_anios;
+            $this->vista->menores=$menores;
 
 
             $this->vista->Cargar_Vistas('reportes/PDF/censo_niños');

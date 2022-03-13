@@ -22,6 +22,9 @@ class Discapacitados extends Controlador
     public function Consultas()
     {
         $this->Seguridad_de_Session();
+
+        $discapacidades=$this->modelo->Consultar_discapacidades();
+        $this->vista->discapacidades=$discapacidades;
         $this->vista->Cargar_Vistas('discapacitados/consultar');
     }
 
@@ -72,9 +75,9 @@ public function consultar_info_discapacitados(){
      $discapacidades=$this->modelo->get_discapacidades();
      $retornar=[];
 
-     foreach ($discapacitados as $d) {
+     foreach ($discapacitados as $d) { 
 
-        $discapacidades_p='<table style="width:100%"><tr><td>Discapacidad</td><td>En cama</td><td>Necesidades</td><td>Observaciones</td></tr>';
+        $discapacidades_p='<table style="width:100%">';
         $id_discapacidad_p=[];
         
          foreach ($discapacidades as $dis) {
@@ -92,7 +95,7 @@ public function consultar_info_discapacitados(){
          }
 
 
-         $discapacidades_p="<div style='overflow-y:scroll;width:100%;height:100px;background:#B4DFDE;'>".$discapacidades_p."</table></div>";
+         $discapacidades_p="<div style='overflow-y:scroll;width:100%;height:100px;background:#B4DFDE;'>".$discapacidades_p."</div></table>";
  
 
 
@@ -100,7 +103,7 @@ public function consultar_info_discapacitados(){
                 "cedula" => $d['cedula_persona'],
                 "nombre" => $d['primer_nombre']." ".$d['primer_apellido'],
                 "discapacidades" => $discapacidades_p,
-                "editar" => "<button type='button' class='btn btn-success'><em class='fa fa-edit'></em></button>",
+                "editar" => "<button type='button' class='btn btn-success editar' onclick='editar(`".$d['cedula_persona']."`)' data-toggle='modal' data-target='#actualizar'><em class='fa fa-edit'></em></button>", 
                 "eliminar" =>"<button class='btn btn-danger' onclick='eliminar(`".json_encode($id_discapacidad_p)."`)' type='button'><em class='fa fa-trash'></em></button>"
          ];
      }
@@ -114,6 +117,35 @@ public function consultar_info_discapacitados(){
 
 public function eliminar_logica(){
   echo $this->Eliminar_Tablas("discapacidad_persona","id_discapacidad_persona",$_POST['id']);
+}
+
+public function consultar_discapacitados_datos(){
+     
+     $discapacidades=$this->modelo->get_discapacidades_persona($_POST['cedula']);
+    
+
+     $this->Escribir_JSON($discapacidades);
+}
+
+public function eliminar_discapacidad(){
+  $retornar=0;
+  
+  if($this->Eliminar_Tablas("discapacidad_persona","id_discapacidad_persona",$_POST['id_discapacidad_persona'])){
+    $discapacidades=$this->Consultar_Columna("discapacidad_persona","cedula_persona",$_POST['cedula_persona']);
+    if(count($discapacidades)!=0){
+      $retornar=[];
+      for($i=0;$i<count($discapacidades);$i++){
+         $enfer=$this->Consultar_Columna("discapacidades","id_enfermedad",$discapacidades[$i]['id_enfermedad']);
+         $retornar[]=[
+           "nombre_discapacidad"=>$enfer[0]['nombre_discapacidad'],
+           "id_discapacidad_persona"=>$discapacidades[$i]['id_discapacidad_persona']
+         ];
+      }
+    }
+  }
+
+  echo json_encode($retornar);
+
 }
 
 

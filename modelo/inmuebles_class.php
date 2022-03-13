@@ -97,7 +97,7 @@ class Inmuebles_Class extends Modelo
             $this->error = 'Ha surgido un error y no se puede cargar los datos. Detalle: ' . $e->getMessage();
             return false;
         }
-    }
+    } 
 
 
     // public function Eliminar($param)

@@ -59,8 +59,8 @@
                                     Direccion de Negocio
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control no-simbolos mb-10" id="direccion" name="datos[direccion_negocio]"
-                                        placeholder="Direccion de Negocio" type="text" />
+                                    <input class="form-control no-simbolos mb-10 letras_numeros" id="direccion" name="datos[direccion_negocio]"
+                                        placeholder="Direccion de Negocio" type="text" oninput="Limitar(this,30);" />
                                 </div>
                                 <span id="mensaje_direccion"></span>
                             </div>
@@ -70,8 +70,8 @@
                                     Nombre de Negocio
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control mb-10" id="nombre_negocio" name="datos[nombre_negocio]"
-                                        placeholder="Nombre de Negocio" type="text" />
+                                    <input class="form-control letras_numeros mb-10" id="nombre_negocio" name="datos[nombre_negocio]"
+                                        placeholder="Nombre de Negocio" type="text" oninput="Limitar(this,30);" />
                                          
                                 </div>
                                 <span id="mensaje_negocio"></span>
@@ -79,11 +79,11 @@
                             
                             <div class="col-md-6 mt-2">
                                 <label for="cedula_propietario">
-                                    Cedula de Propietario
+                                    Propietario
                                 </label>
                                 <div class="input-group">
                                     <input list="cedula" id="cedula_propietario" name="datos[cedula_propietario]"
-                                        class="form-control " placeholder="Cedula" />
+                                        class="form-control no-simbolos letras_numeros" placeholder="Cedula" oninput="Limitar(this,20);"/>
                                     <datalist id="cedula">
                                         <?php foreach($this->personas as $persona){   ?>
                                         <option value="<?php echo $persona["cedula_persona"];?>">
@@ -101,8 +101,8 @@
                                     Rif del Negocio
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control mb-10" id="rif_negocio" name="datos[rif_negocio]"
-                                        placeholder="Rif del Negocio" type="text" />
+                                    <input class="form-control mb-10 letras_numeros" id="rif_negocio" name="datos[rif_negocio]"
+                                        placeholder="Rif del Negocio" type="text" onkeyup="Filtro(this,'-',RIF,false)" oninput="Limitar(this,12);"/>
                                 </div>
                                 <span id="mensaje_rif"></span>
                             </div>
@@ -116,7 +116,7 @@
                     <div class="text-center m-t-20">
                         <div class="col-xs-12">
                             <input type="button" class="btn  btn-success m-r-10" name="" id="enviar" value="Guardar">
-                            <input type="button" class="btn btn-danger" id="" name="" value="Limpiar">
+                            <input type="reset" class="btn btn-danger" id="" name="" value="Limpiar">
                         </div>
                     </div>
                 </div>

@@ -6,7 +6,7 @@ class Enfermos extends Controlador
     {
         parent::__construct();
      //   $this->Cargar_Modelo("enfermos");
-    }
+    } 
 
 
     public function Registros()
@@ -22,6 +22,8 @@ class Enfermos extends Controlador
     public function Consultas()
     {
         $this->Seguridad_de_Session();
+        $enfermedades=$this->modelo->Consultar_enfermedades();
+        $this->vista->enfermedades=$enfermedades;
         $this->vista->Cargar_Vistas('enfermos/consultar');
     }
 
@@ -91,7 +93,8 @@ public function consultar_info_enfermos(){
                 "nombre" => $e['primer_nombre']." ".$e['primer_apellido'],
                 "enfermedades" => $enfermedades_p,
                 "medicamentos" => $medicamentos_p,
-                "editar" => "<button type='button' class='btn btn-success'><em class='fa fa-edit'></em></button>",
+                "ver" => "<button type='button' class='btn btn-info' data-toggle='modal' data-target='#ver_enfermos'><em class='fa fa-eye'></em></button>",
+                "editar" => "<button type='button' class='btn btn-success editar' data-toggle='modal' data-target='#actualizar'  onclick='editar(`".$e['cedula_persona']."`)'><em class='fa fa-edit'></em></button>", 
                 "eliminar" =>"<button class='btn btn-danger' onclick='eliminar(`".json_encode($id_enfermedad_p)."`)' type='button'><em class='fa fa-trash'></em></button>"
          ];
      }
@@ -102,9 +105,38 @@ public function consultar_info_enfermos(){
      $this->Escribir_JSON($retornar);
 }
 
+public function consultar_enfermos_datos(){
+     
+     $enfermedades=$this->modelo->get_enfermedades_personas($_POST['cedula']);
+    
+
+     $this->Escribir_JSON($enfermedades);
+}
+
 
 public function eliminar_logica(){
   echo $this->Eliminar_Tablas("personas_enfermedades","id_persona_enfermedad",$_POST['id']);
+}
+
+public function eliminar_enfermedad(){
+  $retornar=0;
+  
+  if($this->Eliminar_Tablas("personas_enfermedades","id_persona_enfermedad",$_POST['id_persona_enfermedad'])){
+    $enfermedades=$this->Consultar_Columna("personas_enfermedades","cedula_persona",$_POST['cedula_persona']);
+    if(count($enfermedades)!=0){
+      $retornar=[];
+      for($i=0;$i<count($enfermedades);$i++){
+         $enfer=$this->Consultar_Columna("enfermedades","id_enfermedad",$enfermedades[$i]['id_enfermedad']);
+         $retornar[]=[
+           "nombre_enfermedad"=>$enfer[0]['nombre_enfermedad'],
+           "id_persona_enfermedad"=>$enfermedades[$i]['id_persona_enfermedad']
+         ];
+      }
+    }
+  }
+
+  echo json_encode($retornar);
+
 }
 
 

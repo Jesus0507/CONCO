@@ -31,6 +31,7 @@
                                     <?php  }   ?>
                                     </select>
                                 </div>
+                                <span id="mensaje_calle"></span>
                             </div>
 
                            
@@ -39,9 +40,10 @@
                                     Direccion de Negocio
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control mb-10" id="direccion_negocio2" name="datos[direccion_negocio]"
-                                        placeholder="Direccion de Negocio" type="text" />
+                                    <input class="form-control mb-10 letras_numeros" id="direccion_negocio2" name="datos[direccion_negocio]"
+                                        placeholder="Direccion de Negocio" type="text" oninput="Limitar(this,30);" />
                                 </div>
+                                <span id="mensaje_direccion"></span>
                             </div>
 
                             <div class="col-md-12 mt-2">
@@ -49,19 +51,20 @@
                                     Nombre de Negocio
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control mb-10" id="nombre_negocio2" name="datos[nombre_negocio]"
-                                        placeholder="Nombre de Negocio" type="text" />
+                                    <input class="form-control mb-10 letras_numeros" id="nombre_negocio2" name="datos[nombre_negocio]"
+                                        placeholder="Nombre de Negocio" type="text" oninput="Limitar(this,30);" />
                                 </div>
+                                <span id="mensaje_negocio"></span>
                             </div>
                             
                             <div class="col-md-6 mt-2">
                                 <label for="cedula_propietario2">
-                                    Cedula de Propietario
+                                    Propietario
                                 </label>
                                 <div class="input-group">
                                    
                                 <input list="cedula" id="cedula_propietario2" name="datos[cedula_propietario]"
-                                        class="form-control " placeholder="Cedula" />
+                                        class="form-control letras_numeros" placeholder="Cedula" oninput="Limitar(this,20);" />
                                     <datalist id="cedula">
                                         <?php foreach($this->personas as $persona){   ?>
                                         <option value="<?php echo $persona["cedula_persona"];?>">
@@ -71,6 +74,7 @@
                                     </datalist>
                                     
                                 </div> 
+                                <span id="mensaje_cedula"></span>
                             </div>
 
                             <div class="col-md-6 mt-2">
@@ -78,9 +82,10 @@
                                     Rif del Negocio
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control mb-10" id="rif_negocio2" name="datos[rif_negocio]"
-                                        placeholder="Rif del Negocio" type="text" />
+                                    <input class="form-control mb-10 letras_numeros" id="rif_negocio2" name="datos[rif_negocio]"
+                                        placeholder="Rif del Negocio" type="text" onkeyup="Filtro(this,'-',RIF,false)" oninput="Limitar(this,12);"/>
                                 </div>
+                                <span id="mensaje_rif"></span>
                             </div>
                 
                         </div>

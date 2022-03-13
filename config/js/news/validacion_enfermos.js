@@ -25,7 +25,7 @@ enfermedad_select.onchange=function(){
 		valid_enfermedad.innerHTML='';
 		enfermedad_select.style.borderColor='';
 	}
-}
+} 
 
 
 

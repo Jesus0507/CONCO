@@ -51,7 +51,7 @@
                  <div id='second' style='display:none'>
                      <div class='row'>
 
-                         <div class="col-md-12">
+                         <div class="col-md-12"> 
 
                              <label>Enfermedad</label> <span id='valid_enfermedad' style='color:red'></span>
                              <table style='width:100%'><tr><td>

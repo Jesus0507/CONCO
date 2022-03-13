@@ -18,7 +18,7 @@ var observaciones=document.getElementById("observaciones");
 
 
 
-discapacidad_select.onchange=function(){
+discapacidad_select.onchange=function(){ 
 	if(discapacidad_select.value=='vacio'){
 		valid_discapacidad.innerHTML='Ingrese la discapacidad';
 		discapacidad_select.style.borderColor='red';

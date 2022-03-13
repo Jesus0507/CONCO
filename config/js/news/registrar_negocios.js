@@ -3,7 +3,7 @@ $(document).ready(function() {
         var form = $("#formulario");
         var id_calle = document.getElementById("id_calle");
         var nombre_negocio = document.getElementById("nombre_negocio");
-        var direccion_negocio = document.getElementById("direccion");
+        var direccion = document.getElementById("direccion");
         var cedula_propietario = document.getElementById("cedula_propietario");
         var rif_negocio = document.getElementById("rif_negocio");
         var mensaje_calle = document.getElementById("mensaje_calle");
@@ -12,6 +12,40 @@ $(document).ready(function() {
         var mensaje_cedula = document.getElementById("mensaje_cedula");
         var mensaje_rif = document.getElementById("mensaje_rif");
         var retornar = false;
+
+        if (id_calle.value == 0 &&
+            direccion.value == '' || direccion.value == null &&
+            nombre_negocio.value == '' || nombre_negocio.value == null &&
+            cedula_propietario.value == '' || cedula_propietario.value == null &&
+            rif_negocio.value == '' || rif_negocio.value == null
+            ) 
+        {
+            mensaje_calle.innerHTML = 'Debe seleccionar una Calle';
+            id_calle.style.borderColor = 'red';
+            mensaje_calle.style.color = 'red';
+            id_calle.focus();
+
+            mensaje_direccion.innerHTML = 'el campo direccion no puede estar vacio';
+            direccion.style.borderColor = 'red';
+            mensaje_direccion.style.color = 'red';
+            direccion.focus();
+
+            mensaje_negocio.innerHTML = 'el campo nombre no puede estar vacio';
+            nombre_negocio.style.borderColor = 'red';
+            mensaje_negocio.style.color = 'red';
+            nombre_negocio.focus();
+
+            mensaje_cedula.innerHTML = 'el campo cedula no puede estar vacio';
+            cedula_propietario.style.borderColor = 'red';
+            mensaje_cedula.style.color = 'red';
+            cedula_propietario.focus();
+
+            mensaje_rif.innerHTML = 'el campo rif no puede estar vacio';
+            rif_negocio.style.borderColor = 'red';
+            mensaje_rif.style.color = 'red';
+            rif_negocio.focus();
+        }
+
         if (id_calle.value == 0) {
             mensaje_calle.innerHTML = 'Debe seleccionar una Calle';
             id_calle.style.borderColor = 'red';
@@ -66,7 +100,8 @@ $(document).ready(function() {
                                     'rif_negocio': rif_negocio.value,
                                 },
                             }).done(function(respuesta) {
-                                if (respuesta == 0) {
+                                console.log(respuesta)
+                                if (respuesta != 0) {
                                     mensaje_rif.innerHTML = 'Ya hay un negocio registrado con este rif.';
                                     rif_negocio.style.borderColor = 'red';
                                     mensaje_rif.style.color = 'red';
@@ -105,12 +140,11 @@ $(document).ready(function() {
             }
         }
     });
-    document.onkeypress = function(e) {
-        if (e.which == 13 || e.keyCode == 13) {
-            envioFormulario();
-            return false;
-        } else {
-            return true;
-        }
+document.onkeypress = function(e) {
+    if (e.which == 13 || e.keyCode == 13) {
+        return false;
+    } else {
+        return true;
     }
+}
 });

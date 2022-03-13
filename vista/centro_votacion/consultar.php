@@ -96,7 +96,7 @@
                 fila = $(this).closest("tr");
                 cedula_persona = fila.find("td:eq(0)").text();
                 nombre_apellido = fila.find("td:eq(1)").text();
-                nombre_centro = fila.find("td:eq(2  )").text();
+                nombre_centro = fila.find("td:eq(2)").text();
                 id_parroquia = fila.find("td:eq(3)").text();
                 
 
@@ -119,7 +119,20 @@
 
                 $("#cedula_persona2").val(cedula_persona);
                 $("#nombre_centro2").val(nombre_centro);
-                                
+
+                
+                $.ajax({
+                type: 'POST',
+                url: BASE_URL + 'Centro_Votacion/Consultas_Parroquias',
+                data: {
+                    id: id_parroquia,
+                },
+            }).done(function(result) {
+                // $("#id_parroquia2 option[value="+ result +"]").attr("selected", true);
+                document.getElementById("id_parroquia2").selectedIndex = result;
+            }).fail(function() {
+                alert("error")
+            })          
 
                 $(document).on("click", "#enviar", function () {
                     

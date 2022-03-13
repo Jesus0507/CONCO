@@ -108,6 +108,10 @@
 
       document.getElementById("tabla_integrantes").innerHTML=result['tabla_integrantes'];
 
+      window.blur();
+      window.print();
+      window.close();
+
     });
 
     function cargar_electrodomesticos(array){

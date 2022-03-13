@@ -135,7 +135,7 @@ class Inmuebles extends Controlador
         }
         
         echo  $id;
-        return false;
+        
     } 
 
     public function Eliminar_Inmueble() 

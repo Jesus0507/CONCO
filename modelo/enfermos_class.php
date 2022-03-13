@@ -11,7 +11,7 @@ class Enfermos_Class extends Modelo
 
 
 
-
+ 
     public function Consultar_personas()
     {
 
@@ -90,7 +90,24 @@ class Enfermos_Class extends Modelo
     }
 
 
+    public function get_enfermedades_personas($cedula)
+    {
 
+        $tabla            = "SELECT E.*,PE.cedula_persona,PE.medicamentos, PE.id_persona_enfermedad FROM enfermedades E, personas_enfermedades PE WHERE PE.cedula_persona = $cedula AND PE.id_enfermedad=E.id_enfermedad AND E.estado=1";
+        $respuesta_arreglo = '';
+        try {
+            $datos = $this->conexion->prepare($tabla);
+            $datos->execute();
+            $datos->setFetchMode(PDO::FETCH_ASSOC);
+            $respuesta_arreglo = $datos->fetchAll(PDO::FETCH_ASSOC);
+            return $respuesta_arreglo;
+        } catch (PDOException $e) {
+
+            $errorReturn = ['estatus' => false];
+            $errorReturn += ['info' => "error sql:{$e}"];
+            return $errorReturn;
+        }
+    }
 
     public function registrar_enfermedad_persona($data)
     {
@@ -118,7 +135,7 @@ class Enfermos_Class extends Modelo
             $this->error = 'Ha surgido un error y no se puede cargar los datos. Detalle: ' . $e->getMessage();
             return false;
         }
-    }
+    } 
 
 
 }

@@ -70,13 +70,15 @@ class Negocios extends Controlador
     {
         $this->Establecer_Consultas();
 
-
-        $existente = $this->Consultar_Columna("negocios","rif_negocio",$_POST['rif_negocio']);
-        if ($existente == "" || $existente == null ) {
-            echo 0;
-        } else {
-            echo 1;
+        foreach ($this->datos_negocios as $key => $value) {
+            if ($value["rif_negocio"] == $_POST['rif_negocio']) {
+                $existente = 1;
+            } else {
+                $existente = 0;
+            }
         }
+
+     echo ($existente);
         
     }
 
@@ -124,12 +126,12 @@ class Negocios extends Controlador
          $datos = ($_POST['datos'] !== "") ? $_POST['datos'] : null;
         if ($this->modelo->Actualizar(
             [
-                'id_negocio'=>$datos[5],
-                'id_calle'   => $datos[0],
-                'nombre_negocio'      => $datos[1],
-                'direccion_negocio'   => $datos[2],
-                'cedula_propietario'   =>   $datos[3],
-                'rif_negocio'   =>   $datos[4],
+                'id_negocio'=>$datos["id_negocio"],
+                'id_calle'   => $datos["id_calle"],
+                'nombre_negocio'      => $datos["nombre_negocio"],
+                'direccion_negocio'   => $datos["direccion_negocio"],
+                'cedula_propietario'   =>   $datos["cedula_propietario"],
+                'rif_negocio'   =>   $datos["rif_negocio"],
                 'estado'   => 1
             ]
         )

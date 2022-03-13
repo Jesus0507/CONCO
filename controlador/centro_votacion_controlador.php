@@ -233,5 +233,19 @@ class Centro_Votacion extends Controlador
         echo $this->mensaje;
         return false;
     } 
+
+    public function Consultas_Parroquias() 
+    {
+        $this->Establecer_Consultas();
+
+        foreach ($this->parroquias as $key => $value) {
+            if ($value["nombre_parroquia"] == $_POST['id']) {
+                $id = $value["id_parroquia"];
+            }
+        }
+        
+        echo  $id;
+        
+    } 
 }
 ?> 
