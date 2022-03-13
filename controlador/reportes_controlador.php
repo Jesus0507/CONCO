@@ -695,15 +695,17 @@
             $servicios = $this->Consultar_Columna("servicios", "id_servicio", $vivienda[0]['id_servicio']);
             $servicio_gas = $this->Consultar_Columna("vivienda_servicio_gas", "id_vivienda", $vivienda[0]['id_vivienda']);
             $integrantes = $this->Consultar_Columna("familia_personas", "id_familia", $id);
-            $electrodomesticos=$this->Consultar_Columna("vivienda_electrodomesticos","id_vivienda",$vivienda[0]['id_vivienda']);
+            $electrodomesticos = $this->Consultar_Columna("vivienda_electrodomesticos", "id_vivienda", $vivienda[0]['id_vivienda']);
             $jefe_familia = "";
-            $fam_sexo_diverso=0;
-            $privado_libertad=0;
-            $cant_trabajando=0;
-            $cant_menor_17_trabajando=0;
-            $proyecto_socio=0;
-            $sector_agricola=0;
-            $org_politica="";
+            $fam_sexo_diverso = 0;
+            $privado_libertad = 0;
+            $cant_trabajando = 0;
+            $cant_menor_17_trabajando = 0;
+            $proyecto_socio = 0;
+            $sector_agricola = 0;
+            $org_politica = "";
+            $cant_integrantes = 1;
+            $tabla_integrantes = "";
 
 
 
@@ -735,66 +737,141 @@
 
             for ($i = 0; $i < count($integrantes); $i++) {
                 $persona = $this->Consultar_Columna("personas", "cedula_persona", $integrantes[$i]['cedula_persona']);
-                $cond_lab=$this->Consultar_Columna("condicion_laboral","cedula_persona",$integrantes[$i]['cedula_persona']);
-                $proyecto=$this->Consultar_Columna("persona_proyecto","cedula_persona",$integrantes[$i]['cedula_persona']);
-                $sector_agricola=$this->Consultar_Columna("sector_agricola","cedula_persona",$integrantes[$i]['cedula_persona']);
-                $org_politica=$this->Consultar_Columna("org_politica_persona","cedula_persona",$integrantes[$i]['cedula_persona']);
+                $cond_lab = $this->Consultar_Columna("condicion_laboral", "cedula_persona", $integrantes[$i]['cedula_persona']);
+                $proyecto = $this->Consultar_Columna("persona_proyecto", "cedula_persona", $integrantes[$i]['cedula_persona']);
+                $sector_agricola = $this->Consultar_Columna("sector_agricola", "cedula_persona", $integrantes[$i]['cedula_persona']);
+                $org_politica = $this->Consultar_Columna("org_politica_persona", "cedula_persona", $integrantes[$i]['cedula_persona']);
+                $anio = explode('-', $persona[0]["fecha_nacimiento"]);
+                $edad = date("Y") - $anio[0];
+                $ocupacion_persona = $this->Consultar_Columna("ocupacion_persona", "cedula_persona", $integrantes[$i]['cedula_persona']);
+                $condicion_laboral_persona = $this->Consultar_Columna("condicion_laboral", "cedula_persona", $integrantes[$i]['cedula_persona']);
+                $enfermedades_persona=$this->Consultar_Columna("personas_enfermedades","cedula_persona",$integrantes[$i]['cedula_persona']);
+                $misiones_persona=$this->Consultar_Columna("persona_misiones","cedula_persona",$integrantes[$i]['cedula_persona']);
                 if ($persona[0]['jefe_familia'] == 1) {
                     $jefe_familia = $persona[0];
                     $ocupacion = $this->Consultar_Columna("ocupacion_persona", "cedula_persona", $jefe_familia['cedula_persona']);
                     $cant = count($ocupacion);
                     $cant == 0 ? $ocupacion = "No posee" : $ocupacion = $this->Consultar_Columna("ocupacion", "id_ocupacion", $ocupacion[0]['id_ocupacion']);
                     $cant != 0 ? $jefe_familia['ocupacion'] = $ocupacion[0]['nombre_ocupacion'] : $jefe_familia['ocupacion'] = 'No posee';
-                    $condicion_laboral=$this->Consultar_Columna("condicion_laboral","cedula_persona",$jefe_familia['cedula_persona']);
-                    count($condicion_laboral)==0?$jefe_familia['condicion_laboral']="No posee":$jefe_familia['condicion_laboral']=$condicion_laboral[0];
-                    $comunidad_indigena=$this->Consultar_Columna("comunidad_indigena_personas","cedula_persona",$jefe_familia['cedula_persona']);
-                    if(count($comunidad_indigena)==0){
-                        $jefe_familia['comunidad_indigena']=0;
+                    $condicion_laboral = $this->Consultar_Columna("condicion_laboral", "cedula_persona", $jefe_familia['cedula_persona']);
+                    count($condicion_laboral) == 0 ? $jefe_familia['condicion_laboral'] = "No posee" : $jefe_familia['condicion_laboral'] = $condicion_laboral[0];
+                    $comunidad_indigena = $this->Consultar_Columna("comunidad_indigena_personas", "cedula_persona", $jefe_familia['cedula_persona']);
+                    if (count($comunidad_indigena) == 0) {
+                        $jefe_familia['comunidad_indigena'] = 0;
+                    } else {
+                        $comunidad = $this->Consultar_Columna("comunidad_indigena", "id_comunidad_indigena", $comunidad_indigena[0]['id_comunidad_indigena']);
+                        $jefe_familia['comunidad_indigena'] = $comunidad[0]['nombre_comunidad'];
                     }
-                    else{
-                        $comunidad=$this->Consultar_Columna("comunidad_indigena","id_comunidad_indigena",$comunidad_indigena[0]['id_comunidad_indigena']);
-                        $jefe_familia['comunidad_indigena']=$comunidad[0]['nombre_comunidad'];
-                    }
-                }   
-
-                if($persona[0]['sexualidad']!="Heterosexual"){
-                    $fam_sexo_diverso=1;
                 }
 
-                if($persona[0]['privado_libertad']==1){
-                    $privado_libertad=1;
+                if ($persona[0]['sexualidad'] != "Heterosexual") {
+                    $fam_sexo_diverso = 1;
                 }
 
-                if(count($cond_lab)!=0){
-                    $cant_trabajando++;        
-                    $anio = explode('-', $persona[0]["fecha_nacimiento"]);
-                    $edad = date("Y") - $anio[0];
-                    if($edad<17){
+                if ($persona[0]['privado_libertad'] == 1) {
+                    $privado_libertad = 1;
+                }
+
+                if (count($cond_lab) != 0) {
+                    $cant_trabajando++;
+                    if ($edad < 17) {
                         $cant_menor_17_trabajando++;
                     }
                 }
 
-                if(count($proyecto)!=0){
-                    $pro=$this->Consultar_Columna("proyecto","id_proyecto",$proyecto[0]['id_proyecto']);
-                    $proyecto_socio=$pro[0];
+                if (count($proyecto) != 0) {
+                    $pro = $this->Consultar_Columna("proyecto", "id_proyecto", $proyecto[0]['id_proyecto']);
+                    $proyecto_socio = $pro[0];
                 }
 
-                if(count($sector_agricola)==0){
-                    $sector_agricola=0;
+                if (count($sector_agricola) == 0) {
+                    $sector_agricola = 0;
+                } else {
+                    $sector_agricola = $sector_agricola[0];
                 }
+
+                if (count($org_politica) == 0) {
+                    $org_politica = 0;
+                } else {
+                    $org = $this->Consultar_Columna("org_politica", "id_org_politica", $org_politica[0]['id_org_politica']);
+                    $org_politica = $org[0];
+                }
+
+            $ocup="";
+            if(count($ocupacion_persona)==0){
+                $ocup="No posee";
+            }
+            else{
+            $ocupa= $this->Consultar_Columna("ocupacion", "id_ocupacion", $ocupacion_persona[0]['id_ocupacion']);
+            $ocup=$ocupa[0]['nombre_ocupacion'];
+            }
+
+            $cond_lab_persona="";
+            if(count($condicion_laboral_persona)==0){
+                $cond_lab_persona="No posee";
+            }
+            else{
+                $cond_lab_persona=$condicion_laboral_persona[0]['nombre_cond_laboral'];
+            }
+
+            $enfermedad="";
+            if(count($enfermedades_persona)==0){
+                $enfermedad="No posee";
+            }
+            else{
+                $enf=$this->Consultar_Columna("enfermedades","id_enfermedad",$enfermedades_persona[0]['id_enfermedad']);
+                $enfermedad=$enf[0]['nombre_enfermedad'];
+            }
+
+            $misiones="";
+            if(count($misiones_persona)==0){
+                $misiones="No aplica";
+            }
+            else{
+                if($misiones_persona[0]['recibe_actualmente']==1){
+                $mision=$this->Consultar_Columna("misiones","id_mision",$misiones_persona[0]['id_mision']);
+                $misiones=$mision[0]['nombre_mision'];    
+            }
                 else{
-                    $sector_agricola=$sector_agricola[0];
+                    $misiones="No aplica";
                 }
-
-                if(count($org_politica)==0){
-                    $org_politica=0;
-                }
-                else{
-                    $org=$this->Consultar_Columna("org_politica","id_org_politica",$org_politica[0]['id_org_politica']);
-                    $org_politica=$org[0];
-                }
+            }
 
 
+
+
+
+             $tabla_integrantes.="
+                <thead>
+                <tr style='color:red;'>
+                  <th>#</th>
+                  <th>Nombre y Apellido</th>
+                  <th>Edad</th>
+                  <th>Cedula</th>
+                  <th>Fecha de Nacimiento</th>
+                  <th>Grado Intrucciones</th>
+                  <th>Estado Civil</th>
+                </tr>
+                <thead>
+                  <tbody>";
+                 $tabla_integrantes .= "<tr><td>" . $cant_integrantes . "</td><td>" . $persona[0]['primer_nombre'] . " " . $persona[0]['primer_apellido'] . "</td>";
+                 $tabla_integrantes .= "<td>" . $edad . "</td><td>" . $persona[0]['cedula_persona'] . "</td><td>" . $persona[0]['fecha_nacimiento'] . "</td>";
+                 $tabla_integrantes .= "<td>" . $persona[0]['nivel_educativo'] . "</td><td>" . $persona[0]['estado_civil'] . "</td></tr>";
+                $tabla_integrantes.="
+                 <tr style='color:red;'>
+                   <td></td>
+                   <th>Ocupacion u Oficio</th>
+                   <th>Condicion Laboral</th>
+                   <th>Enfermedad o Factor de Riesgo</th>
+                   <th>Mision de la cual recibe beneficio</th>
+                   <th colspan='2'>Documento que requiere</th>
+                 </tr>
+                 <tr>
+                   <td>".$cant_integrantes."</td><td>".$ocup."</td><td>".$cond_lab_persona."</td>
+               <td>".$enfermedad."</td><td>".$misiones."</td><td colspan='2'></td>";
+
+
+                 $cant_integrantes++;
             }
 
 
@@ -810,14 +887,15 @@
                 "gas" => $servicio_gas,
                 "integrantes" => $integrantes,
                 "jefe_familia" => $jefe_familia,
-                "familiar_sexo_diverso"=>$fam_sexo_diverso,
-                "privado_libertad"=>$privado_libertad,
-                "trabajando"=>$cant_trabajando,
-                "proyectos"=>$proyecto_socio,
-                "menores_trabajando"=>$cant_menor_17_trabajando,
-                "sector_agricola"=>$sector_agricola,
-                "org_politica"=>$org_politica,
-                "electrodomesticos"=>$electrodomesticos
+                "familiar_sexo_diverso" => $fam_sexo_diverso,
+                "privado_libertad" => $privado_libertad,
+                "trabajando" => $cant_trabajando,
+                "proyectos" => $proyecto_socio,
+                "menores_trabajando" => $cant_menor_17_trabajando,
+                "sector_agricola" => $sector_agricola,
+                "org_politica" => $org_politica,
+                "electrodomesticos" => $electrodomesticos,
+                "tabla_integrantes" => $tabla_integrantes
             ];
 
             echo json_encode($datos);

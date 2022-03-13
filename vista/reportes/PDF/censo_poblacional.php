@@ -106,6 +106,8 @@
         document.getElementById("cantidad_menores_trabajando").innerHTML=result['menores_trabajando'];
       }
 
+      document.getElementById("tabla_integrantes").innerHTML=result['tabla_integrantes'];
+
     });
 
     function cargar_electrodomesticos(array){
@@ -1784,43 +1786,7 @@ for (var i = 0; i < array.length; i++) {
                     </div>
                   </tr>
                   <tr>
-                    <table class="datos">
-                      <tr style="color:red;">
-                        <td>#</td>
-                        <td>Nombre y Apellido</td>
-                        <td>Edad</td>
-                        <td>Cedula</td>
-                        <td>Fecha de Nacimiento</td>
-                        <td>Grado Intrucciones</td>
-                        <td>Estado Civil</td>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-
-                      <tr style="color:red;">
-                        <td></td>
-                        <td>Ocupacion u Oficio</td>
-                        <td>Condicion Laboral</td>
-                        <td>Enfermedad o Factor de Riesgo</td>
-                        <td>Mision de la cual recibe beneficio</td>
-                        <td colspan="2">Documento que requiere</td>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td colspan="2"></td>
-
-                      </tr>
+                    <table class="datos" id='tabla_integrantes'>
                     </table>
 
                   </tr>
