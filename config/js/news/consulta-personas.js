@@ -676,8 +676,15 @@ function editar_persona() {
     data: { datos_persona: inf_persona },
   }).done(function (result) {
     if(result==1){
+      swal({
+        type:"success",
+        title:"Éxito",
+        text:"Se han almacenado los cambios correctamente",
+        timer:2000,
+        showConfirmButton:false
+      });
       setTimeout(function(){$('#example1').DataTable().clear().destroy();
-      cargar_tabla_personas();$("#edit_persona").modal("hide");},300);
+      cargar_tabla_personas();$("#edit_persona").modal("hide");},1000);
     }
   });
 }

@@ -49,6 +49,50 @@
         document.getElementById("no_plagas").innerHTML="<div style='border-style:solid;height: 20px;width:20px;position: relative;left: -170px'>X</div>";
       }
 
+      document.getElementById("nombre").innerHTML=result['jefe_familia']['primer_nombre']+" "+result['jefe_familia']['primer_apellido'];
+
+      document.getElementById("cedula").innerHTML=result['jefe_familia']['cedula_persona'];
+      document.getElementById("sexo").innerHTML=result['jefe_familia']['genero'];
+      var edad=new Date().getFullYear() - new Date(result['jefe_familia']['fecha_nacimiento']).getFullYear();
+      document.getElementById("edad").innerHTML=edad;
+      document.getElementById("fecha").innerHTML=result['jefe_familia']['fecha_nacimiento'];
+      document.getElementById("estado_civil").innerHTML=result['jefe_familia']['estado_civil'];
+      document.getElementById("nivel").innerHTML=result['jefe_familia']['nivel_educativo'];
+      document.getElementById("ocupacion").innerHTML=result['jefe_familia']['ocupacion'];
+      document.getElementById("condicion").innerHTML=result['jefe_familia']['condicion_laboral']['nombre_cond_laboral'];
+      if(result['jefe_familia']['condicion_laboral']!='No posee'){
+        console.log(result['jefe_familia']['condicion_laboral']['sector_laboral']);
+      if(result['jefe_familia']['condicion_laboral']['sector_laboral']==1){
+        document.getElementById("formal").innerHTML="X";
+        result['jefe_familia']['condicion_laboral']['pertenece']==1?document.getElementById("formal_informal").innerHTML="X":document.getElementById("formal_publico").innerHTML='X';
+      }
+      }
+      result['jefe_familia']['afrodescencencia']==1?document.getElementById("si_afro").innerHTML="X":document.getElementById("no_afro").innerHTML="X";
+      if(result['jefe_familia']['comunidad_indigena']==0){
+        document.getElementById("no_indigena").innerHTML="X";
+      }
+      else{
+        document.getElementById("si_indigena").innerHTML="X";
+        console.log(result['jefe_familia']['comunidad_indigena']);
+        document.getElementById("comunidad").innerHTML=result['jefe_familia']['comunidad_indigena'];
+
+      }
+
+      if(result['integrantes'].length<=4){
+        document.getElementById("nuclear").innerHTML='X';
+      }
+      else{
+        if(result['integrantes'].length==5){
+        document.getElementById("extensa").innerHTML='X';
+      }
+      else{
+        document.getElementById("ampliada").innerHTML='X';
+      }
+      }
+console.log(result['familiar_sexo_diverso']);
+      result['familiar_sexo_diverso']==1?document.getElementById("si_sexo_diverso").innerHTML="X":document.getElementById("no_sexo_diverso").innerHTML="X";
+      result['privado_libertad']==1?document.getElementById("si_privado_libertad").innerHTML="X":document.getElementById("no_privado_libertad").innerHTML="X";
+
 
 
     });
@@ -904,36 +948,36 @@ for (var i = 0; i < array.length; i++) {
                         <td style="position: relative; left: -120px;"> Ocupacion u Oficio </td>
                       </tr>
                       <tr style="color: red;font-size: 13px;">
-                        <td style="position: relative; left: -180px;">
+                        <td style="position: relative; left: -30px;">
                           <span id="nombre"></span>
                           <br>
                         </td>
-                        <td style="position: relative; left: -120px;">
+                        <td style="position: relative; left: -50px;">
                           <span id="cedula"></span>
                           <br>
                         </td>
-                        <td style="position: relative; left: -80px;">
-                          <span id="sexo"></span>
+                        <td style="position: relative; left: -125px;">
+                          <span id="sexo">M</span>
                           <br>
                         </td>
-                        <td style="position: relative; left: -60px;">
+                        <td style="position: relative; left: -200px;">
                           <span id="edad"></span>
                           <br>
                         </td>
-                        <td style="position: relative; left: -30px;">
+                        <td style="position: relative; left: -160px;">
                           <span id="fecha"></span>
                           <br>
                         </td>
-                        <td style="position: relative; left: 0px;">
-                          <span id="estado"></span>
+                        <td style="position: relative; left: -170px;">
+                          <span id="estado_civil"></span>
                           <br>
                         </td>
-                        <td style="position: relative; left: 30px;">
-                          <span id="nivel"></span>
+                        <td style="position: relative; left: -135px;">
+                          <span id="nivel">educacion</span>
                           <br>
                         </td>
-                        <td style="position: relative; left: 50px;">
-                          <span id="ocupación"></span>
+                        <td style="position: relative; left: -120px;">
+                          <span id="ocupacion"></span>
                           <br>
                         </td>
                       </tr>
@@ -949,29 +993,29 @@ for (var i = 0; i < array.length; i++) {
                         </td>
                         <td style="position: relative;left: 30px;"> Formal </td>
                         <td>
-                          <span id='platabanda'>
-                            <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -60px'></div>
+                          <span>
+                            <div id="formal" style='border-style:solid;height: 20px;width:20px;position: relative;left: -60px'></div>
                           </span>
                         </td>
                         <td>
                         <td style="position: relative;left: -150px;"> Publico </td>
                         <td>
-                          <span id='platabanda'>
-                            <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -150px'></div>
+                          <span >
+                            <div id='publico' style='border-style:solid;height: 20px;width:20px;position: relative;left: -150px'></div>
                           </span>
                         </td>
                         <td>
                         <td style="position: relative;left: -220px;"> Informal </td>
                         <td>
-                          <span id='platabanda'>
-                            <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -230px'></div>
+                          <span>
+                            <div id='formal_informal' style='border-style:solid;height: 20px;width:20px;position: relative;left: -230px'></div>
                           </span>
                         </td>
                         <td>
                         <td style="position: relative;left: -200px;"> Publico </td>
                         <td>
-                          <span id='platabanda'>
-                            <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -190px'></div>
+                          <span>
+                            <div id='formal_publico' style='border-style:solid;height: 20px;width:20px;position: relative;left: -190px'></div>
                           </span>
                         </td>
                         <td>
@@ -997,62 +1041,62 @@ for (var i = 0; i < array.length; i++) {
                   <tr style="color: red;font-size: 13px;">
                     <td style="position: relative;left: 30px;"> Nuclear </td>
                     <td>
-                      <span id='platabanda'>
-                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -40px'></div>
+                      <span>
+                        <div id='nuclear' style='border-style:solid;height: 20px;width:20px;position: relative;left: -40px'></div>
                       </span>
                     </td>
                     <td>
                     <td style="position: relative;left: -280px;"> Si </td>
                     <td>
-                      <span id='laminas'>
-                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -380px'></div>
+                      <span>
+                        <div id='si_afro' style='border-style:solid;height: 20px;width:20px;position: relative;left: -380px'></div>
                       </span>
                     </td>
                     <td style="position: relative;left: -280px;"> Si </td>
                     <td>
-                      <span id='laminas'>
-                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -270px'></div>
+                      <span >
+                        <div id='si_indigena' style='border-style:solid;height: 20px;width:20px;position: relative;left: -270px'></div>
                       </span>
                     </td>
                     <td style="position: relative;left: -150px;"> Si </td>
                     <td>
-                      <span id='laminas'>
-                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -140px'></div>
+                      <span >
+                        <div id='si_sexo_diverso' style='border-style:solid;height: 20px;width:20px;position: relative;left: -140px'></div>
                       </span>
                     </td>
                   </tr>
                   <tr style="color: red;font-size: 13px;">
                     <td style="position: relative;left: 30px;"> Extensa </td>
                     <td>
-                      <span id='platabanda'>
-                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -40px'></div>
+                      <span >
+                        <div id='extensa' style='border-style:solid;height: 20px;width:20px;position: relative;left: -40px'></div>
                       </span>
                     </td>
                     <td>
                     <td style="position: relative;left: -280px;"> No </td>
                     <td>
-                      <span id='laminas'>
-                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -380px'></div>
+                      <span >
+                        <div id='no_afro' style='border-style:solid;height: 20px;width:20px;position: relative;left: -380px'></div>
                       </span>
                     </td>
                     <td style="position: relative;left: -280px;"> No </td>
                     <td>
-                      <span id='laminas'>
-                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -270px'></div>
+                      <span >
+                        <div id='no_indigena' style='border-style:solid;height: 20px;width:20px;position: relative;left: -270px'></div>
                       </span>
                     </td>
                     <td style="position: relative;left: -150px;"> No </td>
                     <td>
-                      <span id='laminas'>
-                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -140px'></div>
+                      <span >
+                        <div id='no_sexo_diverso' style='border-style:solid;height: 20px;width:20px;position: relative;left: -140px'></div>
                       </span>
                     </td>
                   </tr>
                   <tr style="color: red;font-size: 13px;">
                     <td style="position: relative;left: 30px;"> Ampliada </td>
                     <td>
-                      <span id='platabanda'>
-                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -40px'></div>
+                      <span >
+                        <div id='ampliada' style='border-style:solid;height: 20px;width:20px;position: relative;left: -40px'></div>
                       </span>
                     </td>
                     <td>
@@ -1071,8 +1115,8 @@ for (var i = 0; i < array.length; i++) {
                   <tr style="color: red;font-size: 13px;">
                     <td style="position: relative;left: 30px;"> Si </td>
                     <td>
-                      <span id='platabanda'>
-                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -130px'></div>
+                      <span >
+                        <div id='si_privado_libertad' style='border-style:solid;height: 20px;width:20px;position: relative;left: -130px'></div>
                       </span>
                     </td>
                     <td>
@@ -1089,8 +1133,8 @@ for (var i = 0; i < array.length; i++) {
                   <tr style="color: red;font-size: 13px;">
                     <td style="position: relative;left: 30px;"> No </td>
                     <td>
-                      <span id='platabanda'>
-                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -130px'></div>
+                      <span >
+                        <div id='no_privado_libertad' style='border-style:solid;height: 20px;width:20px;position: relative;left: -130px'></div>
                       </span>
                     </td>
                     <td>
