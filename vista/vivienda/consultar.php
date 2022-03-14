@@ -115,7 +115,7 @@
     <!-- /.content -->
     <!-- /.content -->
 </div>
-<?php include modal."ver-vivienda.php"; ?>  
+<?php include modal."editar-vivienda.php"; ?>  
 <?php include (call."style-agenda.php"); ?>
 <!-- /.content-wrapper -->
 <?php include (call."Fin.php"); ?>

@@ -95,9 +95,9 @@ class Viviendas extends Controlador
             <i class='fa fa-eye'></i>
             </a>",
 
-            "editar" => '<a href="javascript:void(0)" class="btn bg-success btnEditar"  title="Actualizar" type="button" data-toggle="modal" data-target="#actualizar" onclick="Modificar('.json_encode($value["id_vivienda"]).')">
-            <i class="fa fa-edit" style="color: white;"></i>
-            </a>',
+            "editar" => "<a href='javascript:void(0)' class='btn bg-success btnEditar'  title='Actualizar' type='button' data-toggle='modal' data-target='#actualizar' onclick='Modificar(".json_encode($value["id_vivienda"]).",`".json_encode($value)."`,`".json_encode($techos)."`,`".json_encode($paredes)."`,`".json_encode($pisos)."`,`".json_encode($gas)."`,`".json_encode($electrodomesticos)."`)'>
+            <i class='fa fa-edit' style='color: white;'></i>
+            </a>",
 
             "eliminar" => ' <a href="javascript:void(0)" style="margin-right: 5px;" class="btn bg-danger mensaje-eliminar" title="Eliminar" onclick="Eliminar('.json_encode($value["id_vivienda"]).','.$value['id_servicio'].')">
             <i class="fa fa-trash"></i>
@@ -514,6 +514,99 @@ public function eliminacion_vivienda(){
    
    }
 
+   public function get_techos(){
+       $techos_vivienda=$this->modelo->get_techos_vivienda($_POST['id_vivienda']);
+       echo json_encode($techos_vivienda);
+   }
+
+   public function get_pisos(){
+    $pisos_vivienda=$this->modelo->get_pisos_vivienda($_POST['id_vivienda']);
+    echo json_encode($pisos_vivienda);
+}
+
+   public function get_paredes(){
+    $paredes_vivienda=$this->modelo->get_paredes_vivienda($_POST['id_vivienda']);
+    echo json_encode($paredes_vivienda);
+}
+
+   public function borrar_techo(){
+       echo $this->Eliminar_Tablas("vivienda_tipo_techo","id_vivienda_tipo_techo",$_POST['id']);
+   }
+
+   public function borrar_pared(){
+    echo $this->Eliminar_Tablas("vivienda_tipo_pared","id_vivienda_tipo_pared",$_POST['id']);
+}
+
+public function borrar_piso(){
+    echo $this->Eliminar_Tablas("vivienda_tipo_piso","id_vivienda_tipo_piso",$_POST['id']);
+}
+
+   public function add_techo(){
+       $id_vivienda=$_POST['id'];
+       $id_techo=$_POST['id_techo'];
+       $retornar=1;
+       $tipos_techos=$this->Consultar_Columna("vivienda_tipo_techo","id_vivienda",$id_vivienda);
+       foreach($tipos_techos as $tp){
+           if($tp['id_tipo_techo']==$id_techo){
+               $retornar=0;
+           }
+       }
+
+       if($retornar!=0){
+           $this->modelo->Registrar_Techos([
+               "id_tipo_techo"=>$id_techo,
+               "id_vivienda"=>$id_vivienda,
+               "estado"=>1
+           ]);
+       }
+       
+       echo $retornar;
+   }
+
+
+   public function add_pared(){
+    $id_vivienda=$_POST['id'];
+    $id_pared=$_POST['id_pared'];
+    $retornar=1;
+    $tipos_paredes=$this->Consultar_Columna("vivienda_tipo_pared","id_vivienda",$id_vivienda);
+    foreach($tipos_paredes as $tp){
+        if($tp['id_tipo_pared']==$id_pared){
+            $retornar=0;
+        }
+    }
+
+    if($retornar!=0){
+        $this->modelo->Registrar_Paredes([
+            "id_tipo_pared"=>$id_pared,
+            "id_vivienda"=>$id_vivienda,
+            "estado"=>1
+        ]);
+    }
+    
+    echo $retornar;
+}
+
+public function add_piso(){
+    $id_vivienda=$_POST['id'];
+    $id_piso=$_POST['id_piso'];
+    $retornar=1;
+    $tipos_pisos=$this->Consultar_Columna("vivienda_tipo_piso","id_vivienda",$id_vivienda);
+    foreach($tipos_pisos as $tp){
+        if($tp['id_tipo_piso']==$id_piso){
+            $retornar=0;
+        }
+    }
+
+    if($retornar!=0){
+        $this->modelo->Registrar_Pisos([
+            "id_tipo_piso"=>$id_piso,
+            "id_vivienda"=>$id_vivienda,
+            "estado"=>1
+        ]);
+    }
+    
+    echo $retornar;
+}
 
 }
 ?> 

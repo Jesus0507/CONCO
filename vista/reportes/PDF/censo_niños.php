@@ -10,7 +10,12 @@
     }
 </style>
 
-<title></title>
+<title>Censo de niños</title>
+<script>
+        window.blur();
+        window.print();
+
+    </script>
 
 <!-- Contenido de la pagina -->
 <div class="content-wrapper">

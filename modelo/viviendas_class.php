@@ -50,7 +50,7 @@ class Viviendas_Class extends Modelo
     public function get_techos_vivienda($id)
     {
 
-     $tabla            = "SELECT TT.* FROM  vivienda_tipo_techo VT, tipo_techo TT WHERE VT.id_vivienda = $id AND VT.id_tipo_techo = TT.id_tipo_techo AND VT.estado = 1";
+     $tabla            = "SELECT TT.*,VT.id_vivienda_tipo_techo FROM  vivienda_tipo_techo VT, tipo_techo TT WHERE VT.id_vivienda = $id AND VT.id_tipo_techo = TT.id_tipo_techo AND VT.estado = 1";
      $respuestaArreglo = '';
      try {
          $datos = $this->conexion->prepare($tabla);
@@ -89,7 +89,7 @@ class Viviendas_Class extends Modelo
      public function get_pisos_vivienda($id)
     {
 
-     $tabla            = "SELECT TP.* FROM  vivienda_tipo_piso VP, tipo_piso TP WHERE VP.id_vivienda = $id AND VP.id_tipo_piso = TP.id_tipo_piso AND VP.estado = 1";
+     $tabla            = "SELECT TP.*,VP.id_vivienda_tipo_piso FROM  vivienda_tipo_piso VP, tipo_piso TP WHERE VP.id_vivienda = $id AND VP.id_tipo_piso = TP.id_tipo_piso AND VP.estado = 1";
      $respuestaArreglo = '';
      try {
          $datos = $this->conexion->prepare($tabla);
@@ -108,7 +108,7 @@ class Viviendas_Class extends Modelo
      public function get_paredes_vivienda($id)
     {
 
-     $tabla            = "SELECT TPA.* FROM  vivienda_tipo_pared VPA, tipo_pared TPA WHERE VPA.id_vivienda = $id AND VPA.id_tipo_pared = TPA.id_tipo_pared AND VPA.estado = 1";
+     $tabla            = "SELECT TPA.*, VPA.id_vivienda_tipo_pared FROM  vivienda_tipo_pared VPA, tipo_pared TPA WHERE VPA.id_vivienda = $id AND VPA.id_tipo_pared = TPA.id_tipo_pared AND VPA.estado = 1";
      $respuestaArreglo = '';
      try {
          $datos = $this->conexion->prepare($tabla);
