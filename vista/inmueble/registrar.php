@@ -58,7 +58,7 @@
                                 </label>
                                 <div class="input-group">
                                     <input class="form-control no-simbolos mb-10" id="nombre_inmueble" name="datos[nombre_inmueble]"
-                                        placeholder="Nombre de Inmueble" type="text" />
+                                        placeholder="Nombre de Inmueble" type="text" oninput="Limitar(this,25)"/>
                                 </div>
                                 <span id="mensaje_2"></span>
                             </div>
@@ -79,7 +79,7 @@
                                     Tipo Inmueble
                                 </label>
                                 <div class="input-group">
-                                    <input list="tipo_I" id="tipo_inmueble" name="datos[tipo_inmueble]" class="form-control no-simbolos " placeholder="Tipo de Inmueble" />
+                                    <input list="tipo_I" id="tipo_inmueble" name="datos[tipo_inmueble]" class="form-control no-simbolos solo-letras " placeholder="Tipo de Inmueble" oninput="Limitar(this,20)"/>
                                     <datalist id="tipo_I">
                                         <?php foreach($this->tipo_inmueble as $t_inmueble){   ?>
                                         <option value="<?php echo $t_inmueble["nombre_tipo"];?>">

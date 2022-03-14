@@ -9,9 +9,14 @@ $(document).ready(function() {
     $('.letras_numeros').on('input', function() {
         this.value = this.value.replace(/[^A-Za-z0-9]/g, '');
     });
-    $('.solo-letras').on('input', function() {
-        this.value = this.value.replace(/[^a-zA-ZñÑ]/g, '');
-    });
+    $(".solo-letras").bind('keypress', function(event) {
+        var regex = new RegExp("^[a-zA-Z ]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+          event.preventDefault();
+          return false;
+      }
+      });
     $('.no-acentos').on('input', function() {
         this.value = this.value.replace(/[áéíóúüÁÉÍÓÚÄËÏÖÜ]/g, '');
     });

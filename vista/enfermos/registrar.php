@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Registrar Personas Enfermas</h1>
+                    <h1 class="m-0">Registrar personas enfermas</h1>
                 </div><!-- /.col -->
                 <!-- /.col -->
             </div><!-- /.row -->
@@ -32,7 +32,7 @@
                         <div class="col-md-12">
                          <label>Persona</label> <span id='valid_persona' style='color:red'></span>
                          <table style='width:100%'><tr><td>
-                             <input type="number" maxlength="15" placeholder="Buscar cédula" class='form-control no-simbolos' id='persona' name="" list='lista_personas'>
+                             <input type="number" maxlength="15" placeholder="Buscar cédula" class='form-control no-simbolos letras_numeros' id='persona' name="" list='lista_personas' oninput="Limitar(this,15)">
 
                              <datalist id='lista_personas'>
                                  <?php foreach ($this->personas as $p) { ?>
@@ -55,7 +55,7 @@
 
                              <label>Enfermedad</label> <span id='valid_enfermedad' style='color:red'></span>
                              <table style='width:100%'><tr><td>
-                                 <input type="text" style='display:none' maxlength="30" placeholder="Enfermedad..." class='form-control no-simbolos' id='enfermedad_input' name="">
+                                 <input type="text" style='display:none' maxlength="30" placeholder="Enfermedad..." class='form-control ' id='enfermedad_input' name="" oninput="Limitar(this,35)">
 
                                  <select class='form-control no-simbolos' id='enfermedad_select'> 
                                    <option value='vacio'>-Enfermedad-</option>

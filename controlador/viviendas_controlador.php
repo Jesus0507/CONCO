@@ -542,6 +542,10 @@ public function get_gases(){
     echo $this->Eliminar_Tablas("vivienda_tipo_pared","id_vivienda_tipo_pared",$_POST['id']);
 }
 
+public function borrar_gases(){
+    echo $this->Eliminar_Tablas("vivienda_servicio_gas","id_vivienda_servicio_gas",$_POST['id_gas']);
+}
+
 public function borrar_piso(){
     echo $this->Eliminar_Tablas("vivienda_tipo_piso","id_vivienda_tipo_piso",$_POST['id']);
 }

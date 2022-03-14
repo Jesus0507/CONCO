@@ -83,7 +83,7 @@
                                 </label>
                                 <div class="input-group">
                                     <input list="cedula" id="cedula_propietario" name="datos[cedula_propietario]"
-                                        class="form-control no-simbolos letras_numeros" placeholder="Cedula" oninput="Limitar(this,20);"/>
+                                        class="form-control no-simbolos letras_numeros" placeholder="Cedula" oninput="Limitar(this,15);"/>
                                     <datalist id="cedula">
                                         <?php foreach($this->personas as $persona){   ?>
                                         <option value="<?php echo $persona["cedula_persona"];?>">

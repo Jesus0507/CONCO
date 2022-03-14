@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6"> 
-                    <h1 class="m-0">Asinar Mienbros del Consejo Comunar</h1>
+                    <h1 class="m-0">Asignar miembros al Consejo Comunal</h1>
                 </div><!-- /.col -->
                 <!-- /.col -->
             </div><!-- /.row -->
@@ -39,7 +39,7 @@
                                 </label>
                                 <div class="input-group">
                                     <input list="cedula_p" id="cedula_persona" name="datos[cedula_persona]"
-                                        class="form-control no-simbolos " placeholder="Cedula de Persona"/>
+                                        class="form-control no-simbolos letras_numeros" placeholder="Cedula de Persona" oninput="Limitar(this,15);"/>
                                     <datalist id="cedula_p">
                                         <?php foreach($this->personas as $vocero){   ?>
                                         <option value="<?php echo $vocero["cedula_persona"];?>">
@@ -57,7 +57,7 @@
                                     Comite
                                 </label>
                                 <div class="input-group">
-                                    <input list="comite" id="nombre_comite" name="datos[nombre_comite]" class="form-control no-simbolos " placeholder="Comite"/>
+                                    <input list="comite" id="nombre_comite" name="datos[nombre_comite]" class="form-control no-simbolos solo-letras" placeholder="Comite" oninput="Limitar(this,40)"/>
                                     <datalist id="comite">
                                         <?php foreach($this->comite as $comites){   ?>
                                         <option value="<?php echo $comites["nombre_comite"];?>">

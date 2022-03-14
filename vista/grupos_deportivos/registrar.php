@@ -37,8 +37,8 @@
                                     Deporte
                                 </label>
                                 <div class="input-group">
-                                    <input list="tipo_I" id="id_deporte" name="datos[id_deporte]" class="form-control no-simbolos "
-                                        placeholder="Deporte" />
+                                    <input list="tipo_I" id="id_deporte" name="datos[id_deporte]" class="form-control no-simbolos solo-letras "
+                                        placeholder="Deporte" oninput="Limitar(this,25)"/>
                                     <datalist id="tipo_I">
                                         <?php foreach($this->deportes as $deporte){   ?>
                                         <option value="<?php echo $deporte["nombre_deporte"];?>">
@@ -51,12 +51,12 @@
 
                             <div class="col-md-6 mt-2">
                                 <label for="nombre_grupo_deportivo">
-                                    Nombre Grupo Deportivo
+                                    Nombre del Grupo Deportivo
                                 </label>
                                 <div class="input-group">
                                     <input class="form-control no-simbolos mb-10" id="nombre_grupo_deportivo"
                                         name="datos[nombre_grupo_deportivo]" placeholder="Nombre de Grupo"
-                                        type="text" />
+                                        type="text" oninput="Limitar(this,50)"/>
                                 </div>
                             </div>
 

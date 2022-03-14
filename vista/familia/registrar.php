@@ -71,7 +71,7 @@
                                                    <option value='Propia pagada'>Propia pagada</option>
                                                    <option value='Propia pagándose'>Propia pagándose</option>
                                                </select>
-                                            <input style='display:none' type="text" maxlength="20" id='input_condicion_ocupacion' placeholder="Especifique..." class='form-control' name="">
+                                            <input style='display:none' type="text" maxlength="20" id='input_condicion_ocupacion' placeholder="Especifique..." class='form-control solo-letras' name="" oninput="Limitar(this,15)">
  
                                            </td><td><button class='btn btn-info' type='button' id='nueva_condicion_ocupacion'>Otra</button></td></tr></table>
                                                 </div>
@@ -82,9 +82,9 @@
                                                     Nombre de familia
                                                 </label><span id='valid_2' style="color:red;"></span>
                                                 <div class="input-group">
-                                                    <input class="form-control mb-10" id="nombre_familia"
+                                                    <input class="form-control mb-10 solo-letras" id="nombre_familia"
                                                         name="datos[nombre_familia]" placeholder="Nombre de la familia"
-                                                        type="text" />
+                                                        type="text" oninput="Limitar(this,25)" />
                                                 </div>
 
                                             </div>
@@ -94,9 +94,9 @@
                                                     Téléfono de familia
                                                 </label><span id='valid_3' style="color:red;"></span>
                                                 <div class="input-group">
-                                                    <input class="form-control mb-10" id="telefono_familia"
+                                                    <input class="form-control mb-10 solo-numeros" id="telefono_familia"
                                                         name="datos[telefono_familia]" placeholder="telefono_familia"
-                                                        type="number" />
+                                                        type="number" oninput="Limitar(this,12)"/>
                                                 </div>
 
                                             </div>
@@ -108,7 +108,7 @@
                                                 <div class="input-group">
                                                     <input class="form-control mb-10" id="ingreso_aprox"
                                                         name="datos[ingreso_aprox]" placeholder="Ingreso mensual aprox"
-                                                        type="text" />
+                                                        type="text" oninput="Limitar(this,10)"/>
                                                 </div>
 
                                             </div>
@@ -134,7 +134,7 @@
                                                    <table style='width:100%'>
                                                     <tr>
                                                         <td>
-                                                            <input type="number" class='form-control' id='integrante_input' placeholder="Buscar cédula" name="" list='lista_personas'>
+                                                            <input type="number" class='form-control letras_numeros' id='integrante_input' placeholder="Buscar cédula" name="" list='lista_personas' oninput="Limitar(this,15)">
                                                             <datalist id='lista_personas'>
                                                                 <?php foreach ($this->personas as $p) { ?>
                                                                          <option value='<?php echo $p['cedula_persona']; ?>'><?php echo $p['primer_nombre']." ".$p['primer_apellido']; ?></option>

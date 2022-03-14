@@ -39,7 +39,7 @@
                                 </label>
                                 <div class="input-group">
                                     <input list="cedula_p" id="cedula_persona" name="datos[cedula_persona]"
-                                        class="form-control no-simbolos " placeholder="Cedula de Persona"/>
+                                        class="form-control no-simbolos letras-numeros " placeholder="Cedula de Persona" oninput="Limitar(this,15)"/>
                                     <datalist id="cedula_p">
                                         <?php foreach($this->personas as $persona){   ?>
                                         <option value="<?php echo $persona["cedula_persona"];?>">
@@ -57,7 +57,7 @@
                                     Centro de Votacion
                                 </label>
                                 <div class="input-group">
-                                    <input list="centro" id="nombre_centro" name="datos[nombre_centro]" class="form-control no-simbolos " placeholder="Centro de Votacion" />
+                                    <input list="centro" id="nombre_centro" name="datos[nombre_centro]" class="form-control no-simbolos " placeholder="Centro de Votacion" oninput="Limitar(this,45);" />
                                     <datalist id="centro">
                                         <?php foreach($this->centros_votacion as $centro){   ?>
                                         <option value="<?php echo $centro["nombre_centro"];?>"> 

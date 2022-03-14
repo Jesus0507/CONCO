@@ -215,7 +215,7 @@ function get_letras(dato) {
   }
 }
 
-var id_vivienda="";
+var id_vivienda = "";
 function Modificar(
   id,
   vivienda,
@@ -227,7 +227,7 @@ function Modificar(
 ) {
   vivienda = JSON.parse(vivienda);
   techos = JSON.parse(techos);
-  id_vivienda=id;
+  id_vivienda = id;
   gas = JSON.parse(gas);
   document.getElementById("id_calle").value = vivienda["id_calle"];
   document.getElementById("direccion_vivienda").value =
@@ -285,91 +285,95 @@ function cargar_techos(id_vivienda) {
         techos[i]["techo"] +
         "' class='form-control' placeholder='Tipo techo'></td><td><button type='button' class='btn btn-danger' onclick='borrar_techo(" +
         techos[i]["id_vivienda_tipo_techo"] +
-        ","+id_vivienda+")'>X</button></td></tr>";
+        "," +
+        id_vivienda +
+        ")'>X</button></td></tr>";
     }
   });
 }
 
-function borrar_techo(id,id_vivienda){
-	swal({
-		type:"warning",
-		title:"¿Está seguro?",
-    text:"Está por eliminar este tipo de techo relacionado con la vivienda, ¿Desea continuar?",
-    showCancelButton:true,
-    confirmButtonText:"Sí",
-    cancelButtonText:"No"
-	},function(isConfirm){
-         if(isConfirm){
-           $.ajax({
-             type:"POST",
-             url:BASE_URL+"Viviendas/borrar_techo",
-             data:{"id":id}
-           }).done(function(result){
-                 if(result==1){
-                   cargar_techos(id_vivienda);
-                 }
-                 else{
-                   console.log(result);
-                 }
-           });
-         }
-  });
+function borrar_techo(id, id_vivienda) {
+  swal(
+    {
+      type: "warning",
+      title: "¿Está seguro?",
+      text: "Está por eliminar este tipo de techo relacionado con la vivienda, ¿Desea continuar?",
+      showCancelButton: true,
+      confirmButtonText: "Sí",
+      cancelButtonText: "No",
+    },
+    function (isConfirm) {
+      if (isConfirm) {
+        $.ajax({
+          type: "POST",
+          url: BASE_URL + "Viviendas/borrar_techo",
+          data: { id: id },
+        }).done(function (result) {
+          if (result == 1) {
+            cargar_techos(id_vivienda);
+          } else {
+            console.log(result);
+          }
+        });
+      }
+    }
+  );
 }
 
-
-document.getElementById("agregar").onclick=function(){
-  if(document.getElementById("tipo_techo").value=="0"){
-      swal({
-        type:"error",
-        title:"Error",
-        text:"Debe seleccionar un tipo de techo",
-        timer:2000,
-        showConfirmButton:false
-      });
-      document.getElementById("tipo_techo").style.borderColor='red';
-  }
-  else{
+document.getElementById("agregar").onclick = function () {
+  if (document.getElementById("tipo_techo").value == "0") {
+    swal({
+      type: "error",
+      title: "Error",
+      text: "Debe seleccionar un tipo de techo",
+      timer: 2000,
+      showConfirmButton: false,
+    });
+    document.getElementById("tipo_techo").style.borderColor = "red";
+  } else {
     $.ajax({
-      type:"POST",
-      url:BASE_URL+"Viviendas/add_techo",
-      data:{"id":id_vivienda,"id_techo":document.getElementById("tipo_techo").value}
-    }).done(function(result){
+      type: "POST",
+      url: BASE_URL + "Viviendas/add_techo",
+      data: {
+        id: id_vivienda,
+        id_techo: document.getElementById("tipo_techo").value,
+      },
+    }).done(function (result) {
       console.log(result);
-           if(result==1){
-             cargar_techos(id_vivienda);
-           }
-           else{
-             swal({
-               type:"error",
-               title:"Error",
-               text:"Este tipo de techo ya esta asociado a esta vivienda",
-               timer:2000,
-               showConfirmButton:false
-             })
-           }
+      if (result == 1) {
+        cargar_techos(id_vivienda);
+      } else {
+        swal({
+          type: "error",
+          title: "Error",
+          text: "Este tipo de techo ya esta asociado a esta vivienda",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      }
 
-           document.getElementById("tipo_techo").value='0';
+      document.getElementById("tipo_techo").value = "0";
     });
   }
-}
+};
 
-document.getElementById("tipo_techo").onchange=function(){
-  if(document.getElementById("tipo_techo").value!="0"){
-    document.getElementById("tipo_techo").style.borderColor="";
+document.getElementById("tipo_techo").onchange = function () {
+  if (document.getElementById("tipo_techo").value != "0") {
+    document.getElementById("tipo_techo").style.borderColor = "";
   }
-}
+};
 
-document.getElementById("tipo_piso").onchange=function(){
-  if(document.getElementById("tipo_piso").value!="0"){
-    document.getElementById("tipo_piso").style.borderColor="";
+document.getElementById("tipo_piso").onchange = function () {
+  if (document.getElementById("tipo_piso").value != "0") {
+    document.getElementById("tipo_piso").style.borderColor = "";
   }
-}
+};
 
-document.getElementById("tipo_pared").onchange=function(){
-  if(document.getElementById("tipo_pared").value!="0"){
-    document.getElementById("tipo_pared").style.borderColor="";
+document.getElementById("tipo_pared").onchange = function () {
+  if (document.getElementById("tipo_pared").value != "0") {
+    document.getElementById("tipo_pared").style.borderColor = "";
   }
-}
+};
 
 function cargar_paredes(id_vivienda) {
   document.getElementById("tabla_pared").innerHTML = "";
@@ -386,76 +390,78 @@ function cargar_paredes(id_vivienda) {
         paredes[i]["pared"] +
         "' class='form-control'></td><td><button type='button' class='btn btn-danger' onclick='borrar_pared(" +
         paredes[i]["id_vivienda_tipo_pared"] +
-        ","+id_vivienda+")'>X</button></td></tr>";
+        "," +
+        id_vivienda +
+        ")'>X</button></td></tr>";
     }
   });
 }
 
-function borrar_pared(id,id_vivienda){
-	swal({
-		type:"warning",
-		title:"¿Está seguro?",
-    text:"Está por eliminar este tipo de pared relacionado con la vivienda, ¿Desea continuar?",
-    showCancelButton:true,
-    confirmButtonText:"Sí",
-    cancelButtonText:"No"
-	},function(isConfirm){
-         if(isConfirm){
-           $.ajax({
-             type:"POST",
-             url:BASE_URL+"Viviendas/borrar_pared",
-             data:{"id":id}
-           }).done(function(result){
+function borrar_pared(id, id_vivienda) {
+  swal(
+    {
+      type: "warning",
+      title: "¿Está seguro?",
+      text: "Está por eliminar este tipo de pared relacionado con la vivienda, ¿Desea continuar?",
+      showCancelButton: true,
+      confirmButtonText: "Sí",
+      cancelButtonText: "No",
+    },
+    function (isConfirm) {
+      if (isConfirm) {
+        $.ajax({
+          type: "POST",
+          url: BASE_URL + "Viviendas/borrar_pared",
+          data: { id: id },
+        }).done(function (result) {
+          console.log(result);
+          if (result == 1) {
+            cargar_paredes(id_vivienda);
+          } else {
             console.log(result);
-                 if(result==1){
-                   cargar_paredes(id_vivienda);
-                 }
-                 else{
-                   console.log(result);
-                 }
-           });
-         }
-  });
+          }
+        });
+      }
+    }
+  );
 }
 
-
-
-document.getElementById("agregar2").onclick=function(){
-  if(document.getElementById("tipo_pared").value=="0"){
-      swal({
-        type:"error",
-        title:"Error",
-        text:"Debe seleccionar un tipo de pared",
-        timer:2000,
-        showConfirmButton:false
-      });
-      document.getElementById("tipo_pared").style.borderColor='red';
-  }
-  else{
+document.getElementById("agregar2").onclick = function () {
+  if (document.getElementById("tipo_pared").value == "0") {
+    swal({
+      type: "error",
+      title: "Error",
+      text: "Debe seleccionar un tipo de pared",
+      timer: 2000,
+      showConfirmButton: false,
+    });
+    document.getElementById("tipo_pared").style.borderColor = "red";
+  } else {
     $.ajax({
-      type:"POST",
-      url:BASE_URL+"Viviendas/add_pared",
-      data:{"id":id_vivienda,"id_pared":document.getElementById("tipo_pared").value}
-    }).done(function(result){
+      type: "POST",
+      url: BASE_URL + "Viviendas/add_pared",
+      data: {
+        id: id_vivienda,
+        id_pared: document.getElementById("tipo_pared").value,
+      },
+    }).done(function (result) {
       console.log(result);
-           if(result==1){
-             cargar_paredes(id_vivienda);
-           }
-           else{
-             swal({
-               type:"error",
-               title:"Error",
-               text:"Este tipo de pared ya esta asociado a esta vivienda",
-               timer:2000,
-               showConfirmButton:false
-             })
-           }
+      if (result == 1) {
+        cargar_paredes(id_vivienda);
+      } else {
+        swal({
+          type: "error",
+          title: "Error",
+          text: "Este tipo de pared ya esta asociado a esta vivienda",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      }
 
-           document.getElementById("tipo_pared").value='0';
+      document.getElementById("tipo_pared").value = "0";
     });
   }
-}
-
+};
 
 function cargar_pisos(id_vivienda) {
   document.getElementById("tabla_piso").innerHTML = "";
@@ -472,176 +478,185 @@ function cargar_pisos(id_vivienda) {
         pisos[i]["piso"] +
         "' class='form-control'></td><td><button type='button' class='btn btn-danger' onclick='borrar_piso(" +
         pisos[i]["id_vivienda_tipo_piso"] +
-        ","+id_vivienda+")'>X</button></td></tr>";
+        "," +
+        id_vivienda +
+        ")'>X</button></td></tr>";
     }
   });
 }
 
-function borrar_piso(id,id_vivienda){
-	swal({
-		type:"warning",
-		title:"¿Está seguro?",
-    text:"Está por eliminar este tipo de piso relacionado con la vivienda, ¿Desea continuar?",
-    showCancelButton:true,
-    confirmButtonText:"Sí",
-    cancelButtonText:"No"
-	},function(isConfirm){
-         if(isConfirm){
-           $.ajax({
-             type:"POST",
-             url:BASE_URL+"Viviendas/borrar_piso",
-             data:{"id":id}
-           }).done(function(result){
+function borrar_piso(id, id_vivienda) {
+  swal(
+    {
+      type: "warning",
+      title: "¿Está seguro?",
+      text: "Está por eliminar este tipo de piso relacionado con la vivienda, ¿Desea continuar?",
+      showCancelButton: true,
+      confirmButtonText: "Sí",
+      cancelButtonText: "No",
+    },
+    function (isConfirm) {
+      if (isConfirm) {
+        $.ajax({
+          type: "POST",
+          url: BASE_URL + "Viviendas/borrar_piso",
+          data: { id: id },
+        }).done(function (result) {
+          console.log(result);
+          if (result == 1) {
+            cargar_pisos(id_vivienda);
+          } else {
             console.log(result);
-                 if(result==1){
-                   cargar_pisos(id_vivienda);
-                 }
-                 else{
-                   console.log(result);
-                 }
-           });
-         }
-  });
-}
-
-document.getElementById("agregar3").onclick=function(){
-  if(document.getElementById("tipo_piso").value=="0"){
-      swal({
-        type:"error",
-        title:"Error",
-        text:"Debe seleccionar un tipo de piso",
-        timer:2000,
-        showConfirmButton:false
-      });
-      document.getElementById("tipo_piso").style.borderColor='red';
-  }
-  else{
-    $.ajax({
-      type:"POST",
-      url:BASE_URL+"Viviendas/add_piso",
-      data:{"id":id_vivienda,"id_piso":document.getElementById("tipo_piso").value}
-    }).done(function(result){
-      console.log(result);
-           if(result==1){
-             cargar_pisos(id_vivienda);
-           }
-           else{
-             swal({
-               type:"error",
-               title:"Error",
-               text:"Este tipo de piso ya esta asociado a esta vivienda",
-               timer:2000,
-               showConfirmButton:false
-             })
-           }
-
-           document.getElementById("tipo_piso").value='0';
-    });
-  }
-}
-
-
-document.getElementById("guardar").onclick=function(){
-if(document.getElementById("direccion_vivienda").value==""){
-   document.getElementById("valid_direccion").innerHTML="Debe ingresar la dirección de la vivienda";
-   document.getElementById("direccion_vivienda").focus();
-   document.getElementById("direccion_vivienda").style.borderColor="red";
-}
-else{
-  document.getElementById("valid_direccion").innerHTML="";
-  document.getElementById("direccion_vivienda").style.borderColor="";
-  if(document.getElementById("numero_casa").value==""){
-    document.getElementById("valid_numero_casa").innerHTML="Debe ingresar el número de la vivienda";
-   document.getElementById("numero_casa").focus();
-   document.getElementById("numero_casa").style.borderColor="red";
-  }else{
-    document.getElementById("valid_numero_casa").innerHTML="";
-  document.getElementById("numero_casa").style.borderColor="";
-  if(document.getElementById("cantidad_habitaciones").value==""){
-    document.getElementById("valid_cantidad_habitaciones").innerHTML="Debe ingresar la cantidad de habitaciones";
-    document.getElementById("cantidad_habitaciones").focus();
-    document.getElementById("cantidad_habitaciones").style.borderColor="red";
- }
- else{
-   document.getElementById("valid_cantidad_habitaciones").innerHTML="";
-   document.getElementById("cantidad_habitaciones").style.borderColor="";
-   if(document.getElementById("id_tipo_vivienda").value==""){
-    document.getElementById("valid_tipo_vivienda").innerHTML="Debe ingresar el tipo de vivienda";
-    document.getElementById("id_tipo_vivienda").focus();
-    document.getElementById("id_tipo_vivienda").style.borderColor="red";
- }
- else{
-   document.getElementById("valid_tipo_vivienda").innerHTML="";
-   document.getElementById("id_tipo_vivienda").style.borderColor="";
-   if(document.getElementById("tabla_techo").innerHTML=="" || document.getElementById("tabla_techo").innerHTML==null){
-     swal({
-       type:"error",
-       title:"Error",
-       text:"Debe ingresar al menos un tipo de techo",
-       timer:2000,
-       showConfirmButton:false
-     });
-   }
-   else{
-    if(document.getElementById("tabla_pared").innerHTML=="" || document.getElementById("tabla_pared").innerHTML==null){
-      swal({
-        type:"error",
-        title:"Error",
-        text:"Debe ingresar al menos un tipo de pared",
-        timer:2000,
-        showConfirmButton:false
-      });
-    }
-    else{
-      if(document.getElementById("tabla_piso").innerHTML=="" || document.getElementById("tabla_piso").innerHTML==null){
-        swal({
-          type:"error",
-          title:"Error",
-          text:"Debe ingresar al menos un tipo de piso",
-          timer:2000,
-          showConfirmButton:false
+          }
         });
       }
-      else{
-        
-      }
-      
     }
-   }
-  }
-  }
-  }
-}
+  );
 }
 
-document.getElementById("direccion_vivienda").onkeyup=function(){
-  if(document.getElementById("direccion_vivienda").value!=""){
-    document.getElementById("valid_direccion").innerHTML="";
-  document.getElementById("direccion_vivienda").style.borderColor="";
-  }
-}
+document.getElementById("agregar3").onclick = function () {
+  if (document.getElementById("tipo_piso").value == "0") {
+    swal({
+      type: "error",
+      title: "Error",
+      text: "Debe seleccionar un tipo de piso",
+      timer: 2000,
+      showConfirmButton: false,
+    });
+    document.getElementById("tipo_piso").style.borderColor = "red";
+  } else {
+    $.ajax({
+      type: "POST",
+      url: BASE_URL + "Viviendas/add_piso",
+      data: {
+        id: id_vivienda,
+        id_piso: document.getElementById("tipo_piso").value,
+      },
+    }).done(function (result) {
+      console.log(result);
+      if (result == 1) {
+        cargar_pisos(id_vivienda);
+      } else {
+        swal({
+          type: "error",
+          title: "Error",
+          text: "Este tipo de piso ya esta asociado a esta vivienda",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      }
 
-document.getElementById("cantidad_habitaciones").onkeyup=function(){
-  if(document.getElementById("cantidad_habitaciones").value!=""){
-    document.getElementById("valid_cantidad_habitaciones").innerHTML="";
-  document.getElementById("cantidad_habitaciones").style.borderColor="";
+      document.getElementById("tipo_piso").value = "0";
+    });
   }
-}
+};
 
-document.getElementById("id_tipo_vivienda").onkeyup=function(){
-  if(document.getElementById("id_tipo_vivienda").value!=""){
-    document.getElementById("valid_tipo_vivienda").innerHTML="";
-  document.getElementById("id_tipo_vivienda").style.borderColor="";
+document.getElementById("guardar").onclick = function () {
+  if (document.getElementById("direccion_vivienda").value == "") {
+    document.getElementById("valid_direccion").innerHTML =
+      "Debe ingresar la dirección de la vivienda";
+    document.getElementById("direccion_vivienda").focus();
+    document.getElementById("direccion_vivienda").style.borderColor = "red";
+  } else {
+    document.getElementById("valid_direccion").innerHTML = "";
+    document.getElementById("direccion_vivienda").style.borderColor = "";
+    if (document.getElementById("numero_casa").value == "") {
+      document.getElementById("valid_numero_casa").innerHTML =
+        "Debe ingresar el número de la vivienda";
+      document.getElementById("numero_casa").focus();
+      document.getElementById("numero_casa").style.borderColor = "red";
+    } else {
+      document.getElementById("valid_numero_casa").innerHTML = "";
+      document.getElementById("numero_casa").style.borderColor = "";
+      if (document.getElementById("cantidad_habitaciones").value == "") {
+        document.getElementById("valid_cantidad_habitaciones").innerHTML =
+          "Debe ingresar la cantidad de habitaciones";
+        document.getElementById("cantidad_habitaciones").focus();
+        document.getElementById("cantidad_habitaciones").style.borderColor =
+          "red";
+      } else {
+        document.getElementById("valid_cantidad_habitaciones").innerHTML = "";
+        document.getElementById("cantidad_habitaciones").style.borderColor = "";
+        if (document.getElementById("id_tipo_vivienda").value == "") {
+          document.getElementById("valid_tipo_vivienda").innerHTML =
+            "Debe ingresar el tipo de vivienda";
+          document.getElementById("id_tipo_vivienda").focus();
+          document.getElementById("id_tipo_vivienda").style.borderColor = "red";
+        } else {
+          document.getElementById("valid_tipo_vivienda").innerHTML = "";
+          document.getElementById("id_tipo_vivienda").style.borderColor = "";
+          if (
+            document.getElementById("tabla_techo").innerHTML == "" ||
+            document.getElementById("tabla_techo").innerHTML == null
+          ) {
+            swal({
+              type: "error",
+              title: "Error",
+              text: "Debe ingresar al menos un tipo de techo",
+              timer: 2000,
+              showConfirmButton: false,
+            });
+          } else {
+            if (
+              document.getElementById("tabla_pared").innerHTML == "" ||
+              document.getElementById("tabla_pared").innerHTML == null
+            ) {
+              swal({
+                type: "error",
+                title: "Error",
+                text: "Debe ingresar al menos un tipo de pared",
+                timer: 2000,
+                showConfirmButton: false,
+              });
+            } else {
+              if (
+                document.getElementById("tabla_piso").innerHTML == "" ||
+                document.getElementById("tabla_piso").innerHTML == null
+              ) {
+                swal({
+                  type: "error",
+                  title: "Error",
+                  text: "Debe ingresar al menos un tipo de piso",
+                  timer: 2000,
+                  showConfirmButton: false,
+                });
+              } else {
+              }
+            }
+          }
+        }
+      }
+    }
   }
-}
+};
 
-document.getElementById("numero_casa").onkeyup=function(){
-  if(document.getElementById("numero_casa").value!=""){
-    document.getElementById("valid_numero_casa").innerHTML="";
-  document.getElementById("numero_casa").style.borderColor="";
+document.getElementById("direccion_vivienda").onkeyup = function () {
+  if (document.getElementById("direccion_vivienda").value != "") {
+    document.getElementById("valid_direccion").innerHTML = "";
+    document.getElementById("direccion_vivienda").style.borderColor = "";
   }
-}
+};
 
+document.getElementById("cantidad_habitaciones").onkeyup = function () {
+  if (document.getElementById("cantidad_habitaciones").value != "") {
+    document.getElementById("valid_cantidad_habitaciones").innerHTML = "";
+    document.getElementById("cantidad_habitaciones").style.borderColor = "";
+  }
+};
+
+document.getElementById("id_tipo_vivienda").onkeyup = function () {
+  if (document.getElementById("id_tipo_vivienda").value != "") {
+    document.getElementById("valid_tipo_vivienda").innerHTML = "";
+    document.getElementById("id_tipo_vivienda").style.borderColor = "";
+  }
+};
+
+document.getElementById("numero_casa").onkeyup = function () {
+  if (document.getElementById("numero_casa").value != "") {
+    document.getElementById("valid_numero_casa").innerHTML = "";
+    document.getElementById("numero_casa").style.borderColor = "";
+  }
+};
 
 function cargar_servicio_gas(id_vivienda) {
   document.getElementById("gases_agregados").innerHTML = "";
@@ -652,52 +667,75 @@ function cargar_servicio_gas(id_vivienda) {
   }).done(function (result) {
     console.log(result);
     var gases = JSON.parse(result);
+    var texto = "";
     for (var i = 0; i < gases.length; i++) {
-      var div=document.createElement("div");
-      var table=document.createElement("table");
-      table.style.width="100%";
-      var tr=document.createElement("tr");
-      var td1=document.createElement("td");
-      td1.style.width='25%';
-      td1.style.textalign='center';
-      var td2=document.createElement("td");
-      td2.style.width='25%';
-      td2.style.textalign='center';
-      var td3=document.createElement("td");
-      td3.style.width='25%';
-      td3.style.textalign='center';
-      var td4=document.createElement("td");
-
-      td4.style.textAlign='right';
-
-      td1.innerHTML=gases[i]['nombre_servicio_gas'];
-      td2.innerHTML=gases[i]['tipo_bombona'];
-      td3.innerHTML=gases[i]['dias_duracion']+" días";
-
-      var button=document.createElement("input");
-      button.className='btn btn-danger';
-      button.value='X';
-      button.style.width='20%';
-      td4.appendChild(button);
-
-      tr.appendChild(td1);
-      tr.appendChild(td2);
-      tr.appendChild(td3);
-      tr.appendChild(td4);
-
-      table.appendChild(tr);
-      var hr=document.createElement("hr");
-
-      div.appendChild(table);
-      div.appendChild(hr);
-
-      document.getElementById("gases_agregados").appendChild(div);
-
-      button.onclick=function(){
-       borrar_gases(gases[i]['id_vivienda_servicio_gas']);
-   }
+      texto +=
+        "<div><table style='width:100%'><tr><td style='width:25%;text-align:center'>" +
+        gases[i]["nombre_servicio_gas"] +
+        "</td>";
+      texto +=
+        "<td style='width:25%;text-align:center'>" +
+        gases[i]["tipo_bombona"] +
+        "</td>";
+      texto +=
+        "<td style='width:25%;text-align:center'>" +
+        gases[i]["dias_duracion"] +
+        " días</td>";
+      texto +=
+        "<td style='width:25%;text-align:right'><button style='width:20%;margin-top:10px' type='button' class='btn btn-danger' onclick='borrar_gases(" +
+        gases[i]["id_vivienda_servicio_gas"] +
+        "," +
+        id_vivienda +
+        ")'>X</button></td>";
+      texto += "</tr></table></div><hr>";
     }
+
+    document.getElementById("gases_agregados").innerHTML = texto;
   });
 }
 
+function borrar_gases(id, id_vivienda) {
+  swal(
+    {
+      type: "warning",
+      title: "¿Está seguro?",
+      text: "Está por eliminar este servicio de gas asociaod a la vivienda, ¿desea continuar?",
+      showCancelButton: true,
+      confirmButtonText: "Si",
+      cancelButtonText: "No",
+    },
+    function (isConfirm) {
+      if (isConfirm) {
+        $.ajax({
+          type: "POST",
+          url: BASE_URL + "Viviendas/borrar_gases",
+          data: { id: id_vivienda, id_gas: id },
+        }).done(function (result) {
+          if (result == 1) {
+            cargar_servicio_gas(id_vivienda);
+          } else {
+            console.log(result);
+          }
+        });
+      }
+    }
+  );
+}
 
+document.getElementById("agregar_servicio").onclick=function(){
+if(document.getElementById("gas_select").style.display=="none"){
+  document.getElementById("gas_input").style.display="none";
+  document.getElementById("gas_select").style.display="";
+  document.getElementById("gas_input").value="";
+}
+else{
+  document.getElementById("gas_select").style.display="none";
+  document.getElementById("gas_input").style.display="";
+  document.getElementById("gas_input").focus();
+  document.getElementById("gas_select").value="vacio";
+}
+}
+
+document.getElementById("agregar_gas").onclick=function(){
+  
+}

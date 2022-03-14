@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Registrar Parto Humanizado</h1>
+                    <h1 class="m-0">Registrar Embarazadas</h1>
                 </div><!-- /.col -->
                 <!-- /.col -->
             </div><!-- /.row -->
@@ -39,7 +39,7 @@
                                 </label>
                                 <div class="input-group">
                                     <input list="cedula_p" id="cedula_persona" name="datos[cedula_persona]"
-                                        class="form-control no-simbolos " placeholder="Cedula de Persona" />
+                                        class="form-control no-simbolos letras_numeros " placeholder="Cedula de Persona" oninput="Limitar(this,15)" />
                                     <datalist id="cedula_p">
                                         <?php foreach($this->personas as $persona){  
                                             if($persona['genero']=="F"){ ?>
@@ -77,7 +77,7 @@
                                     Tiempo de Gestacion
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control no-simbolos" placeholder="Tiempo de Gestacion" id="tiempo_gestacion" name="datos[tiempo_gestacion]" type="text">
+                                    <input class="form-control no-simbolos letras_numeros" placeholder="Tiempo de Gestacion" id="tiempo_gestacion" name="datos[tiempo_gestacion]" type="text" oninput="Limitar(this,15)">
                                 </div>
                             </div>
                             

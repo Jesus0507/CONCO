@@ -107,9 +107,9 @@
                                                 Documento de identidad                                               </label> <span style='color:red;display:none' id='valid_1'>Ingrese el documento de identidad</span>
 
                                                 <div class="input-group">
-                                                    <input class="form-control input-numero" id="cedula"
+                                                    <input class="form-control input-numero solo-numeros" id="cedula"
                                                     name="datos[cedula]" placeholder="Cedula de identidad"
-                                                    type="number"/>
+                                                    type="number" oninput="Limite(this,8)"/>
                                                 </div>
                                             </div>
 
@@ -119,9 +119,9 @@
                                                 </label>
                                                 <span style='display:none;color:red' id='valid_2'>Ingrese el primer nombre</span>
                                                 <div class="input-group">
-                                                    <input class="form-control mb-10" id="primer_nombre"
+                                                    <input class="form-control mb-10 solo-letras" id="primer_nombre"
                                                     name="datos[primer_nombre]" placeholder="Primer Nombre"
-                                                    type="text" />
+                                                    type="text" oninput="Limitar(this,15)"/>
                                                 </div>
 
                                             </div>
@@ -132,9 +132,9 @@
                                                 </label>
                                                 <span style='display:none;color:red' id='valid_3'>Ingrese el segundo nombre</span>
                                                 <div class="input-group">
-                                                    <input class="form-control mb-10" id="segundo_nombre"
+                                                    <input class="form-control mb-10 solo-letras" id="segundo_nombre"
                                                     name="datos[segundo_nombre]" placeholder="Segundo Nombre"
-                                                    type="text" />
+                                                    type="text" oninput="Limitar(this,15)" />
                                                 </div>
 
                                             </div>
@@ -145,9 +145,9 @@
                                                 </label>
                                                 <span style='display:none;color:red' id='valid_4'>Ingrese el primer apellido</span>
                                                 <div class="input-group">
-                                                    <input class="form-control mb-10" id="primer_apellido"
+                                                    <input class="form-control mb-10 solo-letras" id="primer_apellido"
                                                     name="datos[primer_apellido]" placeholder="Primer Apellido"
-                                                    type="text" />
+                                                    type="text" oninput="Limitar(this,15)"/>
                                                 </div>
 
                                             </div>
@@ -158,9 +158,9 @@
                                                 </label>
                                                 <span style='display:none;color:red' id='valid_5'>Ingrese el segundo apellido</span>
                                                 <div class="input-group">
-                                                    <input class="form-control mb-10" id="segundo_apellido"
+                                                    <input class="form-control mb-10 solo-letras" id="segundo_apellido"
                                                     name="datos[segundo_apellido]" placeholder="Segundo Apellido"
-                                                    type="text" />
+                                                    type="text" oninput="Limitar(this,15)"/>
                                                 </div>
 
                                             </div>
@@ -253,8 +253,8 @@
                                         </label>
                                         <span style='display:none;color:red' id='valid_10'>Ingrese la nacionalidad</span>
                                         <div class="input-group">
-                                            <input class="form-control mb-10" id="nacionalidad"
-                                            name="datos[nacionalidad]" placeholder="Nacionalidad" type="text" />
+                                            <input class="form-control mb-10 solo-letras" id="nacionalidad"
+                                            name="datos[nacionalidad]" placeholder="Nacionalidad" type="text" oninput="Limitar(this,15)" />
                                         </div>
 
                                     </div>
@@ -415,7 +415,7 @@
 
      </select></td><td style='display:none' id='tipo_transporte_view'>
 
-       <input type="text" id='tipo_transporte' name="tipo_transporte" placeholder="Indique el tipo de transporte" class="form-control" list='transportes_regitrados'> 
+       <input type="text" id='tipo_transporte' name="tipo_transporte" placeholder="Indique el tipo de transporte" class="form-control letras_numeros" list='transportes_regitrados' oninput="Limitar(this,15)"> 
 
        <datalist id='transportes_regitrados'>
            <?php foreach ($this->transportes as $tr) { ?>
@@ -449,7 +449,7 @@
 
      </select></td><td style='display:none' id='comunidad_indigena_view'>
 
-       <input type="text" id='nombre_comunidad' name="nombre_comunidad" placeholder="Nombre de la comunidad indigena" class="form-control" list='comunidades_indigenas'> 
+       <input type="text" id='nombre_comunidad' name="nombre_comunidad" placeholder="Nombre de la comunidad indigena" class="form-control solo-letras" list='comunidades_indigenas' oninput="Limitar(this,20)"> 
 
        <datalist id='comunidades_indigenas'>
            <?php foreach ($this->comunidades as $cm) { ?>
@@ -520,8 +520,8 @@
                                                 </label>
                                                 <span style='color:red' id='valid_serial_patria'></span>
                                                 <div class="input-group">
-                                                    <input class="form-control mb-10" id="serial_patria"
-                                                    name="datos[serial_patria]" placeholder="Serial" type="text" />
+                                                    <input class="form-control mb-10 no-espacios no-acentos" id="serial_patria"
+                                                    name="datos[serial_patria]" placeholder="Serial" type="text" oninput="Limitar(this,10)"/>
                                                 </div>
                                             </div>
 
@@ -531,8 +531,8 @@
                                                 </label>
                                                 <span style='color:red' id='valid_serial_psuv'></span>
                                                 <div class="input-group">
-                                                    <input class="form-control mb-10" id="serial_psuv"
-                                                    name="datos[serial_psuv]" placeholder="Serial" type="text" />
+                                                    <input class="form-control mb-10 no-espacios no-acentos" id="serial_psuv"
+                                                    name="datos[serial_psuv]" placeholder="Serial" type="text" oninput="Limitar(this,12)"/>
                                                 </div>
                                             </div>
 
@@ -542,8 +542,8 @@
                                                 </label>
                                                 <span style='color:red' id='valid_codigo_patria'></span>
                                                 <div class="input-group">
-                                                    <input class="form-control mb-10" id="codigo_patria"
-                                                    name="datos[codigo_patria]" placeholder="Codigo" type="text" />
+                                                    <input class="form-control mb-10 no-espacios no-acentos" id="codigo_patria"
+                                                    name="datos[codigo_patria]" placeholder="Codigo" type="text" oninput="Limitar(this,10)"/>
                                                 </div>
 
                                             </div>
@@ -554,8 +554,8 @@
                                                 </label>
                                                 <span style='color:red' id='valid_codigo_psuv'></span>
                                                 <div class="input-group">
-                                                    <input class="form-control mb-10" id="codigo_psuv"
-                                                    name="datos[codigo_psuv]" placeholder="Codigo" type="text" />
+                                                    <input class="form-control mb-10 no-espacios no-acentos" id="codigo_psuv"
+                                                    name="datos[codigo_psuv]" placeholder="Codigo" type="text" oninput="Limitar(this,12)"/>
                                                 </div>
                                             </div>
 
@@ -570,16 +570,16 @@
                                                 </label>
                                                 <span style='color:red' id='valid_serial_discapacidad'></span>
                                                 <div class="input-group">
-                                                    <input class="form-control mb-10" id="serial_discapacidad"
-                                                    name="datos[serial_discapacidad]" placeholder="Serial" type="text" />
+                                                    <input class="form-control mb-10 no-espacios no-acentos" id="serial_discapacidad"
+                                                    name="datos[serial_discapacidad]" placeholder="Serial" type="text" oninput="Limitar(this,12)"/>
                                                 </div>
                                                 <label for="codigo_discapacidad">
                                                     Código discapacidad
                                                 </label>
                                                 <span style='color:red' id='valid_codigo_discapacidad'></span>
                                                 <div class="input-group">
-                                                    <input class="form-control mb-10" id="codigo_discapacidad"
-                                                    name="datos[codigo_discapacidad]" placeholder="Codigo" type="text" />
+                                                    <input class="form-control mb-10 no-espacios no-acentos" id="codigo_discapacidad"
+                                                    name="datos[codigo_discapacidad]" placeholder="Codigo" type="text" oninput="Limitar(this,12)"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -598,7 +598,7 @@
                                                         Correo Electronico
                                                     </label>
                                                     <div class="input-group">
-                                                        <input class="form-control" id="correo" name="datos[correo]"
+                                                        <input class="form-control no-espacios" id="correo" name="datos[correo]"
                                                         placeholder="Correo" type="text">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text">@</span>
@@ -633,9 +633,9 @@
                                         </label>
                                         <span style='display:none;color:red' id='valid_21'>Ingrese el número de teléfono</span>
                                         <div class="input-group">
-                                            <input class="form-control mb-10" id="telefono"
+                                            <input class="form-control mb-10 solo-numeros no-espacios" id="telefono"
                                             name="datos[telefono]" placeholder="0000-000-0000"
-                                            type="number" />
+                                            type="number" oninput="Limitar(this,12)"/>
                                         </div>
 
                                     </div>
@@ -694,7 +694,7 @@
                                                                     <option value="<?php echo $org['id_org_politica']; ?>"><?php echo $org['nombre_org']; ?></option>
                                                                 <?php } ?>
                                                             </select>
-                                                            <input style='display:none' type="text" id='nombre_organizacion' class='form-control' placeholder="Escriba el nombre de la organización" name="">
+                                                            <input style='display:none' type="text" id='nombre_organizacion' class='form-control' placeholder="Escriba el nombre de la organización" name="" oninput="Limitar(this,30)">
                                                         </div></td><td>
                                                             <input type="button" id='btn_nueva_org'  class='btn btn-primary' value="Nueva organización">
                                                         </td></tr></table>
@@ -725,7 +725,7 @@
                                                                    <?php  } ?>
                                                                </select>
 
-                                                               <input style='display:none' type="text" id='bono_nuevo' name="bono_nuevo" class='form-control' placeholder="Nombre del bono">
+                                                               <input style='display:none' type="text" id='bono_nuevo' name="bono_nuevo" class='form-control' placeholder="Nombre del bono" oninput="Limitar(this,20)">
                                                            </div>
                                                        </td>
                                                        <td><br>

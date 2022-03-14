@@ -1,7 +1,7 @@
-<?php
+ <?php
 
-class Familias_Class extends Modelo
-{
+ class Familias_Class extends Modelo
+ {
 
     public function __construct()
     {
@@ -9,9 +9,9 @@ class Familias_Class extends Modelo
     }
 
 
-        public function Consultar_viviendas()
+    public function Consultar_viviendas()
     {
- 
+
         $tabla            = "SELECT * FROM vivienda WHERE estado=1";
         $respuesta_arreglo = '';
         try {
@@ -29,9 +29,9 @@ class Familias_Class extends Modelo
     }
 
 
-       public function Consultar_personas()
+    public function Consultar_personas()
     {
- 
+
         $tabla            = "SELECT * FROM personas WHERE estado=1";
         $respuesta_arreglo = '';
         try {
@@ -49,9 +49,9 @@ class Familias_Class extends Modelo
     }
 
 
-       public function get_familias()
+    public function get_familias()
     {
- 
+
         $tabla            = "SELECT F.*,V.* FROM familia F , vivienda V WHERE F.estado=1 AND F.id_vivienda=V.id_vivienda";
         $respuesta_arreglo = '';
         try {
@@ -68,9 +68,9 @@ class Familias_Class extends Modelo
         }
     }
 
-           public function get_integrantes($id_familia)
+    public function get_integrantes($id_familia)
     {
- 
+
         $tabla            = "SELECT P.* FROM familia_personas FP, personas P WHERE FP.id_familia='$id_familia' AND FP.cedula_persona = P.cedula_persona";
         $respuesta_arreglo = '';
         try {
@@ -88,7 +88,7 @@ class Familias_Class extends Modelo
     }
 
 
-        public function Registrar_Familia($data)
+    public function Registrar_Familia($data)
     {
 
         try {
@@ -128,8 +128,43 @@ class Familias_Class extends Modelo
             return $this->error;
         }
     }
+    public function Actualizar_Familia($data)
+    {
 
- public function Registrar_persona_familia($data)
+       try {
+            $query = $this->conexion->prepare("UPDATE familia  SET
+                id_vivienda     =   :id_vivienda,
+                condicion_ocupacion  =   :condicion_ocupacion,
+                nombre_familia     =   :nombre_familia,
+                observacion  =   :observacion,
+                telefono_familia     =   :telefono_familia,
+                ingreso_mensual_aprox  =   :ingreso_mensual_aprox,
+                estado     =   :estado
+                
+                WHERE id_familia =:id_familia"
+            );
+
+            $query->execute([
+                'id_familia'  => $data['id_familia'],
+               'id_vivienda'  => $data['id_vivienda'],
+                'condicion_ocupacion' => $data["condicion_ocupacion"],
+                'nombre_familia'        => $data['nombre_familia'],
+                'observacion'      => $data['observacion'],
+                'telefono_familia'    =>$data['telefono_familia'],
+                'ingreso_mensual_aprox'        =>$data['ingreso_mensual_aprox'],
+                'estado'      => $data['estado']
+            ]);
+
+            return true;
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+
+            return false;
+        }
+    }
+
+    public function Registrar_persona_familia($data)
     {
 
         try {
@@ -137,9 +172,9 @@ class Familias_Class extends Modelo
                 id_familia,
                 cedula_persona        
                 ) VALUES (
-                    :id_familia,
-                    :cedula_persona
-                )');
+                :id_familia,
+                :cedula_persona
+            )');
 
             $datos->execute([
                 'id_familia'      => $data['id_familia'],
@@ -153,6 +188,9 @@ class Familias_Class extends Modelo
             return false;
         }
     }
+
+
+
 
 
 }
