@@ -77,7 +77,7 @@
                                     Tiempo de Gestacion
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control no-simbolos letras_numeros" placeholder="Tiempo de Gestacion" id="tiempo_gestacion" name="datos[tiempo_gestacion]" type="text" oninput="Limitar(this,15)">
+                                    <input class="form-control no-simbolos " placeholder="Tiempo de Gestacion" id="tiempo_gestacion" name="datos[tiempo_gestacion]" type="text" oninput="Limitar(this,15)">
                                 </div>
                             </div>
                             
@@ -101,7 +101,7 @@
                     <div class="text-center m-t-20">
                         <div class="col-xs-12">
                             <input type="button" class="btn  btn-success m-r-10" name="" id="boton" value="Guardar">
-                            <input type="button" class="btn btn-danger" id="" name="" value="Limpiar">
+                            
                         </div>
                     </div>
                 </div>

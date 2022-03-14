@@ -941,8 +941,8 @@
              <div class="input-group">
                 <table style='width:100%'>
                     <tr><td>
-                        <input class="form-control" id="contrasenia" name=""
-                        placeholder="Contraseña de ingreso" type="password">
+                        <input class="form-control no-espacios" id="contrasenia" name=""
+                        placeholder="Contraseña de ingreso" type="password" oninput="Limitar(this,10)">
                     </td><td><button type='button' class='btn btn-default' id='ver_clave'><em class='fa fa-eye'></em></button></td></tr></table>
                 </table>
 
@@ -955,8 +955,8 @@
                  Confirmar contraseña
              </label> <span id='valid_confirmar' style='color:red;display:none'>Debe confirmar la contraseña del usuario</span>
              <div class="input-group">
-                        <input class="form-control" id="confirmar" name=""
-                        placeholder="Contraseña de ingreso" type="password">
+                        <input class="form-control no-espacios" id="confirmar" name=""
+                        placeholder="Contraseña de ingreso" type="password" oninput="Limitar(this,10)">
 
             </div>
         </div>
@@ -972,7 +972,7 @@
             <div class="input-group">
                 <input class="form-control mb-10" id="color_fav"
                 placeholder="Color favorito"
-                type="text" maxlength="12" />
+                type="text" oninput="Limitar(this,10)" />
             </div></td>
 
 <td>
@@ -980,14 +980,14 @@
             <div class="input-group">
                 <input class="form-control mb-10" id="animal_fav"
                 placeholder="Animal favorito"
-                type="text" maxlength="12" />
+                type="text" oninput="Limitar(this,10)"/>
             </div>
 </td><td>
             <span style='display:none;color:red' id='valid_mascota'>Ingrese el nombre de la primera mascota</span>
             <div class="input-group">
                 <input class="form-control mb-10" id="primera_mascota"
                 placeholder="Nombre de la primera mascota"
-                type="text" maxlength="12" />
+                type="text"  oninput="Limitar(this,10)" />
             </div>
 </td></tr></table>  
 

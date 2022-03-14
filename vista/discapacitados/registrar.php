@@ -55,7 +55,7 @@
 
                              <label>Discapacidad</label> <span id='valid_discapacidad' style='color:red'></span>
                              <table style='width:100%'><tr><td>
-                                 <input type="text" style='display:none' maxlength="30" placeholder="Discapacidad..." class='form-control no-simbolos solo-letras' id='discapacidad_input' name="" oninput="Limitar(this,30)">
+                                 <input type="text" style='display:none'  placeholder="Discapacidad..." class='form-control no-simbolos solo-letras' id='discapacidad_input' name="" oninput="Limitar(this,30)">
 
                                  <select class='form-control no-simbolos' id='discapacidad_select'> 
                                    <option value='vacio'>-Discapacidad-</option>

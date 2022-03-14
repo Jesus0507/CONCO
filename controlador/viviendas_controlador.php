@@ -534,6 +534,11 @@ public function get_gases(){
     echo json_encode($gases_vivienda);
 }
 
+public function get_electrodomesticos(){
+    $electrodomesticos_vivienda=$this->modelo->get_electrodomesticos_vivienda($_POST['id_vivienda']);
+    echo json_encode($electrodomesticos_vivienda);
+}
+
    public function borrar_techo(){
        echo $this->Eliminar_Tablas("vivienda_tipo_techo","id_vivienda_tipo_techo",$_POST['id']);
    }
@@ -544,6 +549,10 @@ public function get_gases(){
 
 public function borrar_gases(){
     echo $this->Eliminar_Tablas("vivienda_servicio_gas","id_vivienda_servicio_gas",$_POST['id_gas']);
+}
+
+public function borrar_electrodomesticos(){
+    echo $this->Eliminar_Tablas("vivienda_electrodomesticos","id_vivienda_electrodomestico",$_POST['id_electrodomestico']);
 }
 
 public function borrar_piso(){
@@ -615,6 +624,178 @@ public function add_piso(){
     }
     
     echo $retornar;
+}
+
+public function add_gases(){
+    $gas=$_POST['gas'];
+    $retornar=1;
+    $id_vivienda=$_POST['id_vivienda'];
+    $existe="";
+    $servicios_vivienda=$this->Consultar_Columna("vivienda_servicio_gas","id_vivienda",$id_vivienda);
+    $companias=$this->Consultar_Tabla("servicio_gas",1,"id_servicio_gas");
+    if($gas['nuevo']==1){
+        foreach($companias as $c){
+            if(strtolower($c['nombre_servicio_gas'])==strtolower($gas['gas'])){
+                $existe=$c['id_servicio_gas'];
+            }
+        }
+
+        if($existe==""){
+            $this->Registrar_Tablas("servicio_gas","nombre_servicio_gas",$gas['gas']);
+            $id=$this->Ultimo_Ingresado("servicio_gas","id_servicio_gas");
+            $this->modelo->Registrar_vivienda_gas([
+                "id_servicio_gas"=>$id[0]['MAX(id_servicio_gas)'],
+                "id_vivienda"=>$id_vivienda,
+                "tipo_bombona"=>$gas['tipo_bombona'],
+                "dias_duracion"=>$gas['tiempo_duracion']
+            ]);
+        }
+        else{
+            foreach($servicios_vivienda as $sv){
+                if($sv['id_servicio_gas']==$existe && $sv['tipo_bombona']==$gas['tipo_bombona'] && $sv['dias_duracion']==$gas['tiempo_duracion']){
+                    $retornar=0;
+                }
+            }
+
+            if($retornar==1){
+                $this->modelo->Registrar_vivienda_gas([
+                    "id_servicio_gas"=>$existe,
+                    "id_vivienda"=>$id_vivienda,
+                    "tipo_bombona"=>$gas['tipo_bombona'],
+                    "dias_duracion"=>$gas['tiempo_duracion']
+                ]);
+            }
+        }
+    }
+    else{
+        foreach($servicios_vivienda as $sv){
+            if($sv['id_servicio_gas']==$gas['gas'] && $sv['tipo_bombona']==$gas['tipo_bombona'] && $sv['dias_duracion']==$gas['tiempo_duracion']){
+                $retornar=0;
+            }
+        }
+
+        if($retornar==1){
+            $this->modelo->Registrar_vivienda_gas([
+                "id_servicio_gas"=>$gas['gas'],
+                "id_vivienda"=>$id_vivienda,
+                "tipo_bombona"=>$gas['tipo_bombona'],
+                "dias_duracion"=>$gas['tiempo_duracion']
+            ]);
+        }
+
+    }
+    echo $retornar;
+}
+
+public function cargar_gas(){
+    $gases=$this->Consultar_Tabla("servicio_gas",1,"id_servicio_gas");
+    $texto="<option value='vacio'>-Compañia-</option>";
+    foreach($gases as $g){
+        $texto.="<option value='".$g['id_servicio_gas']."'>".$g['nombre_servicio_gas']."</option>";
+    }
+    
+    echo $texto;
+
+}
+
+public function cargar_electrodomesticos(){
+    $electrodomesticos=$this->Consultar_Tabla("electrodomesticos",1,"id_electrodomestico");
+    $texto="<option value='vacio'>-Electrodoméstico-</option>";
+    foreach($electrodomesticos as $e){
+        $texto.="<option value='".$e['id_electrodomestico']."'>".$e['nombre_electrodomestico']."</option>";
+    }
+    
+    echo $texto;
+
+}
+
+
+public function add_electrodomestico(){
+    $electrodomestico=$_POST['inf_electrodomestico'];
+    $retornar=1;
+    $id_vivienda=$_POST['id_vivienda'];
+    $existe="";
+    $electrodomesticos_vivienda=$this->Consultar_Columna("vivienda_electrodomesticos","id_vivienda",$id_vivienda);
+    $electrodomesticos_all=$this->Consultar_Tabla("electrodomesticos",1,"id_electrodomestico");
+    if($electrodomestico['nuevo']==1){
+        foreach($electrodomesticos_all as $e){
+            if(strtolower($e['nombre_electrodomestico'])==strtolower($electrodomestico['electrodomestico'])){
+                $existe=$e['id_electrodomestico'];
+            }
+        }
+
+        if($existe==""){
+            $this->Registrar_Tablas("electrodomesticos","nombre_electrodomestico",$electrodomestico['electrodomestico']);
+            $id=$this->Ultimo_Ingresado("electrodomesticos","id_electrodomestico");
+            $this->modelo->registrar_vivienda_electrodomesticos([
+                "id_electrodomestico"=>$id[0]['MAX(id_electrodomestico)'],
+                "id_vivienda"=>$id_vivienda,
+                "cantidad"=>$electrodomestico['cantidad']
+            ]);
+        }
+        else{
+            foreach($electrodomesticos_vivienda as $ev){
+                if($ev['id_electrodomestico']==$existe){
+                    $retornar=0;
+                }
+            }
+
+            if($retornar==1){
+                $this->modelo->registrar_vivienda_electrodomesticos([
+                    "id_electrodomestico"=>$existe,
+                    "id_vivienda"=>$id_vivienda,
+                    "cantidad"=>$electrodomestico['cantidad']
+                ]);
+            }
+        }
+    }
+    else{
+        foreach($electrodomesticos_vivienda as $ev){
+            if($ev['id_electrodomestico']==$electrodomestico['electrodomestico']){
+                $retornar=0;
+            }
+        }
+
+        if($retornar==1){
+            $this->modelo->registrar_vivienda_electrodomesticos([
+                "id_electrodomestico"=>$electrodomestico['electrodomestico'],
+                "id_vivienda"=>$id_vivienda,
+                "cantidad"=>$electrodomestico['cantidad']
+            ]);
+        }
+
+    }
+    echo $retornar;
+}
+
+
+public function modificar_vivienda(){
+    $info_vivienda=$_POST['vivienda'];
+    $servicios_vivienda=$this->Consultar_Columna("vivienda","id_vivienda",$info_vivienda['id_vivienda']);
+    if($this->modelo->Registrar_Servicios($info_vivienda['id_servicio'])){
+        $existe=0;
+        $id_servicio=$this->Ultimo_Ingresado("servicios","id_servicio");
+        $info_vivienda['id_servicio']=$id_servicio[0]['MAX(id_servicio)'];
+        $tipos_vivienda=$this->Consultar_Tabla("tipo_vivienda",1,"id_tipo_vivienda");
+        foreach($tipos_vivienda as $tv){
+            if(strtolower($tv['nombre_tipo_vivienda'])==strtolower($info_vivienda['id_tipo_vivienda'])){
+                $existe=$tv['id_tipo_vivienda'];
+            }
+        }
+
+        if($existe==0){
+            $this->Registrar_Tablas("tipo_vivienda","nombre_tipo_vivienda",$info_vivienda['id_tipo_vivienda']);
+            $id=$this->Ultimo_Ingresado("tipo_vivienda","id_tipo_vivienda");
+            $info_vivienda['id_tipo_vivienda']=$id[0]['MAX(id_tipo_vivienda)'];
+        }
+        else{
+            $info_vivienda['id_tipo_vivienda']=$existe;
+        }
+        if($this->modelo->Actualizar($info_vivienda)){
+            echo $this->Eliminar_Tablas("servicios","id_servicio",$servicios_vivienda[0]['id_servicio']);
+        }
+
+    }
 }
 
 }

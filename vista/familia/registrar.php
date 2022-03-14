@@ -106,7 +106,7 @@
                                                     Ingreso mensual Aprox
                                                 </label><span id='valid_4' style="color:red;"></span>
                                                 <div class="input-group">
-                                                    <input class="form-control mb-10" id="ingreso_aprox"
+                                                    <input class="form-control mb-10 no-acentos" id="ingreso_aprox"
                                                         name="datos[ingreso_aprox]" placeholder="Ingreso mensual aprox"
                                                         type="text" oninput="Limitar(this,10)"/>
                                                 </div>
@@ -163,7 +163,7 @@
                     <div class="text-center m-t-20">
                         <div class="col-xs-12">
                             <input type="button" class="btn  btn-success m-r-10" name="" id="guardar" value="Guardar">
-                            <input type="button" class="btn btn-danger" id="limpiar" name="" value="Limpiar">
+                            
                         </div>
                     </div>
                 </div>

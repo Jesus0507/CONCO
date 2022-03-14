@@ -76,8 +76,8 @@
                                     Numero de vivienda
                                 </label> <span id='valid_numero_casa' style='color:red'></span>
                                 <div class="input-group">
-                                    <input class="form-control mb-10" id="numero_casa" name="datos[numero_casa]"
-                                    placeholder="Numero de vivienda" type="text" />
+                                    <input class="form-control mb-10 letras_numeros" id="numero_casa" name="datos[numero_casa]"
+                                    placeholder="Numero de vivienda" type="text" oninput="Limitar(this,6)"/>
                                 </div>
                             </div>
 
@@ -88,9 +88,9 @@
                                     Cantidad de Habitaciones
                                 </label> <span id='valid_cantidad_habitaciones' style='color:red'></span>
                                 <div class="input-group">
-                                    <input class="form-control mb-10" id="cantidad_habitaciones"
+                                    <input class="form-control mb-10 solo-numeros" id="cantidad_habitaciones"
                                     name="datos[cantidad_habitaciones]" placeholder="Cantidad Habitaciones"
-                                    type="number" />
+                                    type="number" oninput="Limitar(this,2)"/>
                                 </div>
                             </div>
 
@@ -101,7 +101,7 @@
                                 <span id='valid_tipo_vivienda' style='color:red'></span>
                                 <div class="input-group">
                                     <input list="tipo_v" id="id_tipo_vivienda" name="datos[id_tipo_vivienda]"
-                                    class="form-control " placeholder="Tipo de Vivienda" />
+                                    class="form-control solo-letras" placeholder="Tipo de Vivienda" oninput="Limitar(this,20)"/>
                                     <datalist id="tipo_v">
                                         <?php foreach($this->tipo_vivienda as $T_VIVIENDA){   ?>
                                             <option value="<?php echo $T_VIVIENDA["nombre_tipo_vivienda"];?>">
@@ -392,7 +392,7 @@
                         <table class="table table-bordered" id="tabla_techo">
                             <tr>
                                 <td class="">
-                                    <input list="techo" type="text" id="tipo_techo" name="tipo_techo[]" placeholder="Tipo Techo" class="form-control cedula" />
+                                    <input list="techo" type="text" id="tipo_techo" name="tipo_techo[]" placeholder="Tipo Techo" class="form-control cedula solo-letras" oninput="Limitar(this,15)"/>
                                     <datalist id="techo">
                                         <?php foreach($this->tipo_techo as $techo){   ?>
                                             <option value="<?php echo $techo["techo"];?>">
@@ -415,7 +415,7 @@
                         <table class="table table-bordered" id="tabla_pared">
                             <tr>
                                 <td class="">
-                                    <input list="pared" type="text" id="tipo_pared" name="tipo_pared[]" placeholder="Tipo Pared" class="form-control cedula" />
+                                    <input list="pared" type="text" id="tipo_pared" name="tipo_pared[]" placeholder="Tipo Pared" class="form-control cedula solo-letras" oninput="Limitar(this,15)"/>
                                     <datalist id="pared">
                                         <?php foreach($this->tipo_pared as $pared){   ?>
                                             <option value="<?php echo $pared["pared"];?>">
@@ -438,7 +438,7 @@
                         <table class="table table-bordered" id="tabla_piso">
                             <tr>
                                 <td class="">
-                                    <input list="piso" type="text" id="tabla_piso" name="tipo_piso[]" placeholder="Tipo Piso" class="form-control cedula" />
+                                    <input list="piso" type="text" id="tabla_piso" name="tipo_piso[]" placeholder="Tipo Piso" class="form-control cedula solo-letras" oninput="Limitar(this,15)"/>
                                     <datalist id="piso">
                                         <?php foreach($this->tipo_piso as $piso){   ?>
                                             <option value="<?php echo $piso["piso"];?>">
@@ -512,9 +512,9 @@
                                       <option value='<?php  echo $e['id_electrodomestico']?>'><?php echo $e['nombre_electrodomestico']; ?></option>
                                   <?php   } ?>
                               </select>
-                              <input type="text" maxlength='30' class='form-control' placeholder="Nombre del electrodoméstico.." name="" id='electrodomestico_input' style='display:none'>
+                              <input type="text" maxlength='30' class='form-control solo-letras' placeholder="Nombre del electrodoméstico.." name="" id='electrodomestico_input' style='display:none'>
                           </td>
-                          <td> <input type="number" id='cantidad_electrodomestico' placeholder="Cantidad" class="form-control" name=""></td>
+                          <td> <input type="number" id='cantidad_electrodomestico' placeholder="Cantidad" class="form-control solo-numeros" name="" oninput="Limitar(this,15)"></td>
                           <td >
                             <button type="button" name="agregar" id="agregar_electrodomestico" class="btn btn-success">Agregar</button>
                         </td>

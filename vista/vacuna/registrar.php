@@ -37,7 +37,7 @@
                                     Cedula de Persona
                                 </label>
                                 <div class="input-group">
-                                    <input list="cedula_p" id="cedula_persona" name="cedula_persona" class="form-control no-simbolos " placeholder="Cedula de Persona" />
+                                    <input list="cedula_p" id="cedula_persona" name="cedula_persona" class="form-control no-simbolos letras_numeros" placeholder="Cedula de Persona" oninput="Limitar(this,15)"/>
                                     <datalist id="cedula_p">
                                         <?php foreach ($this->personas as $persona) {   ?>
                                             <option value="<?php echo $persona["cedula_persona"]; ?>">
@@ -98,7 +98,7 @@
                     <div class="text-center m-t-20">
                         <div class="col-xs-12">
                             <input type="button" class="btn  btn-success m-r-10" name="" id="enviar" value="Guardar">
-                            <input type="button" class="btn btn-danger" id="" name="" value="Limpiar">
+                            
                         </div>
                     </div>
                 </div>

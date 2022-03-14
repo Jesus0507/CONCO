@@ -45,7 +45,7 @@
                                 </label>
                                 <div class="input-group">
                                     <input list="cedula_p" id="cedula_persona" name="datos[cedula_persona]"
-                                        class="form-control no-simbolos " placeholder="Cedula de Persona"/>
+                                        class="form-control no-simbolos letras_numeros " placeholder="Cedula de Persona" oninput="Limitar(this,15)"/>
                                     <datalist id="cedula_p">
                                         <?php foreach($this->personas as $persona){   ?>
                                         <option value="<?php echo $persona["cedula_persona"];?>">
@@ -62,8 +62,8 @@
                                     Area de Produccion
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control  no-simbolos mb-10" id="area_produccion" name="datos[area_produccion]"
-                                        placeholder="Area de Produccion" type="text" />
+                                    <input class="form-control  no-simbolos mb-10 no-numeros" id="area_produccion" name="datos[area_produccion]"
+                                        placeholder="Area de Produccion" type="text" oninput="Limitar(this,25)" />
                                 </div>
                             </div>
 
@@ -73,8 +73,8 @@
                                     Años de Experiencia
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control no-simbolos mb-10" id="anios_experiencia" name="datos[anios_experiencia]"
-                                        placeholder="Años de Experiencia" type="number" />
+                                    <input class="form-control no-simbolos mb-10 solo-numeros" id="anios_experiencia" name="datos[anios_experiencia]"
+                                        placeholder="Años de Experiencia" type="number" oninput="Limitar(this,2)"/>
                                 </div>
                             </div>
                             
@@ -84,7 +84,7 @@
                                 </label>
                                 <div class="input-group">
                                     <input class="form-control no-simbolos mb-10" id="org_agricola" name="datos[org_agricola]"
-                                        placeholder="Organizacion Agricola" type="text" />
+                                        placeholder="Organizacion Agricola" type="text" oninput="Limitar(this,25)"/>
                                 </div>
                             </div>
 
@@ -93,8 +93,8 @@
                                     Rubro Principal
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control no-simbolos mb-10" id="rubro_principal" name="datos[rubro_principal]"
-                                        placeholder="Rubro Principal" type="text" />
+                                    <input class="form-control no-simbolos mb-10 solo-letras" id="rubro_principal" name="datos[rubro_principal]"
+                                        placeholder="Rubro Principal" type="text" oninput="Limitar(this,15)"/>
                                 </div>
                             </div>
 
@@ -103,8 +103,8 @@
                                     Rubro Alternativo
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control no-simbolos mb-10" id="rubro_alternativo" name="datos[rubro_alternativo]"
-                                        placeholder=" Rubro Alternativo" type="text" />
+                                    <input class="form-control no-simbolos mb-10 solo-letras" id="rubro_alternativo" name="datos[rubro_alternativo]"
+                                        placeholder=" Rubro Alternativo" type="text" oninput="Limitar(this,15)"/>
                                 </div>
                             </div>
 
@@ -113,7 +113,7 @@
                                     Financiamiento
                                 </label>
                                 <div class="input-group">
-                                    <input class="form-control no-simbolos mb-10 dinero" id="financiado" name="datos[financiado]"
+                                    <input class="form-control solo-numeros mb-10 dinero" id="financiado" name="datos[financiado]"
                                         placeholder="Financiado" type="text" />
                                 </div>
                             </div>
@@ -213,7 +213,7 @@
                     <div class="text-center m-t-20">
                         <div class="col-xs-12">
                             <input type="submit" class="btn  btn-success m-r-10" name="" id="" value="Guardar">
-                            <input type="button" class="btn btn-danger" id="" name="" value="Limpiar">
+                            
                         </div>
                     </div>
                 </div>

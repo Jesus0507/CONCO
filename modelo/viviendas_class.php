@@ -225,6 +225,52 @@ class Viviendas_Class extends Modelo
     }
 }
 
+public function Actualizar($data)
+{
+
+   try {
+       $datos = $this->conexion->prepare('UPDATE vivienda SET
+           id_calle                 = :id_calle,
+           id_tipo_vivienda         = :id_tipo_vivienda,
+           id_servicio              = :id_servicio,
+           direccion_vivienda       = :direccion_vivienda,
+           numero_casa              = :numero_casa,
+           cantidad_habitaciones    = :cantidad_habitaciones, 
+           espacio_siembra          = :espacio_siembra,
+           hacinamiento             = :hacinamiento,
+           banio_sanitario          = :banio_sanitario,
+           condicion                = :condicion,
+           descripcion              = :descripcion,
+           animales_domesticos      = :animales_domesticos,
+           insectos_roedores        = :insectos_roedores
+           WHERE id_vivienda        = :id_vivienda');
+
+       $datos->execute([
+           'id_calle' => $data['id_calle'],
+           'id_tipo_vivienda' => $data['id_tipo_vivienda'],
+           'id_servicio' => $data['id_servicio'],
+           'direccion_vivienda' => $data['direccion_vivienda'],
+           'numero_casa' => $data['numero_casa'],
+           'cantidad_habitaciones' => $data['cantidad_habitaciones'],
+           'espacio_siembra' => $data['espacio_siembra'],
+           'hacinamiento' => $data['hacinamiento'],
+           'banio_sanitario' => $data['banio_sanitario'],
+           'condicion' => $data['condicion'],
+           'descripcion' => $data['descripcion'],
+           'animales_domesticos' => $data['animales_domesticos'],
+           'insectos_roedores' => $data['insectos_roedores'],
+           'id_vivienda' => $data['id_vivienda'],
+       ]);
+
+       return true;
+   } catch (PDOException $e) {
+       $this->error = 'Ha surgido un error y no se puede cargar los datos. Detalle: ' . $e->getMessage();
+       return $this->error;
+   }
+}
+
+
+
 public function Registrar_Servicios($data)
 {
 

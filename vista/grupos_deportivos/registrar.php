@@ -78,7 +78,7 @@
                                     <tr>
                                         <td class="col-6">
                                             <input list="cedula_p" id="cedula" type="number" name="cedula[]" placeholder="Cedula"
-                                                class="form-control no-simbolos cedula" />
+                                                class="form-control " oninput="Limitar(this,15)"/>
                                             <datalist id="cedula_p">
                                                 <?php foreach($this->personas as $persona){   ?>
                                                 <option value="<?php echo $persona["cedula_persona"];?>">
@@ -108,7 +108,7 @@
                     <div class="text-center m-t-20">
                         <div class="col-xs-12">
                             <input type="button" class="btn  btn-success m-r-10" name="" id="guardar" value="Guardar">
-                            <input type="button" class="btn btn-danger" id="" name="" value="Limpiar">
+                            
                         </div>
                     </div>
                 </div>

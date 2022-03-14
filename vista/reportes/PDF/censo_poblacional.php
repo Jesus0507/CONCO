@@ -9,7 +9,7 @@
     border: 1px solid red !important;
   }
 </style>
-<title>Censo Poblacional</title>
+<title>Censo Poblacional</title> 
 <!-- Contenido de la pagina -->
 <input type="hidden" value="<?php echo $_GET['id']; ?>" id='fam'>
 <div class="content-wrapper">
@@ -110,8 +110,7 @@
 
       window.blur();
       window.print();
-      window.close();
-
+     
     });
 
     function cargar_electrodomesticos(array){
@@ -525,7 +524,7 @@ for (var i = 0; i < array.length; i++) {
                 <b>II. Condiciones de la vivienda</b>
               </center>
             </div>
-            <table style='width:100%;color:red !important;font-size:13px'>
+            <table style='width:100%;color:red !important;font-size:13px;height: 100px;'>
               <tr style='color:red'>
                 <td> 1- Tipo de vivienda <br>
                   <table>
@@ -630,7 +629,7 @@ for (var i = 0; i < array.length; i++) {
                       <td style="position: relative;left: -50px;">Propia pagándose</td>
                       <td>
                         <span id='propia_pagandose'>
-                          <div style='position: relative;left: -50px;border-style:solid;height: 20px;width:20px'></div>
+                          <div style='position: relative;left: -40px;border-style:solid;height: 20px;width:20px'></div>
                         </span>
                       </td>
                       <td>Adjudicada</td>
@@ -674,11 +673,11 @@ for (var i = 0; i < array.length; i++) {
                     <td style="position: relative;left: 20px;"> Platabanda </td>
                     <td>
                       <span id='platabanda'>
-                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -110px'></div>
+                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -80px'></div>
                       </span>
                     </td>
                     <td>
-                    <td style="position: relative;left: -180px;"> Laminas Asfalticas </td>
+                    <td style="position: relative;left: -130px;"> Laminas Asfalticas </td>
                     <td>
                       <span id='laminas_asfalticas'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -160px'></div>
@@ -701,11 +700,11 @@ for (var i = 0; i < array.length; i++) {
                     <td style="position: relative;left: 20px;"> Tela </td>
                     <td>
                       <span id='tela'>
-                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -110px'></div>
+                        <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -80px'></div>
                       </span>
                     </td>
                     <td>
-                    <td style="position: relative;left: -180px;"> Asbesto y Similares </td>
+                    <td style="position: relative;left: -130px;"> Asbesto y Similares </td>
                     <td>
                       <span id='asbesto'>
                         <div style='border-style:solid;height: 20px;width:20px;position: relative;left: -160px'></div>
@@ -831,7 +830,7 @@ for (var i = 0; i < array.length; i++) {
                     <p style="position: relative;color:red;font-size: 15px;">5.Servicios con los que cuenta la vivienda &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6. Presencia de Vectores &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7. Indicar Cantidad de Habitaciones </p>
                   </td>
                   <td>
-                    <table>
+                    <table style="width: 1000px;">
                       <tr style="color: red;font-size: 13px;">
                         <td style="position: relative; left: -40px;"> Agua Consumo </td>
                         <td style="position: relative;left: 10px;"> Residuos Solidos </td>
@@ -951,7 +950,7 @@ for (var i = 0; i < array.length; i++) {
                     <p style="position: relative;color:red;font-size: 15px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8. Gas Domestico &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
                   </td>
                   <td>
-                    <table>
+                    <table style="width: 100%;">
                       <tr style="color: red;font-size: 13px;">
                         <td style="position: relative; left: -40px;"> Tipo Bombona </td>
                         <td style="position: relative;left: 150px;"> Cuanto Tiempo le dura </td>
@@ -1032,7 +1031,7 @@ for (var i = 0; i < array.length; i++) {
               <tr>
                 <br>
                 <br>
-                <div style='width:100%;background: red;color:white'>
+                <div style='width:100%;background: red;color:white;margin-top: -100px;'>
                   <center> III. Jefe (a) del Hogar </center>
                 </div>
                 <div style="position: relative;left: 60px;">
@@ -1462,7 +1461,7 @@ for (var i = 0; i < array.length; i++) {
                   </tr>
                   <tr>
                     <td>
-                      <hr>
+                      
                     </td>
                   </tr>
                   <tr style="color: red;font-size: 13px;">

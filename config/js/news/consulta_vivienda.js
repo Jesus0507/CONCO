@@ -15,7 +15,6 @@ function Eliminar(id, id_servicio) {
           url: BASE_URL + "Viviendas/eliminacion_logica",
           data: { id_vivienda: id },
         }).done(function (result) {
-          console.log(result);
           if (result) {
             swal({
               type: "success",
@@ -264,8 +263,8 @@ function Modificar(
   cargar_paredes(id);
   cargar_pisos(id);
   cargar_servicio_gas(id);
+  cargar_electrodomesticos(id);
 
-  console.log(techos);
 
   $("#editar_vivienda").modal("show");
 }
@@ -277,7 +276,6 @@ function cargar_techos(id_vivienda) {
     url: BASE_URL + "Viviendas/get_techos",
     data: { id_vivienda: id_vivienda },
   }).done(function (result) {
-    console.log(result);
     var techos = JSON.parse(result);
     for (var i = 0; i < techos.length; i++) {
       document.getElementById("tabla_techo").innerHTML +=
@@ -382,7 +380,6 @@ function cargar_paredes(id_vivienda) {
     url: BASE_URL + "Viviendas/get_paredes",
     data: { id_vivienda: id_vivienda },
   }).done(function (result) {
-    console.log(result);
     var paredes = JSON.parse(result);
     for (var i = 0; i < paredes.length; i++) {
       document.getElementById("tabla_pared").innerHTML +=
@@ -621,6 +618,41 @@ document.getElementById("guardar").onclick = function () {
                   showConfirmButton: false,
                 });
               } else {
+
+                var inf_servicio=new Object();
+
+                inf_servicio['agua_consumo']=document.getElementById("agua_consumo").value;
+                inf_servicio['aguas_negras']=document.getElementById("aguas_negras").value;
+                inf_servicio['residuos_solidos']=document.getElementById("residuos_solidos").value;
+                inf_servicio['cable_telefonico']=document.getElementById("cable_telefonico").value;
+                inf_servicio['internet']=document.getElementById("internet").value;
+                inf_servicio['servicio_electrico']=document.getElementById("servicio_electrico").value;
+                inf_servicio['estado']=1;   
+
+                var info_vivienda=new Object();
+                info_vivienda['id_vivienda']=id_vivienda;
+                info_vivienda['id_calle']=document.getElementById("id_calle").value;
+                info_vivienda['id_tipo_vivienda']=document.getElementById("id_tipo_vivienda").value;     
+                info_vivienda['id_servicio']=inf_servicio;   
+                info_vivienda['direccion_vivienda']=document.getElementById("direccion_vivienda").value;     
+                info_vivienda['numero_casa']=document.getElementById("numero_casa").value;
+                info_vivienda['cantidad_habitaciones']=document.getElementById("cantidad_habitaciones").value;    
+                info_vivienda['espacio_siembra']=document.getElementById("espacio_siembra").value;     
+                info_vivienda['hacinamiento']=document.getElementById("hacinamiento").value;    
+                info_vivienda['banio_sanitario']=document.getElementById("banio_sanitario").value;  
+                info_vivienda['condicion']=document.getElementById("condicion").value;    
+                info_vivienda['descripcion']=document.getElementById("descripcion").value;  
+                info_vivienda['animales_domesticos']=document.getElementById("animales_domesticos").value;  
+                info_vivienda['insectos_roedores']=document.getElementById("insectos_roedores").value; 
+                
+                $.ajax({
+                  type:"POST",
+                  url:BASE_URL+"Viviendas/modificar_vivienda",
+                  data:{"vivienda":info_vivienda}
+                }).done(function(result){
+                  console.log(result);
+                })
+
               }
             }
           }
@@ -665,7 +697,6 @@ function cargar_servicio_gas(id_vivienda) {
     url: BASE_URL + "Viviendas/get_gases",
     data: { id_vivienda: id_vivienda },
   }).done(function (result) {
-    console.log(result);
     var gases = JSON.parse(result);
     var texto = "";
     for (var i = 0; i < gases.length; i++) {
@@ -691,6 +722,14 @@ function cargar_servicio_gas(id_vivienda) {
     }
 
     document.getElementById("gases_agregados").innerHTML = texto;
+  });
+
+
+  $.ajax({
+    type:"POST",
+    url:BASE_URL+"Viviendas/cargar_gas",
+  }).done(function(result){
+      document.getElementById("gas_select").innerHTML=result;
   });
 }
 
@@ -737,5 +776,260 @@ else{
 }
 
 document.getElementById("agregar_gas").onclick=function(){
-  
+  if((document.getElementById("gas_select").style.display!="none" && document.getElementById("gas_select").value=="vacio") || (document.getElementById("gas_select").style.display=="none" && document.getElementById("gas_input").value=="")){
+    document.getElementById("gas_select").style.borderColor="red";
+    document.getElementById("gas_input").style.borderColor="red";
+    document.getElementById("gas_input").focus();
+    document.getElementById("valid_gases_agregados").innerHTML="Debe indicar una compañía de gas";
+  }
+  else{
+    document.getElementById("gas_select").style.borderColor="";
+    document.getElementById("gas_input").style.borderColor="";
+    document.getElementById("valid_gases_agregados").innerHTML="";
+    if(document.getElementById("tipo_bombona").value=="vacio"){
+      document.getElementById("tipo_bombona").style.borderColor="red";
+      document.getElementById("valid_gases_agregados").innerHTML="Debe indicar el tipo de bombona";
+    }
+    else{
+    document.getElementById("tipo_bombona").style.borderColor="";
+    document.getElementById("valid_gases_agregados").innerHTML="";
+    if(document.getElementById("tiempo_duracion").value=="vacio"){
+      document.getElementById("tiempo_duracion").style.borderColor="red";
+      document.getElementById("valid_gases_agregados").innerHTML="Debe indicar el tiempo de duración de la bombona";
+    }
+    else{
+      document.getElementById("tiempo_duracion").style.borderColor="";
+      document.getElementById("valid_gases_agregados").innerHTML="";
+      var inf_gas=new Object();
+      if(document.getElementById("gas_select").style.display!="none"){
+        inf_gas['gas']=document.getElementById("gas_select").value;
+        inf_gas['nuevo']=0;
+      }else{
+        inf_gas['gas']=document.getElementById("gas_input").value;
+        inf_gas['nuevo']=1;
+      }
+      inf_gas['tipo_bombona']=document.getElementById("tipo_bombona").value;
+      inf_gas['tiempo_duracion']=document.getElementById("tiempo_duracion").value;
+      console.log(inf_gas);
+      $.ajax({
+        type:"POST",
+        url:BASE_URL+"Viviendas/add_gases",
+        data:{"gas":inf_gas,"id_vivienda":id_vivienda}
+      }).done(function(result){
+          console.log(result);
+          if(result==1){
+            cargar_servicio_gas(id_vivienda);
+          }
+        else{
+          swal({
+            type:"error",
+            title:"Error",
+            text:"Este servicio de gas ya está asociado a esta vivienda",
+            timer:2000,
+            showConfirmButton:false
+          });
+        }
+        document.getElementById("gas_input").style.display="none";
+        document.getElementById("gas_select").style.display="";
+        document.getElementById("gas_input").value="";
+        document.getElementById("gas_select").value=document.getElementById("tipo_bombona").value=document.getElementById("tiempo_duracion").value='vacio';
+      });
+    }
+    }
+  }
 }
+
+document.getElementById("gas_select").onchange=function(){
+  if(document.getElementById("gas_select").value!="vacio"){
+    document.getElementById("gas_select").style.borderColor="";
+    document.getElementById("valid_gases_agregados").innerHTML="";
+  }
+}
+
+document.getElementById("gas_input").onkeyup=function(){
+  if(document.getElementById("gas_input").value!="vacio"){
+    document.getElementById("gas_input").style.borderColor="";
+    document.getElementById("valid_gases_agregados").innerHTML="";
+  }
+}
+
+document.getElementById("tipo_bombona").onchange=function(){
+  if(document.getElementById("tipo_bombona").value!="vacio"){
+    document.getElementById("tipo_bombona").style.borderColor="";
+    document.getElementById("valid_gases_agregados").innerHTML="";
+  }
+}
+
+document.getElementById("tiempo_duracion").onchange=function(){
+  if(document.getElementById("tiempo_duracion").value!="vacio"){
+    document.getElementById("tiempo_duracion").style.borderColor="";
+    document.getElementById("valid_gases_agregados").innerHTML="";
+  }
+}
+
+function cargar_electrodomesticos(id_vivienda) {
+  document.getElementById("electrodomesticos_agregados").innerHTML = "";
+  $.ajax({
+    type: "POST",
+    url: BASE_URL + "Viviendas/get_electrodomesticos",
+    data: { "id_vivienda": id_vivienda },
+  }).done(function (result) {
+    var electrodomesticos = JSON.parse(result);
+    var texto = "";
+    for (var i = 0; i < electrodomesticos.length; i++) {
+      texto +=
+        "<div><table style='width:100%'><tr><td style='width:25%;text-align:center'>" +
+        electrodomesticos[i]["nombre_electrodomestico"] +
+        "</td>";
+      texto +=
+        "<td style='width:25%;text-align:center'>" +
+        electrodomesticos[i]["cantidad"] +
+        " Unidades</td>";
+      texto +=
+        "<td style='width:25%;text-align:right'><button style='width:20%;margin-top:10px' type='button' class='btn btn-danger' onclick='borrar_electrodomesticos(" +
+        electrodomesticos[i]["id_vivienda_electrodomestico"] +
+        "," +
+        id_vivienda +
+        ")'>X</button></td>";
+      texto += "</tr></table></div><hr>";
+    }
+
+    document.getElementById("electrodomesticos_agregados").innerHTML = texto;
+  });
+
+
+  $.ajax({
+    type:"POST",
+    url:BASE_URL+"Viviendas/cargar_electrodomesticos",
+  }).done(function(result){
+      document.getElementById("electrodomestico_select").innerHTML=result;
+  });
+}
+
+function borrar_electrodomesticos(id, id_vivienda) {
+  swal(
+    {
+      type: "warning",
+      title: "¿Está seguro?",
+      text: "Está por eliminar este electrodoméstico asociado a la vivienda, ¿desea continuar?",
+      showCancelButton: true,
+      confirmButtonText: "Si",
+      cancelButtonText: "No",
+    },
+    function (isConfirm) {
+      if (isConfirm) {
+        $.ajax({
+          type: "POST",
+          url: BASE_URL + "Viviendas/borrar_electrodomesticos",
+          data: { "id": id_vivienda, "id_electrodomestico": id },
+        }).done(function (result) {
+          if (result == 1) {
+            cargar_electrodomesticos(id_vivienda);
+          } else {
+            console.log(result);
+          }
+        });
+      }
+    }
+  );
+}
+
+
+document.getElementById("nuevo_electrodomestico").onclick=function(){
+  if(document.getElementById("electrodomestico_select").style.display=="none"){
+    document.getElementById("electrodomestico_input").style.display="none";
+    document.getElementById("electrodomestico_select").style.display="";
+    document.getElementById("electrodomestico_input").value="";
+  }
+  else{
+    document.getElementById("electrodomestico_select").style.display="none";
+    document.getElementById("electrodomestico_input").style.display="";
+    document.getElementById("electrodomestico_input").focus();
+    document.getElementById("electrodomestico_select").value="vacio";
+  }
+  }
+
+  document.getElementById("agregar_electrodomestico").onclick=function(){
+    if((document.getElementById("electrodomestico_select").style.display!="none" && document.getElementById("electrodomestico_select").value=="vacio") || (document.getElementById("electrodomestico_select").style.display=="none" && document.getElementById("electrodomestico_input").value=="")){
+      document.getElementById("electrodomestico_select").style.borderColor="red";
+      document.getElementById("electrodomestico_input").style.borderColor="red";
+      document.getElementById("electrodomestico_input").focus();
+      document.getElementById("valid_electrodomesticos_agregados").innerHTML="Debe indicar el electrodomestico";
+    }
+    else{
+      document.getElementById("electrodomestico_select").style.borderColor="";
+      document.getElementById("electrodomestico_input").style.borderColor="";
+      document.getElementById("valid_electrodomesticos_agregados").innerHTML="";
+      if(document.getElementById("cantidad_electrodomestico").value==""){
+        document.getElementById("valid_electrodomesticos_agregados").innerHTML="Debe ingresar la cantidad";
+        document.getElementById("cantidad_electrodomestico").style.borderColor="red";
+      }
+      else{
+        document.getElementById("valid_electrodomesticos_agregados").innerHTML="";
+        document.getElementById("cantidad_electrodomestico").style.borderColor="";
+        var inf_electrodomestico=new Object();
+        if(document.getElementById("electrodomestico_select").style.display=="none"){
+           inf_electrodomestico['nuevo']=1;
+           inf_electrodomestico['electrodomestico']=document.getElementById("electrodomestico_input").value;
+        }
+        else{
+          inf_electrodomestico['nuevo']=0;
+          inf_electrodomestico['electrodomestico']=document.getElementById("electrodomestico_select").value;
+        }
+
+        inf_electrodomestico['cantidad']=document.getElementById("cantidad_electrodomestico").value;
+        console.log(inf_electrodomestico);
+        $.ajax({
+          type:"POST",
+          url:BASE_URL+"Viviendas/add_electrodomestico",
+          data:{"inf_electrodomestico":inf_electrodomestico,"id_vivienda":id_vivienda}
+      }).done(function(result){
+        if(result==1){
+          cargar_electrodomesticos(id_vivienda);
+        }
+        else{
+          swal({
+            type:"error",
+            title:"Error",
+            text:"Este electrodomestico ya esta asociado a esta vivienda",
+            timer:2000,
+            showConfirmButton:false
+          });
+        }
+
+        document.getElementById("electrodomestico_input").value="";
+        document.getElementById("electrodomestico_input").style.display="none";
+        document.getElementById("electrodomestico_select").value="vacio";
+        document.getElementById("electrodomestico_select").style.display="";
+        document.getElementById("cantidad_electrodomestico").value="";
+
+      })
+      }
+    }
+  }
+
+  document.getElementById("electrodomestico_select").onchange=function(){
+    if(document.getElementById("electrodomestico_select").value!="vacio"){
+      document.getElementById("electrodomestico_select").style.borderColor="";
+      document.getElementById("valid_electrodomesticos_agregados").innerHTML="";
+    }
+  }
+
+  
+  document.getElementById("electrodomestico_input").onkeyup=function(){
+    if(document.getElementById("electrodomestico_input").value!=""){
+      document.getElementById("electrodomestico_input").style.borderColor="";
+      document.getElementById("valid_electrodomesticos_agregados").innerHTML="";
+    }
+  }
+
+
+  document.getElementById("cantidad_electrodomestico").onkeyup=function(){
+    if(document.getElementById("cantidad_electrodomestico").value!=""){
+      document.getElementById("cantidad_electrodomestico").style.borderColor="";
+      document.getElementById("valid_electrodomesticos_agregados").innerHTML="";
+    }
+  }
+
+
+
