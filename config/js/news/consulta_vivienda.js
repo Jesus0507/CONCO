@@ -263,6 +263,7 @@ function Modificar(
   cargar_techos(id);
   cargar_paredes(id);
   cargar_pisos(id);
+  cargar_servicio_gas(id);
 
   console.log(techos);
 
@@ -639,6 +640,64 @@ document.getElementById("numero_casa").onkeyup=function(){
     document.getElementById("valid_numero_casa").innerHTML="";
   document.getElementById("numero_casa").style.borderColor="";
   }
+}
+
+
+function cargar_servicio_gas(id_vivienda) {
+  document.getElementById("gases_agregados").innerHTML = "";
+  $.ajax({
+    type: "POST",
+    url: BASE_URL + "Viviendas/get_gases",
+    data: { id_vivienda: id_vivienda },
+  }).done(function (result) {
+    console.log(result);
+    var gases = JSON.parse(result);
+    for (var i = 0; i < gases.length; i++) {
+      var div=document.createElement("div");
+      var table=document.createElement("table");
+      table.style.width="100%";
+      var tr=document.createElement("tr");
+      var td1=document.createElement("td");
+      td1.style.width='25%';
+      td1.style.textalign='center';
+      var td2=document.createElement("td");
+      td2.style.width='25%';
+      td2.style.textalign='center';
+      var td3=document.createElement("td");
+      td3.style.width='25%';
+      td3.style.textalign='center';
+      var td4=document.createElement("td");
+
+      td4.style.textAlign='right';
+
+      td1.innerHTML=gases[i]['nombre_servicio_gas'];
+      td2.innerHTML=gases[i]['tipo_bombona'];
+      td3.innerHTML=gases[i]['dias_duracion']+" días";
+
+      var button=document.createElement("input");
+      button.className='btn btn-danger';
+      button.value='X';
+      button.style.width='20%';
+      td4.appendChild(button);
+
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
+      tr.appendChild(td4);
+
+      table.appendChild(tr);
+      var hr=document.createElement("hr");
+
+      div.appendChild(table);
+      div.appendChild(hr);
+
+      document.getElementById("gases_agregados").appendChild(div);
+
+      button.onclick=function(){
+       borrar_gases(gases[i]['id_vivienda_servicio_gas']);
+   }
+    }
+  });
 }
 
 

@@ -529,6 +529,11 @@ public function eliminacion_vivienda(){
     echo json_encode($paredes_vivienda);
 }
 
+public function get_gases(){
+    $gases_vivienda=$this->modelo->get_gas_vivienda($_POST['id_vivienda']);
+    echo json_encode($gases_vivienda);
+}
+
    public function borrar_techo(){
        echo $this->Eliminar_Tablas("vivienda_tipo_techo","id_vivienda_tipo_techo",$_POST['id']);
    }
