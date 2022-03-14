@@ -541,13 +541,104 @@ document.getElementById("agregar3").onclick=function(){
 
 
 document.getElementById("guardar").onclick=function(){
-
+if(document.getElementById("direccion_vivienda").value==""){
+   document.getElementById("valid_direccion").innerHTML="Debe ingresar la dirección de la vivienda";
+   document.getElementById("direccion_vivienda").focus();
+   document.getElementById("direccion_vivienda").style.borderColor="red";
 }
-
-
-
-function cambio_color(tag,valor){
-  if(tag.value!=valor){
-    tag.style.borderColor="";
+else{
+  document.getElementById("valid_direccion").innerHTML="";
+  document.getElementById("direccion_vivienda").style.borderColor="";
+  if(document.getElementById("numero_casa").value==""){
+    document.getElementById("valid_numero_casa").innerHTML="Debe ingresar el número de la vivienda";
+   document.getElementById("numero_casa").focus();
+   document.getElementById("numero_casa").style.borderColor="red";
+  }else{
+    document.getElementById("valid_numero_casa").innerHTML="";
+  document.getElementById("numero_casa").style.borderColor="";
+  if(document.getElementById("cantidad_habitaciones").value==""){
+    document.getElementById("valid_cantidad_habitaciones").innerHTML="Debe ingresar la cantidad de habitaciones";
+    document.getElementById("cantidad_habitaciones").focus();
+    document.getElementById("cantidad_habitaciones").style.borderColor="red";
+ }
+ else{
+   document.getElementById("valid_cantidad_habitaciones").innerHTML="";
+   document.getElementById("cantidad_habitaciones").style.borderColor="";
+   if(document.getElementById("id_tipo_vivienda").value==""){
+    document.getElementById("valid_tipo_vivienda").innerHTML="Debe ingresar el tipo de vivienda";
+    document.getElementById("id_tipo_vivienda").focus();
+    document.getElementById("id_tipo_vivienda").style.borderColor="red";
+ }
+ else{
+   document.getElementById("valid_tipo_vivienda").innerHTML="";
+   document.getElementById("id_tipo_vivienda").style.borderColor="";
+   if(document.getElementById("tabla_techo").innerHTML=="" || document.getElementById("tabla_techo").innerHTML==null){
+     swal({
+       type:"error",
+       title:"Error",
+       text:"Debe ingresar al menos un tipo de techo",
+       timer:2000,
+       showConfirmButton:false
+     });
+   }
+   else{
+    if(document.getElementById("tabla_pared").innerHTML=="" || document.getElementById("tabla_pared").innerHTML==null){
+      swal({
+        type:"error",
+        title:"Error",
+        text:"Debe ingresar al menos un tipo de pared",
+        timer:2000,
+        showConfirmButton:false
+      });
+    }
+    else{
+      if(document.getElementById("tabla_piso").innerHTML=="" || document.getElementById("tabla_piso").innerHTML==null){
+        swal({
+          type:"error",
+          title:"Error",
+          text:"Debe ingresar al menos un tipo de piso",
+          timer:2000,
+          showConfirmButton:false
+        });
+      }
+      else{
+        
+      }
+      
+    }
+   }
+  }
+  }
   }
 }
+}
+
+document.getElementById("direccion_vivienda").onkeyup=function(){
+  if(document.getElementById("direccion_vivienda").value!=""){
+    document.getElementById("valid_direccion").innerHTML="";
+  document.getElementById("direccion_vivienda").style.borderColor="";
+  }
+}
+
+document.getElementById("cantidad_habitaciones").onkeyup=function(){
+  if(document.getElementById("cantidad_habitaciones").value!=""){
+    document.getElementById("valid_cantidad_habitaciones").innerHTML="";
+  document.getElementById("cantidad_habitaciones").style.borderColor="";
+  }
+}
+
+document.getElementById("id_tipo_vivienda").onkeyup=function(){
+  if(document.getElementById("id_tipo_vivienda").value!=""){
+    document.getElementById("valid_tipo_vivienda").innerHTML="";
+  document.getElementById("id_tipo_vivienda").style.borderColor="";
+  }
+}
+
+document.getElementById("numero_casa").onkeyup=function(){
+  if(document.getElementById("numero_casa").value!=""){
+    document.getElementById("valid_numero_casa").innerHTML="";
+  document.getElementById("numero_casa").style.borderColor="";
+  }
+}
+
+
