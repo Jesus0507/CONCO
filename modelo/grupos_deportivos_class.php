@@ -1,5 +1,5 @@
 <?php
-
+ 
 class Grupos_Deportivos_Class extends Modelo
 {
 
@@ -9,7 +9,7 @@ class Grupos_Deportivos_Class extends Modelo
     }  
 
     public function Registrar($data)
-    {
+    { 
 
         try {
             $datos = $this->conexion->prepare('INSERT INTO grupo_deportivo (
@@ -91,6 +91,25 @@ class Grupos_Deportivos_Class extends Modelo
     {
 
         $tabla = "SELECT pg.id_persona_grupo_deportivo, pg.id_grupo_deportivo, pg.cedula_persona, p.primer_nombre, p.primer_apellido, gp.id_deporte, d.nombre_deporte FROM personas_grupo_deportivo pg, grupo_deportivo gp, personas p, deportes d WHERE pg.estado = 1 AND pg.cedula_persona = p.cedula_persona AND gp.id_deporte = d.id_deporte AND pg.id_grupo_deportivo = gp.id_grupo_deportivo ORDER BY `p`.`primer_nombre` ASC";
+        $respuesta_arreglo = '';
+        try {
+            $datos = $this->conexion->prepare($tabla);
+            $datos->execute();
+            $datos->setFetchMode(PDO::FETCH_ASSOC);
+            $respuesta_arreglo = $datos->fetchAll(PDO::FETCH_ASSOC);
+            return $respuesta_arreglo;
+        } catch (PDOException $e) {
+
+            $errorReturn = ['estatus' => false];
+            $errorReturn += ['info' => "error sql:{$e}"];
+            return $errorReturn;
+        }
+    } 
+
+    public function Grupo_Deportivo_Persona_Datos($id)
+    {
+
+        $tabla = "SELECT DISTINCT pg.cedula_persona ,pg.id_persona_grupo_deportivo, pg.id_grupo_deportivo, p.primer_nombre, p.primer_apellido FROM grupo_deportivo gp, personas_grupo_deportivo pg, personas p WHERE  pg.id_grupo_deportivo = $id AND p.cedula_persona= pg.cedula_persona and pg.estado = 1";
         $respuesta_arreglo = '';
         try {
             $datos = $this->conexion->prepare($tabla);

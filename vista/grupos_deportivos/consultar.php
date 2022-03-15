@@ -12,7 +12,7 @@
                 <!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
-    </div>
+    </div> 
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -36,8 +36,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <script src="<?php echo constant('URL')?>config/js/ajax/Ajax_Consultas_Grupos_Deportivo.js">
-                        </script>
                     </tbody>
                     <tfoot>
                         <tr>
@@ -56,10 +54,13 @@
         <!-- /.card -->
 
     </section>
+
     <!-- /.content -->
     <!-- /.content -->
 </div>
 <?php include modal."ver-grupo_deportivo.php"; ?>
 <?php include modal."editar-grupo_deportivo.php"; ?>
+<script src="<?php echo constant('URL')?>config/js/ajax/Ajax_Consultas_Grupos_Deportivo.js">
+                        </script>
 <!-- /.content-wrapper -->
 <?php include (call."Fin.php"); ?>

@@ -1,5 +1,5 @@
 <div class="modal fade" id="actualizar">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-xl" style="max-width: 80%;">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Editar Grupo Deportivo</h4>
@@ -50,33 +50,26 @@
                         </div>
 
                         <div class="col-md-12 mt-2">
-                            <label for="">
-                                Integrantes
-                            </label>
-                            <table class="table table-bordered" id="tabla">
-                                <tr>
-                                    <td class="col-6">
-                                        <input list="cedula_p" id="cedula" type="number" name="cedula[]"
-                                            placeholder="Cedula" class="form-control cedula" />
-                                        <datalist id="cedula_p">
-                                            <?php foreach($this->personas as $persona){   ?>
-                                            <option value="<?php echo $persona["cedula_persona"];?>">
-                                                <?php echo $persona["primer_nombre"]." ".$persona["primer_apellido"];?>
-                                            </option>
-                                            <?php  }   ?>
-                                        </datalist>
-                                    </td>
-                                    <td class="col-6">
-                                        <input type="text" name="" placeholder="Nombre y Apellido"
-                                            class="form-control nombre_apellido" />
-                                    </td>
-                                    <td>
-                                        <button type="button" name="agregar" id="agregar"
-                                            class="btn btn-success">Agregar</button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+            <label for="segundo_apellido">
+                Integrantes
+            </label><span id='valid_5' style="color:red;"></span>
+            <div class="input-group">
+               <table style='width:100%'>
+                <tr>
+                    <td>
+                        <input type="number" class='form-control' id='integrantes_grupo_input' placeholder="Buscar cédula"  list='lista_personas'>
+                        <datalist id='lista_personas'>
+                            <?php foreach ($this->personas as $p) { ?>
+                             <option value='<?php echo $p['cedula_persona']; ?>'><?php echo $p['primer_nombre']." ".$p['primer_apellido']; ?></option>
+                         <?php    } ?>
+                     </datalist>
+                 </td><td><button class='btn btn-primary' type='button' id='btn_agregar'>Agregar</button></td>
+             </tr>
+             <tr><td colspan='2'><br>
+               <div style='background:#D0E8E7;overflow-y: scroll;width: 95%;height:200px;'><center>
+                <div style='width:95%' id='integrantes_agregados'></div>
+            </center>
+        </div>
                     </div>
                 </form>
             </div>

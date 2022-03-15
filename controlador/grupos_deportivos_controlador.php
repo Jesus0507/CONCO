@@ -1,12 +1,12 @@
 <?php
-
+ 
 class Grupos_Deportivos extends Controlador 
 { 
     public function __construct()
     {
         parent::__construct();
      //   $this->Cargar_Modelo("grupos_deportivos");
-    } 
+    }  
 
     public function Establecer_Consultas() 
     { 
@@ -116,7 +116,7 @@ class Grupos_Deportivos extends Controlador
                 $id_deporte = $value["id_deporte"];
             }
         }
-        if ($this->modelo->Actualizar(
+         $resultado = $this->modelo->Actualizar(
             [
                 'id_grupo_deportivo'      => $datos[3],
                 'id_deporte'      => $id_deporte,
@@ -124,15 +124,23 @@ class Grupos_Deportivos extends Controlador
                 'descripcion'   => $datos[2],
                 'estado'   => 1
             ]
-        )
-        ) {
-            $this->mensaje = 1;
-        } else {
-            $this->mensaje = 0;
-        }
+            );
+
+            if($resultado){
+                $id=$this->Ultimo_Ingresado("grupo_deportivo","id_grupo_deportivo");
+                foreach ($id as  $i) {
+                 foreach ($datos[4] as $inte) {
+                  $this->modelo->Registrar_Personas_Grupo_Deportivo([
+                     "cedula_persona"         =>  $inte,
+                     "id_grupo_deportivo"            =>   $i['MAX(id_grupo_deportivo)'],
+                     'estado'   => 1
+                 ]);
+              }
+          }
+      }
+     echo $datos;
         
-        echo  $this->mensaje;
-        #header('location:' . constant('URL') . "Calles/Consultas");
+     
         exit();
         return false;
     }
@@ -183,5 +191,53 @@ class Grupos_Deportivos extends Controlador
         echo $this->mensaje;
         return false;
     } 
+
+    public function consultar_grupos_datos(){
+     
+     $grupos_deportivos=$this->modelo->Consultar();
+     $retornar=[];
+
+     foreach ($grupos_deportivos as $gp) {
+        
+        if ($gp['id_grupo_deportivo'] == $_POST['id_grupo_deportivo']) {
+            
+            $integrantes=$this->modelo->Grupo_Deportivo_Persona_Datos($_POST['id_grupo_deportivo']);
+
+         $retornar[]=[
+                "id_grupo_deportivo" => $gp['id_grupo_deportivo'],
+                "nombre_deporte" => $gp['nombre_deporte'],
+                "nombre_grupo_deportivo" => $gp['nombre_grupo_deportivo'],
+                "descripcion" => $gp['descripcion'],
+                "integrantes"  => json_encode($integrantes),
+         ];
+        }
+     }
+
+      
+
+
+     $this->Escribir_JSON($retornar);
+}
+
+public function eliminar_integrantes(){
+    $retornar=0;
+    
+    if($this->Eliminar_Tablas("personas_grupo_deportivo","cedula_persona",$_POST['cedula_persona'])){
+      $integrantes=$this->Consultar_Columna("personas_grupo_deportivo","cedula_persona",$_POST['cedula_persona']);
+      if(count($integrantes)!=0){
+        $retornar=[];
+        for($i=0;$i<count($integrantes);$i++){
+  
+           $retornar[]=[
+             "cedula_persona"=>$integrantes[0]['cedula_persona'],
+             "id_familia_persona"=>$integrantes[$i]['id_familia_persona']
+           ];
+        }
+      }
+    }
+  
+    echo json_encode($retornar);
+  
+  }
 }
 ?> 

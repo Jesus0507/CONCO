@@ -96,7 +96,7 @@
 
 
 
-          <div class="col-md-12 mt-2">
+        <div class="col-md-12 mt-2">
             <label for="segundo_apellido">
                 Integrantes
             </label><span id='valid_5' style="color:red;"></span>
