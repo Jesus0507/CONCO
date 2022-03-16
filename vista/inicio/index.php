@@ -165,8 +165,8 @@
                     <span class="info-box-icon"><i class="fa fa-users"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Mienbros del Consejo Comunal</span>
-                        <span class="info-box-number">100</span>
+                        <span class="info-box-text">Miembros del Consejo Comunal</span>
+                        <span class="info-box-number"><?php echo $this->cantidad_miembros; ?></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -176,7 +176,7 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">Adulto Mayor</span>
-                        <span class="info-box-number">50</span>
+                        <span class="info-box-number"><?php echo $this->adulto_mayor; ?></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -186,7 +186,7 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">Menores de edad</span>
-                        <span class="info-box-number">30</span>
+                        <span class="info-box-number"><?php echo $this->menores_edad; ?></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -196,7 +196,7 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">Votantes</span>
-                        <span class="info-box-number">20</span>
+                        <span class="info-box-number"><?php echo $this->votantes; ?></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>

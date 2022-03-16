@@ -219,6 +219,43 @@ class Grupos_Deportivos extends Controlador
      $this->Escribir_JSON($retornar);
 }
 
+
+public function add_integrante(){
+    $id=$_POST['grupo_deportivo'];
+    $integrantes=$this->Consultar_Columna("personas_grupo_deportivo","id_grupo_deportivo",$id);
+    $retornar=1;
+    $cedula=$_POST['cedula'];
+    foreach($integrantes as $i){
+        if($i['cedula_persona']==$cedula){
+            $retornar=0;
+        }
+    }
+
+    if($retornar==1){
+        $this->modelo->Registrar_Personas_Grupo_Deportivo([
+            "cedula_persona"         =>  $cedula,
+            "id_grupo_deportivo"            =>   $id,
+            'estado'   => 1
+        ]);
+    }
+
+    echo $retornar;
+
+}
+
+public function get_integrantes(){
+    $id=$_POST['id'];
+    $integrantes=$this->Consultar_Columna("personas_grupo_deportivo","id_grupo_deportivo",$id);
+    $result=[];
+    foreach($integrantes as $i){
+        $persona=$this->Consultar_Columna("personas","cedula_persona",$i['cedula_persona']);
+        $result[]=$persona[0];
+    }
+
+    echo json_encode($result);
+    
+}
+
 public function eliminar_integrantes(){
     $retornar=0;
     

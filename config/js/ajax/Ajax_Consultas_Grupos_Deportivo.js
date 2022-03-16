@@ -2,6 +2,7 @@
 var integrantes=[];
 var valid_integrantes=document.getElementById("valid_5");
 var div_integrantes=document.getElementById("integrantes_agregados");
+var id_grupo_deportivo_global="";
 
 $(function() { 
     $.ajax({
@@ -96,6 +97,13 @@ $(function() {
             });
         });
 
+
+        integrantes_input.onkeyup=function(){
+            if(integrantes_input.value!=""){
+                valid_integrantes.innerHTML="";
+            }
+        }
+
         $(document).on('click', '#btn_agregar', function() {
 
                                     if(integrantes_input.value==""){
@@ -104,60 +112,33 @@ $(function() {
                                     }
                                     else{
                                         valid_integrantes.innerHTML="";
-
-                                        if(valid_integrantes_agregados()){
-                                           valid_integrantes.innerHTML="";
                                            $.ajax({
                                             type: 'POST',
-                                            url: BASE_URL + 'Personas/Consultas_cedula',
-                                            data:{'cedula':integrantes_input.value}
+                                            url: BASE_URL + 'Grupos_Deportivos/add_integrante',
+                                            data:{'cedula':integrantes_input.value,"grupo_deportivo":id_grupo_deportivo_global}
                                         })
                                            .done(function (datos) {
-
-
-                                            if(datos!=0){
-
-                                                var result=JSON.parse(datos);
-                                                integrantes.push(result[0]['cedula_persona']);
-                                                integrantes_input.value='';
-                                                var div=document.createElement("div");
-                                                div.style.width='100%';
-                                                var tabla=document.createElement("table");
-                                                tabla.style.width='100%';
-                                                var tr=document.createElement("tr");
-                                                var td1=document.createElement("td");
-                                                var td2=document.createElement("td");
-                                                td1.innerHTML="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-"+result[0]['primer_nombre']+" "+result[0]['primer_apellido'];
-                                                var btn=document.createElement("input");
-                                                btn.type="button";
-                                                btn.className="btn btn-danger";
-                                                btn.value="X";
-                                                td2.style.textAlign="right";
-                                                td2.appendChild(btn);
-                                                tr.appendChild(td1);
-                                                tr.appendChild(td2);
-                                                tabla.appendChild(tr);
-                                                div.appendChild(tabla);
-                                                var hr=document.createElement("hr");
-                                                div.appendChild(tabla);
-                                                div.appendChild(hr);
-                                                div_integrantes.appendChild(div);
-                                                btn.onclick=function(){
-                                                 div_integrantes.removeChild(div);
-                                                 integrantes.splice(integrantes.indexOf(result[0]['cedula_persona']),1);
-                                                 console.log(integrantes);
-                                             }
-                                             console.log(integrantes);
-                                         }
-                                         else{
-                                            valid_integrantes.innerHTML="Esta persona no está registrada";
+                                        if(datos==1){
+                                            actualizar_integrantes(id_grupo_deportivo_global);
                                         }
-
+                                        else{
+                                        swal({
+                                            type:"error",
+                                            title:"Error",
+                                            text:"Esta persona ya se encuentra registrada en el grupo deportivo",
+                                            timer:2000,
+                                            showConfirmButton:false
+                                        });
+                                
+                                        }
+                                      integrantes_input.value="";
                                     });
 
-                                       }
+                                       
                                    }
                                });
+
+
         $(document).on('click', '.btnEditar', function() {
             fila = $(this).closest("tr");
             nombre_grupo = fila.find('td:eq(0)').text();
@@ -186,14 +167,14 @@ $(function() {
                     if (datos != 0) {
                         swal({
                             title: "Actualizado!",
-                            text: "El elemento fue ctualizado con exito.",
+                            text: "El elemento fue actualizado con exito.",
                             type: "success",
                             showConfirmButton: false
                         });
                         console.log(datos)
-                        // setTimeout(function() {
-                        //     location.reload();
-                        // }, 2000);
+                        setTimeout(function() {
+                            location.reload();
+                        }, 2000);
                     }
                 }).fail(function() {
                     alert("error");
@@ -206,7 +187,7 @@ $(function() {
 });
 
 function editar(id_grupo_deportivo,cedula_persona){
-
+id_grupo_deportivo_global=id_grupo_deportivo;
      $.ajax({
          type:"POST",
          url:BASE_URL+"Grupos_Deportivos/consultar_grupos_datos",
@@ -224,7 +205,7 @@ function editar(id_grupo_deportivo,cedula_persona){
 
                 for (var j = 0; j < inte.length; j++) {
                     var tabl=
-                    grupos.innerHTML += " <table style='width:95%'><tr><hr><td>-" + inte[j]["primer_nombre"]+" " +inte[j]["primer_apellido"]+ "</td><td style='text-align:right'><span onclick='borrar_integrante("+data[i]['id_grupo_deportivo']+","+inte[j]['cedula_persona']+")' class='iconDelete fa fa-times-circle' title='Eliminar Familia' style='font-size:22px'></span></td></tr></table><br><hr>";
+                    grupos.innerHTML += " <table style='width:95%'><tr><hr><td>-" + inte[j]["primer_nombre"]+" " +inte[j]["primer_apellido"]+ "</td><td style='text-align:right'><span onclick='borrar_integrante("+data[i]['id_grupo_deportivo']+","+inte[j]['cedula_persona']+")' class='iconDelete fa fa-times-circle' title='Eliminar Familia' style='font-size:22px;cursor:pointer'></span></td></tr></table><br><hr>";
                 }
                 
             }
@@ -249,7 +230,7 @@ function editar(id_grupo_deportivo,cedula_persona){
           data:{"id_grupo_deportivo":id,"cedula_persona":cedula_param}
       }).done(function(result){
           result=JSON.parse(result);
-          actualizar_integrantes(result,cedula_param);
+          actualizar_integrantes(id);
           editar(id);
           console.log(result)
       })
@@ -257,15 +238,19 @@ function editar(id_grupo_deportivo,cedula_persona){
 });
 }
 
-function actualizar_integrantes(result,cedula_param){
-
-    var integrantes = document.getElementById('integrantes_agregados'); 
-    if(result!=0){
-      integrantes.innerHTML = "";
-      for (var i = 0; i < result.length; i++) {
-        integrantes.innerHTML += " <table style='width:95%'><tr><td>- " + result[i]["cedula_persona"] + "</td><td style='text-align:right'><span onclick='borrar_familia("+result[i]['id_familia_persona']+","+result[i]['cedula_persona']+")' class='iconDelete fa fa-times-circle' title='Eliminar' style='font-size:22px'></span></td></tr></table><br><hr>";
-    }
-  }
+function actualizar_integrantes(id){
+    $.ajax({
+        type:"POST",
+        url:BASE_URL+"Grupos_Deportivos/get_integrantes",
+        data:{"id":id}
+    }).done(function(result){
+        var integrantes = document.getElementById('integrantes_agregados'); 
+        integrantes.innerHTML = "";    
+        result=JSON.parse(result);     
+          for (var i = 0; i < result.length; i++) {
+            integrantes.innerHTML += "<table style='width:95%'><tr><hr><td>-" + result[i]["primer_nombre"]+" " +result[i]["primer_apellido"]+ "</td><td style='text-align:right'><span onclick='borrar_integrante("+id+","+result[i]['cedula_persona']+")' class='iconDelete fa fa-times-circle' title='Eliminar Familia' style='font-size:22px;cursor:pointer'></span></td></tr></table><br><hr>";
+        }    
+    })
   
   }
 
