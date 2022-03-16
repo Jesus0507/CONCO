@@ -638,7 +638,52 @@ public function modificar_persona(){
 
 
 
+public function get_info_vacunado(){
+$cedula=$_POST['cedula'];
+$vacunas=$this->Consultar_Columna("vacuna_covid","cedula_persona",$cedula);
+$devolver="";
+foreach($vacunas as $v){
+$devolver.="<table style='width:100%'><tr><td>".$v['dosis']."</td><td>(".$v['fecha_vacuna'].")</td>
+<td><button type='button' class='btn btn-danger' onclick='eliminar_dosis(".$v['id_vacuna_covid'].",".$cedula.")'>X</button>
+</td></tr></table><hr>";
+}
 
+echo $devolver;
+}
+
+
+public function add_vacuna(){
+  $cedula=$_POST['persona'];
+$vacunas=$this->Consultar_Columna("vacuna_covid","cedula_persona",$cedula);
+$retornar=1;
+
+if(count($vacunas)>=3){
+  $retornar=0;
+}
+else{
+foreach($vacunas as $v){
+  if($v['dosis']==$_POST['vacuna']){
+    $retornar=0;
+  }
+}
+
+if($retornar==1){
+  $this->modelo->Registrar_Vacuna([
+    "cedula_persona" =>$cedula,
+    "dosis"=>$_POST['vacuna'],
+    "fecha_vacuna"=>$_POST['fecha'],
+    "estado"=>1
+  ]);
+}
+}
+
+echo $retornar;
+
+}
+
+public function borrar_dosis(){
+  echo $this->Eliminar_Tablas("vacuna_covid","id_vacuna_covid",$_POST['id']);
+}
 
 
 public function editar_comunidad_indigena($datos_persona){

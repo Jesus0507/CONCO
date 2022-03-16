@@ -61,7 +61,7 @@
                                         {
                                             "data": function(data) {
                                                 return '<td class="text-center">' +
-                                                    '<a href="javascript:void(0)" style="margin-right: 5px;" class="btn bg-success btnEditar"  title="Actualizar" type="button" data-toggle="modal" data-target="#actualizar">' +
+                                                    '<a href="javascript:void(0)" style="margin-right: 5px;" class="btn bg-success btnEditar" onclick="editar(this)"  title="Actualizar"  type="button" >' +
                                                     '<i class="fa fa-edit" style="color: white;"></i>' +
                                                     '</a>' +
 
@@ -86,9 +86,11 @@
                                     '#example1_wrapper .col-md-6:eq(0)');
 
                                     
-                            $(document).on("click", ".mensaje-eliminar", function () {
+                                    
+                 $(document).on("click", ".mensaje-eliminar", function () {
                 fila = $(this).closest("tr");
                 cedula_persona = fila.find("td:eq(0)").text();
+
 
                 swal(
                     {
@@ -163,3 +165,5 @@
 
 <!-- /.content-wrapper -->
 <?php include (call."Fin.php"); ?>
+
+<script type="text/javascript" src="<?php echo constant('URL')?>config/js/news/consultar-vacunados.js"></script>

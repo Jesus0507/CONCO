@@ -17,16 +17,8 @@
                                     Cedula de Persona
                                 </label>
                                 <div class="input-group">
-                                    <input list="cedula_p" id="cedula_persona" name="cedula_persona"
+                                    <input id="cedula_persona_editar" name="cedula_persona"
                                         class="form-control " placeholder="Cedula de Persona" />
-                                    <datalist id="cedula_p">
-                                        <?php foreach($this->personas as $persona){   ?>
-                                        <option value="<?php echo $persona["cedula_persona"];?>">
-                                            <?php echo $persona["primer_nombre"]." ".$persona["primer_apellido"];?>
-                                        </option>
-                                        <?php  }   ?>
-                                    </datalist>
-
                                 </div>
                             </div>
 
@@ -40,7 +32,7 @@
                                         <td class="col-6">
 
                                             <div class="input-group">
-                                                <select class="custom-select" id="dosis" name="dosis[]">
+                                                <select class="custom-select" id="dosis_vacuna" name="dosis[]">
                                                     <option value="Primera Dosis">
                                                         Primera Dosis
                                                     </option>
@@ -56,15 +48,22 @@
                                         <td class="col-6">
 
                                             <div class="input-group">
-                                                <input class="form-control" id="fecha" name="fecha[]" type="date">
+                                                <input class="form-control" id="fecha_dosis" name="fecha[]" type="date">
                                             </div>
                                         </td>
                                         <td class="">
                                             <div class="input-group ">
-                                                <button type="button" name="agregar" id="agregar"
+                                                <button type="button" name="agregar" id="agregar_dosis"
                                                     class="btn btn-success">Agregar</button>
                                             </div>
 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='3'>
+                                            <div id='vacunas_info' style='width:100%;height:150px;background:#AEE6E8;overflow-y:scroll'>
+
+                                            </div>
                                         </td>
                                     </tr>
                                 </table>
