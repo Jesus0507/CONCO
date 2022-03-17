@@ -180,44 +180,37 @@ class Centro_Votacion extends Controlador
         
         $cont=0;
         $this->Establecer_Consultas();
+        $existe=0;
        
         foreach ($this->centros_votacion as $cv) {
-            if(strtolower($cv['nombre_centro'])==strtolower($_POST['nombre_centro'])){
-           $this->modelo->Registrar_Votantes(
-            [
-                'id_centro_votacion' => $cv["id_centro_votacion"],
-                'cedula_votante' => $_POST['cedula_persona'],
-                'estado' => 1
-            ]);
-           $cont++;
+            if(strtolower($cv['nombre_centro'])==strtolower($_POST['nombre_centro']) && $cv['id_parroquia']==$_POST['id_parroquia']){
+                 $existe=$cv['id_centro_votacion'];
             }
         }
 
-        if($cont==0){
-            if($this->modelo->Registrar_Centro_Votacion(
-            [
-                'id_parroquia' => $_POST['id_parroquia'],
-                'nombre_centro' => $_POST['nombre_centro'],
-                'estado' => 1
-            ]
-            )){
-                $id= $this->Ultimo_Ingresado("centros_votacion","id_centro_votacion");
-
-                foreach ($id as $i) {
-                    echo $this->modelo->Actualizar_Votantes(
-            [
-                'id_votante_centro_votacion' => $_POST['id'],
-                'id_centro_votacion' => $i['MAX(id_centro_votacion)'],
-                'cedula_votante' => $_POST['cedula_persona'],
-                'estado' => 1
-            ]);
-                }
-            }
-        }
-
-        echo 1;
-
-        return false;
+       if($existe==0){
+     echo $this->modelo->Registrar_Centro_Votacion([
+            "id_parroquia"=>$_POST['id_parroquia'],
+            "nombre_centro"=>$_POST['nombre_centro'],
+            "estado"=>1
+        ]);
+         $id=$this->Ultimo_Ingresado("centros_votacion","id_centro_votacion");
+         $this->modelo->Actualizar_Votantes([
+             "id_votante_centro_votacion"=>$_POST['id'],
+             "id_centro_votacion"=>$id[0]['MAX(id_centro_votacion)'],
+             "cedula_votante"=>$_POST['cedula_persona'],
+             "estado"=>1
+         ]);
+       }
+       else{
+          $this->modelo->Actualizar_Votantes([
+            "id_votante_centro_votacion"=>$_POST['id'],
+            "id_centro_votacion"=>$existe,
+            "cedula_votante"=>$_POST['cedula_persona'],
+            "estado"=>1
+        ]);  
+       }
+echo 1;
         
     }
 

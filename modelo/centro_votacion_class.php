@@ -100,7 +100,7 @@ class Centro_Votacion_Class extends Modelo
 
         } catch (PDOException $e) {
             $this->error = 'Ha surgido un error y no se puede cargar los datos. Detalle: ' . $e->getMessage();
-            return false;
+            return $this->error;
         }
     }
 

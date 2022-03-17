@@ -20,7 +20,7 @@
                                     Cedula de Persona
                                 </label>
                                 <div class="input-group">
-                                    <input list="cedula_p" id="cedula_persona2" name="datos[cedula_persona]"
+                                    <input list="cedula_p" readOnly="readOnly" id="cedula_persona2" name="datos[cedula_persona]"
                                         class="form-control " placeholder="Cedula de Persona"/>
                                     <datalist id="cedula_p">
                                         <?php foreach($this->personas as $persona){   ?>
@@ -56,11 +56,8 @@
                                 <div class="input-group">
 
                                     <select class="custom-select" id="id_parroquia2" name="datos[id_parroquia]">
-                                        <option>
-                                           Seleccione ...
-                                        </option>
                                     <?php foreach($this->parroquias as $parroquia){   ?>
-                                        <option value="<?php echo $parroquia["id_parroquia "];?>">
+                                        <option value="<?php echo $parroquia["id_parroquia"];?>">
                                             <?php echo $parroquia["nombre_parroquia"];?>
                                         </option>
                                     <?php  }   ?>
